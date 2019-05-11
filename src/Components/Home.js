@@ -8,7 +8,7 @@ import Navbar from  './Navbar';
 
 const fakeDb = [
 //Change the Href to be pages with description with the X button, not href to the image
-        { href:"http://jamdo-487.herokuapp.com/" , src:"images/thumbs/01.jpg", alt:"", title:"Jamdo, a web application created for Web Services and Applications class.", type: 'python' },
+        { href:"Jamdo" , src:"images/thumbs/01.jpg", alt:"", title:"Jamdo, a web application created for Web Services and Applications class.", type: 'python' },
         { href:"Pokemon" , src:"images/thumbs/02.jpg", alt:"", title: "A Pokemon card battle game created for Web-Based Enterprise Application Design .", type: "java" },
         { href:"https://airbnbmock.herokuapp.com/" , src:"images/thumbs/03.jpg", alt:"", title:"An airbnb replica front page created with react JS (first time using React) ", type: 'javascript' },
         { href:"Real_Estate" , src:"images/thumbs/04.jpg", alt:"", title:"A real estate application created for Web Programming class, my first web application. ", type: 'php' },
@@ -68,10 +68,14 @@ class Home extends Component {
                 </div>
               </section>
   
+              <header id="header">
+						
+						</header>
+
                       <section id="galleries">
                           <div className="gallery">
                               <header>
-                                  <h1>Projects</h1>
+                                <h1>Projects</h1>
                                   <ul id="tabs">
                                       <li><button onClick={() => this.filter("")} data-tag="all" class="button">All</button></li>
                                       <li><button onClick={() => this.filter("java")} data-tag="java" class="button">Java</button></li>
@@ -132,6 +136,12 @@ class Home extends Component {
   
               </section>
   
+  
+        <footer id="footer">
+							<div class="copyright">
+								&copy; 2019<span > Andy Nguyen</span>
+							</div>
+				</footer>
           </section>
       </div>
   
