@@ -5,8 +5,8 @@ import Navbar from  './Navbar';
 import Footer from  './Footer';
 import OwnerTenant from  './OwnerTenant';
 
-const imgLinks = ["images/projects/mtlrental2.png",
-"images/projects/mtlrental1.png"];
+const imgLinks = ["images/projects/mtlrental2.jpg",
+"images/projects/mtlrental1.jpg"];
 
 const images = [{type:"Owner", view : "Owner View", src: imgLinks[0], description: "The Owner can see the list of potential tenants who match their criteria", id: 0},
 {type:"Tenant", view: "Tenant View", src: imgLinks[1], description: "The tenant will see the list of listings based on their preferences", id: 1}];
