@@ -120,7 +120,7 @@ class Home extends Component {
                 
                   <div className="column">
                     <h3>Get in Touch with Me</h3>
-                    <form action="mailto:nguyen.andy123@gmail.com" method="post" encType="text/plain">
+                    <form action="mailto:nguyen.andy123@gmail.com" method="post" encType="text/plain" target="_top">
                       <div className="field half first">
                         <label htmlFor="name">Name</label>
                         <input name="name" id="name" type="text" placeholder="Name"/>
