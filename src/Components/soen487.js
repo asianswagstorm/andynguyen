@@ -20,7 +20,7 @@ class soen487 extends Component {
 
             <div class="inner">
 								<header>
-								<span className="image left"><a target = "_blank" rel="noopener noreferrer" href="http://jamdo-487.herokuapp.com/">   <img src="images/projects/jamdo1.png" alt=""  /> <strong>Click Image to try yourself </strong> </a> </span>
+								<span className="image left"><a target = "_blank" rel="noopener noreferrer" href="http://jamdo-487.herokuapp.com/">   <img src="images/projects/jamdo1.jpg" alt=""  /> <strong>Click Image to try yourself </strong> </a> </span>
 								</header>
 							
 								<h3>What Is Jamdo?</h3>

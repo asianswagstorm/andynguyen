@@ -22,7 +22,7 @@ class soen387 extends Component {
 
             <div className="inner">
 								<header>
-								<span className="image center">  <img src="images/projects/pokemon1.png" alt=""  />  </span>
+								<span className="image center">  <img src="images/projects/pokemon1.jpg" alt=""  />  </span>
 								</header>
 								<h3>What this app is about?</h3>
 								<p>This project was created using Java Enterprise Servlets that uses HTTP servlet  requests and response. Users can challenge other players to a card battle and once the other user accepts the challenge a game is invoked.  

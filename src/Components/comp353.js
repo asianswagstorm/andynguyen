@@ -20,7 +20,7 @@ class comp353 extends Component {
 
             <div class="inner">
 								<header>
-								<span className="image center"> <a target = "_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/comp353"> <img src="images/projects/database1.png" alt=""  /></a>   </span>
+								<span className="image center"> <a target = "_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/comp353"> <img src="images/projects/database1.jpg" alt=""  /></a>   </span>
 								</header>
 								<h2>What is it?</h2>
 

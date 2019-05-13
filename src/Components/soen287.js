@@ -69,7 +69,7 @@ openLightbox=(id) =>{
 
             <div className="inner">
 								<header>
-								<span className="image center">  <img src="images/projects/mtlrental3.png" alt=""  />  </span>
+								<span className="image center">  <img src="images/projects/mtlrental3.jpg" alt=""  />  </span>
 								</header>
 								<h2>What is MTL Rental?</h2>
 								<p>MTL Rental was the first ever web application I ever built during my second semester of University. This application uses <strong>HTML5, CSS3, Bootstrap</strong>in the front end, and   <strong>PHP ,MySQL</strong> in the backend. 

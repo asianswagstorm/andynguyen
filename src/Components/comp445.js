@@ -34,7 +34,7 @@ class comp445 extends Component {
 									 <section id="one" className="wrapper style1">
 									  
 									 <article className="feature left">
-						<span className="image"><img src="images/projects/UDP2.png" alt="" /></span>
+						<span className="image"><img src="images/projects/UDP2.jpg" alt="" /></span>
 						<div className="content">
 							<h4>Example of private messaging between Ben and Jerry</h4>
 							<p>Users can start a private chat with other users in the chatroom using the <strong>/private</strong> command, these messages are only visible between the two users. Here we can see Ben and Jerry discussing about the new user Tom who just entered the chatroom.</p>
@@ -43,7 +43,7 @@ class comp445 extends Component {
 					</article>
 
 					<article className="feature right">
-						<span className="image"><img src="images/projects/UDP3.png" alt="" /></span>
+						<span className="image"><img src="images/projects/UDP3.jpg" alt="" /></span>
 						<div className="content">
 							<h4>Example of channel messaging </h4>
 							<p>Channel messaging is messaging only to all users that are in the current channel, similar to private messaging but to a group of users.</p>
@@ -52,7 +52,7 @@ class comp445 extends Component {
 					</article>
 
 					<article className="feature left">
-						<span className="image"><img src="images/projects/UDP1.png" alt="" /></span>
+						<span className="image"><img src="images/projects/UDP1.jpg" alt="" /></span>
 						<div className="content">
 							<h4>Example of leaving the application </h4>
 							<p>When a user leaves the chatroom with <strong>/leave</strong> all users are notified and the users is taken out of the users array.</p>
