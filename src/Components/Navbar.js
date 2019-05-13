@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import ReactDOM from 'react-dom'; // register the DOM? 
+
 import '../css/Home.css';
 
 class Navbar extends Component {

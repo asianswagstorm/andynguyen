@@ -1,11 +1,61 @@
 import React, { Component } from 'react';
-//import ReactDOM from 'react-dom'; // register the DOM? 
+import Lightbox from 'react-images';
 import '../css/Home.css';
 import Navbar from  './Navbar';
+import Footer from  './Footer';
+import OwnerTenant from  './OwnerTenant';
+
+const imgLinks = ["images/projects/mtlrental2.png",
+"images/projects/mtlrental1.png"];
+
+const images = [{type:"Owner", view : "Owner View", src: imgLinks[0], description: "The Owner can see the list of potential tenants who match their criteria", id: 0},
+{type:"Tenant", view: "Tenant View", src: imgLinks[1], description: "The tenant will see the list of listings based on their preferences", id: 1}];
 
 class soen287 extends Component {
+
+	constructor(props){
+		super(props);
+		this.state = { currentImage: 0 };
+		this.closeLightbox = this.closeLightbox.bind(this); 
+		this.gotoNext = this.gotoNext.bind(this);
+		this.gotoPrevious = this.gotoPrevious.bind(this); 
+		this.openLightbox = this.openLightbox.bind(this);
+	}
+
+openLightbox=(id) =>{
+	 id = 1;
+	 if(isNaN(id))
+		console.log(id);
+			if(!isNaN(id)){
+		this.setState({
+		 currentImage: id,
+		 lightboxIsOpen: true,
+		});}
+	} 
+
+	closeLightbox=()=> {
+		this.setState({
+			currentImage: 0,
+			lightboxIsOpen: false,
+		}); 
+	}
+	gotoPrevious=()=> {
+		this.setState({
+			currentImage: this.state.currentImage - 1,                                                           
+		});  
+	}
+	gotoNext=()=> {
+		this.setState({
+			currentImage: this.state.currentImage + 1,                                            
+		}); 
+	}
+
     render = () => {
         const navbar = <Navbar/>
+				const footer = <Footer/>
+				const data = images.map((object,index) => {
+					return <OwnerTenant index= {index} src={object.src} view={object.view} description={object.description} type={object.type}  />
+			});
         return (
             <div className="page-wrap">
             {navbar}
@@ -14,41 +64,36 @@ class soen287 extends Component {
 
 				
 						<header id="header">
-							<div class="split-para">Real Estate App <span>Web Programming  </span></div>
+							<div className="split-para">Real Estate App <span>Web Programming  </span></div>
 						</header>
 
-            <div class="inner">
+            <div className="inner">
 								<header>
-									<h1>Java Servlet MVC Design Pattern</h1>
+								<span className="image center">  <img src="images/projects/mtlrental3.png" alt=""  />  </span>
 								</header>
-								<p>This project was created using Java Enterprise Servlets that implement HTTP requests and response  parturient mus phasellus vestibulum suspendisse dui vel ridiculus nibh diam placerat tellus scelerisque facilisi mus vestibulum arcu mus praesent in blandit. Conubia ullamcorper cum rhoncus vitae dapibus venenatis integer in donec egestas lacus nibh vestibulum habitasse accumsan parturient malesuada sociis auctor scelerisque vehicula urna eu proin euismod. Id facilisi suspendisse parturient leo mus condimentum natoque scelerisque ullamcorper odio tristique ultricies arcu ac condimentum facilisi scelerisque class commodo. Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<h2>Ultricies Senectus Magnis</h2>
-								<p>Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<section class="columns double">
-									<div class="column">
-										<span class="image left special"><img src="images/explore1.png" alt="" /></span>
-										<h3>Parturient Consequat Neque</h3>
-										<p>
-											Adipiscing dis a mus a convallis condimentum molestie penatibus iaculis pulvinar vestibulum enim lacus suscipit mi dictumst hendrerit sit condimentum at rutrum vulputate vestibulum habitasse nam fusce a nascetur. Ut ullamcorper suspendisse malesuada tempus vestibulum commodo habitasse suspendisse magnis.
-										</p>
-									</div>
-									<div class="column">
-										<span class="image left special"><img src="images/explore2.png" alt="" /></span>
-										<h3>Ridiculus Torquent Quam Accumsan</h3>
-										<p>
-											At sem phasellus elit class dapibus lectus posuere donec morbi in cras commodo faucibus ipsum vehicula fringilla. Risus hendrerit sit condimentum at rutrum vulputate fringilla dis curae metus ipsum imperdiet vulputate sapien dolorem ligula sapien curae consequat vestibulum urna. Nulla vulputate cum augue non arcu.
-										</p>
-									</div>
+								<h2>What is MTL Rental?</h2>
+								<p>MTL Rental was the first ever web application I ever built during my second semester of University. This application uses <strong>HTML5, CSS3, Bootstrap</strong>in the front end, and   <strong>PHP ,MySQL</strong> in the backend. 
+									This application lets <strong>Owners</strong> list their properties, set criterias of their potential tenants, and view the Tenants that match their criteria.  
+									<strong>Tenants</strong> can set their preferences and view the listings based on these prefereces.		</p>							
+								<section className="columns double"  onClick ={this.openLightbox}>
+								<Lightbox images={images}
+                          onClose={this.closeLightbox}
+                          onClickPrev={this.gotoPrevious}
+                          onClickNext={this.gotoNext}
+                          currentImage={this.state.currentImage}
+                          isOpen={this.state.lightboxIsOpen}/>   
+             
+								{data}
+
 								</section>
+
+								<h3>What I learned</h3>
+								<p>I learned how to use the WAMP servers to host PHP projects, basic mysql queries and basics of web development. This course was the introduction to my journey in web development, and essentially sparked my passion. </p>
+						
                 </div>
 
-                <footer id="footer">
-							<div class="copyright">
-								&copy; 2019<span > Andy Nguyen</span>
-							</div>
-				</footer>
-
-
+								{footer}
+								
                 </section>
                 </div>
             

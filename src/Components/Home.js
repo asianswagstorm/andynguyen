@@ -4,7 +4,7 @@ import '../css/Home.css';
 import '../css/font-awesome.min.css';
 import Card from  './Card';
 import Navbar from  './Navbar';
-
+import Footer from  './Footer';
 
 const fakeDb = [
 //Change the Href to be pages with description with the X button, not href to the image
@@ -49,6 +49,7 @@ class Home extends Component {
         return false
     });
     const navbar = <Navbar/>
+    const footer = <Footer/>
 
     return (
     
@@ -61,7 +62,7 @@ class Home extends Component {
               <section id="banner">
                 <div className="inner">
                   <h1>Hey, I'm Andy</h1>
-                  <p>Recently graduated from Computer Science interested in web development </p>
+                  <p>I'm a programmer. On the occasion I lift things up and put them down. </p>
                   <ul className="actions">
                     <li><a target = "_blank" rel="noopener noreferrer" href="Andy_Nguyen.pdf" className="button alt scrolly big">Download My CV</a></li>
                   </ul>
@@ -99,16 +100,20 @@ class Home extends Component {
                 
                   <div className="social column">
                     <h3>About Me</h3>
-                    <p>My name's Andy Nguyen, a Montreal based software developer. I am interested in web development, being able to create applications from stract is what I love to do. Recently discovered the world of web framework, 
-                   I am currently learning React JS and Flask. Always willing to learn more about cool industry technology to help me become the best developer I can be.  </p>
+                    <p>My name's Andy Nguyen, a Montreal based software developer. A recent grad in Computer Science in the Web Services and Application domain. 
+                      I'm a problem solver, solving bugs in my code or learning something new always fuels me to become a better developer.
+                      My interest lies in web development, throughout my years in university and my personal projects creating my projects has made me discover
+                      my passion for coding. However it is time for me to level up to the next step in my life, I am looking for a challenge. A career that can push me 
+                      to become a better developer. Always learning and growing, I look forward to work with you.</p>
+                         <p>
                     Outside of coding, I am a <a href="http://www.fqd-quebec.com/lifter/528" target="_blank" rel="noopener noreferrer">competitive powerlifter </a> in the -83kg class in the Quebec Powerlifting Federation.  
-                    I enjoy cooking, mixology and have a keen eye for photography.  
+                  I enjoy cooking, mixology, petting dogs and love photography.  
+                    </p>
                     
                     <h3>Follow Me</h3>
                     <ul className="icons">
                       <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/andy-nguyen-84818b15b/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
                       <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm" class="icon fa-github"><span class="label">Github</span></a></li>
-                      <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/asianswagstorm" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
                       <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/asianswagstorm/?hl=en" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
                     </ul>
                   </div>
@@ -136,12 +141,8 @@ class Home extends Component {
   
               </section>
   
-  
-        <footer id="footer">
-							<div class="copyright">
-								&copy; 2019<span > Andy Nguyen</span>
-							</div>
-				</footer>
+        {footer}
+
           </section>
       </div>
   

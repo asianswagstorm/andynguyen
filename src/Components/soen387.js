@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
 import '../css/Home.css';
 import '../css/font-awesome.min.css';
 import Navbar from  './Navbar';
+import Footer from  './Footer';
 
 class soen387 extends Component {
     render = () => {
         const navbar = <Navbar/>
+				const footer = <Footer/>
         return (
             <div className="page-wrap">
             {navbar}
@@ -15,40 +17,31 @@ class soen387 extends Component {
 
 				
 						<header id="header">
-							<div class="split-para">Pokemon Web App <span>Web-based Enterprise Application Design </span></div>
+							<div className="split-para">Pokemon Web App <span>Web-based Enterprise Application Design </span></div>
 						</header>
 
-            <div class="inner">
+            <div className="inner">
 								<header>
-									<h1>Java Servlet MVC Design Pattern</h1>
+								<span className="image center">  <img src="images/projects/pokemon1.png" alt=""  />  </span>
 								</header>
-								<p>This project was created using Java Enterprise Servlets that implement HTTP requests and response  parturient mus phasellus vestibulum suspendisse dui vel ridiculus nibh diam placerat tellus scelerisque facilisi mus vestibulum arcu mus praesent in blandit. Conubia ullamcorper cum rhoncus vitae dapibus venenatis integer in donec egestas lacus nibh vestibulum habitasse accumsan parturient malesuada sociis auctor scelerisque vehicula urna eu proin euismod. Id facilisi suspendisse parturient leo mus condimentum natoque scelerisque ullamcorper odio tristique ultricies arcu ac condimentum facilisi scelerisque class commodo. Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<h2>Ultricies Senectus Magnis</h2>
-								<p>Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<section class="columns double">
-									<div class="column">
-										<span class="image left special"><img src="images/explore1.png" alt="" /></span>
-										<h3>Parturient Consequat Neque</h3>
-										<p>
-											Adipiscing dis a mus a convallis condimentum molestie penatibus iaculis pulvinar vestibulum enim lacus suscipit mi dictumst hendrerit sit condimentum at rutrum vulputate vestibulum habitasse nam fusce a nascetur. Ut ullamcorper suspendisse malesuada tempus vestibulum commodo habitasse suspendisse magnis.
-										</p>
-									</div>
-									<div class="column">
-										<span class="image left special"><img src="images/explore2.png" alt="" /></span>
-										<h3>Ridiculus Torquent Quam Accumsan</h3>
-										<p>
-											At sem phasellus elit class dapibus lectus posuere donec morbi in cras commodo faucibus ipsum vehicula fringilla. Risus hendrerit sit condimentum at rutrum vulputate fringilla dis curae metus ipsum imperdiet vulputate sapien dolorem ligula sapien curae consequat vestibulum urna. Nulla vulputate cum augue non arcu.
-										</p>
-									</div>
-								</section>
+								<h3>What this app is about?</h3>
+								<p>This project was created using Java Enterprise Servlets that uses HTTP servlet  requests and response. Users can challenge other players to a card battle and once the other user accepts the challenge a game is invoked.  
+								The DBMS used was mysql, and the output response had to be in json format to be tested on against the test cases provided. Therefore because the application had to pass the test cases given, it was my first Test Driven Development application that I developed.
+									Two iterations of this project was done using various design patterns:
+									 <li> <strong>Primitive Page Controllers, Transaction Scripts and Row Data Gateway</strong></li> 
+									 Each feature has their own page controller file that processes requests using the HttpServletRequest and HttpServletResponse. 
+									 <li> <strong>Front Controllers, Dispatchers, Commands, Template View, Domain Object, Input / Output Mapper, Finder, Table Data Gateway, Proxy (Lazy Load), Identidy Map, Factory, UOW, Optimistic Concurrency Management </strong></li> 
+								Each feature were seperated by Dispatchers, Commands and Models (Finder, TDG , InputMapper, OutputMapper, Proxy, Interface, Factory)
+							
+								</p>
+								<h3>What I learned</h3>
+								<p> This was the first Java Web Developement project I did, I learned how <strong>Java Servlets, JSP, Apache Tomcat servers</strong> worked. Learned to use design patterns in the form of MVC (Presentation, Domain, DataSource), design class diagrams and system sequence diagrams.
+									This class heavily emphasied on <strong>Martin Fowler's Enterprise Patterns</strong>, which uses various design patterns listed above. Overall I learned how Java Enterprise Edition architectures worked, with servlet components and POJO's.
+									The framework used was called SONEA, a framework developed by the professor teaching the course. Eventually I would like to try the Spring Boot Framework for future Java Web Development projects. </p>
+								
                 </div>
 
-                <footer id="footer">
-							<div class="copyright">
-								&copy; 2019<span > Andy Nguyen</span>
-							</div>
-						</footer>
-
+              {footer}
 
                 </section>
                 </div>

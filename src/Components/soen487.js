@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import '../css/Home.css';
 import Navbar from  './Navbar';
+import Footer from  './Footer';
 
 class soen487 extends Component {
     render = () => {
         const navbar = <Navbar/>
+        const footer = <Footer/>
         return (
             <div className="page-wrap">
             {navbar}
@@ -14,41 +15,30 @@ class soen487 extends Component {
 
 				
 						<header id="header">
-							<div class="split-para"><a target = "_blank" rel="noopener noreferrer" href="http://jamdo-487.herokuapp.com/"> Wikipedia data fetch app </a><span>	Web Services and Applications </span></div>
+							<div className="split-para">Wikipedia data fetch app <span>	Web Services and Applications </span></div>
 						</header>
 
             <div class="inner">
 								<header>
-									<h1>Java Servlet MVC Design Pattern</h1>
+								<span className="image left"><a target = "_blank" rel="noopener noreferrer" href="http://jamdo-487.herokuapp.com/">   <img src="images/projects/jamdo1.png" alt=""  /> <strong>Click Image to try yourself </strong> </a> </span>
 								</header>
-								<p>This project was created using Java Enterprise Servlets that implement HTTP requests and response  parturient mus phasellus vestibulum suspendisse dui vel ridiculus nibh diam placerat tellus scelerisque facilisi mus vestibulum arcu mus praesent in blandit. Conubia ullamcorper cum rhoncus vitae dapibus venenatis integer in donec egestas lacus nibh vestibulum habitasse accumsan parturient malesuada sociis auctor scelerisque vehicula urna eu proin euismod. Id facilisi suspendisse parturient leo mus condimentum natoque scelerisque ullamcorper odio tristique ultricies arcu ac condimentum facilisi scelerisque class commodo. Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<h2>Ultricies Senectus Magnis</h2>
-								<p>Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								
-                                <span class=""><img src="images/explore1.png" alt="" /></span>
-										<h3>Parturient Consequat Neque</h3>
-										<p>
-											Adipiscing dis a mus a convallis condimentum molestie penatibus iaculis pulvinar vestibulum enim lacus suscipit mi dictumst hendrerit sit condimentum at rutrum vulputate vestibulum habitasse nam fusce a nascetur. Ut ullamcorper suspendisse malesuada tempus vestibulum commodo habitasse suspendisse magnis.
-										</p>
+							
+								<h3>What Is Jamdo?</h3>
+								<p>	 Jamdo is a Restful web application developed as a project for the web services course. The application implements four technical microservices: an application server, resourse gathering server, a caching server and an authentication server.
+									This application allows users to search dates and receive a list of events that occured on that date from the <strong>Wikipedia API </strong> response in Json format. 
+									 For the authentication, it uses Bcrypt cryptography to hash the user's password, the user's information is then encoded in a <strong>Json Web Token </strong> which is validated by our authentication server. 
+									 Finally a caching server is used to reduce the amount of requests to the Wikipedia API, if the searched data was already searched for previously, the data incoming will come from the stored caching database.
+									This application was developed using the <strong> Flask framework </strong> with <strong> SQLite</strong> as a relational dbms. 
+									Testing was done using PyUnit a unit test framework to test our various unit cases.</p> 
 									
-										<img src="images/explore2.png" alt="" />
-										<h3>Ridiculus Torquent Quam Accumsan</h3>
-										<p>
-											At sem phasellus elit class dapibus lectus posuere donec morbi in cras commodo faucibus ipsum vehicula fringilla. Risus hendrerit sit condimentum at rutrum vulputate fringilla dis curae metus ipsum imperdiet vulputate sapien dolorem ligula sapien curae consequat vestibulum urna. Nulla vulputate cum augue non arcu.
-										</p>
+										
+								<h3>What I learnt</h3>
+								<p> In this class and while doing this project, I learned about <strong>microservices vs monolithic </strong> applications. I was exposed to <strong>Python3 and the Flask</strong> framework. 
+								 I learned how to communicate with different servers on different ports rather than single server applications. I learned about <strong>Restful </strong> service constraints, and the <strong>OWASP TOP 10</strong> security projects  </p>
                 </div>
-               
-									
-									
-									
-                <footer id="footer">
-							<div class="copyright">
-								&copy; 2019<span > Andy Nguyen</span>
-							</div>
-				</footer>
-
-
+								{footer}
                 </section>
+                
                 </div>
             
          );

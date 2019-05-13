@@ -1,52 +1,49 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
 import '../css/Home.css';
 import Navbar from  './Navbar';
-
+import Footer from './Footer';
 class soen423 extends Component {
     render = () => {
         const navbar = <Navbar/>
+				const footer = <Footer/>
         return (
             <div className="page-wrap">
             {navbar}
 
             <section id="main">
 
-				
 						<header id="header">
-							<div class="split-para">Employee Management App <span>Distributed Systems </span></div>
+							<div className="split-para">Employee Management App <span>Distributed Systems </span></div>
 						</header>
 
-            <div class="inner">
-								<header>
-									<h1>Java Servlet MVC Design Pattern</h1>
-								</header>
-								<p>This project was created using Java Enterprise Servlets that implement HTTP requests and response  parturient mus phasellus vestibulum suspendisse dui vel ridiculus nibh diam placerat tellus scelerisque facilisi mus vestibulum arcu mus praesent in blandit. Conubia ullamcorper cum rhoncus vitae dapibus venenatis integer in donec egestas lacus nibh vestibulum habitasse accumsan parturient malesuada sociis auctor scelerisque vehicula urna eu proin euismod. Id facilisi suspendisse parturient leo mus condimentum natoque scelerisque ullamcorper odio tristique ultricies arcu ac condimentum facilisi scelerisque class commodo. Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<h2>Ultricies Senectus Magnis</h2>
-								<p>Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<section class="columns double">
-									<div class="column">
-										<span class="image left special"><img src="images/explore1.png" alt="" /></span>
-										<h3>Parturient Consequat Neque</h3>
-										<p>
-											Adipiscing dis a mus a convallis condimentum molestie penatibus iaculis pulvinar vestibulum enim lacus suscipit mi dictumst hendrerit sit condimentum at rutrum vulputate vestibulum habitasse nam fusce a nascetur. Ut ullamcorper suspendisse malesuada tempus vestibulum commodo habitasse suspendisse magnis.
-										</p>
-									</div>
-									<div class="column">
-										<span class="image left special"><img src="images/explore2.png" alt="" /></span>
-										<h3>Ridiculus Torquent Quam Accumsan</h3>
-										<p>
-											At sem phasellus elit class dapibus lectus posuere donec morbi in cras commodo faucibus ipsum vehicula fringilla. Risus hendrerit sit condimentum at rutrum vulputate fringilla dis curae metus ipsum imperdiet vulputate sapien dolorem ligula sapien curae consequat vestibulum urna. Nulla vulputate cum augue non arcu.
-										</p>
-									</div>
-								</section>
+            <div className="inner">
+						
+								<h2>What is it?</h2>
+								<p>This project manages employees in three servers running on different locations. The HR manager(end user) can add employee, manager records, get the number of employees and edit their records.
+									It was implemented in 3 different ways: </p>
+								<ul>
+									<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/newDistributedSystem/blob/master/srcA1/SOEN423A1_27333870.pdf" class="icon fa-github" > RMI Registry</a></li>
+									<p>Java Remote Method Invocation: Java RMI's are used to bind remote objects together. In this example the 3 seperate country servers are connected via UDP to the RMI Registry. The servers can 
+										interact with each other because the interface server  lies in the Registry. Java RMI is provided in a package in the Java Virtual Machine, and is strictly for object based programming.
+										  </p>
+									<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/newDistributedSystem/blob/master/srcA2/Andy%20Nguyen%2027333870%20A2%20Design%20Document.pdf" class="icon fa-github" > CORBA</a></li>
+									<p>Common Object Request Broker Architecture: Corba's Internet Inter-ORB Protocol (IIOP) allows objects to communicate with each other regardless of its programming language, since it was designed for generic languages. This provides a special function
+										narrow() to be used instead of name casting objects. (Keep in mind that CORBA technology is outdated) 
+										      </p>
+									<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/newDistributedSystem/blob/master/srcA3/Design%20Document%20A3%20Web%20Services%2027333870.pdf" class="icon fa-github" > SOAP WEB SERVICE </a></li>
+									<p>Simple Object Access Protocol (SOAP Web Service): 3 seperate Web Service Definition Language documents are generated by the dynamic web project along with SOAP binding stubs. SOAP binding binds the 3 services to seperate URL located on port 8888 (defined in our initiation).
+										SOAP protocal uses XML for message exchange.
+									</p>
+								</ul>  
+								<h2>What I learned</h2>
+								<p><strong>Threads</strong>, running 3 server threads on different ports. <strong>Synchronization</strong>, preventing threads running at the same time during the synchronized block, by using <strong>Locks</strong>. Relearned material on <strong>Operating Systems</strong> (deadlocking situations) mutual exclusion.   <strong>Interface Definition Language</strong>, Java IDL: is a tool used to develop <strong>CORBA</strong> applications, it auto generates (operation, helper, stub holder and POA) files these files help integrate and share objects from different models and languages.
+
+								</p>
+								
                 </div>
 
-                <footer id="footer">
-							<div class="copyright">
-								&copy; 2019<span > Andy Nguyen</span>
-							</div>
-				</footer>
+                {footer}
 
 
                 </section>

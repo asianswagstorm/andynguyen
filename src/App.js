@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import Home from "./Components/Home";
 import soen387 from "./Components/soen387";
 import soen487 from "./Components/soen487";

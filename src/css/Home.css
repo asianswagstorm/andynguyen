@@ -903,7 +903,12 @@
 			display: none;
 		}
 
+
+		.center{
+			text-align: center;
+		}
 /* Image */
+
 
 	.image {
 		border: 0;
@@ -915,11 +920,12 @@
 			display: block;
 		}
 
-		.image.left, .image.right {
+		.image.left, .image.right, .image.center {
 			max-width: 40%;
 		}
 
-			.image.left img, .image.right img {
+
+			.image.left img, .image.right img, .image.center img {
 				width: 100%;
 			}
 
@@ -961,6 +967,23 @@
 				}
 
 			}
+		
+		.image.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			top: -1.5em;
+			}
+	
+				@media screen and (max-width: 480px) {
+	
+					.image.center {
+						float: none;
+						margin-left: auto;
+						margin-right: auto;
+					}
+	
+				}	
 
 		.image.fit {
 			display: block;
@@ -982,6 +1005,86 @@
 				width: 100%;
 			}
 
+			/* Feature */
+
+			.feature {
+				display: -moz-flex;
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+				-moz-align-items: center;
+				-webkit-align-items: center;
+				-ms-align-items: center;
+				align-items: center;
+				margin-bottom: 6em;
+			}
+		
+				.feature:last-child {
+					margin-bottom: 2em;
+				}
+		
+				.feature.left {
+					-moz-flex-direction: row;
+					-webkit-flex-direction: row;
+					-ms-flex-direction: row;
+					flex-direction: row;
+				}
+		
+				.feature.right {
+					-moz-flex-direction: row-reverse;
+					-webkit-flex-direction: row-reverse;
+					-ms-flex-direction: row-reverse;
+					flex-direction: row-reverse;
+				}
+		
+				.feature .image {
+					width: 48%;
+				}
+		
+					.feature .image img {
+						max-width: 100%;
+					}
+		
+				.feature .content {
+					padding: 2em 3em 0.1em 3em;
+					width: 52%;
+				}
+		
+				@media screen and (max-width: 1280px) {
+		
+					.feature {
+						margin-bottom: 4em;
+					}
+		
+						.feature .content {
+							padding: 1em 2em 0.1em 2em;
+						}
+		
+				}
+		
+				@media screen and (max-width: 980px) {
+		
+					.feature.left, .feature.right {
+						-moz-flex-direction: column;
+						-webkit-flex-direction: column;
+						-ms-flex-direction: column;
+						flex-direction: column;
+					}
+		
+					.feature .image {
+						width: 100%;
+					}
+		
+						.feature .image img {
+							width: 100%;
+						}
+		
+					.feature .content {
+						padding: 2em 2em 0.1em 2em;
+						width: 100%;
+					}
+		
+				}
 /* List */
 
 	ol {

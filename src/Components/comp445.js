@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import '../css/Home.css';
 import Navbar from  './Navbar';
+import Footer from  './Footer';
 
 class comp445 extends Component {
     render = () => {
         const navbar = <Navbar/>
+				const footer = <Footer/>
         return (
             <div className="page-wrap">
             {navbar}
@@ -14,40 +15,72 @@ class comp445 extends Component {
 
 				
 						<header id="header">
-							<div class="split-para">UDP Chat App <span>Data Communications and Computer Networks  </span></div>
+							<div className="split-para">UDP Chat App <span>Data Communications and Computer Networks  </span></div>
 						</header>
 
-            <div class="inner">
+            <div className="inner">
 								<header>
-									<h1>Java Servlet MVC Design Pattern</h1>
+									<div className="center">
+										<ul className="icons">
+                      <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/NetworkingStuff/blob/master/code/p2p.js" class="icon fa-github"><span class="label">Github</span></a></li>
+											<span>View the code</span>
+                    </ul>
+									</div>
 								</header>
-								<p>This project was created using Java Enterprise Servlets that implement HTTP requests and response  parturient mus phasellus vestibulum suspendisse dui vel ridiculus nibh diam placerat tellus scelerisque facilisi mus vestibulum arcu mus praesent in blandit. Conubia ullamcorper cum rhoncus vitae dapibus venenatis integer in donec egestas lacus nibh vestibulum habitasse accumsan parturient malesuada sociis auctor scelerisque vehicula urna eu proin euismod. Id facilisi suspendisse parturient leo mus condimentum natoque scelerisque ullamcorper odio tristique ultricies arcu ac condimentum facilisi scelerisque class commodo. Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<h2>Ultricies Senectus Magnis</h2>
-								<p>Scelerisque sagittis magna mi duis iaculis id erat pharetra vestibulum condimentum hac suspendisse tempor leo aliquet penatibus parturient donec parturient parturient. Vehicula suspendisse sem a adipiscing est ad donec ultricies senectus magnis convallis a fringilla adipiscing vulputate dui elementum diam ipsum eleifend condimentum placerat facilisi viverra mollis scelerisque. Commodo cum vestibulum hendrerit sit condimentum at rutrum vulputate scelerisque erat convallis himenaeos consequat a hac ultrices nam vel suspendisse nascetur dictum vulputate sed at.</p>
-								<section class="columns double">
-									<div class="column">
-										<span class="image left special"><img src="images/explore1.png" alt="" /></span>
-										<h3>Parturient Consequat Neque</h3>
-										<p>
-											Adipiscing dis a mus a convallis condimentum molestie penatibus iaculis pulvinar vestibulum enim lacus suscipit mi dictumst hendrerit sit condimentum at rutrum vulputate vestibulum habitasse nam fusce a nascetur. Ut ullamcorper suspendisse malesuada tempus vestibulum commodo habitasse suspendisse magnis.
-										</p>
-									</div>
-									<div class="column">
-										<span class="image left special"><img src="images/explore2.png" alt="" /></span>
-										<h3>Ridiculus Torquent Quam Accumsan</h3>
-										<p>
-											At sem phasellus elit class dapibus lectus posuere donec morbi in cras commodo faucibus ipsum vehicula fringilla. Risus hendrerit sit condimentum at rutrum vulputate fringilla dis curae metus ipsum imperdiet vulputate sapien dolorem ligula sapien curae consequat vestibulum urna. Nulla vulputate cum augue non arcu.
-										</p>
-									</div>
-								</section>
+								<h2>What is it</h2>
+								<p>This console based application uses UDP4 sockets and Docker containers to enable a multi user chat feature. Using dockers allow for multiple containers (multiple users, 1 container per user) to listen on the same port and IP.
+									  Users can chat in private mode, channel mode and general, additionally users can also see who is active in the chatroom.  
+									 </p>
+									 <section id="one" className="wrapper style1">
+									  
+									 <article className="feature left">
+						<span className="image"><img src="images/projects/UDP2.png" alt="" /></span>
+						<div className="content">
+							<h4>Example of private messaging between Ben and Jerry</h4>
+							<p>Users can start a private chat with other users in the chatroom using the <strong>/private</strong> command, these messages are only visible between the two users. Here we can see Ben and Jerry discussing about the new user Tom who just entered the chatroom.</p>
+						
+						</div>
+					</article>
+
+					<article className="feature right">
+						<span className="image"><img src="images/projects/UDP3.png" alt="" /></span>
+						<div className="content">
+							<h4>Example of channel messaging </h4>
+							<p>Channel messaging is messaging only to all users that are in the current channel, similar to private messaging but to a group of users.</p>
+						
+						</div>
+					</article>
+
+					<article className="feature left">
+						<span className="image"><img src="images/projects/UDP1.png" alt="" /></span>
+						<div className="content">
+							<h4>Example of leaving the application </h4>
+							<p>When a user leaves the chatroom with <strong>/leave</strong> all users are notified and the users is taken out of the users array.</p>
+						
+						</div>
+					</article>
+									 
+									 </section>
+
+								<h2>What I learned</h2>
+								<p>Working on networking, I learned about TCP and UDP protocols. HTTP Requests, and the 7 layers of the Open System Interconnection Model  </p>
+								<ul>
+									<li>Application</li>
+									<li>Presentation</li>
+									<li>Session</li>
+									<li>Transport</li>
+									<li>Network</li>
+									<li>Data Link</li>
+									<li>Physical</li>
+								</ul>
+									
+								<p> I was exposed to Docker Terminals which has given me the knowledge/understanding of vitualizion (running localized virtual containers) instead of running apps multiple servers. 
+								
+								</p>
+								
                 </div>
 
-                <footer id="footer">
-							<div class="copyright">
-								&copy; 2019<span > Andy Nguyen</span>
-							</div>
-				</footer>
-
+           {footer}
 
                 </section>
                 </div>
