@@ -8,17 +8,17 @@ import Footer from  './Footer';
 
 const fakeDb = [
 //Change the Href to be pages with description with the X button, not href to the image
-        { href:"Jamdo" , src:"images/thumbs/01.jpg", alt:"", title:"Jamdo, a web application created for Web Services and Applications class.", type: 'python' },
-        { href:"Pokemon" , src:"images/thumbs/02.jpg", alt:"", title: "A Pokemon card battle game created for Web-Based Enterprise Application Design .", type: "java" },
-        { href:"https://airbnbmock.herokuapp.com/" , src:"images/thumbs/03.jpg", alt:"", title:"An airbnb replica front page created with react JS (first time using React) ", type: 'javascript' },
-        { href:"Real_Estate" , src:"images/thumbs/04.jpg", alt:"", title:"A real estate application created for Web Programming class, my first web application. ", type: 'php' },
-        { href:"Medical_Clinic" , src:"images/thumbs/05.jpg", alt:"", title:"Medical Clinic Patient Management application created for Database class.", type:'php'},
-        { href:"https://asianswagstorm.github.io/SimpleProjects/TicTacToe/" , src:"images/thumbs/06.jpg", alt:"", title:"Tic Tac Toe Game .", type:'javascript'},
-        { href:"https://asianswagstorm.github.io/SimpleProjects/RockPaperScissor/" , src:"images/thumbs/07.jpg", alt:"", title:"Rock Paper Scissor Game.", type:'javascript'},
-        { href:"https://asianswagstorm.github.io/SimpleProjects/Connect4/" , src:"images/thumbs/08.jpg", alt:"", title:"Connect 4 Game.", type:'javascript'},
-        { href:"PowerGrid" , src:"images/thumbs/09.jpg", alt:"", title:"C++ Board Game implemented with design pattern.", type:'c++'},
-        { href:"Distributed_System" , src:"images/thumbs/10.jpg", alt:"", title:"Distributed Systems.", type:'java'},
-        { href:"UDP_APP" , src:"images/thumbs/11.jpg", alt:"", title:"UDP chat application using docker container for networking class.", type:'javascript'},
+        { href:"Jamdo" , src:"images/thumbs/thumb1.jpg", alt:"", title:"Jamdo, a web application created for Web Services and Applications class.", type: 'python' },
+        { href:"Pokemon" , src:"images/thumbs/thumb2.jpg", alt:"", title: "A Pokemon card battle game created for Web-Based Enterprise Application Design .", type: "java" },
+        { href:"https://airbnbmock.herokuapp.com/" , src:"images/thumbs/thumb3.jpg", alt:"", title:"An airbnb replica front page created with react JS (first time using React) ", type: 'javascript' },
+        { href:"Real_Estate" , src:"images/thumbs/thumb4.jpg", alt:"", title:"A real estate application created for Web Programming class, my first web application. ", type: 'php' },
+        { href:"Medical_Clinic" , src:"images/thumbs/thumb5.jpg", alt:"", title:"Medical Clinic Patient Management application created for Database class.", type:'php'},
+        { href:"https://asianswagstorm.github.io/SimpleProjects/TicTacToe/" , src:"images/thumbs/thumb6.jpg", alt:"", title:"Tic Tac Toe Game .", type:'javascript'},
+        { href:"https://asianswagstorm.github.io/SimpleProjects/RockPaperScissor/" , src:"images/thumbs/thumb7.jpg", alt:"", title:"Rock Paper Scissor Game.", type:'javascript'},
+        { href:"https://asianswagstorm.github.io/SimpleProjects/Connect4/" , src:"images/thumbs/thumb8.jpg", alt:"", title:"Connect 4 Game.", type:'javascript'},
+        { href:"PowerGrid" , src:"images/thumbs/thumb9.jpg", alt:"", title:"C++ Board Game implemented with design pattern.", type:'c++'},
+        { href:"Distributed_System" , src:"images/thumbs/thumb10.jpg", alt:"", title:"Distributed Systems.", type:'java'},
+        { href:"UDP_APP" , src:"images/thumbs/thumb11.jpg", alt:"", title:"UDP chat application using docker container for networking class.", type:'javascript'},
      
                            ];
 
