@@ -45,7 +45,7 @@ class Home extends Component {
 
     const lifeList = fakeDb.map((value, index) => {
         if(this.state.filterOption === value.type || this.state.filterOption === ""){
-        return <Card href={value.href} imgSrc={value.src} alt="" title={value.title}/>}
+        return<Card key={index} href={value.href} imgSrc={value.src} alt="" title={value.title}/>}
         return false
     });
     const navbar = <Navbar/>
@@ -78,12 +78,12 @@ class Home extends Component {
                               <header>
                                 <h1>Projects</h1>
                                   <ul id="tabs">
-                                      <li><button onClick={() => this.filter("")} data-tag="all" class="button">All</button></li>
-                                      <li><button onClick={() => this.filter("java")} data-tag="java" class="button">Java</button></li>
-                                      <li><button onClick={() => this.filter("javascript")}  data-tag="javascript" class="button">Javascript</button></li>
-                                      <li><button onClick={() => this.filter("python")}  data-tag="python" class="button">Python</button></li>
-                                      <li><button onClick={() => this.filter("php")}  data-tag="php" class="button">Php</button></li>
-                                      <li><button onClick={() => this.filter("c++")}  data-tag="c++" class="button">C++</button></li>
+                                      <li><button onClick={() => this.filter("")} data-tag="all" className="button">All</button></li>
+                                      <li><button onClick={() => this.filter("java")} data-tag="java" className="button">Java</button></li>
+                                      <li><button onClick={() => this.filter("javascript")}  data-tag="javascript" className="button">Javascript</button></li>
+                                      <li><button onClick={() => this.filter("python")}  data-tag="python" className="button">Python</button></li>
+                                      <li><button onClick={() => this.filter("php")}  data-tag="php" className="button">Php</button></li>
+                                      <li><button onClick={() => this.filter("c++")}  data-tag="c++" className="button">C++</button></li>
 
                                   </ul>
                               </header>
@@ -112,15 +112,15 @@ class Home extends Component {
                     
                     <h3>Follow Me</h3>
                     <ul className="icons">
-                      <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/andy-nguyen-84818b15b/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                      <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm" class="icon fa-github"><span class="label">Github</span></a></li>
-                      <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/asianswagstorm/?hl=en" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                      <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/andy-nguyen-84818b15b/" className="icon fa-linkedin"><span className="label">LinkedIn</span></a></li>
+                      <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm" className="icon fa-github"><span className="label">Github</span></a></li>
+                      <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/asianswagstorm/?hl=en" className="icon fa-instagram"><span className="label">Instagram</span></a></li>
                     </ul>
                   </div>
                 
                   <div className="column">
                     <h3>Get in Touch with Me</h3>
-                    <form action="mailto:nguyen.andy123@gmail.com" method="post" enctype="text/plain">
+                    <form action="mailto:nguyen.andy123@gmail.com" method="post" encType="text/plain">
                       <div className="field half first">
                         <label htmlFor="name">Name</label>
                         <input name="name" id="name" type="text" placeholder="Name"/>
@@ -134,7 +134,7 @@ class Home extends Component {
                         <textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
                       </div>
                       <ul className="actions">
-                        <li><input value="Send Message" class="button" type="submit"/></li>
+                        <li><input value="Send Message" className="button" type="submit"/></li>
                       </ul>
                     </form>
                   </div>
