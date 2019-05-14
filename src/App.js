@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from "./Components/Home";
+import NotFound from "./Components/NotFound";
 import soen387 from "./Components/soen387";
 import soen487 from "./Components/soen487";
 import soen287 from "./Components/soen287";
@@ -22,6 +23,7 @@ class App extends Component {
         <Route path="/PowerGrid" exact component ={comp345} />
         <Route path="/Distributed_System" exact component ={soen423} />
         <Route path="/UDP_APP" exact component ={comp445} />
+        <Route path="*" exact component={NotFound} />
       </Switch>
     </BrowserRouter>
     );
