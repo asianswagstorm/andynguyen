@@ -14,20 +14,17 @@ class NotFound extends Component {
             {navbar}
 
             <section id="main">
-
 				
 						<header id="header">
 							<div className="split-para">Nothing to see here  <a href="/"><span>Go back to home page </span></a></div>
 						</header>
 
 						<h1 className="center">404 ERROR,YOU HAVE REACHED A DEFAULT ROUTE </h1>
-				
 
               {footer}
 
                 </section>
                 </div>
-            
             
          );
                  }
