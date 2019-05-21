@@ -11,6 +11,7 @@ const fakeDb = [
         { href:"Jamdo" , src:"images/thumbs/thumb1.jpg", alt:"", title:"Jamdo, a web application created for Web Services and Applications class.", type: 'python' },
         { href:"Pokemon" , src:"images/thumbs/thumb2.jpg", alt:"", title: "A Pokemon card battle game created for Web-Based Enterprise Application Design .", type: "java" },
         { href:"https://airbnbmock.herokuapp.com/" , src:"images/thumbs/thumb3.jpg", alt:"", title:"An airbnb replica front page created with react JS (first time using React) ", type: 'javascript' },
+        { href:"https://recipes-api-app.herokuapp.com/" , src:"images/thumbs/thumb12.jpg", alt:"", title:"A recipe api app made with react. ", type: 'javascript' },
         { href:"Real_Estate" , src:"images/thumbs/thumb4.jpg", alt:"", title:"A real estate application created for Web Programming class, my first web application. ", type: 'php' },
         { href:"Medical_Clinic" , src:"images/thumbs/thumb5.jpg", alt:"", title:"Medical Clinic Patient Management application created for Database class.", type:'php'},
         { href:"https://asianswagstorm.github.io/SimpleProjects/TicTacToe/" , src:"images/thumbs/thumb6.jpg", alt:"", title:"Tic Tac Toe Game .", type:'javascript'},
@@ -100,14 +101,13 @@ class Home extends Component {
                 
                   <div className="social column">
                     <h3>About Me</h3>
-                    <p>My name's Andy Nguyen, a Montreal based software developer. A recent grad in Computer Science in the Web Services and Application domain. 
-                      I'm a problem solver, solving bugs in my code or learning something new always fuels me to become a better developer.
-                      My interest lies in web development, throughout my years in university and my personal projects creating my projects has made me discover
-                      my passion for coding. However it is time for me to level up to the next step in my life, I am looking for a challenge. A career that can push me 
-                      to become a better developer. Always learning and growing, I look forward to work with you.</p>
+                    <p>My name's Andy Nguyen, a Montreal based software developer. A recent Computer Science grad in the Web Services and Application domain. 
+                      I'm a problem solver, solving bugs or learning something new always fuels me to become a better developer.
+                      My interest lies in web development, my years in university and my personal projects have made me discover
+                      my passion for coding. I am always learning and growing, and look forward to work with you.</p>
                          <p>
                     Outside of coding, I am a <a href="http://www.fqd-quebec.com/lifter/528" target="_blank" rel="noopener noreferrer">competitive powerlifter </a> in the -83kg class in the Quebec Powerlifting Federation.  
-                  I enjoy cooking, mixology, petting dogs and love photography.  
+                  I enjoy cooking, mixology, photography and of course petting dogs.  
                     </p>
                     
                     <h3>Follow Me</h3>
