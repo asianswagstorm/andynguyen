@@ -28,9 +28,10 @@ class Home extends Component {
         super(props);
         this.state = {
             filterOption: "",
-            isToggleOn: true,};
+            isToggleOn: true,
+            specialFooter: false};
         this.escapeFunction = this.escapeFunction.bind(this);  
-    
+       
       }
 
   filter = (type) => {
@@ -50,7 +51,7 @@ class Home extends Component {
         return false
     });
     const navbar = <Navbar/>
-    const footer = <Footer/>
+    const footer = <Footer specialFooter = {this.state.specialFooter}/>
 
     return (
     

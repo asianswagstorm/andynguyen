@@ -4,9 +4,10 @@ import Navbar from  './Navbar';
 import Footer from  './Footer';
 
 class comp345 extends Component {
+
     render = () => {
         const navbar = <Navbar/>
-				const footer = <Footer/>
+				const footer = <Footer specialFooter = {true}/>
         return (
             <div className="page-wrap">
             {navbar}

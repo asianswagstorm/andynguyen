@@ -80,9 +80,10 @@ class comp445 extends Component {
 								
                 </div>
 
-           {footer}
+								{footer}
 
                 </section>
+							
                 </div>
             
             

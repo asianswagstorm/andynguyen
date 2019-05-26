@@ -15,11 +15,10 @@ class soen387 extends Component {
 
             <section id="main">
 
-				
 						<header id="header">
 							<div className="split-para">Pokemon Web App <span>Web-based Enterprise Application Design </span></div>
 						</header>
-
+					
             <div className="inner">
 								<header>
 								<span className="image center">  <img src="images/projects/pokemon1.jpg" alt=""  />  </span>
@@ -40,7 +39,7 @@ class soen387 extends Component {
 									The framework used was called SONEA, a framework developed by the professor teaching the course. Eventually I would like to try the Spring Boot Framework for future Java Web Development projects. </p>
 								
                 </div>
-
+							
               {footer}
 
                 </section>

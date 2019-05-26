@@ -6,7 +6,7 @@ import Footer from  './Footer';
 class soen487 extends Component {
     render = () => {
         const navbar = <Navbar/>
-        const footer = <Footer/>
+        const footer = <Footer specialFooter = {true}/>
         return (
             <div className="page-wrap">
             {navbar}
@@ -18,6 +18,7 @@ class soen487 extends Component {
 							<div className="split-para">Wikipedia data fetch app <span>	Web Services and Applications </span></div>
 						</header>
 
+						<div className= "content">
             <div class="inner">
 								<header>
 								<span className="image left"><a target = "_blank" rel="noopener noreferrer" href="http://jamdo-487.herokuapp.com/">   <img src="images/projects/jamdo1.jpg" alt=""  /> <strong>Click Image to try yourself </strong> </a> </span>
@@ -36,6 +37,7 @@ class soen487 extends Component {
 								<p> In this class and while doing this project, I learned about <strong>microservices vs monolithic </strong> applications. I was exposed to <strong>Python3 and the Flask</strong> framework. 
 								 I learned how to communicate with different servers on different ports rather than single server applications. I learned about <strong>Restful </strong> service constraints, and the <strong>OWASP TOP 10</strong> security projects  </p>
                 </div>
+								</div>
 								{footer}
                 </section>
                 

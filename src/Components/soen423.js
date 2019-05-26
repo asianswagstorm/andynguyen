@@ -4,7 +4,9 @@ import '../css/Home.css';
 import Navbar from  './Navbar';
 import Footer from './Footer';
 class soen423 extends Component {
+
     render = () => {
+		
         const navbar = <Navbar/>
 				const footer = <Footer/>
         return (

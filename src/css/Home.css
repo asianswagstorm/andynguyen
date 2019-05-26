@@ -1780,6 +1780,8 @@
 	#main {
 		background: #f1f1f1;
 		width: 100%;
+		min-height:100vh;
+	
 	}
 
 		#main #header {
@@ -1814,6 +1816,7 @@
 	#footer {
 		padding: 4em 0 2em 0;
 		background: #f1f1f1;
+	
 	}
 
 		#footer .copyright {
@@ -1823,6 +1826,14 @@
 			padding: 0 1em;
 			text-align: center;
 		}
+
+			#footer1 {
+				padding: 4em 0 2em 0;
+				background: #f1f1f1;
+				position: absolute;
+				bottom:0;
+				right:42%;
+			}
 
 		@media screen and (max-width: 736px) {
 
