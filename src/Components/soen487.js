@@ -19,7 +19,7 @@ class soen487 extends Component {
 						</header>
 
 						<div className= "content">
-            <div class="inner">
+            <div className="inner">
 								<header>
 								<span className="image left"><a target = "_blank" rel="noopener noreferrer" href="http://jamdo-487.herokuapp.com/">   <img src="images/projects/jamdo1.jpg" alt=""  /> <strong>Click Image to try yourself </strong> </a> </span>
 								</header>
@@ -35,7 +35,7 @@ class soen487 extends Component {
 										
 								<h3>What I learnt</h3>
 								<p> In this class and while doing this project, I learned about <strong>microservices vs monolithic </strong> applications. I was exposed to <strong>Python3 and the Flask</strong> framework. 
-								 I learned how to communicate with different servers on different ports rather than single server applications. I learned about <strong>Restful </strong> service constraints, and the <strong>OWASP TOP 10</strong> security projects  </p>
+								 I learned how to communicate with different servers on different ports rather than single server applications. I learned about <strong>Restful </strong> service constraints, and the <strong>OWASP TOP 10</strong> security projects.  </p>
                 </div>
 								</div>
 								{footer}

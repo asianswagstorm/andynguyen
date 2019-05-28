@@ -7,7 +7,7 @@ class comp345 extends Component {
 
     render = () => {
         const navbar = <Navbar/>
-				const footer = <Footer specialFooter = {true}/>
+				const footer = <Footer specialFooter = {true} footer2 = {true}/>
         return (
             <div className="page-wrap">
             {navbar}
@@ -16,14 +16,14 @@ class comp345 extends Component {
 
 				
 						<header id="header">
-							<div class="split-para">Powergrid <span>Advanced Program Design with C++ </span></div>
+							<div className="split-para">Powergrid <span>Advanced Program Design with C++ </span></div>
 						</header>
 
-            <div class="inner">
+            <div className="inner">
 								<header>
 								<div className="center">
 										<ul className="icons">
-                      <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/Powergrid" class="icon fa-github"><span class="label">Github</span></a></li>
+                      <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/asianswagstorm/Powergrid" className="icon fa-github"><span className="label">Github</span></a></li>
 											<span>View the code</span>
                     </ul>
 									</div>

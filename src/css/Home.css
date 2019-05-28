@@ -1135,7 +1135,22 @@
 					padding: 0;
 				}
 
-				@media screen and (max-width: 736px) {
+				@media screen and (max-width: 812px) and (max-height:375px) {
+
+					ul, #tabs li {
+						display: block;
+						margin: 0 0 .25em 0;
+						padding: 0;
+					}
+
+						ul #tabs li .button {
+							width: 100%;
+						}
+
+				}
+
+
+				@media screen and (max-height: 375px) and (max-width: 667px)  {
 
 					ul, #tabs li {
 						display: block;
@@ -1811,6 +1826,19 @@
 
 			}
 
+			@media screen and (max-width: 667px) {
+
+				#main #header {
+					text-align: center;
+				}
+
+				#main {
+					min-height:125vh;
+				}
+
+			}
+
+
 /* Footer */
 
 	#footer {
@@ -1827,7 +1855,7 @@
 			text-align: center;
 		}
 
-			#footer1 {
+			#footer1 , #footer2 {
 				padding: 4em 0 2em 0;
 				background: #f1f1f1;
 				position: absolute;
@@ -1835,10 +1863,105 @@
 				right:42%;
 			}
 
-		@media screen and (max-width: 736px) {
+			/* Iphone 6-7-8 doenst work*/
+			/* @media screen and (max-height: 375px) and (max-width: 667px) { 
 
 			#footer {
 				padding: 3em 0 1em 0;
 			}
 
+			#footer1 {
+				padding: 3em 0 1em 0;
+				position: absolute;
+				bottom:-125vh;
+				right:0;
+				width: 100%;
+			}
+
+			#footer2 {
+				padding: 3em 0 1em 0;
+				position: absolute;
+				bottom:-30vh;
+				right:0;
+				width: 100%;
+			}
+
+			#footer1 .copyright , #footer2 .copyright  {
+				color: red; 
+				font-size: 1.3em;
+				margin: 0 0 2em 0;
+				padding: 0 1em;
+				text-align: center;
+			}
+
+		}*/
+
+		/* Iphone 6-7-8 Plus Not working*/
+		/*
+		@media screen and (max-width: 736px) { 
+
+			#footer {
+				padding: 3em 0 1em 0;
+			}
+
+			#footer1 {
+				padding: 3em 0 1em 0;
+				position: absolute;
+				bottom:-105vh;
+				right:0;
+				width: 100%;
+			}
+
+			#footer2 {
+				padding: 3em 0 1em 0;
+				position: absolute;
+				bottom:-30vh;
+				right:0;
+				width: 100%;
+			}
+
+			#footer1 .copyright , #footer2 .copyright  {
+				color: red;
+				font-size: 1.3em;
+				margin: 0 0 2em 0;
+				padding: 0 1em;
+				text-align: center;
+			}
+
+		} */
+
+		/*Iphone X WORKS */
+		@media screen and (max-width: 812px) { 
+
+			#footer {
+				padding: 3em 0 1em 0;
+			}
+
+			#footer1 {
+				padding: 3em 0 1em 0;
+				position: absolute;
+				bottom:-85vh;
+				right:0;
+				width: 100%;
+			}
+
+			#footer2 {
+				padding: 3em 0 1em 0;
+				position: absolute;
+				bottom:-30vh;
+				right:0;
+				width: 100%;
+			}
+
+			#footer1 .copyright , #footer2 .copyright  {
+				color: black;
+				font-size: 1.3em;
+				margin: 0 0 2em 0;
+				padding: 0 1em;
+				text-align: center;
+			}
+
 		}
+
+
+

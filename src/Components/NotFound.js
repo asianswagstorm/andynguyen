@@ -8,7 +8,7 @@ import Footer from  './Footer';
 class NotFound extends Component {
     render = () => {
         const navbar = <Navbar/>
-				const footer = <Footer/>
+				const footer = <Footer specialFooter = {true} footer2 = {true} />
         return (
             <div className="page-wrap">
             {navbar}
