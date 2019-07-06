@@ -47,6 +47,13 @@ const fakeDb = [
     type: "JavaScript"
   },
   {
+    href: "https://spotify-app-andy.herokuapp.com/",
+    src: "images/thumbs/thumb14.jpg",
+    alt: "",
+    title: "A spotify api app made with react. ",
+    type: "JavaScript"
+  },
+  {
     href: "Real_Estate",
     src: "images/thumbs/thumb4.jpg",
     alt: "",
@@ -160,7 +167,7 @@ class Home extends Component {
         <li>
           <button
             key={index}
-            onClick={() => this.filter(x.languages != "All" ? x.languages : "")}
+            onClick={() => this.filter(x.languages !== "All" ? x.languages : "")}
             data-tag={x.languages}
             className="button"
           >
