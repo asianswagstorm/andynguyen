@@ -5,121 +5,14 @@ import "../css/font-awesome.min.css";
 import Card from "./Card";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import {tiles} from "./constants/Tiles";
 
-const fakeDb = [
-  //Change the Href to be pages with description with the X button, not href to the image
-  {
-    href: "Jamdo",
-    src: "images/thumbs/thumb1.jpg",
-    alt: "",
-    title:
-      "Jamdo, a web application created for Web Services and Applications class.",
-    type: "Python"
-  },
-  {
-    href: "Pokemon",
-    src: "images/thumbs/thumb2.jpg",
-    alt: "",
-    title:
-      "A Pokemon card battle game created for Web-Based Enterprise Application Design .",
-    type: "Java"
-  },
-  {
-    href: "https://airbnbmock.herokuapp.com/",
-    src: "images/thumbs/thumb3.jpg",
-    alt: "",
-    title:
-      "An airbnb replica front page created with react JS (first time using React) ",
-    type: "JavaScript"
-  },
-  {
-    href: "https://recipes-api-app.herokuapp.com/",
-    src: "images/thumbs/thumb12.jpg",
-    alt: "",
-    title: "A recipe api app made with react. ",
-    type: "JavaScript"
-  },
-  {
-    href: "https://pokemon-dex-application.herokuapp.com/",
-    src: "images/thumbs/thumb13.jpg",
-    alt: "",
-    title: "A pokedex api app made with react. ",
-    type: "JavaScript"
-  },
-  {
-    href: "https://spotify-app-andy.herokuapp.com/",
-    src: "images/thumbs/thumb14.jpg",
-    alt: "",
-    title: "A spotify api app made with react. ",
-    type: "JavaScript"
-  },
-  {
-    href: "Real_Estate",
-    src: "images/thumbs/thumb4.jpg",
-    alt: "",
-    title:
-      "A real estate application created for Web Programming class, my first web application. ",
-    type: "PHP"
-  },
-  {
-    href: "Medical_Clinic",
-    src: "images/thumbs/thumb5.jpg",
-    alt: "",
-    title:
-      "Medical Clinic Patient Management application created for Database class.",
-    type: "PHP"
-  },
-  {
-    href: "https://asianswagstorm.github.io/SimpleProjects/TicTacToe/",
-    src: "images/thumbs/thumb6.jpg",
-    alt: "",
-    title: "Tic Tac Toe Game .",
-    type: "JavaScript"
-  },
-  {
-    href: "https://asianswagstorm.github.io/SimpleProjects/RockPaperScissor/",
-    src: "images/thumbs/thumb7.jpg",
-    alt: "",
-    title: "Rock Paper Scissor Game.",
-    type: "JavaScript"
-  },
-  {
-    href: "https://asianswagstorm.github.io/SimpleProjects/Connect4/",
-    src: "images/thumbs/thumb8.jpg",
-    alt: "",
-    title: "Connect 4 Game.",
-    type: "JavaScript"
-  },
-  {
-    href: "PowerGrid",
-    src: "images/thumbs/thumb9.jpg",
-    alt: "",
-    title: "C++ Board Game implemented with design pattern.",
-    type: "C++"
-  },
-  {
-    href: "Distributed_System",
-    src: "images/thumbs/thumb10.jpg",
-    alt: "",
-    title: "Distributed Systems.",
-    type: "Java"
-  },
-  {
-    href: "UDP_APP",
-    src: "images/thumbs/thumb11.jpg",
-    alt: "",
-    title: "UDP chat application using docker container for networking class.",
-    type: "JavaScript"
-  }
-];
 
 const languages = [
   { languages: "All" },
-  { languages: "Java" },
+  { languages: "Work Experience" },
   { languages: "JavaScript" },
-  { languages: "Python" },
-  { languages: "PHP" },
-  { languages: "C++" }
+  { languages: "Python" }
 ];
 
 class Home extends Component {
@@ -144,7 +37,7 @@ class Home extends Component {
   };
 
   render = () => {
-    const lifeList = fakeDb.map((value, index) => {
+    const lifeList = tiles.map((value, index) => {
       if (
         this.state.filterOption === value.type ||
         this.state.filterOption === ""
@@ -164,9 +57,8 @@ class Home extends Component {
 
     const language_buttons = languages.map((x, index) => {
       return (
-        <li>
+        <li key={index}>
           <button
-            key={index}
             onClick={() => this.filter(x.languages !== "All" ? x.languages : "")}
             data-tag={x.languages}
             className="button"
@@ -279,7 +171,7 @@ class Home extends Component {
                 </li>
               </ul>
             </div>
-
+            {/* Clean this up and make a email server. */}
             <div className="column">
               <h3>Get in Touch with Me</h3>
               <form

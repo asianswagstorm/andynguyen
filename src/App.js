@@ -1,35 +1,48 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import Home from "./Components/Home";
+// import Games from "./Components/Games";
+import TicTacToe from "./Components/games/TicTacToe";//test
 import NotFound from "./Components/NotFound";
-import soen387 from "./Components/soen387";
-import soen487 from "./Components/soen487";
-import soen287 from "./Components/soen287";
-import comp353 from "./Components/comp353";
-import comp345 from "./Components/comp345";
-import soen423 from "./Components/soen423";
-import comp445 from "./Components/comp445";
+import * as games_action from './redux/actions/GamesAction';
+
 class App extends Component {
 
+  componentDidMount = () => {
+    console.log('App props', this.props);
+  }
+
   render=()=>{
+
+    const routes_components = [ {path: "/", component: Home},
+                                // {path= "/Games", component: <Games/>},
+                                {path: "/TicTacToe", component: TicTacToe},
+                                {path: "*", component: NotFound}];
     return (
       <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Jamdo" exact component ={soen487} />
-        <Route path="/Pokemon" exact component ={soen387} />
-        <Route path="/Real_Estate" exact component ={soen287} />
-        <Route path="/Medical_Clinic" exact component ={comp353} />
-        <Route path="/PowerGrid" exact component ={comp345} />
-        <Route path="/Distributed_System" exact component ={soen423} />
-        <Route path="/UDP_APP" exact component ={comp445} />
-        <Route path="*" exact component={NotFound} />
+        {
+          routes_components.map((route, key) => //this.props undefined
+          <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
+            // <Route key = {key} path= {route.path} exact component={route.component} /> doesnt pass props
+          )
+        }  
       </Switch>
     </BrowserRouter>
     );
   }
 }
 
-export default App;
+export const mapDispatchToProps = dispatch => {
+  console.log("game action", games_action); // this.props is undefined
+  return {
+    games_action,
+    dispatch
+  };
+};
+
+export default connect(null,mapDispatchToProps)(App);
 
 
