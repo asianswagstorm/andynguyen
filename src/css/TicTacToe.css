@@ -106,8 +106,14 @@ header > h3 {
     margin-top: 20px;
 }
 
-table.tictactoetable td.tictactoe-cell{
-    	padding: 0;
+table#notdisabled.tictactoetable td.tictactoe-cell{
+        padding: 0;
+        cursor: pointer;
+}
+
+table#disabled.tictactoetable td.tictactoe-cell{
+    padding: 0;
+    cursor: not-allowed;  
 }
 
 td#disabled.tictactoe-cell:hover{

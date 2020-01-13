@@ -7,7 +7,8 @@ const defaultTicTacToeStates =
     player1_score : 0,
     player2_score : 0,
     game_message : "Make your move.",
-    player_one_turn : true
+    player_one_turn : true, 
+    gameOver : false
 };
 
 const DEFAULT_STATES = {defaultTicTacToeStates: {...defaultTicTacToeStates}};
@@ -18,7 +19,7 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         case 'RESET_TICTACTOEGAME':
             return {
                 ...state,
-                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: true, tictactoe_boxes: action.tictactoe_boxes}
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, tictactoe_boxes: action.tictactoe_boxes, game_message: defaultTicTacToeStates.game_message, gameOver:defaultTicTacToeStates.gameOver }
             };
         case 'SET_CURRENT_PLAYER':
             return {
@@ -50,6 +51,11 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
                 ...state, 
                 defaultTicTacToeStates: {...state.defaultTicTacToeStates, compEnabled: action.compEnabled }
             };
+        case 'SET_GAME_OVER': 
+            return {
+            ...state, 
+            defaultTicTacToeStates: {...state.defaultTicTacToeStates, gameOver: action.gameOver }
+        };
         default:
             return state; //save state
     }; 

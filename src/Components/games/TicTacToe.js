@@ -23,11 +23,37 @@ class TicTacToe extends Component {
   /**
    * checkWin Function
    */
+  checkWin = async () => {
+    // TicTacToeWinCombo // return an array of arrays.
+    const {dispatch} = this.props;
+    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver} = this.props.action_props.games_action;
+ 
+    const winCombo = TicTacToeWinCombo([...this.props.tictactoe_boxes]);
+    console.log('winCombo is',winCombo );
+    //pop if not win?? 
+    let win = [];
+    winCombo.forEach(winCombination => {
+      if (winCombination.every(value => (value === winCombination[0] &&  winCombination[0]!== '') ) === true )
+          win.push(true);
+      else
+          win.push(false);
+    })
+    console.log(win);
+    if(win.includes(true)) {
+      // alert("Win Detected")
+      (this.props.player_one_turn === true) ? await dispatch(setPlayer1Score(this.props.player1_score + 1 )):await dispatch(setPlayer2Score(this.props.player2_score + 1));
+          // winCombination[0] === 'X' ? 
+      await dispatch(setGameMessage(`Player ${ this.props.player_one_turn === true ? '1' : '2'} Wins`));
+      win = [];
+      await dispatch(setGameOver(true));
+    };
+  };
   
   /**
    * On Change on the tic tac toe boxes
    */
   OnChange = async event => {
+    if (this.props.gameOver === false) {
     const {dispatch} = this.props;
     const {setTicTacToeCell,setCurrentPlayer} = this.props.action_props.games_action;
     process.env.NODE_ENV.trim() !== 'production' && console.log('event is', event.target);
@@ -39,7 +65,9 @@ class TicTacToe extends Component {
     ticTacToeBoxesCopy[row_key][data_key] = (this.props.player_one_turn === true) ? playerSymbols.userLabel : playerSymbols.computerLabel;
     //checkWin
     await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
-    await dispatch(setCurrentPlayer(!this.props.player_one_turn))
+    await this.checkWin();
+    await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+    }
   };
 
   render = () => {
@@ -58,11 +86,11 @@ class TicTacToe extends Component {
            {label.label}
           </div>))}
           {/* This should be a prop */}
-          <span id="user-score">0 </span>:<span id="computer-score">0</span>
+          <span id="user-score"> {[this.props.player1_score]} </span>:<span id="computer-score"> {[this.props.player2_score]} </span>
         </div>
 
         <div className="message">
-          <p> Make your move. </p>
+          <p> {[this.props.game_message]} </p>
         </div>
 
         <div className="reset">
@@ -87,7 +115,7 @@ class TicTacToe extends Component {
         </div>
             {/* Clean this up  */}
         <div className="Boxes" id="board">
-          <table className="tictactoetable">
+          <table className="tictactoetable" id= {this.props.gameOver === false ? "notdisabled" : "disabled"} >
               <tbody>
               {
                 [...this.props.tictactoe_boxes].map((table_row,row_key) => 
@@ -95,7 +123,7 @@ class TicTacToe extends Component {
                         {[...table_row].map((table_data, data_key) => 
                             <td className="tictactoe-cell" key = {data_key} id={table_data === '' ? JSON.stringify({ row_key : row_key,
                                                                             data_key : data_key}) : 'disabled'}
-                              onClick = {table_data === '' ? this.OnChange : null}> {`${table_data}`} </td>
+                              onClick = {(table_data === '') ? this.OnChange : null}> {`${table_data}`} </td>
                             )}
                     </tr>
                   )
@@ -111,9 +139,9 @@ class TicTacToe extends Component {
 const mapStateToProps = state => { 
   process.env.NODE_ENV.trim() !== 'production' && console.log('state: ', state)
   const  TicTacToeProps  = state.gamesReducer.defaultTicTacToeStates; 
-  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn} = TicTacToeProps;
+  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver} = TicTacToeProps;
   return {
-    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn
+    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver
   };
 };
 

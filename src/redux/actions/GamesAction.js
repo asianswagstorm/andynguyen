@@ -8,6 +8,13 @@ const setOpponentSuccess = compEnabled => {
     };
 };
 
+export const setGameOver = (gameOver) => {
+    return {
+        type: TICTACTOE_TYPE.SET_GAME_OVER,
+        gameOver
+    };
+};
+
 export const resetTicTacToeCell = () => dispatch => {
     dispatch(resetTicTacToeCellSuccess(tictactoe_boxes));
 };
@@ -40,14 +47,14 @@ export const setGameMessage = game_message => {
 export const setPlayer1Score = player1_score => {
     return {
         type: TICTACTOE_TYPE.SET_PLAYER1_SCORE,
-        player1_score: player1_score++ //
+        player1_score: player1_score //
     };
 };
 
 export const setPlayer2Score = player2_score => {
     return {
         type: TICTACTOE_TYPE.SET_PLAYER2_SCORE,
-        player2_score: player2_score++ 
+        player2_score: player2_score 
     };
 };
 
