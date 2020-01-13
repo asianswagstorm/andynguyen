@@ -10,9 +10,9 @@ import * as games_action from './redux/actions/GamesAction';
 
 class App extends Component {
 
-  componentDidMount = () => {
-    console.log('App props', this.props);
-  }
+  // componentDidMount = () => {
+  //   console.log('App props', this.props);
+  // }
 
   render=()=>{
 
@@ -24,9 +24,8 @@ class App extends Component {
       <BrowserRouter>
       <Switch>
         {
-          routes_components.map((route, key) => //this.props undefined
+          routes_components.map((route, key) => 
           <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
-            // <Route key = {key} path= {route.path} exact component={route.component} /> doesnt pass props
           )
         }  
       </Switch>

@@ -1,16 +1,19 @@
-export const TicTacToeWinCombo = [   [0, 1, 2],
-[0, 4, 8],
-[0, 3, 6],
-[1, 4, 7],
-[2, 4, 6],
-[2, 5, 8],
-[3, 4, 5],
-[6, 7 , 8]  ]; 
+export const TicTacToeWinCombo = array => [   
+    [array[0][0], array[0][1], array[0][2]], //row 1 horizontal
+    [array[1][0], array[1][1], array[1][2]], //row 2 horizontal
+    [array[2][0], array[2][1], array[2][2]], //row 3 horizontal
+    [array[0][0], array[1][0], array[2][0]], //col 1 vertical
+    [array[0][1], array[1][1], array[2][1]], //col 2 vertical
+    [array[0][2], array[1][2], array[2][2]], //col 3 vertical
+    [array[0][0], array[1][1], array[2][2]], //col 1 diagonal
+    [array[0][2], array[1][1], array[2][0]] //col 3 diagonal
+]; 
 
-export const tictactoe_boxes = [ 
-    [{index:1, value: ''},{index:2, value: ''},{index:3, value: ''}],
-    [{index:4, value: ''},{index:5, value: ''},{index:6, value: ''}],
-    [{index:7, value: ''},{index:8, value: ''},{index:9, value: ''}]
+//remove these index
+export const tictactoe_boxes = [ //overwritten
+    ['','',''],
+    ['','',''],
+    ['','','']
 ];
 
 export const tictactoe_score_label = [  { label: 'X', id: "user-label"},

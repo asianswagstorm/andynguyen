@@ -20,6 +20,7 @@ const middleware = [thunk];
 (process.env.NODE_ENV.trim() !== 'production') && middleware.push(createLogger());
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(persistedReducer, applyMiddleware(...middleware));
+store.subscribe(() => store.getState());
 const persistor = persistStore(store);
 ReactDOM.render(
     <Provider store = {store}>

@@ -1,17 +1,30 @@
 import {tictactoe_boxes} from "../../Components/constants/Games";
+
 const defaultTicTacToeStates = 
 {
     tictactoe_boxes,
     compEnabled : false,  //human vs computer
     player1_score : 0,
     player2_score : 0,
-    game_message : "Make your move."
+    game_message : "Make your move.",
+    player_one_turn : true
 };
 
-const DEFAULT_STATES = {defaultTicTacToeStates};
+const DEFAULT_STATES = {defaultTicTacToeStates: {...defaultTicTacToeStates}};
+//tictactoe_boxes doesnt reset
 
-export const gamesReducer = (state = DEFAULT_STATES, action) => {
-    switch  (action.type) {
+const gamesReducer = (state = DEFAULT_STATES, action) => {
+    switch(action.type) {
+        case 'RESET_TICTACTOEGAME':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: true, tictactoe_boxes: action.tictactoe_boxes}
+            };
+        case 'SET_CURRENT_PLAYER':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: action.player_one_turn }
+            };
         case 'SET_TIC_TAC_TOE_CELLS':
             return {
                 ...state,
@@ -38,6 +51,8 @@ export const gamesReducer = (state = DEFAULT_STATES, action) => {
                 defaultTicTacToeStates: {...state.defaultTicTacToeStates, compEnabled: action.compEnabled }
             };
         default:
-            return {...state}
+            return state; //save state
     }; 
 };
+
+export default gamesReducer 

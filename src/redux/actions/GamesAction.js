@@ -1,9 +1,28 @@
 import {TICTACTOE_TYPE} from "./types";
+import {tictactoe_boxes} from "../../Components/constants/Games";
 
 const setOpponentSuccess = compEnabled => {
     return {
         type: TICTACTOE_TYPE.SET_COMP_ENABLED,
         compEnabled 
+    };
+};
+
+export const resetTicTacToeCell = () => dispatch => {
+    dispatch(resetTicTacToeCellSuccess(tictactoe_boxes));
+};
+
+export const resetTicTacToeCellSuccess = (tictactoe_boxes) => {
+    return {
+        type: TICTACTOE_TYPE.RESET_TICTACTOEGAME,
+        tictactoe_boxes
+    };
+};
+
+export const setCurrentPlayer = player_one_turn => {
+    return {
+        type: TICTACTOE_TYPE.SET_CURRENT_PLAYER,
+        player_one_turn
     };
 };
 
