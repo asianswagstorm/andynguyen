@@ -15,6 +15,13 @@ export const adjust_number_of_turns = remaining_turns => {
     };
 };
 
+export const pickedPlayer = picked_player => {
+    return {
+        type: TICTACTOE_TYPE.PICK_PLAYER_TYPE,
+        picked_player
+    };
+};
+
 export const setTie = isTie => {
     return {
         type: TICTACTOE_TYPE.SET_TIE_TRUE,

@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/TicTacToe.css";
+import { popUpNotification } from "../constants/HelperFunction/Functions";
 import { TicTacToeWinCombo, playerPicker ,tictactoe_score_label,playerSymbols,winIndexs} from "../constants/Games"; //tictactoe_boxes
 class TicTacToe extends Component {
   
   setPlayerType = isCompEnabled => {
     // console.log(`props is:`, this.props) 
     const {dispatch} = this.props;
-    const {setOpponent} = this.props.action_props.games_action;
+    const {setOpponent,pickedPlayer,setGameMessage} = this.props.action_props.games_action;
     dispatch(setOpponent(isCompEnabled));
+    dispatch(pickedPlayer(true));
+    dispatch(setGameMessage('Make your move.'));
   };
 
   resetGame = () => {
@@ -60,7 +63,7 @@ class TicTacToe extends Component {
    * On Change on the tic tac toe boxes
    */
   OnChange = async event => {
-    if (this.props.gameOver === false) {
+    if (this.props.gameOver === false && this.props.picked_player === true) {
     const {dispatch} = this.props;
     const {setTicTacToeCell,setCurrentPlayer,adjust_number_of_turns} = this.props.action_props.games_action;
     process.env.NODE_ENV.trim() !== 'production' && console.log('event is', event.target);
@@ -76,6 +79,12 @@ class TicTacToe extends Component {
     await this.checkWin();
     if(this.props.gameOver === false)
       await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+    }
+    else {
+      if(this.props.gameOver === false)
+        popUpNotification('error', "You must select an opponent before starting the game!", "Click on Human to play a local game, or Computer to play with the computer." )
+      else 
+        popUpNotification('warning', "The game is already over!", "Click Reset Game to start a new game." )
     }
   };
 
@@ -93,6 +102,7 @@ class TicTacToe extends Component {
   };
 
   render = () => {
+    const tieDisabled = (this.props.isTie === true) ? 'disabled-tie': 'disabled';
       //need redux for the prop states. 
     return (
       <section>
@@ -113,38 +123,41 @@ class TicTacToe extends Component {
         <div className="message">
           <p> {[this.props.game_message]} </p>
         </div>
-
-        <div className="reset">
-          <button
-            onClick={this.resetGame}
-            className="button button-block"
-            id="reset-game"
-          >
-            Reset Game
-          </button>
-        </div>
-        <div className="play">
-            {/* Clean this up */}
-          <p> Play with Human or Computer? </p>
-          {
-            playerPicker.map((player, key) => (
-              <button key={key} onClick= {() => this.setPlayerType(player.isComp)} className="button button-block" id= {player.id}>
-                {player.name}
-              </button>
-            ))
-          }
-        </div>
+        {this.props.picked_player === true &&
+          <div className="reset">
+            <button
+              onClick={this.resetGame}
+              className="button button-block"
+              id="reset-game"
+            >
+              Reset Game
+            </button>
+          </div>
+        }
+      
+        {this.props.picked_player === false && 
+          <div className="play">
+            <p> Play with Human or Computer? </p>
+            {
+              playerPicker.map((player, key) => (
+                <button key={key} onClick= {() => this.setPlayerType(player.isComp)} className="button button-block" id= {player.id}>
+                  {player.name}
+                </button>
+              ))
+            }
+          </div>
+        }
             {/* Clean this up  */}
         <div className="Boxes" id="board">
-          <table className="tictactoetable" id= {this.props.gameOver === false ? "notdisabled" : "disabled"} >
+          <table className="tictactoetable" id= {this.props.gameOver === false || [this.props.picked_player] === true ? "notdisabled" : "disabled"} >
               <tbody>
               {
                 [...this.props.tictactoe_boxes].map((table_row,row_key) => 
                     <tr key = {row_key} id={`row${row_key+1}`}>
                         {[...table_row].map((table_data, data_key) => 
                         // function
-                            <td className={this.changeBackgroundIfWin(row_key,data_key)} key = {data_key} id={table_data === '' ? JSON.stringify({ row_key : row_key,
-                                                                            data_key : data_key}) : (this.props.isTie === true) ? 'disabled-tie': 'disabled'}
+                            <td className={this.changeBackgroundIfWin(row_key,data_key)} key = {data_key} id={this.props.gameOver === false ? ((table_data === '') ? JSON.stringify({ row_key : row_key,
+                                                                            data_key : data_key}) : tieDisabled) : (tieDisabled)}
                               onClick = {(table_data === '') ? this.OnChange : null}> {`${table_data}`} </td>
                             )}
                     </tr>
@@ -161,9 +174,9 @@ class TicTacToe extends Component {
 const mapStateToProps = state => { 
   process.env.NODE_ENV.trim() !== 'production' && console.log('state: ', state)
   const  TicTacToeProps  = state.gamesReducer.defaultTicTacToeStates; 
-  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie} = TicTacToeProps;
+  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player} = TicTacToeProps;
   return {
-    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie
+    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player
   };
 };
 

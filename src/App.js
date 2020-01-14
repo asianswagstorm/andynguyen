@@ -7,6 +7,7 @@ import Home from "./Components/Home";
 import TicTacToe from "./Components/games/TicTacToe";//test
 import NotFound from "./Components/NotFound";
 import * as games_action from './redux/actions/GamesAction';
+import 'antd/dist/antd.css';
 
 class App extends Component {
 

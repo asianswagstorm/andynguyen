@@ -2,11 +2,12 @@ import {tictactoe_boxes} from "../../Components/constants/Games";
 
 const defaultTicTacToeStates = 
 {
+    picked_player : false,
     tictactoe_boxes,
     compEnabled : false,  //human vs computer
     player1_score : 0,
     player2_score : 0,
-    game_message : "Make your move.",
+    game_message : "Select opponent type.",
     player_one_turn : true, 
     gameOver : false,
     winIndex : '',
@@ -15,7 +16,6 @@ const defaultTicTacToeStates =
 };
 
 const DEFAULT_STATES = {defaultTicTacToeStates: {...defaultTicTacToeStates}};
-//tictactoe_boxes doesnt reset
 
 const gamesReducer = (state = DEFAULT_STATES, action) => {
     switch(action.type) {
@@ -24,6 +24,11 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
                 ...state,
                 defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, remaining_turns: 9, isTie: false, tictactoe_boxes: action.tictactoe_boxes, game_message: defaultTicTacToeStates.game_message, gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
             };
+        case 'PICK_PLAYER_TYPE':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, picked_player: action.picked_player}
+            }; 
         case 'SET_TIE_TRUE':
             return {
                 ...state,
