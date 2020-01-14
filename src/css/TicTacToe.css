@@ -106,22 +106,27 @@ header > h3 {
     margin-top: 20px;
 }
 
-table#notdisabled.tictactoetable td.tictactoe-cell{
+table#notdisabled.tictactoetable td.tictactoe-cell, table#notdisabled.tictactoetable td.tictactoe-cell-win{
         padding: 0;
         cursor: pointer;
 }
 
-table#disabled.tictactoetable td.tictactoe-cell{
+table#disabled.tictactoetable td.tictactoe-cell, table#disabled.tictactoetable td.tictactoe-cell-win{
     padding: 0;
     cursor: not-allowed;  
 }
 
-td#disabled.tictactoe-cell:hover{
+td#disabled.tictactoe-cell:hover td#disabled.tictactoe-cell-win:hover{
     cursor: not-allowed;  
+}
+/* winCondition */
+td#disabled.tictactoe-cell-win{
+    background-color: green;
 }
 
 td#disabled.tictactoe-cell{
     color:black;
+    text-shadow: 2px 2px white;
 }
 
 td  {

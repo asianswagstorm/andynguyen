@@ -8,6 +8,13 @@ const setOpponentSuccess = compEnabled => {
     };
 };
 
+export const setWinIndex = winIndex => {
+    return {
+        type: TICTACTOE_TYPE.SET_WIN_INDEX,
+        winIndex
+    };
+};
+
 export const setGameOver = (gameOver) => {
     return {
         type: TICTACTOE_TYPE.SET_GAME_OVER,

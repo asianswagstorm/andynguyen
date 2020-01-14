@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/TicTacToe.css";
-import { TicTacToeWinCombo, playerPicker ,tictactoe_score_label,playerSymbols} from "../constants/Games"; //tictactoe_boxes
+import { TicTacToeWinCombo, playerPicker ,tictactoe_score_label,playerSymbols,winIndexs} from "../constants/Games"; //tictactoe_boxes
 class TicTacToe extends Component {
   
   setPlayerType = isCompEnabled => {
@@ -24,9 +24,10 @@ class TicTacToe extends Component {
    * checkWin Function
    */
   checkWin = async () => {
+    //return or set prop to winning indexs
     // TicTacToeWinCombo // return an array of arrays.
     const {dispatch} = this.props;
-    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver} = this.props.action_props.games_action;
+    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver,setWinIndex} = this.props.action_props.games_action;
  
     const winCombo = TicTacToeWinCombo([...this.props.tictactoe_boxes]);
     console.log('winCombo is',winCombo );
@@ -40,7 +41,9 @@ class TicTacToe extends Component {
     })
     console.log(win);
     if(win.includes(true)) {
-      // alert("Win Detected")
+      const winIndex = win.indexOf(true);
+      await dispatch(setWinIndex(winIndex));
+      // console.log('win index', winIndex);
       (this.props.player_one_turn === true) ? await dispatch(setPlayer1Score(this.props.player1_score + 1 )):await dispatch(setPlayer2Score(this.props.player2_score + 1));
           // winCombination[0] === 'X' ? 
       await dispatch(setGameMessage(`Player ${ this.props.player_one_turn === true ? '1' : '2'} Wins`));
@@ -67,6 +70,18 @@ class TicTacToe extends Component {
     await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
     await this.checkWin();
     await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+    }
+  };
+
+  changeBackgroundIfWin = (row_index,data_index) => {
+    if(this.props.winIndex !== ''){
+      const winIndexObject = winIndexs[this.props.winIndex]; //{index1: [0,0], index2: [0,1] , index3:[0,2]}
+
+      if( (row_index === winIndexObject.index1[0] && data_index === winIndexObject.index1[1]) ||
+          (row_index === winIndexObject.index2[0] && data_index === winIndexObject.index2[1]) ||
+          (row_index === winIndexObject.index3[0] && data_index === winIndexObject.index3[1]) ){
+        return "tictactoe-cell-win" 
+      }else return "tictactoe-cell"
     }
   };
 
@@ -121,7 +136,8 @@ class TicTacToe extends Component {
                 [...this.props.tictactoe_boxes].map((table_row,row_key) => 
                     <tr key = {row_key} id={`row${row_key+1}`}>
                         {[...table_row].map((table_data, data_key) => 
-                            <td className="tictactoe-cell" key = {data_key} id={table_data === '' ? JSON.stringify({ row_key : row_key,
+                        // function
+                            <td className={this.changeBackgroundIfWin(row_key,data_key)} key = {data_key} id={table_data === '' ? JSON.stringify({ row_key : row_key,
                                                                             data_key : data_key}) : 'disabled'}
                               onClick = {(table_data === '') ? this.OnChange : null}> {`${table_data}`} </td>
                             )}
@@ -139,9 +155,9 @@ class TicTacToe extends Component {
 const mapStateToProps = state => { 
   process.env.NODE_ENV.trim() !== 'production' && console.log('state: ', state)
   const  TicTacToeProps  = state.gamesReducer.defaultTicTacToeStates; 
-  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver} = TicTacToeProps;
+  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex} = TicTacToeProps;
   return {
-    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver
+    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex
   };
 };
 

@@ -9,7 +9,17 @@ export const TicTacToeWinCombo = array => [
     [array[0][2], array[1][1], array[2][0]] //col 3 diagonal
 ]; 
 
-//remove these index
+export const winIndexs = [
+    {index1: [0,0], index2: [0,1], index3: [0,2]},
+    {index1: [1,0], index2: [1,1], index3: [1,2]},
+    {index1: [2,0], index2: [2,1], index3: [2,2]},
+    {index1: [0,0], index2: [1,0], index3: [2,]},
+    {index1: [0,1], index2: [1,1], index3: [2,1]},
+    {index1: [0,2], index2: [1,2], index3: [2,2]},
+    {index1: [0,0], index2: [1,1], index3: [2,2]},
+    {index1: [0,2], index2: [1,1], index3: [2,0]}
+];
+
 export const tictactoe_boxes = [ //overwritten
     ['','',''],
     ['','',''],
