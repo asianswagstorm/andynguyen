@@ -12,7 +12,6 @@ class TicTacToe extends Component {
     dispatch(setOpponent(isCompEnabled));
   };
 
-
   resetGame = () => {
     const {dispatch} = this.props;
     const {resetTicTacToeCell} = this.props.action_props.games_action;
@@ -27,11 +26,10 @@ class TicTacToe extends Component {
     //return or set prop to winning indexs
     // TicTacToeWinCombo // return an array of arrays.
     const {dispatch} = this.props;
-    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver,setWinIndex} = this.props.action_props.games_action;
+    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver,setWinIndex,setTie} = this.props.action_props.games_action;
  
     const winCombo = TicTacToeWinCombo([...this.props.tictactoe_boxes]);
-    console.log('winCombo is',winCombo );
-    //pop if not win?? 
+
     let win = [];
     winCombo.forEach(winCombination => {
       if (winCombination.every(value => (value === winCombination[0] &&  winCombination[0]!== '') ) === true )
@@ -39,7 +37,7 @@ class TicTacToe extends Component {
       else
           win.push(false);
     })
-    console.log(win);
+ 
     if(win.includes(true)) {
       const winIndex = win.indexOf(true);
       await dispatch(setWinIndex(winIndex));
@@ -50,6 +48,12 @@ class TicTacToe extends Component {
       win = [];
       await dispatch(setGameOver(true));
     };
+
+    if(this.props.remaining_turns === 0 && this.props.winIndex === ''){
+      await dispatch(setGameMessage(`It's a Tie`));
+      await dispatch(setTie(true));
+      await dispatch(setGameOver(true));
+    };
   };
   
   /**
@@ -58,7 +62,7 @@ class TicTacToe extends Component {
   OnChange = async event => {
     if (this.props.gameOver === false) {
     const {dispatch} = this.props;
-    const {setTicTacToeCell,setCurrentPlayer} = this.props.action_props.games_action;
+    const {setTicTacToeCell,setCurrentPlayer,adjust_number_of_turns} = this.props.action_props.games_action;
     process.env.NODE_ENV.trim() !== 'production' && console.log('event is', event.target);
     const indexs = JSON.parse((event.target).id);
     let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; //important
@@ -68,31 +72,34 @@ class TicTacToe extends Component {
     ticTacToeBoxesCopy[row_key][data_key] = (this.props.player_one_turn === true) ? playerSymbols.userLabel : playerSymbols.computerLabel;
     //checkWin
     await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
+    await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
     await this.checkWin();
-    await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+    if(this.props.gameOver === false)
+      await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
     }
   };
 
   changeBackgroundIfWin = (row_index,data_index) => {
+    const class_name = 'tictactoe-cell';
     if(this.props.winIndex !== ''){
       const winIndexObject = winIndexs[this.props.winIndex]; //{index1: [0,0], index2: [0,1] , index3:[0,2]}
-
+    
       if( (row_index === winIndexObject.index1[0] && data_index === winIndexObject.index1[1]) ||
           (row_index === winIndexObject.index2[0] && data_index === winIndexObject.index2[1]) ||
           (row_index === winIndexObject.index3[0] && data_index === winIndexObject.index3[1]) ){
-        return "tictactoe-cell-win" 
-      }else return "tictactoe-cell"
-    }
+        return `${class_name}-win-player${this.props.player_one_turn === true ? '1' : '2'}`//changed player turn
+      }
+    } else return class_name
   };
 
   render = () => {
       //need redux for the prop states. 
     return (
-      <div>
+      <section>
         <header className = "Games">
           {/* Add a back Button */}
-          <h1><a href = "/">Tic Tac Toe </a></h1>
-          <h3> © Copyright 2018 Andy Nguyen. All rights reserved.</h3>
+          <h1 id="tictactoe"><a href = "/"> <span className="icon fa-home"></span> Tic Tac Toe </a></h1>
+          <h2 id="tictactoe">Written in React with Redux</h2>
         </header>
 
         <div className="score-board">
@@ -100,7 +107,6 @@ class TicTacToe extends Component {
           <div key = {key} id= {label.id} className="badge">
            {label.label}
           </div>))}
-          {/* This should be a prop */}
           <span id="user-score"> {[this.props.player1_score]} </span>:<span id="computer-score"> {[this.props.player2_score]} </span>
         </div>
 
@@ -138,7 +144,7 @@ class TicTacToe extends Component {
                         {[...table_row].map((table_data, data_key) => 
                         // function
                             <td className={this.changeBackgroundIfWin(row_key,data_key)} key = {data_key} id={table_data === '' ? JSON.stringify({ row_key : row_key,
-                                                                            data_key : data_key}) : 'disabled'}
+                                                                            data_key : data_key}) : (this.props.isTie === true) ? 'disabled-tie': 'disabled'}
                               onClick = {(table_data === '') ? this.OnChange : null}> {`${table_data}`} </td>
                             )}
                     </tr>
@@ -147,7 +153,7 @@ class TicTacToe extends Component {
               </tbody>
           </table>
         </div>
-      </div>
+      </section>
     );
   };
 };
@@ -155,9 +161,9 @@ class TicTacToe extends Component {
 const mapStateToProps = state => { 
   process.env.NODE_ENV.trim() !== 'production' && console.log('state: ', state)
   const  TicTacToeProps  = state.gamesReducer.defaultTicTacToeStates; 
-  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex} = TicTacToeProps;
+  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie} = TicTacToeProps;
   return {
-    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex
+    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie
   };
 };
 

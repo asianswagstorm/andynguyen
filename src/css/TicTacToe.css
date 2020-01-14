@@ -6,45 +6,67 @@
 }
 
 body {
-    background-color: lightslategray;
+    background-color: #e6e6e6;
 }
 
 header.Games {
-    background: red;
+    background: #0d1217;
     padding: 20px;
 }
 
-header > h1 {
-    color: #24272E;
+header > h1#tictactoe ,header > h2#tictactoe {
+    color: #19B5FE;
     text-align: center;
+    text-shadow: 1px 1px rgb(188, 223, 243);
     font-family: Arial, sans-serif;
 }
+
 
 header > h3 {
     color: ghostwhite;
     text-align: center;
+    text-shadow: 1px 1px black;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .score-board {
     margin: 20px auto;
-    border: 3px solid white;
+    border: 3px solid black;
     border-radius: 4px;
     text-align: center;
     width: 200px;
     color: orange;
+    text-shadow: 1px 1px black;
     font-size: 46px;
     font-weight: bold;
     padding: 15px 20px;
-    font-family: Asap, sans-serif;
+    font-family: Arial, sans-serif;
     position: relative;
 }
 
+button#reset-game.button.button-block{
+    font-size: 25px;
+    text-shadow: 1px 1px rgb(77, 74, 74);
+}
+
+button#H-opponent.button.button-block{
+    font-size: 20px;
+    text-shadow: 1px 1px rgb(77, 74, 74);
+    margin-right: 10px;
+}
+
+button#C-opponent.button.button-block{
+    font-size: 20px;
+    text-shadow: 1px 1px rgb(77, 74, 74);
+    margin-left: 10px;
+}
+
 .badge {
-    background: #E2584D;
-    color: navy;
+    background: #0d1217;
+    color: #19B5FE;
     font-size: 21px;
     padding: 10px 20px;
+    text-shadow: 1px 1px white;
     font-family: Asap, sans-serif;
 }
 
@@ -62,34 +84,28 @@ header > h3 {
 
 .message {
     font-size: 30px;
-    color: white;
+    color: rgb(0, 0, 0);
+    text-shadow: 2px 2px rgb(255, 255, 255);
 }
 
-.play {
+div.play  {
     text-align: center;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: bold;
     font-style: italic;
-    color: white;
+    color: black;
+    text-shadow: 2px 2px white;
 }
 
 .reset {
     text-align: center;
     color: white;
-    font-size: 2em;
 }
 
 .message > p {
     text-align: center;
     font-weight: bold;
-    font-family: Asap, sans-serif;
-}
-
-.square {
-    border: 4px solid red;
-    margin-left: -200%;
-
-    left:50%;
+    font-family: Arial, sans-serif;
 }
 
 .choice:hover {
@@ -97,34 +113,37 @@ header > h3 {
     background: #24272E;
 }
 
-#action-message {
-    text-align: center;
-    color: white;
-    font-family: Asap, sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-table#notdisabled.tictactoetable td.tictactoe-cell, table#notdisabled.tictactoetable td.tictactoe-cell-win{
+table#notdisabled.tictactoetable td.tictactoe-cell, table#notdisabled.tictactoetable td.tictactoe-cell-win-player1, table#notdisabled.tictactoetable td.tictactoe-cell-win-player2 {
         padding: 0;
         cursor: pointer;
 }
 
-table#disabled.tictactoetable td.tictactoe-cell, table#disabled.tictactoetable td.tictactoe-cell-win{
+table#disabled.tictactoetable td.tictactoe-cell, table#disabled.tictactoetable td.tictactoe-cell-win-player1, table#disabled.tictactoetable td.tictactoe-cell-win-player2{
     padding: 0;
     cursor: not-allowed;  
 }
 
-td#disabled.tictactoe-cell:hover td#disabled.tictactoe-cell-win:hover{
+td#disabled.tictactoe-cell:hover, td#disabled.tictactoe-cell-win-player1:hover,td#disabled.tictactoe-cell-win-player2:hover{
     cursor: not-allowed;  
 }
 /* winCondition */
-td#disabled.tictactoe-cell-win{
-    background-color: green;
+td#disabled.tictactoe-cell-win-player1{
+    background-color: #45b3e7;
 }
 
-td#disabled.tictactoe-cell{
+td#disabled.tictactoe-cell-win-player2{
+    background-color: rgba(243, 111, 94, 0.76);
+}
+
+td#disabled-tie{
+    background-color: rgba(39, 180, 39, 0.658);
+    padding: 0;
+    cursor: not-allowed; 
+}
+
+td#disabled{
+    cursor: not-allowed; 
+    padding: 0;
     color:black;
     text-shadow: 2px 2px white;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Home.css';
-
+//Clean this up!!! 
 class Footer extends Component {
     render = () => {
        const specialFooter = this.props.specialFooter;
@@ -9,7 +9,7 @@ class Footer extends Component {
             return(
                 <footer id="footer1">
                 <div className="copyright">
-                    &copy; 2019<span > Andy Nguyen</span>
+                    &copy; 2020<span > Andy Nguyen</span>
                 </div>
                 </footer>   
             );
@@ -18,7 +18,7 @@ class Footer extends Component {
             return(
                 <footer id="footer2">
                 <div className="copyright">
-                    &copy; 2019<span > Andy Nguyen</span>
+                    &copy; 2020<span > Andy Nguyen</span>
                 </div>
                 </footer>   
             );
@@ -27,7 +27,7 @@ class Footer extends Component {
         return (
       <footer id="footer">
             <div className="copyright">
-                &copy; 2019<span > Andy Nguyen</span>
+                &copy; 2020<span > Andy Nguyen</span>
             </div>
         </footer>   
     

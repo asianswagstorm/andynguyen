@@ -9,7 +9,9 @@ const defaultTicTacToeStates =
     game_message : "Make your move.",
     player_one_turn : true, 
     gameOver : false,
-    winIndex : '' //temp
+    winIndex : '',
+    remaining_turns : 9,
+    isTie : false
 };
 
 const DEFAULT_STATES = {defaultTicTacToeStates: {...defaultTicTacToeStates}};
@@ -20,7 +22,17 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         case 'RESET_TICTACTOEGAME':
             return {
                 ...state,
-                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, tictactoe_boxes: action.tictactoe_boxes, game_message: defaultTicTacToeStates.game_message, gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, remaining_turns: 9, isTie: false, tictactoe_boxes: action.tictactoe_boxes, game_message: defaultTicTacToeStates.game_message, gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
+            };
+        case 'SET_TIE_TRUE':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, isTie: action.isTie}
+            };
+        case 'DECREMENT_NUMBER_OF_TURNS':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, remaining_turns: action.remaining_turns}
             };
         case 'SET_WIN_INDEX':
             return {

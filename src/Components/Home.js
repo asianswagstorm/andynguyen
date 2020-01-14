@@ -80,14 +80,15 @@ class Home extends Component {
         <section id="main">
           <section id="banner">
             <div className="inner">
-              <h1>Hey, I'm Andy</h1>
-              <p>
+              <h1 className="intro-andy">Hey, I'm Andy</h1>
+              <p id="intro">
                 I'm a programmer. On the occasion I lift things up and put them
                 down.{" "}
               </p>
               <ul className="actions">
                 <li>
-                  <a
+                  <a 
+                    id="cv-link"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="Andy_Nguyen.pdf"
@@ -115,7 +116,7 @@ class Home extends Component {
           <section id="contact">
             <div className="social column">
               <h3>About Me</h3>
-              <p>
+              <p id="about-me">
                 My name's Andy Nguyen, a Montreal based software developer. A
                 recent Computer Science grad in the Web Services and Application
                 domain. I'm a problem solver, solving bugs or learning something
@@ -124,7 +125,7 @@ class Home extends Component {
                 projects have made me discover my passion for coding. I am
                 always learning and growing, looking for mentorship opportunities within a diverse team environment. I look forward to working with you.
               </p>
-              <p>
+              <p id="about-me">
                 Outside of coding, I am a certified personal trainer and a {" "}
                 <a
                   href="http://www.fqd-quebec.com/lifter/528"

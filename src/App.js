@@ -21,6 +21,7 @@ class App extends Component {
                                 {path: "/TicTacToe", component: TicTacToe},
                                 {path: "*", component: NotFound}];
     return (
+
       <BrowserRouter>
       <Switch>
         {
@@ -30,6 +31,7 @@ class App extends Component {
         }  
       </Switch>
     </BrowserRouter>
+
     );
   }
 }
