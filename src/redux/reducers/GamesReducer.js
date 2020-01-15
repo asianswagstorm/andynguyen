@@ -22,7 +22,7 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         case 'RESET_TICTACTOEGAME':
             return {
                 ...state,
-                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, remaining_turns: 9, isTie: false, tictactoe_boxes: action.tictactoe_boxes, game_message: defaultTicTacToeStates.game_message, gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
             };
         case 'PICK_PLAYER_TYPE':
             return {

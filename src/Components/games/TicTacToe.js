@@ -61,7 +61,37 @@ class TicTacToe extends Component {
   
   /**
    * On Change on the tic tac toe boxes
+   * //trigger if comps turn
    */
+
+  CompPickPosition = async () => {
+    const {dispatch} = this.props;
+    const {setTicTacToeCell,adjust_number_of_turns,setCurrentPlayer} = this.props.action_props.games_action;
+    let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; 
+    //should be random 
+    //clean this up 
+    let emptyPosition = false;
+    let row_key = Math.floor(Math.random() * 3);
+    let data_key = Math.floor(Math.random() * 3);
+
+    if(ticTacToeBoxesCopy[row_key][data_key] === '')
+      emptyPosition = true;
+
+    if(emptyPosition === true){
+      ticTacToeBoxesCopy[row_key][data_key] =  playerSymbols.computerLabel;
+      await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
+      await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
+      await this.checkWin();
+      if(this.props.gameOver === false){
+        await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+      }
+    }
+    else{
+      this.CompPickPosition();
+    }
+  };
+
+
   OnChange = async event => {
     if (this.props.gameOver === false && this.props.picked_player === true) {
     const {dispatch} = this.props;
@@ -73,18 +103,24 @@ class TicTacToe extends Component {
     const row_key = indexs.row_key;
     const data_key = indexs.data_key;
     ticTacToeBoxesCopy[row_key][data_key] = (this.props.player_one_turn === true) ? playerSymbols.userLabel : playerSymbols.computerLabel;
+
     //checkWin
     await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
     await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
     await this.checkWin();
-    if(this.props.gameOver === false)
-      await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+  
+    if(this.props.gameOver === false){
+        await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+      }
+
+    if(this.props.compEnabled === true && this.props.gameOver === false){//comp is enabled.
+      this.CompPickPosition();
     }
-    else {
-      if(this.props.gameOver === false)
-        popUpNotification('error', "You must select an opponent before starting the game!", "Click on Human to play a local game, or Computer to play with the computer." )
-      else 
-        popUpNotification('warning', "The game is already over!", "Click Reset Game to start a new game." )
+    } else {
+        if(this.props.gameOver === false)
+          popUpNotification('error', "You must select an opponent before starting the game!", "Click on Human to play a local game, or Computer to play with the computer." )
+        else 
+          popUpNotification('warning', "The game is already over!", "Click Reset Game to start a new game." )
     }
   };
 
