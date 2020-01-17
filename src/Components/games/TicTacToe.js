@@ -69,9 +69,11 @@ class TicTacToe extends Component {
     const {dispatch} = this.props;
     const {updatePossibleWinCombo} = this.props.action_props.games_action;
     
-    const compPositions = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 !== 0);
-    const player1Positions = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 === 0);
-    //console.log('comp positions',[...compPositions])
+    const compPositionsArray = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 !== 0);
+    const player1PositionsArray = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 === 0);
+    const compPosition = compPositionsArray[compPositionsArray.length - 1];
+    const player1_position = player1PositionsArray[player1PositionsArray.length -1];//last added 
+
    // return {comp_position: [...compPositions, comp] , player1_position: [...player1Positions]};
 
    //if no win, pick another win? 
@@ -82,14 +84,12 @@ class TicTacToe extends Component {
    [...this.props.possible_winning_combo].map(winning_indexes => {
 
     winning_indexes.forEach( position => {
-      player1Positions.forEach(player1_position => {
-        console.log('position:', position);
-        console.log('player1_position:', player1_position);
-        console.log('isEqual:', ((position[0] === player1_position[0]) && (position[1] === player1_position[1])));
+        // console.log('position:', position);
+        // console.log('player1_position:', player1_position);
+        // console.log('isEqual:', ((position[0] === player1_position[0]) && (position[1] === player1_position[1])));
         if(((position[0] === player1_position[0]) && (position[1] === player1_position[1])))
-        checkIfExists.push(true);
+          checkIfExists.push(true);
         else checkIfExists.push(false);
-      })
     });
 
     //sort by 3.
@@ -97,17 +97,17 @@ class TicTacToe extends Component {
 
     // })
     let newArray = [];
-    
-    for(let position = 0 ; position < checkIfExists.length ; position++){ // 24
+    // console.log('checkIfExists', checkIfExists);//wrong
+    for(let position = 0 ; position < checkIfExists.length ; position++){ 
       let positionArray = [];
      
       for (let j = 0 ; j < 3 ;j++){
         positionArray.push(checkIfExists[position+j])
       };
       newArray.push(positionArray)
-      console.log('newArray', newArray);
+      // console.log('newArray', newArray[position/3]);
       if([...newArray].length > 0 && ([...newArray][position/3]).includes(true)){ //wrong
-        console.log('array index with true is', position/3);
+        // console.log('array index with true is', position/3);
         possibleWinCombo[position/3] = false
       }
 
@@ -155,7 +155,7 @@ class TicTacToe extends Component {
     //too easy make a smart algo. //replace 0 with best position
     let row_key = Math.floor(Math.random() * 3);//(this.props.remaining_turns === 8) ? Math.floor(Math.random() * 3) : this.checkBestPosition()[0];
     let data_key = Math.floor(Math.random() * 3);//(this.props.remaining_turns === 8) ? Math.floor(Math.random() * 3) : this.checkBestPosition()[1];
-    this.checkBestPosition([...this.props.current_positions , [row_key,data_key]]);
+    // this.checkBestPosition([...this.props.current_positions , [row_key,data_key]]);
     if(ticTacToeBoxesCopy[row_key][data_key] === '')
       emptyPosition = true;
 
@@ -187,7 +187,8 @@ class TicTacToe extends Component {
       const row_key = indexs.row_key;
       const data_key = indexs.data_key;
       ticTacToeBoxesCopy[row_key][data_key] = (this.props.player_one_turn === true) ? playerSymbols.userLabel : playerSymbols.computerLabel;
-      await dispatch(updateCurrentPositions([...this.props.current_positions , [row_key,data_key]])); 
+      await dispatch(updateCurrentPositions([...this.props.current_positions , [row_key,data_key]]));
+      this.checkBestPosition([...[...this.props.current_positions , [row_key,data_key]]]); 
       //checkWin
       await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
       await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
