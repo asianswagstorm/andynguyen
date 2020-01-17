@@ -36,6 +36,19 @@ export const setWinIndex = winIndex => {
     };
 };
 
+export const updatePossibleWinCombo = possible_winning_combo => {
+    return {type : TICTACTOE_TYPE.UPDATE_POSSIBLE_WIN_COMBO,
+        possible_winning_combo
+    };
+};
+
+export const updateCurrentPositions = current_positions => {
+    return {
+        type: TICTACTOE_TYPE.UPDATE_CURRENT_POSITIONS,
+        current_positions
+    };
+};
+
 export const setGameOver = (gameOver) => {
     return {
         type: TICTACTOE_TYPE.SET_GAME_OVER,

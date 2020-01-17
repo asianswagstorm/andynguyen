@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/TicTacToe.css";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
-import { TicTacToeWinCombo, playerPicker ,tictactoe_score_label,playerSymbols,winIndexs} from "../constants/Games"; //tictactoe_boxes
+import { TicTacToeWinCombo, playerPicker ,tictactoe_score_label,playerSymbols,winIndexs,original_possible_winning_combo} from "../constants/Games"; //tictactoe_boxes
 class TicTacToe extends Component {
   
   setPlayerType = isCompEnabled => {
@@ -64,24 +64,109 @@ class TicTacToe extends Component {
    * //trigger if comps turn
    */
 
+
+  checkBestPosition = (currentPosition) => {
+    const {dispatch} = this.props;
+    const {updatePossibleWinCombo} = this.props.action_props.games_action;
+    
+    const compPositions = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 !== 0);
+    const player1Positions = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 === 0);
+    //console.log('comp positions',[...compPositions])
+   // return {comp_position: [...compPositions, comp] , player1_position: [...player1Positions]};
+
+   //if no win, pick another win? 
+    //winning_indexes is array of array.
+   let checkIfExists = [];
+   const possibleWinCombo = [...this.props.possible_winning_combo];
+
+   [...this.props.possible_winning_combo].map(winning_indexes => {
+
+    winning_indexes.forEach( position => {
+      player1Positions.forEach(player1_position => {
+        console.log('position:', position);
+        console.log('player1_position:', player1_position);
+        console.log('isEqual:', ((position[0] === player1_position[0]) && (position[1] === player1_position[1])));
+        if(((position[0] === player1_position[0]) && (position[1] === player1_position[1])))
+        checkIfExists.push(true);
+        else checkIfExists.push(false);
+      })
+    });
+
+    //sort by 3.
+    // checkIfExists = checkIfExists.forEach(position => {
+
+    // })
+    let newArray = [];
+    
+    for(let position = 0 ; position < checkIfExists.length ; position++){ // 24
+      let positionArray = [];
+     
+      for (let j = 0 ; j < 3 ;j++){
+        positionArray.push(checkIfExists[position+j])
+      };
+      newArray.push(positionArray)
+      console.log('newArray', newArray);
+      if([...newArray].length > 0 && ([...newArray][position/3]).includes(true)){ //wrong
+        console.log('array index with true is', position/3);
+        possibleWinCombo[position/3] = false
+      }
+
+      position = position+2;
+
+    }
+    
+
+    dispatch(updatePossibleWinCombo([...possibleWinCombo].filter(win_combo => (win_combo !== false && win_combo)))); //  )));
+    
+    console.log('filtered win combo', [...possibleWinCombo].filter(win_combo => (win_combo !== false && win_combo))); //.filter(win_combo => (win_combo !== false && win_combo) )); 
+
+   })
+   //should return best position
+  //
+  //   [ //if player 1 has any of these , pop the combo
+  
+  // [[0,0],[0,1],[0,2]],
+  // [[0,0],[1,0],[2,0]],
+  // [[0,0],[1,1],[2,2]],
+
+  // [[1,0],[1,1],[1,2]],
+  // [[2,0],[2,1],[2,2]],
+  // [[0,1],[1,1],[2,1]],
+  // [[0,2],[1,2],[2,2]],
+  // [[0,2],[1,1],[2,0]]  
+  
+  // ]
+
+
+    // this.props.possible_winning_combo
+
+    //return [1,1]
+// updatePossibleWinCombo
+  }
+
   CompPickPosition = async () => {
     const {dispatch} = this.props;
-    const {setTicTacToeCell,adjust_number_of_turns,setCurrentPlayer} = this.props.action_props.games_action;
+    const {setTicTacToeCell,adjust_number_of_turns,setCurrentPlayer,updateCurrentPositions} = this.props.action_props.games_action;
     let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; 
-    //should be random 
+    //possibly make an check for winning positions instead of random. 
     //clean this up 
     let emptyPosition = false;
-    let row_key = Math.floor(Math.random() * 3);
-    let data_key = Math.floor(Math.random() * 3);
-
+    //available positions redux state???  [] 
+    //too easy make a smart algo. //replace 0 with best position
+    let row_key = Math.floor(Math.random() * 3);//(this.props.remaining_turns === 8) ? Math.floor(Math.random() * 3) : this.checkBestPosition()[0];
+    let data_key = Math.floor(Math.random() * 3);//(this.props.remaining_turns === 8) ? Math.floor(Math.random() * 3) : this.checkBestPosition()[1];
+    this.checkBestPosition([...this.props.current_positions , [row_key,data_key]]);
     if(ticTacToeBoxesCopy[row_key][data_key] === '')
       emptyPosition = true;
 
     if(emptyPosition === true){
+      
       ticTacToeBoxesCopy[row_key][data_key] =  playerSymbols.computerLabel;
+      await dispatch(updateCurrentPositions([...this.props.current_positions , [row_key,data_key]])); 
       await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
       await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
       await this.checkWin();
+      
       if(this.props.gameOver === false){
         await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
       }
@@ -91,31 +176,30 @@ class TicTacToe extends Component {
     }
   };
 
-
   OnChange = async event => {
     if (this.props.gameOver === false && this.props.picked_player === true) {
-    const {dispatch} = this.props;
-    const {setTicTacToeCell,setCurrentPlayer,adjust_number_of_turns} = this.props.action_props.games_action;
-    process.env.NODE_ENV.trim() !== 'production' && console.log('event is', event.target);
-    const indexs = JSON.parse((event.target).id);
-    let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; //important
+      const {dispatch} = this.props;
+      const {setTicTacToeCell,setCurrentPlayer,adjust_number_of_turns,updateCurrentPositions} = this.props.action_props.games_action;
+      process.env.NODE_ENV.trim() !== 'production' && console.log('event is', event.target);
+      const indexs = JSON.parse((event.target).id);
+      let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; //important
 
-    const row_key = indexs.row_key;
-    const data_key = indexs.data_key;
-    ticTacToeBoxesCopy[row_key][data_key] = (this.props.player_one_turn === true) ? playerSymbols.userLabel : playerSymbols.computerLabel;
+      const row_key = indexs.row_key;
+      const data_key = indexs.data_key;
+      ticTacToeBoxesCopy[row_key][data_key] = (this.props.player_one_turn === true) ? playerSymbols.userLabel : playerSymbols.computerLabel;
+      await dispatch(updateCurrentPositions([...this.props.current_positions , [row_key,data_key]])); 
+      //checkWin
+      await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
+      await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
+      await this.checkWin();
+    
+      if(this.props.gameOver === false){
+          await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+        }
 
-    //checkWin
-    await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
-    await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
-    await this.checkWin();
-  
-    if(this.props.gameOver === false){
-        await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+      if(this.props.compEnabled === true && this.props.gameOver === false){//comp is enabled.
+        this.CompPickPosition();
       }
-
-    if(this.props.compEnabled === true && this.props.gameOver === false){//comp is enabled.
-      this.CompPickPosition();
-    }
     } else {
         if(this.props.gameOver === false)
           popUpNotification('error', "You must select an opponent before starting the game!", "Click on Human to play a local game, or Computer to play with the computer." )
@@ -210,9 +294,9 @@ class TicTacToe extends Component {
 const mapStateToProps = state => { 
   process.env.NODE_ENV.trim() !== 'production' && console.log('state: ', state)
   const  TicTacToeProps  = state.gamesReducer.defaultTicTacToeStates; 
-  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player} = TicTacToeProps;
+  const {tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player,current_positions,possible_winning_combo} = TicTacToeProps;
   return {
-    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player
+    tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player,current_positions,possible_winning_combo
   };
 };
 

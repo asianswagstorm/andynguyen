@@ -12,8 +12,21 @@ const defaultTicTacToeStates =
     gameOver : false,
     winIndex : '',
     remaining_turns : 9,
-    isTie : false
+    isTie : false,
+    current_positions : [],
+    possible_winning_combo : [ //if player 1 has any of these , pop the combo
+        [[0,0],[0,1],[0,2]],
+        [[0,0],[1,0],[2,0]],
+        [[0,0],[1,1],[2,2]],
+        [[1,0],[1,1],[1,2]],
+        [[2,0],[2,1],[2,2]],
+        [[0,1],[1,1],[2,1]],
+        [[0,2],[1,2],[2,2]],
+        [[0,2],[1,1],[2,0]]  
+    ]
 };
+
+//current positions
 
 const DEFAULT_STATES = {defaultTicTacToeStates: {...defaultTicTacToeStates}};
 
@@ -22,8 +35,18 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         case 'RESET_TICTACTOEGAME':
             return {
                 ...state,
-                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, current_positions: [], possible_winning_combo:defaultTicTacToeStates.possible_winning_combo, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
             };
+        case 'UPDATE_POSSIBLE_WIN_COMBO':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, possible_winning_combo: action.possible_winning_combo}
+            }; 
+        case 'UPDATE_CURRENT_POSITIONS':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, current_positions: action.current_positions}
+            }; 
         case 'PICK_PLAYER_TYPE':
             return {
                 ...state,
