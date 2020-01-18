@@ -69,11 +69,12 @@ class TicTacToe extends Component {
     return numberOfElement;
   };
 
+  /**
+   * Problem when stuck no more winning positions, need to pick random.
+   */
   returnBestWinCombo = (newPossibleWinCombo, compPositionsArray) => {
     let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; 
     
-   
-
     let possibleWinCombo = [...newPossibleWinCombo];
     let indexIfMoreThanOne = 0;
     let indexs = [];
@@ -87,14 +88,19 @@ class TicTacToe extends Component {
     while(isFine === false){
 
     let latestCompPosition = compPositionsArray[compPositionsArray.length - lastIndex];
-    console.log("last position", latestCompPosition);
+    console.log("last position", latestCompPosition);//undefined
     possibleWinCombo.map((possible_indexes, key) => {
           possible_indexes.forEach(index => {
-            if (((index[0] === latestCompPosition[0]) && (index[1] === latestCompPosition[1]) && (ticTacToeBoxesCopy[index[0]][index[1]] !== 'X')))
+            if(index === undefined || !latestCompPosition)
+              isFine = true;
+
+            if (index && latestCompPosition && ((index[0] === latestCompPosition[0]) && (index[1] === latestCompPosition[1]) && (ticTacToeBoxesCopy[index[0]][index[1]] !== 'X')))
               indexs.push(key);
-          })
+           
+            })
+
         })
-        console.log("indexs", indexs);//what if more then 2 index? , 
+        console.log("indexs", indexs);//what if more then 2 index? // wrong 
         lastIndex++;
         if(indexs.length > 0) //last position no longer available, check previous 
               isFine = true;
@@ -108,15 +114,18 @@ class TicTacToe extends Component {
         indexIfMoreThanOne = 1;
     }
 
-   
-    return (possibleWinCombo.length > 1 || indexs.length > 1)  ? possibleWinCombo[indexs[indexIfMoreThanOne]] : [...possibleWinCombo];
-  } 
+   //returnBestWinCombo wrong!!!!
+    const returningCombo = ([...possibleWinCombo].length > 1 && indexs.length > 0)  ? possibleWinCombo[indexs[indexIfMoreThanOne]] : (indexs.length === 0) && [...possibleWinCombo][0];
+    console.log("returningCombo", returningCombo);//wrong!!!! 
+    return returningCombo;
+  }; 
   /**
    * On Change on the tic tac toe boxes
    * //trigger if comps turn
    */
   checkBestPosition = (currentPosition,PlayerType) => {
-    if(this.props.possible_winning_combo.length > 0 ){
+    if([...this.props.possible_winning_combo].length > 0 ){
+
     const {dispatch} = this.props;
     const {updatePossibleWinCombo,updateNextMove} = this.props.action_props.games_action;
     
@@ -170,29 +179,34 @@ class TicTacToe extends Component {
     }
     
     if(PlayerType === "computer" && [this.props.remaining_turns] < 8 ){
-  
+        //not being called
         let getNextPosition = () => {
-    
+        //wrong best position
         const best_postion = this.returnBestWinCombo([...this.props.possible_winning_combo], compPositionsArray); // function, the index where a 0 already exists. //index is []
-        console.log("best_postion",best_postion); undefined
+      
         let possible_positions = [...best_postion].filter(position1 => ((position1[0] !== latestCompPosition[0]) || (position1[1] !== latestCompPosition[1])));
     
-        console.log("possible_positions",possible_positions); 
+        console.log("possible_positions",possible_positions); //wrong
         let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; 
         console.log("ticTacToeBoxesCopy",ticTacToeBoxesCopy);
+        // console.log("ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]]:" , ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]] ) //??? 
+        //TypeError: Cannot read property '[object Array]' of undefined
+
         
-        let next_position = (possible_positions.length > 1) ? (ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]] === '') ?  possible_positions[0] :
-        ((ticTacToeBoxesCopy[possible_positions[1][0]][possible_positions[1][1]] === '') ?  possible_positions[1] : possible_positions[2]) : possible_positions; 
+        let next_position = (possible_positions.length > 1) ? ((ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]] === '') ?  possible_positions[0] : possible_positions[1])  : possible_positions; 
         console.log("next_position",next_position);
-        // alert(next_position)
+   
         dispatch(updateNextMove(next_position));
-        return (next_position !== undefined || next_position !== null ) ? next_position : getNextPosition();
+        return (next_position) ? next_position : getNextPosition();
         };
 
-        getNextPosition();//???
+        return getNextPosition();
       };
     }
-    else return [Math.floor(Math.random() * 3),Math.floor(Math.random() * 3)]
+    else {
+      alert("No win combo picking random");
+      return [Math.floor(Math.random() * 3),Math.floor(Math.random() * 3)]
+    }
   };
   //Block Player 1 not implemented
   CompPickPosition = async () => {
@@ -207,11 +221,13 @@ class TicTacToe extends Component {
     const arrayToSubmit = [...[...this.props.current_positions]];
     // this.checkBestPosition(arrayToSubmit, "computer"); // return me an index 
     
-    const bestPosition = (this.props.remaining_turns < 8 && this.props.possible_winning_combo.length > 0 ) && this.checkBestPosition(arrayToSubmit, "computer");
+    const bestPosition = (this.props.remaining_turns < 8 && [...this.props.possible_winning_combo].length > 0 ) &&  this.checkBestPosition(arrayToSubmit, "computer");
+
     // console.log("bestPosition" ,bestPosition );
-    let row_key = (this.props.remaining_turns === 8 || !bestPosition || this.props.possible_winning_combo.length === 0 ) ? Math.floor(Math.random() * 3) : bestPosition[0];
-    let data_key = (this.props.remaining_turns === 8 || !bestPosition) ? Math.floor(Math.random() * 3) : bestPosition[1];
-    if(ticTacToeBoxesCopy[row_key][data_key] === '')
+    let row_key = (this.props.remaining_turns === 8  || this.props.possible_winning_combo.length === 0 ) ? Math.floor(Math.random() * 3) : bestPosition[0];
+    let data_key = (this.props.remaining_turns === 8  || this.props.possible_winning_combo.length === 0) ? Math.floor(Math.random() * 3) : bestPosition[1];
+
+    if(ticTacToeBoxesCopy[row_key][data_key] === '')//???
       emptyPosition = true;
 
     if(emptyPosition === true){
