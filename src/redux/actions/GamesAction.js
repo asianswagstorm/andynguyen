@@ -36,8 +36,16 @@ export const setWinIndex = winIndex => {
     };
 };
 
+export const updateNextMove = next_moves => {
+    return {
+        type : TICTACTOE_TYPE.UPDATE_NEXT_MOVE,
+        next_moves
+    };
+};
+
 export const updatePossibleWinCombo = possible_winning_combo => {
-    return {type : TICTACTOE_TYPE.UPDATE_POSSIBLE_WIN_COMBO,
+    return {
+        type : TICTACTOE_TYPE.UPDATE_POSSIBLE_WIN_COMBO,
         possible_winning_combo
     };
 };

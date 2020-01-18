@@ -15,15 +15,16 @@ const defaultTicTacToeStates =
     isTie : false,
     current_positions : [],
     possible_winning_combo : [ //if player 1 has any of these , pop the combo
-        [[0,0],[0,1],[0,2]],
-        [[0,0],[1,0],[2,0]],
-        [[0,0],[1,1],[2,2]],
-        [[1,0],[1,1],[1,2]],
-        [[2,0],[2,1],[2,2]],
-        [[0,1],[1,1],[2,1]],
-        [[0,2],[1,2],[2,2]],
-        [[0,2],[1,1],[2,0]]  
-    ]
+        [[0,0],[0,1],[0,2]],// 0
+        [[0,0],[1,0],[2,0]],// 1
+        [[0,0],[1,1],[2,2]],// 2
+        [[1,0],[1,1],[1,2]],// 3
+        [[2,0],[2,1],[2,2]],// 4
+        [[0,1],[1,1],[2,1]],// 5
+        [[0,2],[1,2],[2,2]],// 6
+        [[0,2],[1,1],[2,0]]  // 7
+    ],
+    next_moves : []
 };
 
 //current positions
@@ -35,8 +36,13 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         case 'RESET_TICTACTOEGAME':
             return {
                 ...state,
-                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_turn: defaultTicTacToeStates.player_one_turn, current_positions: [], possible_winning_combo:defaultTicTacToeStates.possible_winning_combo, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, next_moves: [], player_one_turn: defaultTicTacToeStates.player_one_turn, current_positions: [], possible_winning_combo:defaultTicTacToeStates.possible_winning_combo, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
             };
+        case 'UPDATE_NEXT_MOVE': 
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, next_moves: action.next_moves}
+            }; 
         case 'UPDATE_POSSIBLE_WIN_COMBO':
             return {
                 ...state,
