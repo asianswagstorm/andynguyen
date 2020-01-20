@@ -9,6 +9,18 @@ export const TicTacToeWinCombo = array => [
     [array[0][2], array[1][1], array[2][0]] //col 3 diagonal
 ]; 
 
+//order of win combo matters.
+export const winCombos = [ //if player 1 has any of these , pop the combo
+    [[0,0],[0,1],[0,2]],// 0
+    [[1,0],[1,1],[1,2]],// 1
+    [[2,0],[2,1],[2,2]],// 2
+    [[0,0],[1,0],[2,0]],// 3
+    [[0,1],[1,1],[2,1]],// 4
+    [[0,2],[1,2],[2,2]],// 5
+    [[0,0],[1,1],[2,2]],// 6
+    [[0,2],[1,1],[2,0]] // 7
+];
+
 //order matters 
 export const winIndexs = [
     {index1: [0,0], index2: [0,1], index3: [0,2]},

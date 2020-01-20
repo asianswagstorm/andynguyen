@@ -1,4 +1,4 @@
-import {tictactoe_boxes} from "../../Components/constants/Games";
+import {tictactoe_boxes,winCombos} from "../../Components/constants/Games";
 
 const defaultTicTacToeStates = 
 {
@@ -14,17 +14,10 @@ const defaultTicTacToeStates =
     remaining_turns : 9,
     isTie : false,
     current_positions : [],
-    possible_winning_combo : [ //if player 1 has any of these , pop the combo
-        [[0,0],[0,1],[0,2]],// 0
-        [[0,0],[1,0],[2,0]],// 1
-        [[0,0],[1,1],[2,2]],// 2
-        [[1,0],[1,1],[1,2]],// 3
-        [[2,0],[2,1],[2,2]],// 4
-        [[0,1],[1,1],[2,1]],// 5
-        [[0,2],[1,2],[2,2]],// 6
-        [[0,2],[1,1],[2,0]]  // 7
-    ],
-    next_moves : []
+    possible_winning_combo : winCombos,
+    player_one_possible_winning_combo : winCombos ,
+    next_moves : [],
+    player1IndexPossibleWin : [false,false,false,false,false,false,false,false]
 };
 
 //current positions
@@ -36,12 +29,22 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         case 'RESET_TICTACTOEGAME':
             return {
                 ...state,
-                defaultTicTacToeStates: {...state.defaultTicTacToeStates, next_moves: [], player_one_turn: defaultTicTacToeStates.player_one_turn, current_positions: [], possible_winning_combo:defaultTicTacToeStates.possible_winning_combo, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, next_moves: [], player1IndexPossibleWin: defaultTicTacToeStates.player1IndexPossibleWin, player_one_possible_winning_combo: defaultTicTacToeStates.player_one_possible_winning_combo, player_one_turn: defaultTicTacToeStates.player_one_turn, current_positions: [], possible_winning_combo:defaultTicTacToeStates.possible_winning_combo, remaining_turns: 9, isTie: false, tictactoe_boxes: [...tictactoe_boxes], game_message: "Make your move.", gameOver:defaultTicTacToeStates.gameOver, winIndex: '' }
             };
+        case 'UPDATE_INDEX_POSSIBLE_WIN':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player1IndexPossibleWin: action.player1IndexPossibleWin}
+            }; 
         case 'UPDATE_NEXT_MOVE': 
             return {
                 ...state,
                 defaultTicTacToeStates: {...state.defaultTicTacToeStates, next_moves: action.next_moves}
+            }; 
+        case 'UPDATE_PLAYER_ONE_POSSIBLE_WIN_COMBO':
+            return {
+                ...state,
+                defaultTicTacToeStates: {...state.defaultTicTacToeStates, player_one_possible_winning_combo: action.player_one_possible_winning_combo}
             }; 
         case 'UPDATE_POSSIBLE_WIN_COMBO':
             return {

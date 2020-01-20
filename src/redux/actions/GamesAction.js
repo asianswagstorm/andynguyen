@@ -43,6 +43,20 @@ export const updateNextMove = next_moves => {
     };
 };
 
+export const updatePlayerOnePossibleWinIndex = player1IndexPossibleWin => {
+    return {
+        type : TICTACTOE_TYPE.UPDATE_INDEX_POSSIBLE_WIN,
+        player1IndexPossibleWin
+    };
+};
+
+export const updatePlayerOnePossibleWinCombo = player_one_possible_winning_combo => {
+    return {
+        type : TICTACTOE_TYPE.UPDATE_PLAYER_ONE_POSSIBLE_WIN_COMBO,
+        player_one_possible_winning_combo
+    };
+};
+
 export const updatePossibleWinCombo = possible_winning_combo => {
     return {
         type : TICTACTOE_TYPE.UPDATE_POSSIBLE_WIN_COMBO,
