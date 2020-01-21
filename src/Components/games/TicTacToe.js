@@ -3,25 +3,11 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/TicTacToe.css";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
-import { TicTacToeWinCombo, playerPicker ,tictactoe_score_label,playerSymbols,winIndexs} from "../constants/Games"; //tictactoe_boxes
+import { TicTacToeWinCombo ,playerSymbols,winIndexs} from "../constants/Games"; //tictactoe_boxes
+import GamesHead from "./GamesHead";
+
 class TicTacToe extends Component {
   
-  setPlayerType = isCompEnabled => {
-    // console.log(`props is:`, this.props) 
-    const {dispatch} = this.props;
-    const {setOpponent,pickedPlayer,setGameMessage} = this.props.action_props.games_action;
-    dispatch(setOpponent(isCompEnabled));
-    dispatch(pickedPlayer(true));
-    dispatch(setGameMessage('Make your move.'));
-  };
-
-  resetGame = () => {
-    const {dispatch} = this.props;
-    const {resetTicTacToeCell} = this.props.action_props.games_action;
-    window.location.href = '/TicTacToe'; //refresh then reset????
-    dispatch(resetTicTacToeCell()); //doesn't work and the props keep resetting. , tictactoe boxes const getting overwritten!!!
-    // window.location.href = '/TicTacToe'; // temporary
-  };
   /**
    * checkWin Function
    */
@@ -337,47 +323,7 @@ class TicTacToe extends Component {
       //need redux for the prop states. 
     return (
       <section>
-        <header className = "Games">
-          {/* Add a back Button */}
-          <h1 id="tictactoe"><a href = "/"> <span className="icon fa-home"></span> Tic Tac Toe </a></h1>
-          <h2 id="tictactoe">Written in React with Redux</h2>
-        </header>
-
-        <div className="score-board">
-            {tictactoe_score_label.map((label, key) => (
-          <div key = {key} id= {label.id} className="badge">
-           {label.label}
-          </div>))}
-          <span id="user-score"> {[this.props.player1_score]} </span>:<span id="computer-score"> {[this.props.player2_score]} </span>
-        </div>
-
-        <div className="message">
-          <p> {[this.props.game_message]} </p>
-        </div>
-        {this.props.picked_player === true &&
-          <div className="reset">
-            <button
-              onClick={this.resetGame}
-              className="button button-block"
-              id="reset-game"
-            >
-              Reset Game
-            </button>
-          </div>
-        }
-      
-        {this.props.picked_player === false && 
-          <div className="play">
-            <p> Play with Human or Computer? </p>
-            {
-              playerPicker.map((player, key) => (
-                <button key={key} onClick= {() => this.setPlayerType(player.isComp)} className="button button-block" id= {player.id}>
-                  {player.name}
-                </button>
-              ))
-            }
-          </div>
-        }
+        <GamesHead action_props = {this.props.action_props} gameType = "tictactoe"/>
             {/* Clean this up  */}
         <div className="Boxes" id="board">
           <table className="tictactoetable" id= {this.props.gameOver === false || [this.props.picked_player] === true ? "notdisabled" : "disabled"} >

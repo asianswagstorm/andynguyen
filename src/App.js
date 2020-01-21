@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Home from "./Components/Home";
 // import Games from "./Components/Games";
 import TicTacToe from "./Components/games/TicTacToe";//test
+import ConnectFour from "./Components/games/ConnectFour";//test
 import NotFound from "./Components/NotFound";
 import * as games_action from './redux/actions/GamesAction';
 import 'antd/dist/antd.css';
@@ -20,6 +21,7 @@ class App extends Component {
     const routes_components = [ {path: "/", component: Home},
                                 // {path= "/Games", component: <Games/>},
                                 {path: "/TicTacToe", component: TicTacToe},
+                                {path: "/Connect4", component: ConnectFour},
                                 {path: "*", component: NotFound}];
     return (
 

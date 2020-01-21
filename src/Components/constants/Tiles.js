@@ -51,7 +51,7 @@ export const tiles = [
       type: "JavaScript"
     },
     {
-      href: "https://asianswagstorm.github.io/SimpleProjects/Connect4/",
+      href: "/Connect4",
       src: "images/thumbs/thumb8.jpg",
       alt: "",
       title: "Connect 4 Game.",

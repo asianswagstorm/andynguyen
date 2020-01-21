@@ -1,3 +1,4 @@
+//Clean This Up
 export const TicTacToeWinCombo = array => [   
     [array[0][0], array[0][1], array[0][2]], //row 1 horizontal 0
     [array[1][0], array[1][1], array[1][2]], //row 2 horizontal 1
@@ -39,8 +40,10 @@ export const tictactoe_boxes = [ //overwritten
     ['','','']
 ];
 
-export const tictactoe_score_label = [  { label: 'X', id: "user-label"},
-                                        {    label: 'O', id: "computer-label"}];
+export const score_label = (type) => [  { label: (type ==="tictactoe") ? 'X' : 'Red', id: "user-label"},
+                                        {    label: (type ==="tictactoe") ? 'O' : 'Yellow', id: "computer-label"}];
+
+
 
 export const playerSymbols = { userLabel : 'X', computerLabel : 'O' };
 
