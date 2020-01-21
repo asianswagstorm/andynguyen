@@ -120,6 +120,7 @@ class TicTacToe extends Component {
 
   filterPossibleWinCombo = (last_position, playerType) => {
     const {dispatch} = this.props;
+    //use object to filter. 
     const {updatePossibleWinCombo,updatePlayerOnePossibleWinCombo} = this.props.action_props.games_action;
 
     let checkIfExists = [];
@@ -166,7 +167,7 @@ class TicTacToe extends Component {
     if([...this.props.possible_winning_combo].length > 0 ){
 
     const {dispatch} = this.props;
-    const {updateNextMove} = this.props.action_props.games_action;
+    const {updateNextMove,updatePlayerOnePossibleWinIndex} = this.props.action_props.games_action;
 
     const compPositionsArray = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 !== 0);
     
@@ -191,8 +192,14 @@ class TicTacToe extends Component {
         // console.log("ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]]:" , ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]] ) //??? 
         //TypeError: Cannot read property '[object Array]' of undefined
 
-        
         let next_position = (possible_positions.length > 1) ? ((ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]] === '') ?  possible_positions[0] : possible_positions[1])  : possible_positions; 
+        // console.log("indextoplay", );
+        const indextoplay = this.CheckPlayerOneWin([...ticTacToeBoxesCopy]);
+        if(indextoplay.length > 0){
+         next_position = indextoplay;
+         dispatch(updatePlayerOnePossibleWinIndex([])); 
+        }
+
         console.log("next_position",next_position);
         
         dispatch(updateNextMove(next_position));
@@ -239,6 +246,7 @@ class TicTacToe extends Component {
       await dispatch(updateCurrentPositions([...this.props.current_positions , [row_key,data_key]])); 
       
       await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));
+    
       await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
       await this.checkWin();
       
@@ -251,24 +259,69 @@ class TicTacToe extends Component {
     }
   };
   //TicTacToeWinCombo
-  CheckPlayerOneWin = tictactoeCells => {
-    const {dispatch} = this.props;
-    const {updatePlayerOnePossibleWinIndex} = this.props.action_props.games_action;
+  CheckPlayerOneWin = (ticTacToeBoxesCopy) => {
+  //return the index it should be.
+  const {dispatch} = this.props;
+  const {updatePlayerOnePossibleWinIndex} = this.props.action_props.games_action;
+  const playerOnePossibleWinCombo = [...this.props.player_one_possible_winning_combo];
+  let indexToReturn = this.props.player1IndexPossibleWin;
+  playerOnePossibleWinCombo.map(win_combo => {
+    let countX = 0;
+    win_combo.map(index => {
+      if(ticTacToeBoxesCopy[index[0]][index[1]] === 'X')
+        countX = countX + 1;
+    } )
+    if (countX === 2)
 
-    let hasTwoIndex = [...this.props.player1IndexPossibleWin]; //index//prop
-    TicTacToeWinCombo(tictactoeCells).map((rows, row_key) => { //cells is each 3 combo
-      let countDoubleIndex = 0;
-      rows.map(cells => {
-        if(cells === 'X')  
-          countDoubleIndex = countDoubleIndex + 1;
-        if(countDoubleIndex === 2){
-          hasTwoIndex[row_key] = true;
-          dispatch(updatePlayerOnePossibleWinIndex(hasTwoIndex));
-        }
-      })
-      console.log("hasTwoIndex", hasTwoIndex);
-    });
+      indexToReturn = [...win_combo].filter(element => ticTacToeBoxesCopy[element[0]][element[1]] !== 'X')[0];
+    })
+    dispatch(updatePlayerOnePossibleWinIndex(indexToReturn));
+    console.log("indexaboutToWin:", indexToReturn)
+    return indexToReturn;
   };
+  
+  //   //[...this.props.player_one_possible_winning_combo]
+  //   let hasTwoIndex = [false,false,false,false,false,false,false,false]; 
+  //   /*
+  //     tictactoeCells :  [
+  //                         ['','',''],
+  //                         ['','',''],
+  //                         ['','','']
+  //                       ]
+  //   */
+  //   const tictactoeCellCopy =  [...tictactoeCells];
+  //   // tictactoeCellCopy.map((rows => { //cells is each 3 combo
+  //     let countDoubleIndex = 0;
+
+  //     [...this.props.player_one_possible_winning_combo].map((win_rows) => {
+  //       win_rows.forEach(element => {
+  //         [...hasTwoIndex].map((element2) => {
+  //         if(tictactoeCellCopy[element[0]][element[1]] === 'X')
+  //           countDoubleIndex = countDoubleIndex + 1;
+       
+  //           if(tictactoeCellCopy[element[0]][element[1]] === 'O')
+  //           countDoubleIndex = 0;
+         
+  //           if(countDoubleIndex === 2){
+  //             hasTwoIndex[[...hasTwoIndex].indexOf(element2)] = true;
+  //           } 
+  //         })
+      
+  //         })
+  //     })
+   
+  //     if(hasTwoIndex.includes(true)) {
+     
+  //       hasTwoIndex.forEach((element,key) => {
+  //         if(element === true)
+  //         hasTwoIndex[key] = key;
+  //         //  console.log("true at index ", key);
+  //       })
+  //     } 
+  //   hasTwoIndex = hasTwoIndex.filter(element => element !== false && element);
+  //   console.log("hasTwoIndex",hasTwoIndex );
+  //   dispatch(updatePlayerOnePossibleWinIndex(hasTwoIndex));
+  // };
 
   //
   OnChange = async event => {
@@ -291,7 +344,7 @@ class TicTacToe extends Component {
       (this.props.compEnabled === true && this.props.possible_winning_combo.length > 0 ) && this.checkBestPosition([...[...this.props.current_positions , [row_key,data_key]]] , "human"); 
       //checkWin
       await dispatch(setTicTacToeCell(ticTacToeBoxesCopy));//
-      this.CheckPlayerOneWin(ticTacToeBoxesCopy);
+      
       await dispatch(adjust_number_of_turns([this.props.remaining_turns] - 1));
       await this.checkWin();
     
@@ -301,6 +354,7 @@ class TicTacToe extends Component {
 
       if(this.props.compEnabled === true && this.props.gameOver === false){//comp is enabled.
         this.CompPickPosition();
+       
       }
     } else {
         if(this.props.gameOver === false)

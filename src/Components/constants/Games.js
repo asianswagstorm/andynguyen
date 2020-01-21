@@ -1,12 +1,12 @@
 export const TicTacToeWinCombo = array => [   
-    [array[0][0], array[0][1], array[0][2]], //row 1 horizontal
-    [array[1][0], array[1][1], array[1][2]], //row 2 horizontal
-    [array[2][0], array[2][1], array[2][2]], //row 3 horizontal
-    [array[0][0], array[1][0], array[2][0]], //col 1 vertical
-    [array[0][1], array[1][1], array[2][1]], //col 2 vertical
-    [array[0][2], array[1][2], array[2][2]], //col 3 vertical
-    [array[0][0], array[1][1], array[2][2]], //col 1 diagonal
-    [array[0][2], array[1][1], array[2][0]] //col 3 diagonal
+    [array[0][0], array[0][1], array[0][2]], //row 1 horizontal 0
+    [array[1][0], array[1][1], array[1][2]], //row 2 horizontal 1
+    [array[2][0], array[2][1], array[2][2]], //row 3 horizontal 2 
+    [array[0][0], array[1][0], array[2][0]], //col 1 vertical 3
+    [array[0][1], array[1][1], array[2][1]], //col 2 vertical 4
+    [array[0][2], array[1][2], array[2][2]], //col 3 vertical 5
+    [array[0][0], array[1][1], array[2][2]], //col 1 diagonal 6
+    [array[0][2], array[1][1], array[2][0]] //col 3 diagonal 7
 ]; 
 
 //order of win combo matters.

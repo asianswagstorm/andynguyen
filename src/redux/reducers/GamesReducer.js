@@ -17,7 +17,7 @@ const defaultTicTacToeStates =
     possible_winning_combo : winCombos,
     player_one_possible_winning_combo : winCombos ,
     next_moves : [],
-    player1IndexPossibleWin : [false,false,false,false,false,false,false,false]
+    player1IndexPossibleWin : []
 };
 
 //current positions
