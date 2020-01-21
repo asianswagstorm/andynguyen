@@ -129,7 +129,6 @@ class TicTacToe extends Component {
     console.log("last_position", last_position);
 
     possibleWinCombo.map(winning_indexes => {
-
       winning_indexes.forEach( position => {
           if(((position[0] === last_position[0]) && (position[1] === last_position[1])))
             checkIfExists.push(true);
@@ -279,51 +278,7 @@ class TicTacToe extends Component {
     console.log("indexaboutToWin:", indexToReturn)
     return indexToReturn;
   };
-  
-  //   //[...this.props.player_one_possible_winning_combo]
-  //   let hasTwoIndex = [false,false,false,false,false,false,false,false]; 
-  //   /*
-  //     tictactoeCells :  [
-  //                         ['','',''],
-  //                         ['','',''],
-  //                         ['','','']
-  //                       ]
-  //   */
-  //   const tictactoeCellCopy =  [...tictactoeCells];
-  //   // tictactoeCellCopy.map((rows => { //cells is each 3 combo
-  //     let countDoubleIndex = 0;
 
-  //     [...this.props.player_one_possible_winning_combo].map((win_rows) => {
-  //       win_rows.forEach(element => {
-  //         [...hasTwoIndex].map((element2) => {
-  //         if(tictactoeCellCopy[element[0]][element[1]] === 'X')
-  //           countDoubleIndex = countDoubleIndex + 1;
-       
-  //           if(tictactoeCellCopy[element[0]][element[1]] === 'O')
-  //           countDoubleIndex = 0;
-         
-  //           if(countDoubleIndex === 2){
-  //             hasTwoIndex[[...hasTwoIndex].indexOf(element2)] = true;
-  //           } 
-  //         })
-      
-  //         })
-  //     })
-   
-  //     if(hasTwoIndex.includes(true)) {
-     
-  //       hasTwoIndex.forEach((element,key) => {
-  //         if(element === true)
-  //         hasTwoIndex[key] = key;
-  //         //  console.log("true at index ", key);
-  //       })
-  //     } 
-  //   hasTwoIndex = hasTwoIndex.filter(element => element !== false && element);
-  //   console.log("hasTwoIndex",hasTwoIndex );
-  //   dispatch(updatePlayerOnePossibleWinIndex(hasTwoIndex));
-  // };
-
-  //
   OnChange = async event => {
     if (this.props.gameOver === false && this.props.picked_player === true) {
       const {dispatch} = this.props;
