@@ -12,6 +12,22 @@ class ConnectFour extends Component {
         dispatch(setGameType("connectFour"));
       };
 
+
+    //setConnectFourBoard
+    onChange = (column,row) => {
+       
+        const {dispatch} = this.props;
+        const {setConnectFourBoard} = this.props.action_props.connect_four_action;
+
+        const copyConnectFour = [...this.props.connectFourBoard];
+    
+        console.log("column is", column);
+        console.log("row is", row);
+        
+        copyConnectFour[column].rowArrays[row] = "p1";//switchPlayers
+        dispatch(setConnectFourBoard(copyConnectFour));
+    };
+
     determineCirclePosition = (type) => {
         const classNameToReturn = {
             "" : "free",
@@ -33,8 +49,8 @@ class ConnectFour extends Component {
                 {[...this.props.connectFourBoard].map((column, column_key) => (
                     <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key}>
                         {(column.rowArrays).map((row,row_key) => (
-                        <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`}>
-                        <circle cx={xyCoordinates} cy={xyCoordinates} r={radius} stroke="#0B4E72" stroke-width="3" className= {this.determineCirclePosition(row)} /> 
+                        <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`} >
+                        <circle onClick = {() => this.onChange(column_key,row_key)} cx={xyCoordinates} cy={xyCoordinates} r={radius} stroke="#0B4E72" strokeWidth="3" className= {this.determineCirclePosition(row)} /> 
                         </svg> 
                         ))
                         }
@@ -46,7 +62,6 @@ class ConnectFour extends Component {
         )
     };
 };
-
 const mapStateToProps = state => { 
     process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
     // const gamesProps  = state.gamesReducer.defaultGamesStates; 
