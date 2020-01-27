@@ -1,7 +1,8 @@
-import {connectFourBoard} from "../../Components/constants/ConnectFourConstants";
+import {connectFourBoard,rowIndexByColumn} from "../../Components/constants/ConnectFourConstants";
 
 const defaultConnectFourStates = {
-    connectFourBoard
+    connectFourBoard,
+    rowIndexByColumn
 };
 
 const DEFAULT_STATES = {defaultConnectFourStates: {...defaultConnectFourStates}};
@@ -17,11 +18,16 @@ const connectFourReducer = (state = DEFAULT_STATES, action) => {
         case "RESET_CONNECT_FOUR_GAME":
             return {
                 ...state,
-                defaultConnectFourStates: {...state.defaultConnectFourStates, connectFourBoard : action.connectFourBoard}
+                defaultConnectFourStates: {...state.defaultConnectFourStates, connectFourBoard : action.connectFourBoard, rowIndexByColumn: [...rowIndexByColumn]}
+            };
+        case "SET_ROW_FOR_COLUMN":
+            return{
+                ...state,
+                defaultConnectFourStates: {...state.defaultConnectFourStates, rowIndexByColumn : action.rowIndexByColumn}
             };
         default:
-            return state; //save state
-    };
+            return {...state}; //save state
+    }
 };
 
 export default connectFourReducer 

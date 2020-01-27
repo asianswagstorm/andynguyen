@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/ConnectFour.css";
 import GamesHead from "./GamesHead";
-import {connectFourBoard} from "../constants/ConnectFourConstants";
+import { popUpNotification } from "../constants/HelperFunction/Functions";
+  
 class ConnectFour extends Component {
 
     componentDidMount = () => {
@@ -13,19 +14,35 @@ class ConnectFour extends Component {
       };
 
 
+    //getFreeRow(column)
+
     //setConnectFourBoard
-    onChange = (column,row) => {
+    onChange = async (column) => {
        
         const {dispatch} = this.props;
-        const {setConnectFourBoard} = this.props.action_props.connect_four_action;
+        const {setCurrentPlayer} = this.props.action_props.games_action;
+        const {setConnectFourBoard,setRowNumberByColumn} = this.props.action_props.connect_four_action;
 
-        const copyConnectFour = [...this.props.connectFourBoard];
-    
+        let copyConnectFour = [...this.props.connectFourBoard];
+        let copyRowByColumn = [...this.props.rowIndexByColumn];
         console.log("column is", column);
-        console.log("row is", row);
+        // console.log("row is", row); row should be the most free row.
         
-        copyConnectFour[column].rowArrays[row] = "p1";//switchPlayers
-        dispatch(setConnectFourBoard(copyConnectFour));
+        //before set should check. clicking the column.
+        //setRowNumberByColumn
+
+        if(copyRowByColumn[column] > -1) {
+            copyConnectFour[column].rowArrays[copyRowByColumn[column]] = (this.props.player_one_turn === true) ? "p1" : "p2";
+            dispatch(setConnectFourBoard(copyConnectFour));
+            copyRowByColumn[column] =  (copyRowByColumn[column] - 1);
+            dispatch(setRowNumberByColumn(copyRowByColumn));
+
+            if(this.props.gameOver === false){
+             await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+            }
+        }else{
+            popUpNotification("warning", "This column is full.", "Pick another column.");
+        }
     };
 
     determineCirclePosition = (type) => {
@@ -38,7 +55,6 @@ class ConnectFour extends Component {
     };
 
     render = () => {
-     
         const xyCoordinates = "50";
         const radius = "40";
         return (
@@ -47,10 +63,10 @@ class ConnectFour extends Component {
             <div className="connectFourArea"> 
                 <div id="game-board">  
                 {[...this.props.connectFourBoard].map((column, column_key) => (
-                    <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key}>
+                    <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key} onClick = {() => this.onChange(column_key)}>
                         {(column.rowArrays).map((row,row_key) => (
-                        <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`} >
-                        <circle onClick = {() => this.onChange(column_key,row_key)} cx={xyCoordinates} cy={xyCoordinates} r={radius} stroke="#0B4E72" strokeWidth="3" className= {this.determineCirclePosition(row)} /> 
+                        <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`}>
+                        <circle  cx={xyCoordinates} cy={xyCoordinates} r={radius} stroke="#0B4E72" strokeWidth="3" className= {this.determineCirclePosition(row)} /> 
                         </svg> 
                         ))
                         }
@@ -64,12 +80,13 @@ class ConnectFour extends Component {
 };
 const mapStateToProps = state => { 
     process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
-    // const gamesProps  = state.gamesReducer.defaultGamesStates; 
+    const gamesProps  = state.gamesReducer.defaultGamesStates; 
     const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
 
-    const {connectFourBoard} = connectFourProps;
+    const {connectFourBoard,rowIndexByColumn} = connectFourProps;
+    const {player_one_turn,gameOver} = gamesProps
 
-    return {connectFourBoard};
+    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn};
   };
   
   export default withRouter(connect(mapStateToProps)(ConnectFour)); 

@@ -70,7 +70,7 @@ const gamesReducer = (state = DEFAULT_STATES, action) => {
         };
         default:
             return state; //save state
-    }; 
+    } 
 };
 
 export default gamesReducer 

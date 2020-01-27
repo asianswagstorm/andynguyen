@@ -26,12 +26,12 @@ svg#connectFourSVG{
 	display: inline-block;
 }
 
-.column:hover  circle.free{
-	fill: lightgrey;
+.column:hover circle.free{
+	fill: rgba(112, 250, 20, 0.555);
 }
 
 circle.free {
-	fill: white;
+    fill: white;
 }
 
 circle.game_over {
