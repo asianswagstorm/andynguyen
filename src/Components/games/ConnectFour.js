@@ -30,9 +30,9 @@ class ConnectFour extends Component {
             <GamesHead action_props = {this.props.action_props} />
             <div className="connectFourArea"> 
                 <div id="game-board">  
-                    {[...this.props.connectFourBoard].map((column, column_key) => (
+                {[...this.props.connectFourBoard].map((column, column_key) => (
                     <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key}>
-                        {column.map((row,row_key) => (
+                        {(column.rowArrays).map((row,row_key) => (
                         <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`}>
                         <circle cx={xyCoordinates} cy={xyCoordinates} r={radius} stroke="#0B4E72" stroke-width="3" className= {this.determineCirclePosition(row)} /> 
                         </svg> 
