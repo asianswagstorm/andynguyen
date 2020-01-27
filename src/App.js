@@ -9,7 +9,7 @@ import ConnectFour from "./Components/games/ConnectFour";//test
 import NotFound from "./Components/NotFound";
 import * as games_action from './redux/actions/GamesAction';
 import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
-
+import * as connect_four_action from './redux/actions/ConnectFourAction';
 
 import 'antd/dist/antd.css';
 
@@ -47,6 +47,7 @@ export const mapDispatchToProps = dispatch => {
   return {
     games_action,
     tic_tac_toe_action,
+    connect_four_action,
     dispatch
   };
 };

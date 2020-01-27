@@ -14,6 +14,11 @@ const connectFourReducer = (state = DEFAULT_STATES, action) => {
                 ...state,
                 defaultConnectFourStates: {...state.defaultConnectFourStates, connectFourBoard : action.connectFourBoard}
             };
+        case "RESET_CONNECT_FOUR_GAME":
+            return {
+                ...state,
+                defaultConnectFourStates: {...state.defaultConnectFourStates, connectFourBoard : action.connectFourBoard}
+            };
         default:
             return state; //save state
     };

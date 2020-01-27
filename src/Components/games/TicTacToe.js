@@ -9,6 +9,11 @@ import GamesHead from "./GamesHead";
 
 class TicTacToe extends Component {
   
+  componentDidMount = () => {
+    const {dispatch} = this.props;
+    const {setGameType} = this.props.action_props.games_action;
+    dispatch(setGameType("tictactoe"));
+  };
   /**
    * checkWin Function
    */
@@ -328,7 +333,7 @@ class TicTacToe extends Component {
       //need redux for the prop states. 
     return (
       <section>
-        <GamesHead action_props = {this.props.action_props} gameType = "tictactoe"/>
+        <GamesHead action_props = {this.props.action_props} />
             {/* Clean this up  */}
         <div className="Boxes" id="board">
           <table className="tictactoetable" id= {this.props.gameOver === false || [this.props.picked_player] === true ? "notdisabled" : "disabled"} >

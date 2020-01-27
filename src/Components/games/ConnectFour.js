@@ -6,6 +6,12 @@ import GamesHead from "./GamesHead";
 import {connectFourBoard} from "../constants/ConnectFourConstants";
 class ConnectFour extends Component {
 
+    componentDidMount = () => {
+        const {dispatch} = this.props;
+        const {setGameType} = this.props.action_props.games_action;
+        dispatch(setGameType("connectFour"));
+      };
+
     determineCirclePosition = (type) => {
         const classNameToReturn = {
             "" : "free",
@@ -21,10 +27,10 @@ class ConnectFour extends Component {
         const radius = "40";
         return (
         <section>
-            <GamesHead action_props = {this.props.action_props} gameType = "connectFour"/>
+            <GamesHead action_props = {this.props.action_props} />
             <div className="connectFourArea"> 
                 <div id="game-board">  
-                    {[...connectFourBoard].map((column, column_key) => (
+                    {[...this.props.connectFourBoard].map((column, column_key) => (
                     <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key}>
                         {column.map((row,row_key) => (
                         <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`}>
@@ -44,8 +50,11 @@ class ConnectFour extends Component {
 const mapStateToProps = state => { 
     process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
     // const gamesProps  = state.gamesReducer.defaultGamesStates; 
-    // const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
-    return null;
+    const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
+
+    const {connectFourBoard} = connectFourProps;
+
+    return {connectFourBoard};
   };
   
   export default withRouter(connect(mapStateToProps)(ConnectFour)); 

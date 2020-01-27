@@ -17,6 +17,11 @@ const DEFAULT_STATES = {defaultGamesStates: {...defaultGamesStates}};
 
 const gamesReducer = (state = DEFAULT_STATES, action) => {
     switch(action.type) {
+        case 'SET_GAME_TYPE':
+            return {
+                ...state,
+                defaultGamesStates: {...state.defaultGamesStates, gameType: action.gameType}
+            };
         case 'RESET_GAME':
             return {
                 ...state,

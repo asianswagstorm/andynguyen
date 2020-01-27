@@ -17,13 +17,13 @@ class GamesHead extends Component {
         const {dispatch} = this.props;
         const {resetGame} = this.props.action_props.games_action;
         const {resetTicTacToeCell} = this.props.action_props.tic_tac_toe_action;
-        const isTicTacToe = this.props.gameType === "tictactoe";
+        const {resetConnectFour} = this.props.action_props.connect_four_action;
         
         dispatch(resetGame());
-        if(isTicTacToe === true)
-          dispatch(resetTicTacToeCell()); //doesn't work and the props keep resetting. , tictactoe boxes const getting overwritten!!!
+        this.props.gameType === "tictactoe" ?  dispatch(resetTicTacToeCell()) : dispatch(resetConnectFour()); 
+          //doesn't work and the props keep resetting. , tictactoe boxes const getting overwritten!!!
         //resetConnectFour
-        window.location.href = `/${isTicTacToe ? 'TicTacToe' : 'Connect4'}`; //refresh then reset????
+        window.location.href = `/${this.props.gameType === "tictactoe" ? 'TicTacToe' : 'Connect4'}`; //refresh then reset????
     };
 
   render = () => {
@@ -91,10 +91,11 @@ const mapStateToProps = state => {
     const { 
             player1_score,
             player2_score,game_message,
-            picked_player
+            picked_player,
+            gameType
           } = GamesProps; //games props
     return {
-        player1_score, player2_score,game_message,picked_player
+        player1_score, player2_score,game_message,picked_player,gameType
     };
   };
   
