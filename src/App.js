@@ -8,6 +8,9 @@ import TicTacToe from "./Components/games/TicTacToe";//test
 import ConnectFour from "./Components/games/ConnectFour";//test
 import NotFound from "./Components/NotFound";
 import * as games_action from './redux/actions/GamesAction';
+import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
+
+
 import 'antd/dist/antd.css';
 
 class App extends Component {
@@ -40,9 +43,10 @@ class App extends Component {
 }
 
 export const mapDispatchToProps = dispatch => {
-  console.log("game action", games_action); // this.props is undefined
+  console.log("game action", {games_action , tic_tac_toe_action}); // this.props is undefined
   return {
     games_action,
+    tic_tac_toe_action,
     dispatch
   };
 };

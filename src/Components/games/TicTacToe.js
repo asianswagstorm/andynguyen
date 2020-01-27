@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/TicTacToe.css";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
-import { TicTacToeWinCombo ,playerSymbols,winIndexs} from "../constants/Games"; //tictactoe_boxes
+import {playerSymbols} from "../constants/Games";
+import { TicTacToeWinCombo,winIndexs} from "../constants/TicTacToeConstants"; //tictactoe_boxes
 import GamesHead from "./GamesHead";
 
 class TicTacToe extends Component {
@@ -15,8 +16,9 @@ class TicTacToe extends Component {
     //return or set prop to winning indexs
     // TicTacToeWinCombo // return an array of arrays.
     const {dispatch} = this.props;
-    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver,setWinIndex,setTie} = this.props.action_props.games_action;
- 
+    const {setPlayer1Score,setPlayer2Score,setGameMessage,setGameOver,setTie} = this.props.action_props.games_action;
+    const {setWinIndex} = this.props.action_props.tic_tac_toe_action;
+
     const winCombo = TicTacToeWinCombo([...this.props.tictactoe_boxes]);
 
     let win = [];
@@ -107,7 +109,7 @@ class TicTacToe extends Component {
   filterPossibleWinCombo = (last_position, playerType) => {
     const {dispatch} = this.props;
     //use object to filter. 
-    const {updatePossibleWinCombo,updatePlayerOnePossibleWinCombo} = this.props.action_props.games_action;
+    const {updatePossibleWinCombo,updatePlayerOnePossibleWinCombo} = this.props.action_props.tic_tac_toe_action;
 
     let checkIfExists = [];
     let possibleWinCombo = (playerType === "player1") ? [...this.props.player_one_possible_winning_combo] : [...this.props.possible_winning_combo];
@@ -152,7 +154,7 @@ class TicTacToe extends Component {
     if([...this.props.possible_winning_combo].length > 0 ){
 
     const {dispatch} = this.props;
-    const {updateNextMove,updatePlayerOnePossibleWinIndex} = this.props.action_props.games_action;
+    const {updateNextMove,updatePlayerOnePossibleWinIndex} = this.props.action_props.tic_tac_toe_action;
 
     const compPositionsArray = [...currentPosition].filter(i => [...currentPosition].indexOf(i) % 2 !== 0);
     
@@ -202,7 +204,9 @@ class TicTacToe extends Component {
   //Block Player 1 not implemented
   CompPickPosition = async () => {
     const {dispatch} = this.props;
-    const {setTicTacToeCell,adjust_number_of_turns,setCurrentPlayer,updateCurrentPositions} = this.props.action_props.games_action;
+    const {setCurrentPlayer} = this.props.action_props.games_action;
+    const {setTicTacToeCell,adjust_number_of_turns,updateCurrentPositions} = this.props.action_props.tic_tac_toe_action;
+    
     let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; 
     //possibly make an check for winning positions instead of random. 
     //clean this up 
@@ -247,7 +251,7 @@ class TicTacToe extends Component {
   CheckPlayerOneWin = (ticTacToeBoxesCopy) => {
   //return the index it should be.
   const {dispatch} = this.props;
-  const {updatePlayerOnePossibleWinIndex} = this.props.action_props.games_action;
+  const {updatePlayerOnePossibleWinIndex} = this.props.action_props.tic_tac_toe_action;
   const playerOnePossibleWinCombo = [...this.props.player_one_possible_winning_combo];
   let indexToReturn = this.props.player1IndexPossibleWin;
   playerOnePossibleWinCombo.map(win_combo => {
@@ -268,7 +272,8 @@ class TicTacToe extends Component {
   OnChange = async event => {
     if (this.props.gameOver === false && this.props.picked_player === true) {
       const {dispatch} = this.props;
-      const {setTicTacToeCell,setCurrentPlayer,adjust_number_of_turns,updateCurrentPositions} = this.props.action_props.games_action;
+      const {setCurrentPlayer} = this.props.action_props.games_action;
+      const {setTicTacToeCell,adjust_number_of_turns,updateCurrentPositions} = this.props.action_props.tic_tac_toe_action;
       // process.env.NODE_ENV.trim() !== 'production' && console.log('event is', event.target);
       const indexs = JSON.parse((event.target).id);
       let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; //important
@@ -350,12 +355,18 @@ class TicTacToe extends Component {
 
 const mapStateToProps = state => { 
   process.env.NODE_ENV.trim() !== 'production' && console.log('state: ', state)
-  const  TicTacToeProps  = state.gamesReducer.defaultTicTacToeStates; 
+  const  TicTacToeProps  = state.ticTacToeReducer.defaultTicTacToeStates; 
+  const GamesProps = state.gamesReducer.defaultGamesStates;
   const { 
-          player1IndexPossibleWin,tictactoe_boxes,compEnabled,player1_score,
-          player2_score,game_message,player_one_turn,gameOver,winIndex,remaining_turns,
-          isTie,picked_player,current_positions,possible_winning_combo,next_moves,player_one_possible_winning_combo
-        } = TicTacToeProps;
+          compEnabled,player1_score,
+          player2_score,game_message,player_one_turn,gameOver,
+          isTie,picked_player
+        } = GamesProps;
+
+  const { 
+          player1IndexPossibleWin,tictactoe_boxes,winIndex,remaining_turns,
+          current_positions,possible_winning_combo,next_moves,player_one_possible_winning_combo
+  } = TicTacToeProps;
   return {
     player1IndexPossibleWin,tictactoe_boxes,compEnabled,player1_score,player2_score,game_message,
     player_one_turn,gameOver,winIndex,remaining_turns,isTie,picked_player,current_positions,

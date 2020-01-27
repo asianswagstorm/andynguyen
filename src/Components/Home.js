@@ -6,6 +6,7 @@ import Card from "./Card";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import {tiles} from "./constants/Tiles";
+import { popUpNotification } from "./constants/HelperFunction/Functions";
 
 
 const languages = [
@@ -21,10 +22,32 @@ class Home extends Component {
     this.state = {
       filterOption: "",
       isToggleOn: true,
-      specialFooter: false
+      specialFooter: false,
+      status: ""
     };
+    this.submitForm = this.submitForm.bind(this);
     this.escapeFunction = this.escapeFunction.bind(this);
   }
+
+  //use redux props clean this up
+  submitForm = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== XMLHttpRequest.DONE) return;
+      if (xhr.status === 200) {
+        form.reset();
+        this.setState({ status: "SUCCESS" });
+      } else {
+        this.setState({ status: "ERROR" });
+      }
+    };
+    xhr.send(data);
+  };
 
   filter = type => {
     this.setState({ filterOption: type });
@@ -37,6 +60,9 @@ class Home extends Component {
   };
 
   render = () => {
+
+    const { status } = this.state;
+
     const lifeList = tiles.map((value, index) => {
       if (
         this.state.filterOption === value.type ||
@@ -176,33 +202,38 @@ class Home extends Component {
             <div className="column">
               <h3>Get in Touch with Me</h3>
               <form
-                action="mailto:nguyen.andy123@gmail.com"
-                method="post"
-                encType="text/plain"
-                target="_top"
+                onSubmit={this.submitForm}
+                action="https://formspree.io/xjvyddlb"
+                method="POST"
+                // encType="text/plain"
+                // target="_blank"
               >
                 <div className="field half first">
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">Name
                   <input name="name" id="name" type="text" placeholder="Name" />
+                  </label>
                 </div>
                 <div className="field half">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="_replyto">Email
                   <input
-                    name="email"
+                    name="_replyto"
                     id="email"
                     type="email"
                     placeholder="Email"
                   />
+                  </label>
                 </div>
                 <div className="field">
-                  <label htmlFor="message">Message</label>
+                  <label htmlFor="message">Message
                   <textarea
                     name="message"
                     id="message"
                     rows="6"
                     placeholder="Message"
                   />
+                  </label>
                 </div>
+                {status === "SUCCESS" ?  popUpNotification('success', "Thanks for reaching out, I will get back to you shortly." ) : 
                 <ul className="actions">
                   <li>
                     <input
@@ -211,7 +242,9 @@ class Home extends Component {
                       type="submit"
                     />
                   </li>
-                </ul>
+                </ul> }
+                {status === "ERROR" && popUpNotification('error', "Sorry, there was an error while submitting the form." )}
+
               </form>
             </div>
           </section>
