@@ -164,44 +164,51 @@ class ConnectFour extends Component {
 
     checkWin = (position) => this.checkHorizontalWin(position) || this.checkVerticalWin(position) || this.checkLeftDiagonal(position) || this.checkRightDiagonal(position);
     
+    //Todo pick best positions for computer
+    computerTurn = () => {
+        return 0;
+    }
+
+    updateBoard = async (column) => {
+        const {dispatch} = this.props;
+        const {setCurrentPlayer, setGameMessage,setGameOver,setPlayer1Score,setPlayer2Score} = this.props.action_props.games_action;
+        const {setRowNumberByColumn,setConnectFourBoard} = this.props.action_props.connect_four_action;
+        
+        let copyConnectFour = [...this.props.connectFourBoard];
+        let copyRowByColumn = [...this.props.rowIndexByColumn];
+
+        if(copyRowByColumn[column] >= 0) {
+            copyConnectFour[column].rowArrays[copyRowByColumn[column]] = (this.props.player_one_turn === true) ? "p1" : "p2";
+            await dispatch(setConnectFourBoard(copyConnectFour));
+            const position = {column, row: copyRowByColumn[column]};
+            if(this.checkWin(position) === true){
+                await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} Wins.`));
+                await (this.props.player_one_turn === true) ? dispatch(setPlayer1Score(this.props.player1_score + 1)) : dispatch(setPlayer2Score(this.props.player2_score + 1));
+                await dispatch(setGameOver(true));
+            };
+            if(this.props.gameOver === false){
+                copyRowByColumn[column] =  (copyRowByColumn[column] - 1);
+                await dispatch(setRowNumberByColumn(copyRowByColumn));
+                
+                await dispatch(setCurrentPlayer(!this.props.player_one_turn)) 
+                await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} 's turn.`)); 
+            };
+        }else{
+            await popUpNotification("warning", "This column is full.", "Pick another column.");
+            await dispatch(setGameMessage('No free spaces in this column. Pick another location.'));
+        } ;
+    };
+
     //setConnectFourBoard
     insertToken = async (column) => {
-       if (this.props.picked_player === true) {
-            const {dispatch} = this.props;
-            const {setCurrentPlayer,setGameMessage,setGameOver,setPlayer1Score,setPlayer2Score} = this.props.action_props.games_action;
-            const {setConnectFourBoard,setRowNumberByColumn} = this.props.action_props.connect_four_action;
-            
+       if (this.props.picked_player === true) {    
             if(this.props.gameOver === false){
-                let copyConnectFour = [...this.props.connectFourBoard];
-                let copyRowByColumn = [...this.props.rowIndexByColumn];
-                console.log("column is", column);
-                
-                //before set should check. clicking the column.
-            
-                if(copyRowByColumn[column] >= 0) {
-                    copyConnectFour[column].rowArrays[copyRowByColumn[column]] = (this.props.player_one_turn === true) ? "p1" : "p2";
-                    await dispatch(setConnectFourBoard(copyConnectFour));
-                    const position = {column, row: copyRowByColumn[column]};
-                    if(this.checkWin(position) === true){
-                        await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} Wins.`));
-                        await (this.props.player_one_turn === true) ? dispatch(setPlayer1Score(this.props.player1_score + 1)) : dispatch(setPlayer2Score(this.props.player2_score + 1));
-                        await dispatch(setGameOver(true));
-                        
-                    }
-
-                    if(this.props.gameOver === false){
-                        copyRowByColumn[column] =  (copyRowByColumn[column] - 1);
-                        await dispatch(setRowNumberByColumn(copyRowByColumn));
-                        
-                        await dispatch(setCurrentPlayer(!this.props.player_one_turn)) 
-                        await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} 's turn.`)); 
-                    }
-                
-                }else{
-                    await popUpNotification("warning", "This column is full.", "Pick another column.");
-                    await dispatch(setGameMessage('No free spaces in this column. Pick another location.'));
-                } 
-            } 
+                await this.updateBoard(column);
+                    if(this.props.gameOver === false && this.props.compEnabled === true && this.props.player_one_turn === false){
+                        const computersColumn = this.computerTurn();
+                        await this.updateBoard(computersColumn);
+                    };
+                }
             else {
                 await popUpNotification("warning", "The Game is Over!", "Reset Game to start a new one.");
             }
@@ -249,9 +256,9 @@ const mapStateToProps = state => {
     const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
 
     const {connectFourBoard,rowIndexByColumn} = connectFourProps;
-    const {player_one_turn,gameOver,player1_score,player2_score,picked_player} = gamesProps
+    const {player_one_turn,gameOver,player1_score,player2_score,picked_player,compEnabled} = gamesProps
 
-    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player};
+    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled};
   };
   
   export default withRouter(connect(mapStateToProps)(ConnectFour)); 
