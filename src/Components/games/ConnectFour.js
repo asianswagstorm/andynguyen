@@ -14,6 +14,11 @@ class ConnectFour extends Component {
         dispatch(setGameType("connectFour"));
       };
 
+    /**
+     * @param position Object - position is an object containing the column and row of the current token.
+     * This method checks if there is a horizontal win condition.
+     * Not checking every position, only checking from my latest position.
+     */
     checkHorizontalWin = (position) => { //left and right out of order doesnt work.
         let copyConnectFour = [...this.props.connectFourBoard];
         let isWin = false;
@@ -22,40 +27,45 @@ class ConnectFour extends Component {
     
         const playerUnit = (this.props.player_one_turn === true) ? "p1" : "p2";
         let truthyArray = [];
-        //(-1,+2), (-2+1)
+        //(-1,+2)(second position), (-2+1) (third position)
         const minusOneTwoPlusOneTwo = (copyConnectFour[column+1] && copyConnectFour[column+2] && copyConnectFour[column+1].rowArrays[row] === playerUnit && copyConnectFour[column+2].rowArrays[row] === playerUnit); 
-        //(+1,-2), (+2-1)
+        //(+1,-2) (third position) , (+2-1) (second position)
         const plusOneTwoMinusOneTwo = (copyConnectFour[column-1] && copyConnectFour[column-2] && copyConnectFour[column-1].rowArrays[row] === playerUnit && copyConnectFour[column-2].rowArrays[row] === playerUnit); 
 
             for(let i = 0 ; i< 4 ;i++){ //-1 +2, +1 -2 // the column is wrong.
                 //this only check consecutives. 
                 //how to clean this up??? 
-                if( (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row] === playerUnit) || 
-                    (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row] === playerUnit) ||
-                    //X_XX
-                    (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row] === playerUnit && 
+                if( (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row] === playerUnit) || //first position
+                   
+                    (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row] === playerUnit && //second position
                      minusOneTwoPlusOneTwo) ||
-                    //XX_X
-                    (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row] === playerUnit && 
-                      minusOneTwoPlusOneTwo) ||
                     
-                    (copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row] === playerUnit && 
-                      plusOneTwoMinusOneTwo) ||
+                    (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit && //second position
+                     plusOneTwoMinusOneTwo) ||
+
+                    (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row] === playerUnit && //third position
+                     minusOneTwoPlusOneTwo) ||
                     
-                    (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit && 
-                      plusOneTwoMinusOneTwo)
+                    (copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row] === playerUnit && //third position
+                     plusOneTwoMinusOneTwo) ||
+                      
+                    (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row] === playerUnit)  //last position 
                 ){
                         truthyArray.push(copyConnectFour[column-i] ? copyConnectFour[column-i].columnNumber : copyConnectFour[column+i].columnNumber);
                 };
             };
-        console.log("truthyArray" , truthyArray);
         if( truthyArray.length === 4 ){
             isWin = true;
         }
         return isWin;
     };
+
+  
+    checkVerticalWin = (position) => {
+
+    }
     
-    checkWin = (position) => (this.checkHorizontalWin(position)); //|| checkVerticalWin(position) || checkLeftDiagonal(position) || checkRightDiagonal(position));
+    checkWin = (position) => (this.checkHorizontalWin(position)); //|| this.checkVerticalWin(position) || this.checkLeftDiagonal(position) || this.checkRightDiagonal(position));
     
     //setConnectFourBoard
     insertToken = async (column) => {
