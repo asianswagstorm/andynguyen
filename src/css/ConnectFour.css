@@ -3,17 +3,23 @@
     background: #24272E;
 }
 
-div#game-board {
+div.connectFourBoard{
     background: #0074B3;
     box-shadow: 5px 10px rgba(25, 60, 78, 0.74) ;
     width: 700px;
     height: 625px;
-    cursor: pointer;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
     margin-bottom: 25px;
-    /* overflow: auto; */
+}
+
+div#game-board {
+    cursor: pointer;
+}
+
+div#game-board-disabled {
+    cursor: not-allowed;
 }
 
 svg#connectFourSVG{
@@ -27,11 +33,16 @@ svg#connectFourSVG{
 	display: inline-block;
 }
 
+.column:hover circle.free-disabled{
+    fill: rgba(235, 84, 84, 0.712);
+    cursor: not-allowed;
+}
+
 .column:hover circle.free{
 	fill: rgba(112, 250, 20, 0.555);
 }
 
-circle.free {
+circle.free, circle.free-disabled {
     fill: white;
 }
 
