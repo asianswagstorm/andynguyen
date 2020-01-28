@@ -16,3 +16,9 @@ export const setRowNumberByColumn = rowIndexByColumn => ({
     type: CONNECTFOUR_TYPE.SET_ROW_FOR_COLUMN,
     rowIndexByColumn
 });
+
+//UPDATE_COMPUTER_COLUMN
+export const updateComputerColumn = computerCurrentColumn => ({
+    type: CONNECTFOUR_TYPE.UPDATE_COMPUTER_COLUMN,
+    computerCurrentColumn
+});

@@ -166,8 +166,20 @@ class ConnectFour extends Component {
     
     //Todo pick best positions for computer
     computerTurn = () => {
-        return 0;
-    }
+        const {dispatch} = this.props;
+        const {updateComputerColumn} = this.props.action_props.connect_four_action;
+        const {setGameOver} = this.props.action_props.games_action;
+        let computerColumn = this.props.computerCurrentColumn;
+
+        if([...this.props.rowIndexByColumn][computerColumn] < 0 && computerColumn <= 6){
+            computerColumn = computerColumn+1;
+            dispatch(updateComputerColumn(computerColumn));
+        }
+        else if( computerColumn > 6)
+            dispatch(setGameOver(true));
+
+        return computerColumn;
+    };
 
     updateBoard = async (column) => {
         const {dispatch} = this.props;
@@ -255,10 +267,10 @@ const mapStateToProps = state => {
     const gamesProps  = state.gamesReducer.defaultGamesStates; 
     const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
 
-    const {connectFourBoard,rowIndexByColumn} = connectFourProps;
+    const {connectFourBoard,rowIndexByColumn,computerCurrentColumn} = connectFourProps;
     const {player_one_turn,gameOver,player1_score,player2_score,picked_player,compEnabled} = gamesProps
 
-    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled};
+    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled,computerCurrentColumn};
   };
   
   export default withRouter(connect(mapStateToProps)(ConnectFour)); 
