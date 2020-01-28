@@ -14,38 +14,47 @@ class ConnectFour extends Component {
         dispatch(setGameType("connectFour"));
       };
 
-    checkHorizontalWin = (position) => {
-        //0, 5
+    checkHorizontalWin = (position) => { //left and right out of order doesnt work.
         let copyConnectFour = [...this.props.connectFourBoard];
-        let win = false;
+        let isWin = false;
         const row = position.row;
-        const column = position.column;
-        //should check left and right. 
-        /*
-        0: check right
-        1: check right
-        2: check right
-        3: check right and check left
-        4: check left
-        5: check left
-        6: check left
-        */ 
-        console.log((copyConnectFour[column-3]) && copyConnectFour[column-3].rowArrays[row]);
-        console.log((copyConnectFour[column-2]) && copyConnectFour[column-2].rowArrays[row]);
-        console.log((copyConnectFour[column-1]) && copyConnectFour[column-1].rowArrays[row]);
-        console.log(copyConnectFour[column].rowArrays[row]);
+        let column = position.column;
+    
+        const playerUnit = (this.props.player_one_turn === true) ? "p1" : "p2";
+        let truthyArray = [];
+        //(-1,+2), (-2+1)
+        const minusOneTwoPlusOneTwo = (copyConnectFour[column+1] && copyConnectFour[column+2] && copyConnectFour[column+1].rowArrays[row] === playerUnit && copyConnectFour[column+2].rowArrays[row] === playerUnit); 
+        //(+1,-2), (+2-1)
+        const plusOneTwoMinusOneTwo = (copyConnectFour[column-1] && copyConnectFour[column-2] && copyConnectFour[column-1].rowArrays[row] === playerUnit && copyConnectFour[column-2].rowArrays[row] === playerUnit); 
 
-        if( (copyConnectFour[column-3] && copyConnectFour[column-2] && copyConnectFour[column-1]) &&            
-           (copyConnectFour[column].rowArrays[row] === 
-           copyConnectFour[column-1].rowArrays[row]) === 
-            (copyConnectFour[column-2].rowArrays[row] === 
-            copyConnectFour[column-3].rowArrays[row])){
-            return true;
-           }
-        
-        return win;
+            for(let i = 0 ; i< 4 ;i++){ //-1 +2, +1 -2 // the column is wrong.
+                //this only check consecutives. 
+                //how to clean this up??? 
+                if( (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row] === playerUnit) || 
+                    (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row] === playerUnit) ||
+                    //X_XX
+                    (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row] === playerUnit && 
+                     minusOneTwoPlusOneTwo) ||
+                    //XX_X
+                    (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row] === playerUnit && 
+                      minusOneTwoPlusOneTwo) ||
+                    
+                    (copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row] === playerUnit && 
+                      plusOneTwoMinusOneTwo) ||
+                    
+                    (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit && 
+                      plusOneTwoMinusOneTwo)
+                ){
+                        truthyArray.push(copyConnectFour[column-i] ? copyConnectFour[column-i].columnNumber : copyConnectFour[column+i].columnNumber);
+                };
+            };
+        console.log("truthyArray" , truthyArray);
+        if( truthyArray.length === 4 ){
+            isWin = true;
+        }
+        return isWin;
     };
-    ///////////////////////////
+    
     checkWin = (position) => (this.checkHorizontalWin(position)); //|| checkVerticalWin(position) || checkLeftDiagonal(position) || checkRightDiagonal(position));
     
     //setConnectFourBoard
