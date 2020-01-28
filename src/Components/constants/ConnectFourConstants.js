@@ -11,7 +11,12 @@ export const connectFourBoard = [
     {columnNumber : 5 , rowArrays: ["","","","","",""]}, 
     {columnNumber : 6 , rowArrays: ["","","","","",""]}
 ];
-   
+
+export const directions = {
+    horizontal: [ [0, -1], [0, 1] ],
+    vertical: [ [-1, 0], [1, 0] ],
+    diagonal: [ [-1, -1], [1, 1], [-1, 1], [1, -1] ]
+};
 
 //[column,row] 
 export const boardIndex = [

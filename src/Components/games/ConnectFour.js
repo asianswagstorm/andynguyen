@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import "../../css/ConnectFour.css";
 import GamesHead from "./GamesHead";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
+// import {directions} from "../constants/ConnectFourConstants";
   
 class ConnectFour extends Component {
 
@@ -14,34 +15,37 @@ class ConnectFour extends Component {
       };
 
 
-    //getFreeRow(column)
-
-    //setConnectFourBoard
+    //detectWin use the previous.
+    // checkHorizontalWin
+    // checkWin = (position) => (checkHorizontalWin(position) || checkVerticalWin(position) || checkLeftDiagonal(position) || checkRightDiagonal(position));
+    
+   //setConnectFourBoard
     onChange = async (column) => {
        
         const {dispatch} = this.props;
-        const {setCurrentPlayer} = this.props.action_props.games_action;
+        const {setCurrentPlayer,setGameMessage} = this.props.action_props.games_action;
         const {setConnectFourBoard,setRowNumberByColumn} = this.props.action_props.connect_four_action;
 
         let copyConnectFour = [...this.props.connectFourBoard];
         let copyRowByColumn = [...this.props.rowIndexByColumn];
         console.log("column is", column);
-        // console.log("row is", row); row should be the most free row.
         
         //before set should check. clicking the column.
-        //setRowNumberByColumn
-
-        if(copyRowByColumn[column] > -1) {
+     
+        if(copyRowByColumn[column] >= 0) {
             copyConnectFour[column].rowArrays[copyRowByColumn[column]] = (this.props.player_one_turn === true) ? "p1" : "p2";
-            dispatch(setConnectFourBoard(copyConnectFour));
+            await dispatch(setConnectFourBoard(copyConnectFour));
             copyRowByColumn[column] =  (copyRowByColumn[column] - 1);
-            dispatch(setRowNumberByColumn(copyRowByColumn));
-
+            await dispatch(setRowNumberByColumn(copyRowByColumn));
+            // const position = {column, row: copyRowByColumn[column]};
+            // this.checkWin(position);
             if(this.props.gameOver === false){
-             await dispatch(setCurrentPlayer(!this.props.player_one_turn))  
+             await dispatch(setCurrentPlayer(!this.props.player_one_turn)) 
+             await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} 's turn.`)); 
             }
         }else{
-            popUpNotification("warning", "This column is full.", "Pick another column.");
+            await popUpNotification("warning", "This column is full.", "Pick another column.");
+            await dispatch(setGameMessage('No free spaces in this column. Pick another location.'));
         }
     };
 

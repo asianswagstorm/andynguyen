@@ -4,7 +4,8 @@
 }
 
 div#game-board {
-	background: #0074B3;
+    background: #0074B3;
+    box-shadow: 5px 10px rgba(25, 60, 78, 0.74) ;
     width: 700px;
     height: 625px;
     cursor: pointer;
