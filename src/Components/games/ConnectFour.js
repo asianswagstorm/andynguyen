@@ -14,28 +14,27 @@ class ConnectFour extends Component {
         dispatch(setGameType("connectFour"));
       };
 
-    /**
-     * @param position Object - position is an object containing the column and row of the current token.
-     * This method checks if there is a horizontal win condition.
-     * Not checking every position, only checking from my latest position.
-     */
-    checkHorizontalWin = (position) => { //left and right out of order doesnt work.
+    checkDirection = (position, direction) => {
         let copyConnectFour = [...this.props.connectFourBoard];
         let isWin = false;
         const row = position.row;
-        let column = position.column;
+        const column = position.column;
     
         const playerUnit = (this.props.player_one_turn === true) ? "p1" : "p2";
         let truthyArray = [];
+        
         //(-1,+2)(second position), (-2+1) (third position)
-        const minusOneTwoPlusOneTwo = (copyConnectFour[column+1] && copyConnectFour[column+2] && copyConnectFour[column+1].rowArrays[row] === playerUnit && copyConnectFour[column+2].rowArrays[row] === playerUnit); 
+        const minusOneTwoPlusOneTwo = (copyConnectFour[column+1] && copyConnectFour[column+2] && copyConnectFour[column+1].rowArrays[row] === playerUnit && copyConnectFour[column+2].rowArrays[row] === playerUnit);
+        
         //(+1,-2) (third position) , (+2-1) (second position)
         const plusOneTwoMinusOneTwo = (copyConnectFour[column-1] && copyConnectFour[column-2] && copyConnectFour[column-1].rowArrays[row] === playerUnit && copyConnectFour[column-2].rowArrays[row] === playerUnit); 
 
             for(let i = 0 ; i< 4 ;i++){ //-1 +2, +1 -2 // the column is wrong.
                 //this only check consecutives. 
                 //how to clean this up??? 
-                if( (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row] === playerUnit) || //first position
+                if( ((direction === "horizontal") &&
+                    ( 
+                    (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row] === playerUnit) || //first position
                    
                     (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row] === playerUnit && //second position
                      minusOneTwoPlusOneTwo) ||
@@ -50,9 +49,14 @@ class ConnectFour extends Component {
                      plusOneTwoMinusOneTwo) ||
                       
                     (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row] === playerUnit)  //last position 
-                ){
-                        truthyArray.push(copyConnectFour[column-i] ? copyConnectFour[column-i].columnNumber : copyConnectFour[column+i].columnNumber);
-                };
+                    )
+                    ) || 
+
+                   (direction === "vertical" && copyConnectFour[column].rowArrays[row+i] && copyConnectFour[column].rowArrays[row+i] === playerUnit)  //first position
+                   )
+                {
+                        truthyArray.push(true);
+                }
             };
         if( truthyArray.length === 4 ){
             isWin = true;
@@ -60,12 +64,15 @@ class ConnectFour extends Component {
         return isWin;
     };
 
-  
-    checkVerticalWin = (position) => {
+    /**
+     * @param position Object - position is an object containing the column and row of the current token.
+     * This method checks if there is a horizontal win condition.
+     * Not checking every position, only checking from my latest position.
+     */
+    checkHorizontalWin = (position) => this.checkDirection(position, "horizontal");
+    checkVerticalWin = (position) => this.checkDirection(position, "vertical");
 
-    }
-    
-    checkWin = (position) => (this.checkHorizontalWin(position)); //|| this.checkVerticalWin(position) || this.checkLeftDiagonal(position) || this.checkRightDiagonal(position));
+    checkWin = (position) => (this.checkHorizontalWin(position)) || this.checkVerticalWin(position); //|| this.checkLeftDiagonal(position) || this.checkRightDiagonal(position));
     
     //setConnectFourBoard
     insertToken = async (column) => {
