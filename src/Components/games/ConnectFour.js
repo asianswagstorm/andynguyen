@@ -17,11 +17,11 @@ class ConnectFour extends Component {
     checkIsTie = () => {
         let countNegativeIndex = 0;
         [...this.props.rowIndexByColumn].forEach(element => {
-            console.log("element is", element);
+            // console.log("element is", element);
             if(element === -1)
                 countNegativeIndex = countNegativeIndex+1;
         });
-        console.log(countNegativeIndex)
+        // console.log(countNegativeIndex)
         return countNegativeIndex === 7;
     };
 
@@ -171,18 +171,17 @@ class ConnectFour extends Component {
                     (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row-i] && copyConnectFour[column-i].rowArrays[row-i] === playerUnit)  //last position 
                    )
                    ) 
-
                    )
 
                 {
-                        truthyArray.push(true);//????
+                        truthyArray.push(true);
                 }else{
                     if(truthyArray.length > 0)
                         truthyArray = [];
                 }
                 
             };
-            console.log("truthyArray", truthyArray);
+            // console.log("truthyArray", truthyArray);
         if( truthyArray.length === 4 ){
             isWin = true;
         }
@@ -204,17 +203,24 @@ class ConnectFour extends Component {
     //Todo pick best positions for computer
     computerTurn = () => { //availableCols is array of available col index
         const {dispatch} = this.props;
-        const {updateComputerColumn} = this.props.action_props.connect_four_action;
+        const {updateAvailableColumns} = this.props.action_props.connect_four_action;
         const {setGameOver} = this.props.action_props.games_action;
-        //this.props.availableCols
-        let computerColumn =  Math.floor(Math.random() * 7)//this.props.computerCurrentColumn;
-
-        if([...this.props.rowIndexByColumn][computerColumn] < 0 && computerColumn <= 6){
-            computerColumn = computerColumn+1;
-            dispatch(updateComputerColumn(computerColumn));
-        }
-        else if( computerColumn > 6)
-            dispatch(setGameOver(true));
+        let computerColumn;
+        let isValidColumn = false;
+        while(isValidColumn === false && this.props.gameOver === false){
+            computerColumn = Math.floor(Math.random() * [...this.props.availableCols].length)//this.props.computerCurrentColumn;
+            if([...this.props.rowIndexByColumn][computerColumn] >= 0)
+                isValidColumn = true;
+            else{
+                let newAvailableCol = [...this.props.availableCols].filter(element => element !== computerColumn);
+                if(newAvailableCol.length === 0){
+                    dispatch(setGameOver(true));
+                    isValidColumn = true;
+                }else{
+                    dispatch(updateAvailableColumns(newAvailableCol));
+               }
+            }
+        };
 
         return computerColumn;
     };
@@ -310,7 +316,7 @@ class ConnectFour extends Component {
     };
 };
 const mapStateToProps = state => { 
-    process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
+    // process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
     const gamesProps  = state.gamesReducer.defaultGamesStates; 
     const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
 

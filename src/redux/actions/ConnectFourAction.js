@@ -22,3 +22,8 @@ export const updateComputerColumn = computerCurrentColumn => ({
     type: CONNECTFOUR_TYPE.UPDATE_COMPUTER_COLUMN,
     computerCurrentColumn
 });
+//UPDATE_AVAILABLE_COLUMNS
+export const updateAvailableColumns = availableCols => ({
+    type: CONNECTFOUR_TYPE.UPDATE_AVAILABLE_COLUMNS,
+    availableCols
+});
