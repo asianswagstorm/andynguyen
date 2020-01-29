@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import "../../css/ConnectFour.css";
 import GamesHead from "./GamesHead";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
-// import {directions} from "../constants/ConnectFourConstants";
-  
+
+//to do: highlight the winning cells  
 class ConnectFour extends Component {
 
     componentDidMount = () => {
@@ -19,22 +19,29 @@ class ConnectFour extends Component {
         let isWin = false;
         const row = position.row;
         const column = position.column;
-    
+        
         const playerUnit = (this.props.player_one_turn === true) ? "p1" : "p2";
         let truthyArray = [];
         
         //(-1,+2)(second position), (-2+1) (third position) //positions not checked 
         const minusOneTwoPlusOneTwo = (direction) => {
            const dataToReturn = {
-               "horizontal": (  copyConnectFour[column+1] && 
+               "horizontal": (  
+                                copyConnectFour[column-1] &&
+                                copyConnectFour[column+1] && 
                                 copyConnectFour[column+2] && 
+                                copyConnectFour[column-1].rowArrays[row] === playerUnit &&
                                 copyConnectFour[column+1].rowArrays[row] === playerUnit &&
                                 copyConnectFour[column+2].rowArrays[row] === playerUnit),
                
-                "diagonal_left": (  copyConnectFour[column+1] && 
+                "diagonal_left": (  
+                                    copyConnectFour[column-1] && 
+                                    copyConnectFour[column+1] && 
                                     copyConnectFour[column+2] &&
+                                    copyConnectFour[column-1].rowArrays[row+1] &&
                                     copyConnectFour[column+1].rowArrays[row-1] &&
                                     copyConnectFour[column+2].rowArrays[row-2] &&
+                                    copyConnectFour[column-1].rowArrays[row+1]=== playerUnit &&
                                     copyConnectFour[column+1].rowArrays[row-1] === playerUnit &&
                                     copyConnectFour[column+2].rowArrays[row-2] === playerUnit),
                
@@ -51,18 +58,23 @@ class ConnectFour extends Component {
         //(+1,-2) (third position) , (+2-1) (second position)
         const plusOneTwoMinusOneTwo = (direction) => {
             const dataToReturn = {
-                "horizontal":   (  copyConnectFour[column-1] &&
+                "horizontal":   (   copyConnectFour[column-1] &&
                                     copyConnectFour[column-2] && 
+                                    copyConnectFour[column+1] && 
+                                    copyConnectFour[column+1].rowArrays[row] === playerUnit &&
                                     copyConnectFour[column-1].rowArrays[row] === playerUnit &&
                                     copyConnectFour[column-2].rowArrays[row] === playerUnit),
                 
                 "diagonal_left": (  copyConnectFour[column-1] && 
                                     copyConnectFour[column-2] &&
+                                    copyConnectFour[column+1] && 
+                                    copyConnectFour[column+1].rowArrays[row-1] && 
                                     copyConnectFour[column-1].rowArrays[row+1] &&
                                     copyConnectFour[column-2].rowArrays[row+2] &&
+                                    copyConnectFour[column+1].rowArrays[row-1] === playerUnit &&
                                     copyConnectFour[column-1].rowArrays[row+1] === playerUnit &&
                                     copyConnectFour[column-2].rowArrays[row+2] === playerUnit),
-                
+                //something is missing
                 "diagonal_right":(  copyConnectFour[column-1] &&
                                     copyConnectFour[column+2] &&
                                     copyConnectFour[column-1].rowArrays[row-1] &&
@@ -72,27 +84,28 @@ class ConnectFour extends Component {
             };    
             return dataToReturn[direction];
         };
-
+            //called 4 times 
             for(let i = 0 ; i< 4 ;i++){ //-1 +2, +1 -2 // the column is wrong.
                 //this only check consecutives. 
-                //how to clean this up??? 
-                if( ((direction === "horizontal") &&
-                    ( 
-                    (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row] === playerUnit) || //first position
+                //plus and minus mixing 
+                if( ((direction === "horizontal") && //fix horzontal is wrong
+                    ( //i+0, i-1, i+2,i+3
+
+                    (   copyConnectFour[column].rowArrays[row] === playerUnit &&
+                        copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row] === playerUnit &&
+                        copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit &&
+                        copyConnectFour[column+3] && copyConnectFour[column+3].rowArrays[row] === playerUnit) || //first position
                    
-                    (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row] === playerUnit && //second position 1, third position 2
-                     minusOneTwoPlusOneTwo("horizontal")) ||
-                    
-                    (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row] === playerUnit && 
+                    (minusOneTwoPlusOneTwo("horizontal")) || //second position 1, third position 2
+                      
+                    (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row] === playerUnit && //here is wrong
                      minusOneTwoPlusOneTwo("horizontal"))  || //third position 1
                      
-                    (copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row] === playerUnit && //second position 3, third position 4
-                     plusOneTwoMinusOneTwo("horizontal")) ||
-
+                    (plusOneTwoMinusOneTwo("horizontal")) ||//second position 3, third position 4
+                    
                     (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit && 
                      plusOneTwoMinusOneTwo("horizontal")) ||  //second position 4
               
-      
                     (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row] === playerUnit)  //last position 
                     )
                     ) || 
@@ -104,21 +117,19 @@ class ConnectFour extends Component {
                    (
                     (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row+i] && copyConnectFour[column-i].rowArrays[row+i]  === playerUnit) || //first position
                     //second position 3, third position 4 
-                    (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row+1] && copyConnectFour[column-1].rowArrays[row+1]=== playerUnit && 
-                     minusOneTwoPlusOneTwo("diagonal_left")) ||
+                    (minusOneTwoPlusOneTwo("diagonal_left")) ||
                     //second position 4
                     (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row+2] && copyConnectFour[column-2].rowArrays[row+2] === playerUnit &&
                      minusOneTwoPlusOneTwo("diagonal_left")) || 
                     //second position 1, third position 2
-                    (copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row-1] && copyConnectFour[column+1].rowArrays[row-1] === playerUnit && 
-                     plusOneTwoMinusOneTwo("diagonal_left")) ||
+                    (plusOneTwoMinusOneTwo("diagonal_left")) ||
                     //third position 1
                     (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row-2] && copyConnectFour[column+2].rowArrays[row-2]  === playerUnit && 
                     plusOneTwoMinusOneTwo("diagonal_left")) ||
                     (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row-i] && copyConnectFour[column+i].rowArrays[row-i] === playerUnit)  //last position 
                    )
                    ) || 
-
+                    //WRONG!! because of or.
                    ((direction === "diagonal_right") && 
                    
                    (
@@ -143,9 +154,14 @@ class ConnectFour extends Component {
                    )
 
                 {
-                        truthyArray.push(true);
+                        truthyArray.push(true);//????
+                }else{
+                    if(truthyArray.length > 0)
+                        truthyArray = [];
                 }
+                
             };
+            console.log("truthyArray", truthyArray);
         if( truthyArray.length === 4 ){
             isWin = true;
         }
@@ -165,11 +181,12 @@ class ConnectFour extends Component {
     checkWin = (position) => this.checkHorizontalWin(position) || this.checkVerticalWin(position) || this.checkLeftDiagonal(position) || this.checkRightDiagonal(position);
     
     //Todo pick best positions for computer
-    computerTurn = () => {
+    computerTurn = () => { //availableCols is array of available col index
         const {dispatch} = this.props;
         const {updateComputerColumn} = this.props.action_props.connect_four_action;
         const {setGameOver} = this.props.action_props.games_action;
-        let computerColumn = this.props.computerCurrentColumn;
+        //this.props.availableCols
+        let computerColumn =  Math.floor(Math.random() * 7)//this.props.computerCurrentColumn;
 
         if([...this.props.rowIndexByColumn][computerColumn] < 0 && computerColumn <= 6){
             computerColumn = computerColumn+1;
@@ -267,10 +284,10 @@ const mapStateToProps = state => {
     const gamesProps  = state.gamesReducer.defaultGamesStates; 
     const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
 
-    const {connectFourBoard,rowIndexByColumn,computerCurrentColumn} = connectFourProps;
+    const {connectFourBoard,rowIndexByColumn,computerCurrentColumn,availableCols} = connectFourProps;
     const {player_one_turn,gameOver,player1_score,player2_score,picked_player,compEnabled} = gamesProps
 
-    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled,computerCurrentColumn};
+    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled,computerCurrentColumn,availableCols};
   };
   
   export default withRouter(connect(mapStateToProps)(ConnectFour)); 

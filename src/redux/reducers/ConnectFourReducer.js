@@ -3,7 +3,8 @@ import {connectFourBoard,rowIndexByColumn} from "../../Components/constants/Conn
 const defaultConnectFourStates = {
     connectFourBoard,
     rowIndexByColumn,
-    computerCurrentColumn : 0 //for testing purposes. 
+    computerCurrentColumn : 0, //for testing purposes.
+    availableCols: [0,1,2,3,4,5,6] 
 };
 
 const DEFAULT_STATES = {defaultConnectFourStates: {...defaultConnectFourStates}};
@@ -31,6 +32,11 @@ const connectFourReducer = (state = DEFAULT_STATES, action) => {
             return {
                 ...state,
                 defaultConnectFourStates: {...state.defaultConnectFourStates, computerCurrentColumn : action.computerCurrentColumn}
+            };
+        case "UPDATE_AVAILABLE_COLUMNS": 
+            return {
+                ...state,
+                defaultConnectFourStates: {...state.defaultConnectFourStates, availableCols : action.availableCols}
             };
         default:
             return {...state}; //save state
