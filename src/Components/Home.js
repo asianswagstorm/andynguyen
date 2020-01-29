@@ -60,12 +60,12 @@ class Home extends Component {
   };
 
   render = () => {
-
+    //use props from redux.
     const { status } = this.state;
 
     const lifeList = tiles.map((value, index) => {
       if (
-        this.state.filterOption === value.type ||
+        value.type.includes(this.state.filterOption) ||
         this.state.filterOption === ""
       ) {
         return (
@@ -89,8 +89,7 @@ class Home extends Component {
             data-tag={x.languages}
             className="button"
           >
-            {" "}
-            {x.languages}{" "}
+            {x.languages}
           </button>
         </li>
       );
@@ -102,7 +101,7 @@ class Home extends Component {
     return (
       <div className="page-wrap">
         {navbar}
-
+      {/* clean this up, possible carousel*/}
         <section id="main">
           <section id="banner">
             <div className="inner">
@@ -131,7 +130,7 @@ class Home extends Component {
           <section id="galleries">
             <div className="gallery">
               <header>
-                <h1>Projects</h1>
+                <h1>Projects / Experience</h1>
                 <ul id="tabs">{language_buttons}</ul>
               </header>
 

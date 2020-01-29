@@ -58,9 +58,12 @@ class ConnectFour extends Component {
                
                 "diagonal_right":(  copyConnectFour[column+1] &&
                                     copyConnectFour[column-2] &&
+                                    copyConnectFour[column-1] &&
+                                    copyConnectFour[column-1].rowArrays[row-1] &&
                                     copyConnectFour[column+1].rowArrays[row+1] &&
                                     copyConnectFour[column-2].rowArrays[row-2] &&
                                     copyConnectFour[column+1].rowArrays[row+1] === playerUnit &&
+                                    copyConnectFour[column-1].rowArrays[row-1] === playerUnit &&
                                     copyConnectFour[column-2].rowArrays[row-2] === playerUnit)
            }; 
            return dataToReturn[direction];
@@ -88,6 +91,9 @@ class ConnectFour extends Component {
                 //something is missing
                 "diagonal_right":(  copyConnectFour[column-1] &&
                                     copyConnectFour[column+2] &&
+                                    copyConnectFour[column+1] &&
+                                    copyConnectFour[column+1].rowArrays[row+1] &&
+                                    copyConnectFour[column+1].rowArrays[row+1] === playerUnit &&
                                     copyConnectFour[column-1].rowArrays[row-1] &&
                                     copyConnectFour[column+2].rowArrays[row+2] &&
                                     copyConnectFour[column-1].rowArrays[row-1] === playerUnit &&
@@ -95,17 +101,104 @@ class ConnectFour extends Component {
             };    
             return dataToReturn[direction];
         };
-            //called 4 times 
-            for(let i = 0 ; i< 4 ;i++){ //-1 +2, +1 -2 // the column is wrong.
-                //this only check consecutives. 
-                //plus and minus mixing 
+
+        const directionsPlusMinus = (arithmetic_expression, direction, column,row) => {
+
+            const inCommonColumnAdd = {
+                index1: column+1,
+                index2: column+2,
+                index3: column+3
+            };
+
+            const inCommonColumnSubstract = {
+                index1: column-1,
+                index2: column-2,
+                index3: column-3
+            };
+
+            const columnsToReturn = {
+                "addition" : {
+                    "horizontal": {...inCommonColumnAdd},
+                    "vertical" : {
+                        index1: column,
+                        index2: column,
+                        index3: column
+                    },
+                    "diagonal_left" : {...inCommonColumnSubstract},
+                    "diagonal_right" : {...inCommonColumnAdd}
+                },
+                "substraction" : {
+                    "horizontal": {...inCommonColumnSubstract},
+                    "vertical" : {
+                        index1: column,
+                        index2: column,
+                        index3: column
+                    },
+                    "diagonal_left" : {...inCommonColumnAdd},
+                    "diagonal_right" : {...inCommonColumnSubstract}
+                }
+            };
+
+            const diagonalADDRowCommon = {
+                index1: row+1,
+                index2: row+2,
+                index3: row+3
+            };
+
+            const diagonalSUBSTRACTRowCommon = {
+                index1: row-1,
+                index2: row-2,
+                index3: row-3
+            };
+
+            const rowsToReturn = {
+              
+                "addition" : {
+                    "horizontal" : {
+                        index1: row,
+                        index2: row,
+                        index3: row
+                    },
+                    "vertical" : {...diagonalADDRowCommon},
+                    "diagonal_left" : {
+                        ...diagonalADDRowCommon
+                    },
+                    "diagonal_right" : {
+                        ...diagonalADDRowCommon
+                    }
+                },
+                
+                "substraction" :  {"horizontal" : {
+                                    index1: row,
+                                    index2: row,
+                                    index3: row
+                                },
+                                "diagonal_left" : {
+                                    ...diagonalSUBSTRACTRowCommon
+                                },
+                                "diagonal_right" : {
+                                    ...diagonalSUBSTRACTRowCommon
+                                }
+                }
+            };
+ 
+            return (
+                copyConnectFour[column].rowArrays[row] === playerUnit &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index1] && 
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index1].rowArrays[rowsToReturn[arithmetic_expression][direction].index1] &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index1].rowArrays[rowsToReturn[arithmetic_expression][direction].index1] === playerUnit &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index2] &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index2].rowArrays[rowsToReturn[arithmetic_expression][direction].index2] &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index2].rowArrays[rowsToReturn[arithmetic_expression][direction].index2] === playerUnit &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index3] &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index3].rowArrays[rowsToReturn[arithmetic_expression][direction].index3] &&
+                copyConnectFour[columnsToReturn[arithmetic_expression][direction].index3].rowArrays[rowsToReturn[arithmetic_expression][direction].index3] === playerUnit
+            );
+        };
                 if( ((direction === "horizontal") && //fix horzontal is wrong
                     ( //i+0, i-1, i+2,i+3
 
-                    (   copyConnectFour[column].rowArrays[row] === playerUnit &&
-                        copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row] === playerUnit &&
-                        copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit &&
-                        copyConnectFour[column+3] && copyConnectFour[column+3].rowArrays[row] === playerUnit) || //first position
+                    (directionsPlusMinus("addition","horizontal",column,row)) || //first position
                    
                     (minusOneTwoPlusOneTwo("horizontal")) || //second position 1, third position 2
                       
@@ -117,16 +210,16 @@ class ConnectFour extends Component {
                     (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row] === playerUnit && 
                      plusOneTwoMinusOneTwo("horizontal")) ||  //second position 4
               
-                    (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row] === playerUnit)  //last position 
+                    ((directionsPlusMinus("substraction","horizontal",column,row)))  //last position 
                     )
                     ) || 
 
-                   (direction === "vertical" && copyConnectFour[column].rowArrays[row+i] && copyConnectFour[column].rowArrays[row+i] === playerUnit) ||  //first position
+                   (direction === "vertical" && directionsPlusMinus("addition", "vertical",column,row)) ||  //first position
                    
                    ((direction === "diagonal_left") && 
                    
                    (
-                    (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row+i] && copyConnectFour[column-i].rowArrays[row+i]  === playerUnit) || //first position
+                    (directionsPlusMinus("addition", "diagonal_left",column,row)) || //first position
                     //second position 3, third position 4 
                     (minusOneTwoPlusOneTwo("diagonal_left")) ||
                     //second position 4
@@ -137,56 +230,33 @@ class ConnectFour extends Component {
                     //third position 1
                     (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row-2] && copyConnectFour[column+2].rowArrays[row-2]  === playerUnit && 
                     plusOneTwoMinusOneTwo("diagonal_left")) ||
-                    (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row-i] && copyConnectFour[column+i].rowArrays[row-i] === playerUnit)  //last position 
+                    (directionsPlusMinus("substraction", "diagonal_left",column,row))  //last position 
                    )
                    ) || 
                     //WRONG!! because of or.
                    ((direction === "diagonal_right") && 
-                   
+                   //CHANGE minusOneTwoPlusOneTwo and plusOneTwoMinusOneTwo
                    (
-                    (   copyConnectFour[column+1] &&
-                        copyConnectFour[column+2] &&
-                        copyConnectFour[column+3] &&
-                        copyConnectFour[column+1].rowArrays[row+1] && 
-                        copyConnectFour[column+2].rowArrays[row+2] && 
-                        copyConnectFour[column+3].rowArrays[row+3] && 
-                        copyConnectFour[column].rowArrays[row] === playerUnit &&
-                        copyConnectFour[column+1].rowArrays[row+1] === playerUnit &&
-                        copyConnectFour[column+2].rowArrays[row+2] === playerUnit &&
-                        copyConnectFour[column+3].rowArrays[row+3] === playerUnit                       
-                    ) || //first position
-                    //second position 1, third position 2
-                    (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row-1] && copyConnectFour[column-1].rowArrays[row-1]=== playerUnit &&
-                     minusOneTwoPlusOneTwo("diagonal_right")) ||
+                     (directionsPlusMinus("addition","diagonal_right",column,row))                
+                     || //first position
+                    //One of these is causing issues!!!!!! 
+                    // second position 1, third position 2
+                    (minusOneTwoPlusOneTwo("diagonal_right")) ||
                     //second position 4
                     (copyConnectFour[column+2] && copyConnectFour[column+2].rowArrays[row+2] && copyConnectFour[column+2].rowArrays[row+2]  === playerUnit &&
                      minusOneTwoPlusOneTwo("diagonal_right"))||
                     //second position 3, third position 4 
-                    (copyConnectFour[column+1] && copyConnectFour[column+1].rowArrays[row+1] && copyConnectFour[column+1].rowArrays[row+1] === playerUnit && 
-                     plusOneTwoMinusOneTwo("diagonal_right")) ||
+                    (plusOneTwoMinusOneTwo("diagonal_right")) ||
                     //third position 1
                     (copyConnectFour[column-2] && copyConnectFour[column-2].rowArrays[row-2] && copyConnectFour[column-2].rowArrays[row-2] === playerUnit &&
                      plusOneTwoMinusOneTwo("diagonal_right")) ||
-                    
-                    (copyConnectFour[column-i] && copyConnectFour[column-i].rowArrays[row-i] && copyConnectFour[column-i].rowArrays[row-i] === playerUnit)  //last position 
-                   )
-                   ) 
-                   )
 
-                {
-                        truthyArray.push(true);
-                }else{
-                    if(truthyArray.length > 0)
-                        truthyArray = [];
-                }
-                
+                    (directionsPlusMinus("substraction","diagonal_right",column,row))                  //last position 
+                   )) ) {
+                        isWin = true;
+                        }
+                return isWin;
             };
-            // console.log("truthyArray", truthyArray);
-        if( truthyArray.length === 4 ){
-            isWin = true;
-        }
-        return isWin;
-    };
 
     /**
      * @param position Object - position is an object containing the column and row of the current token.
