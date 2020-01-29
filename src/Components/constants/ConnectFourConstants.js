@@ -12,12 +12,6 @@ export const connectFourBoard = [
     {columnNumber : 6 , rowArrays: ["","","","","",""]}
 ];
 
-export const directions = {
-    horizontal: [ [0, -1], [0, 1] ],
-    vertical: [ [-1, 0], [1, 0] ],
-    diagonal: [ [-1, -1], [1, 1], [-1, 1], [1, -1] ]
-};
-
 //[column,row] 
 export const boardIndex = [
     [[0,0], [1,0], [2,0], [3,0] , [4,0], [5,0], [6,0]],
@@ -29,6 +23,7 @@ export const boardIndex = [
 ];
 
 export const rowIndexByColumn = [5,5,5,5,5,5,5];
+
 /**
  * unshift
  * column 0 :[]

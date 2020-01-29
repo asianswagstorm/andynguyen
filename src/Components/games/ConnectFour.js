@@ -14,6 +14,17 @@ class ConnectFour extends Component {
         dispatch(setGameType("connectFour"));
       };
 
+    checkIsTie = () => {
+        let countNegativeIndex = 0;
+        [...this.props.rowIndexByColumn].forEach(element => {
+            console.log("element is", element);
+            if(element === -1)
+                countNegativeIndex = countNegativeIndex+1;
+        });
+        console.log(countNegativeIndex)
+        return countNegativeIndex === 7;
+    };
+
     checkDirection = (position, direction) => {
         let copyConnectFour = [...this.props.connectFourBoard];
         let isWin = false;
@@ -133,7 +144,17 @@ class ConnectFour extends Component {
                    ((direction === "diagonal_right") && 
                    
                    (
-                    (copyConnectFour[column+i] && copyConnectFour[column+i].rowArrays[row+i] && copyConnectFour[column+i].rowArrays[row+i]  === playerUnit) || //first position
+                    (   copyConnectFour[column+1] &&
+                        copyConnectFour[column+2] &&
+                        copyConnectFour[column+3] &&
+                        copyConnectFour[column+1].rowArrays[row+1] && 
+                        copyConnectFour[column+2].rowArrays[row+2] && 
+                        copyConnectFour[column+3].rowArrays[row+3] && 
+                        copyConnectFour[column].rowArrays[row] === playerUnit &&
+                        copyConnectFour[column+1].rowArrays[row+1] === playerUnit &&
+                        copyConnectFour[column+2].rowArrays[row+2] === playerUnit &&
+                        copyConnectFour[column+3].rowArrays[row+3] === playerUnit                       
+                    ) || //first position
                     //second position 1, third position 2
                     (copyConnectFour[column-1] && copyConnectFour[column-1].rowArrays[row-1] && copyConnectFour[column-1].rowArrays[row-1]=== playerUnit &&
                      minusOneTwoPlusOneTwo("diagonal_right")) ||
@@ -200,7 +221,7 @@ class ConnectFour extends Component {
 
     updateBoard = async (column) => {
         const {dispatch} = this.props;
-        const {setCurrentPlayer, setGameMessage,setGameOver,setPlayer1Score,setPlayer2Score} = this.props.action_props.games_action;
+        const {setCurrentPlayer, setGameMessage,setGameOver,setPlayer1Score,setPlayer2Score,setTie} = this.props.action_props.games_action;
         const {setRowNumberByColumn,setConnectFourBoard} = this.props.action_props.connect_four_action;
         
         let copyConnectFour = [...this.props.connectFourBoard];
@@ -215,12 +236,21 @@ class ConnectFour extends Component {
                 await (this.props.player_one_turn === true) ? dispatch(setPlayer1Score(this.props.player1_score + 1)) : dispatch(setPlayer2Score(this.props.player2_score + 1));
                 await dispatch(setGameOver(true));
             };
+
             if(this.props.gameOver === false){
                 copyRowByColumn[column] =  (copyRowByColumn[column] - 1);
                 await dispatch(setRowNumberByColumn(copyRowByColumn));
-                
-                await dispatch(setCurrentPlayer(!this.props.player_one_turn)) 
-                await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} 's turn.`)); 
+              
+                if(this.checkIsTie() === true){
+                    await dispatch(setGameMessage("It's a tie, please reset the game to start a new round."));
+                    await dispatch(setTie(true));
+                    await dispatch(setGameOver(true));
+                };
+
+                if(this.props.gameOver === false){
+                    await dispatch(setCurrentPlayer(!this.props.player_one_turn)) 
+                    await dispatch(setGameMessage(`${this.props.player_one_turn === true ? 'Red' : 'Yellow'} 's turn.`)); 
+                }
             };
         }else{
             await popUpNotification("warning", "This column is full.", "Pick another column.");
@@ -262,7 +292,7 @@ class ConnectFour extends Component {
         <section>
             <GamesHead action_props = {this.props.action_props} />
             <div className="connectFourArea"> 
-                <div className="connectFourBoard" id={`game-board${this.props.picked_player === true ? "" : "-disabled"}`}>  
+                <div className="connectFourBoard" id={`game-board${(this.props.picked_player === true && this.props.gameOver === false) ? "" : "-disabled"}`}>  
                 {[...this.props.connectFourBoard].map((column, column_key) => (
                     <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key} onClick = {() => this.insertToken(column_key)}>
                         {(column.rowArrays).map((row,row_key) => (
@@ -285,9 +315,9 @@ const mapStateToProps = state => {
     const connectFourProps  = state.connectFourReducer.defaultConnectFourStates; 
 
     const {connectFourBoard,rowIndexByColumn,computerCurrentColumn,availableCols} = connectFourProps;
-    const {player_one_turn,gameOver,player1_score,player2_score,picked_player,compEnabled} = gamesProps
+    const {player_one_turn,gameOver,player1_score,player2_score,picked_player,compEnabled,isTie} = gamesProps
 
-    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled,computerCurrentColumn,availableCols};
+    return {connectFourBoard,player_one_turn,gameOver,rowIndexByColumn,player1_score,player2_score,picked_player,compEnabled,computerCurrentColumn,availableCols,isTie};
   };
   
   export default withRouter(connect(mapStateToProps)(ConnectFour)); 
