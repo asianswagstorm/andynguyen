@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import "../css/Home.css";
 import "../css/font-awesome.min.css";
 import Card from "./Card";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import {tiles} from "./constants/Tiles";
 import { popUpNotification } from "./constants/HelperFunction/Functions";
 
@@ -22,7 +20,6 @@ class Home extends Component {
     this.state = {
       filterOption: "",
       isToggleOn: true,
-      specialFooter: false,
       status: ""
     };
     this.submitForm = this.submitForm.bind(this);
@@ -95,12 +92,8 @@ class Home extends Component {
       );
     });
 
-    const navbar = <Navbar />;
-    const footer = <Footer specialFooter={this.state.specialFooter} />;
-
     return (
-      <div className="page-wrap">
-        {navbar}
+     <div>
       {/* clean this up, possible carousel*/}
         <section id="main">
           <section id="banner">
@@ -247,10 +240,8 @@ class Home extends Component {
               </form>
             </div>
           </section>
-
-          {footer}
         </section>
-      </div>
+        </div>
     );
   };
 }

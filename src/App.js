@@ -7,6 +7,9 @@ import Home from "./Components/Home";
 import TicTacToe from "./Components/games/TicTacToe";//test
 import ConnectFour from "./Components/games/ConnectFour";//test
 import NotFound from "./Components/NotFound";
+import Footer from "./Components/Footer";
+import Navbar from "./Components/Navbar";
+import Metso from "./Components/Metso";
 import * as games_action from './redux/actions/GamesAction';
 import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
 import * as connect_four_action from './redux/actions/ConnectFourAction';
@@ -25,19 +28,27 @@ class App extends Component {
                                 // {path= "/Games", component: <Games/>},
                                 {path: "/TicTacToe", component: TicTacToe},
                                 {path: "/Connect4", component: ConnectFour},
+                                {path: "/Experience1", component: Metso},
                                 {path: "*", component: NotFound}];
     return (
 
-      <BrowserRouter>
-      <Switch>
-        {
-          routes_components.map((route, key) => 
-          <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
-          )
-        }  
-      </Switch>
-    </BrowserRouter>
+      <div className="page-wrap">
+        <Navbar/>
+        <section id="main">
+          <BrowserRouter>
+          <Switch>
+            {
 
+              routes_components.map((route, key) => 
+              <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
+              )
+            }  
+          </Switch>
+        </BrowserRouter>
+          <Footer />
+        </section>
+      
+      </div>
     );
   }
 }

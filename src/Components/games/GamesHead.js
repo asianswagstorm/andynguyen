@@ -30,11 +30,10 @@ class GamesHead extends Component {
     return (
       <div>
         <header className="Games">
-          {/* Add a back Button */}
+     
           <h1 id="my-games">
             <a href="/">
-              {" "}
-              <span className="icon fa-home"></span> {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } {" "}
+               {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } {" "}
             </a>
           </h1>
           <h2 id="my-games">Written in React with Redux</h2>

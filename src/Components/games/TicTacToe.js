@@ -332,7 +332,7 @@ class TicTacToe extends Component {
     const tieDisabled = (this.props.isTie === true) ? 'disabled-tie': 'disabled';
       //need redux for the prop states. 
     return (
-      <section>
+      <section id="main">
         <GamesHead action_props = {this.props.action_props} />
             {/* Clean this up  */}
         <div className="Boxes" id="board">

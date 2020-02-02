@@ -1698,6 +1698,7 @@
 	}
 
 	#banner {
+		margin-left: 0.75px;
 		display: -ms-flexbox;
 		-ms-flex-pack: center;
 		-ms-flex-align: center;
@@ -1854,126 +1855,60 @@
 			}
 
 
+p.job-description, span.tech-stack{
+	font-size: 25px;
+	color: black;
+	text-shadow:1px 0.6px grey;
+	
+}
+
+div.job-section{
+	/* background-color: red; */
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /* Footer */
 
 	#footer {
 		padding: 4em 0 2em 0;
-		background: #f1f1f1;
+		background: #0d1217;
+		margin-left: 0.75px;
 	
 	}
 
 		#footer .copyright {
-			color: black;
-			font-size: 1.3em;
+			color:  #19B5FE;
+			font-size: 25px;
+			text-shadow: 1px 1px rgb(188, 223, 243);
 			margin: 0 0 2em 0;
 			padding: 0 1em;
 			text-align: center;
 		}
 
-			#footer1 , #footer2 {
-				padding: 4em 0 2em 0;
-				background: #f1f1f1;
-				position: absolute;
-				bottom:0;
-				right:42%;
-			}
-
-			/* Iphone 6-7-8 doenst work*/
-			/* @media screen and (max-height: 375px) and (max-width: 667px) { 
+			@media screen and (max-height: 375px) and (max-width: 667px) { 
 
 			#footer {
 				padding: 3em 0 1em 0;
 			}
 
-			#footer1 {
-				padding: 3em 0 1em 0;
-				position: absolute;
-				bottom:-125vh;
-				right:0;
-				width: 100%;
-			}
+		}
 
-			#footer2 {
-				padding: 3em 0 1em 0;
-				position: absolute;
-				bottom:-30vh;
-				right:0;
-				width: 100%;
-			}
 
-			#footer1 .copyright , #footer2 .copyright  {
-				color: red; 
-				font-size: 1.3em;
-				margin: 0 0 2em 0;
-				padding: 0 1em;
-				text-align: center;
-			}
-
-		}*/
-
-		/* Iphone 6-7-8 Plus Not working*/
-		/*
 		@media screen and (max-width: 736px) { 
 
 			#footer {
 				padding: 3em 0 1em 0;
 			}
 
-			#footer1 {
-				padding: 3em 0 1em 0;
-				position: absolute;
-				bottom:-105vh;
-				right:0;
-				width: 100%;
-			}
-
-			#footer2 {
-				padding: 3em 0 1em 0;
-				position: absolute;
-				bottom:-30vh;
-				right:0;
-				width: 100%;
-			}
-
-			#footer1 .copyright , #footer2 .copyright  {
-				color: red;
-				font-size: 1.3em;
-				margin: 0 0 2em 0;
-				padding: 0 1em;
-				text-align: center;
-			}
-
-		} */
+		}
 
 		/*Iphone X WORKS */
 		@media screen and (max-width: 812px) { 
 
 			#footer {
 				padding: 3em 0 1em 0;
-			}
-
-			#footer1 {
-				padding: 3em 0 1em 0;
-				position: absolute;
-				bottom:-85vh;
-				right:0;
-				width: 100%;
-			}
-
-			#footer2 {
-				padding: 3em 0 1em 0;
-				position: absolute;
-				bottom:-30vh;
-				right:0;
-				width: 100%;
-			}
-
-			#footer1 .copyright , #footer2 .copyright  {
-				color: black;
-				font-size: 1.3em;
-				margin: 0 0 2em 0;
-				padding: 0 1em;
-				text-align: center;
 			}
 
 		}

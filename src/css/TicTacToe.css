@@ -12,6 +12,7 @@ body {
 header.Games {
     background: #0d1217;
     padding: 20px;
+    margin-left: 0.75px;
 }
 
 header > h1#my-games ,header > h2#my-games {

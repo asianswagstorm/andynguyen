@@ -365,7 +365,7 @@ class ConnectFour extends Component {
         const xyCoordinates = "50";
         const radius = "40";
         return (
-        <section>
+        <section id="main">
             <GamesHead action_props = {this.props.action_props} />
             <div className="connectFourArea"> 
                 <div className="connectFourBoard" id={`game-board${(this.props.picked_player === true && this.props.gameOver === false) ? "" : "-disabled"}`}>  

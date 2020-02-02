@@ -3,7 +3,7 @@
 export const tiles = [
     {
       linkType: "link",
-      href: "Jamdo",
+      href: "https://jamdo-487.herokuapp.com/",
       src: "images/thumbs/thumb1.jpg",
       alt: "",
       title:
@@ -61,11 +61,10 @@ export const tiles = [
     },
     {
       linkType: "modal",
-      href: "#",
+      href: "/Experience1",
       src: "images/thumbs/thumb7.jpg",
       alt: "",
       title: "Work Experience",
       type: ["Work Experience", "JavaScript", "Python"]
     }
-   
   ];
