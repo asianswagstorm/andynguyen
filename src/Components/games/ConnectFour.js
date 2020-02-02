@@ -362,8 +362,10 @@ class ConnectFour extends Component {
     };
 
     render = () => {
-        const xyCoordinates = "50";
-        const radius = "40";
+        // alert(`window.innerWidth  width ${window.innerWidth }` ); //need to update window width 
+        const xyCoordinates = (window.innerWidth  <= 400) ? "20" : "50";
+        const radius = (window.innerWidth  <= 400) ? "15" : "40";
+         
         return (
         <section id="main">
             <GamesHead action_props = {this.props.action_props} />
@@ -373,7 +375,7 @@ class ConnectFour extends Component {
                     <div className="column" key = {column_key} id={`column-${column_key}`} data-x= {column_key} onClick = {() => this.insertToken(column_key)}>
                         {(column.rowArrays).map((row,row_key) => (
                         <svg id="connectFourSVG" key={row_key} className={`row-${row_key}`}>
-                        <circle  cx={xyCoordinates} cy={xyCoordinates} r={radius} stroke="#0B4E72" strokeWidth="3" className= {this.determineCirclePosition(row)} /> 
+                        <circle cx={xyCoordinates} cy={xyCoordinates} r={radius} id="circle" stroke="#0B4E72" strokeWidth="3" className= {this.determineCirclePosition(row)} /> 
                         </svg> 
                         ))
                         }

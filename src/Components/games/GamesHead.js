@@ -50,7 +50,7 @@ class GamesHead extends Component {
         </div>
 
         <div className="message">
-          <p> {[this.props.game_message]} </p>
+          <p id="game-message"> {[this.props.game_message]} </p>
         </div>
         {this.props.picked_player === true && (
           <div className="reset">
@@ -66,7 +66,7 @@ class GamesHead extends Component {
 
         {this.props.picked_player === false && (
           <div className="play">
-            <p> Play with Human or Computer? </p>
+            <p id="game-message"> Play with Human or Computer? </p>
             {playerPicker.map((player, key) => (
               <button
                 key={key}

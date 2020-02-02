@@ -194,3 +194,47 @@ table.tictactoetable tr td:last-child {
 }
 
 
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+ { 
+    
+    .score-board {
+        width: 250px;
+        font-size: 35px;
+    }
+
+    div.message p#game-message, div.play p#game-message {
+        font-size: 15px;
+    }
+
+    button#H-opponent.button.button-block, button#C-opponent.button.button-block{
+        font-size: 15px;
+        width:100px;
+      
+    }
+  
+    .badge { 
+        font-size: 20px;
+    }
+
+    #user-label {
+        top: 15px;
+    }
+    
+    #computer-label {
+        top: 15px;
+        
+    }
+
+    div#board.Boxes {
+        width:375px;
+        height:375px;
+        margin-bottom: 50px;
+    }
+
+    td  {
+        height:  calc(375px / 3); 
+    }
+
+}
