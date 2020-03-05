@@ -1,6 +1,13 @@
 import {GAMES_TYPE} from "./types";
+import {resetConnectFour} from "./ConnectFourAction";
+import {resetTicTacToeCell} from "./TicTacToeAction";
 
-export const resetGame = () => ({type: GAMES_TYPE.RESET_GAME});
+export const resetGame = (game_type) => dispatch => {
+    dispatch(resetGameSuccess());
+    game_type === "tictactoe" ? dispatch(resetTicTacToeCell())  :dispatch(resetConnectFour());
+};
+
+const resetGameSuccess = () => ({type: GAMES_TYPE.RESET_GAME});
 
 export const setGameType = (gameType) => ({
     type : GAMES_TYPE.SET_GAME_TYPE,

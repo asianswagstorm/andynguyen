@@ -90,7 +90,7 @@ export default class Pokemons extends Component {
       <div>
         <header className="MyHeader"> 
             <h1 id="my-games">
-            <a href="/">
+            <a href="#/">
                Pokedex
             </a>
             </h1>

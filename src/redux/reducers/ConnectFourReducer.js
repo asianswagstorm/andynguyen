@@ -20,7 +20,7 @@ const connectFourReducer = (state = DEFAULT_STATES, action) => {
         case "RESET_CONNECT_FOUR_GAME":
             return {
                 ...state,
-                defaultConnectFourStates: {...state.defaultConnectFourStates, connectFourBoard : action.connectFourBoard, rowIndexByColumn: [...rowIndexByColumn],
+                defaultConnectFourStates: {...state.defaultConnectFourStates, connectFourBoard : action.connectFourBoard, rowIndexByColumn: [...action.rowIndexByColumn],
                                            computerCurrentColumn: 0  }
             };
         case "SET_ROW_FOR_COLUMN":

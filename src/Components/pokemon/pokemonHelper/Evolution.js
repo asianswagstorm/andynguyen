@@ -8,7 +8,7 @@ export default class Evolution extends Component {
         <div className="row justify-content-center">
           <div className="col lg-5">
             <strong>Stage 1: </strong> <br />
-            <a href= {`/Pokemon/${this.props.stage1ID}`}>
+            <a href= {`#/Pokemon/${this.props.stage1ID}`}>
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                 this.props.stage1ID
@@ -30,7 +30,7 @@ export default class Evolution extends Component {
 
           <div className="col lg-5">
             <strong>Stage 2: </strong> <br />
-            <a href= {`/Pokemon/${this.props.stage2ID}`}>
+            <a href= {`#/Pokemon/${this.props.stage2ID}`}>
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                 this.props.stage2ID
@@ -50,7 +50,7 @@ export default class Evolution extends Component {
           </div>
           <div className="col lg-5">
             <strong>Stage 3: </strong> <br />
-            <a href= {`/Pokemon/${this.props.stage3ID}`}>
+            <a href= {`#/Pokemon/${this.props.stage3ID}`}>
               <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                 this.props.stage3ID
               }.png`}

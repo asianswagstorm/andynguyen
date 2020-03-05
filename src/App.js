@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Home from "./Components/Home";
@@ -21,20 +21,20 @@ import 'antd/dist/antd.css';
 export class App extends Component {
 
   render=()=>{
-
-    const routes_components = [ {path: "/", component: Home},
-                                {path: "/TicTacToe", component: TicTacToe},
-                                {path: "/Connect4", component: ConnectFour},
-                                {path: "/Experience1", component: Metso},
-                                {path: "/Pokemon", component: Pokemons},
-                                {path: "/Pokemon/:pokemonIndex", component: Pokemon},
+    // const basePath = "/andynguyen"
+    const routes_components = [ {path: `/`, component: Home},
+                                {path:  `/TicTacToe`, component: TicTacToe},
+                                {path:  `/Connect4`, component: ConnectFour},
+                                {path:  `/Experience1`, component: Metso},
+                                {path:  `/Pokemon`, component: Pokemons},
+                                {path:  `/Pokemon/:pokemonIndex`, component: Pokemon},
                                 {path: "*", component: NotFound}];
     return (
 
       <div className="page-wrap">
         <Navbar/>
         <section id="main">
-          <BrowserRouter>
+          <HashRouter>
           <Switch>
             {
               routes_components.map((route, key) => 
@@ -42,7 +42,7 @@ export class App extends Component {
               )
             }  
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
           <Footer />
         </section>
       

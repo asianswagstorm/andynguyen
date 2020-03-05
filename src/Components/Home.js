@@ -101,7 +101,7 @@ class Home extends Component {
               <h1 className="intro-andy">Hey, I'm Andy</h1>
               <p id="intro">
                 I'm a programmer. On the occasion I lift things up and put them
-                down.{" "}
+                down.
               </p>
               <ul className="actions">
                 <li>

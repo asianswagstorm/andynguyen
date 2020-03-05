@@ -63,15 +63,18 @@ export default class Pokemon extends Component {
     imageLoading: true
   };
 
-  componentDidMount = async () => {
+  componentDidMount = () => this.updatePokemon(this.props.match.params.pokemonIndex)
+
+  updatePokemon = async (pokemonIndex) => {
     try {
+      this.props.history.push(`/Pokemon/${pokemonIndex}`);
+
       let capitalize_firstLetter = string =>
         string
           .toLowerCase()
           .charAt(0)
           .toUpperCase() + string.slice(1);
 
-      const { pokemonIndex } = this.props.match.params;
       const pokemonSpeciesLink = `https://pokeapi.co/api/v2/pokemon-species/${pokemonIndex}`;
       const pokemonLink = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`;
       const pokeData = await Axios.get(
@@ -340,17 +343,20 @@ export default class Pokemon extends Component {
           />
         );
       });
+
+    const pokeIndex = parseInt(this.props.match.params.pokemonIndex);
+
     return (
       <div className="col">
         <div className="pokemon-data">
         <div className="card">
           <div className="card-header">
             <div className="row">
-              <div className="col-5">{this.state.pokemonIndex}</div>
+              <div className="col-5">{pokeIndex}</div>
               <div className="col-7">
-    
-                <a href={(this.state.pokemonIndex >= 2) ? `/Pokemon/${this.state.pokemonIndex - 1}` : `/Pokemon/807`} className= "button is-pulled-left"> prev</a>
-                <a href={(this.state.pokemonIndex < 807) ? `/Pokemon/${this.state.pokemonIndex + 1}` : `/Pokemon/1`} className= "button is-pulled-right"> next</a>
+                  
+                <button onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "button is-pulled-left"> prev</button>
+                <button onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "button is-pulled-right"> next</button>
                
                 <div className="float-right">
                   {this.state.types.map(x => (

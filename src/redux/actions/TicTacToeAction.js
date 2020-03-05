@@ -51,13 +51,14 @@ export const updateCurrentPositions = current_positions => {
 };
 
 export const resetTicTacToeCell = () => dispatch => {
-    dispatch(resetTicTacToeCellSuccess(tictactoe_boxes));
+    dispatch(resetTicTacToeCellSuccess());
 };
 
-export const resetTicTacToeCellSuccess = (tictactoe_boxes) => {
+export const resetTicTacToeCellSuccess = () => {
+
     return {
         type: TICTACTOE_TYPE.RESET_TICTACTOEGAME,
-        tictactoe_boxes
+        tictactoe_boxes: [['','',''],['','',''],['','','']]
     };
 };
 

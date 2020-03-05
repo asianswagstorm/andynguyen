@@ -16,14 +16,8 @@ class GamesHead extends Component {
     resetGame = () => {
         const {dispatch} = this.props;
         const {resetGame} = this.props.action_props.games_action;
-        const {resetTicTacToeCell} = this.props.action_props.tic_tac_toe_action;
-        const {resetConnectFour} = this.props.action_props.connect_four_action;
         
-        dispatch(resetGame());
-        this.props.gameType === "tictactoe" ?  dispatch(resetTicTacToeCell()) : dispatch(resetConnectFour()); 
-          //doesn't work and the props keep resetting. , tictactoe boxes const getting overwritten!!!
-        //resetConnectFour
-        window.location.href = `/${this.props.gameType === "tictactoe" ? 'TicTacToe' : 'Connect4'}`; //refresh then reset????
+        dispatch(resetGame(this.props.gameType));
     };
 
   render = () => {
@@ -32,7 +26,7 @@ class GamesHead extends Component {
         <header className="MyHeader">
      
           <h1 id="my-games">
-            <a href="/">
+            <a href="#/">
                {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } {" "}
             </a>
           </h1>

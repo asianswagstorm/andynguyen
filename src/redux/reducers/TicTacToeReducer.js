@@ -26,7 +26,7 @@ const ticTacToeReducer = (state = DEFAULT_STATES, action) => {
                                             player_one_possible_winning_combo: defaultTicTacToeStates.player_one_possible_winning_combo,
                                             current_positions: [],
                                             possible_winning_combo:defaultTicTacToeStates.possible_winning_combo, remaining_turns: 9,
-                                            tictactoe_boxes: [...tictactoe_boxes], winIndex: '' }
+                                            tictactoe_boxes: [...action.tictactoe_boxes], winIndex: '' }
             };
         case 'UPDATE_INDEX_POSSIBLE_WIN':
             return {

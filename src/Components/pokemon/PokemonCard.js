@@ -32,7 +32,7 @@ export default class PokemonCard extends Component {
     return (
     
       <div className="individual_card">
-        <a className="link-hover" href={`Pokemon/${this.state.pokemonIndex}`}>
+        <a className="link-hover" href={`#/Pokemon/${this.state.pokemonIndex}`}>
             <div className="card">
               <h5 className="card-header">{this.state.pokemonIndex}</h5>
              

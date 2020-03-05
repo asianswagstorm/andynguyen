@@ -1,4 +1,3 @@
-// import { Modal } from "antd";
 
 export const tiles = [
     {
@@ -29,7 +28,7 @@ export const tiles = [
     },
     {
       linkType: "link",
-      href: "/Pokemon",
+      href: `#/Pokemon`,
       src: "images/thumbs/thumb13.jpg",
       alt: "",
       title: "A pokedex api app made with react. ",
@@ -45,7 +44,7 @@ export const tiles = [
     },
     {
       linkType: "link",
-      href: "/TicTacToe",
+      href: `#/TicTacToe`,
       src: "images/thumbs/thumb6.jpg",
       alt: "",
       title: "Tic Tac Toe Game .",
@@ -53,7 +52,7 @@ export const tiles = [
     },
     {
       linkType: "link",
-      href: "/Connect4",
+      href: `#/Connect4`,
       src: "images/thumbs/thumb8.jpg",
       alt: "",
       title: "Connect 4 Game.",
@@ -61,7 +60,7 @@ export const tiles = [
     },
     {
       linkType: "modal",
-      href: "/Experience1",
+      href: `#/Experience1`,
       src: "images/thumbs/thumb7.jpg",
       alt: "",
       title: "Work Experience",
