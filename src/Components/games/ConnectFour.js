@@ -32,7 +32,6 @@ class ConnectFour extends Component {
         const column = position.column;
         
         const playerUnit = (this.props.player_one_turn === true) ? "p1" : "p2";
-        let truthyArray = [];
         
         //(-1,+2)(second position), (-2+1) (third position) //positions not checked 
         const minusOneTwoPlusOneTwo = (direction) => {

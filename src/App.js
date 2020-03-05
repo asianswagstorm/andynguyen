@@ -10,25 +10,24 @@ import NotFound from "./Components/NotFound";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Metso from "./Components/Metso";
+import Pokemons from "./Components/pokemon/Pokemons";
+import Pokemon from "./Components/pokemon/Pokemon";
 import * as games_action from './redux/actions/GamesAction';
 import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
 import * as connect_four_action from './redux/actions/ConnectFourAction';
-
+//redux on pokemon
 import 'antd/dist/antd.css';
 
-class App extends Component {
-
-  // componentDidMount = () => {
-  //   console.log('App props', this.props);
-  // }
+export class App extends Component {
 
   render=()=>{
 
     const routes_components = [ {path: "/", component: Home},
-                                // {path= "/Games", component: <Games/>},
                                 {path: "/TicTacToe", component: TicTacToe},
                                 {path: "/Connect4", component: ConnectFour},
                                 {path: "/Experience1", component: Metso},
+                                {path: "/Pokemon", component: Pokemons},
+                                {path: "/Pokemon/:pokemonIndex", component: Pokemon},
                                 {path: "*", component: NotFound}];
     return (
 
@@ -38,7 +37,6 @@ class App extends Component {
           <BrowserRouter>
           <Switch>
             {
-
               routes_components.map((route, key) => 
               <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
               )

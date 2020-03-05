@@ -29,7 +29,7 @@ class GamesHead extends Component {
   render = () => {
     return (
       <div>
-        <header className="Games">
+        <header className="MyHeader">
      
           <h1 id="my-games">
             <a href="/">

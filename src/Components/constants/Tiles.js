@@ -29,7 +29,7 @@ export const tiles = [
     },
     {
       linkType: "link",
-      href: "https://pokemon-dex-application.herokuapp.com/",
+      href: "/Pokemon",
       src: "images/thumbs/thumb13.jpg",
       alt: "",
       title: "A pokedex api app made with react. ",

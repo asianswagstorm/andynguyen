@@ -1,0 +1,63 @@
+
+  div.pokemon_row{
+    width:100%;
+    min-height:70vh;
+  }
+
+  div.single_card_1{
+    padding:0 20px 20px;
+    width:300px
+  }
+
+  div.list_pokemon{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto; 
+  }
+  
+div.pokemon_search{
+    width:400px;
+    margin-top:15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+  #wrapper {
+    min-height:100%;
+   }
+  
+  .form-control{
+    color:black;
+  }
+  
+  .no-results{
+    width: 300px;
+    position: absolute;
+    display:inline-block;
+    align-self: center;
+    right:43%;
+    bottom:-300%;
+    background-color: red;
+  }
+  
+  .no-results-text{
+    text-align: center;
+    color: white;
+  }
+  
+  .content{
+    padding-top:50px;
+    min-height:90vh;
+  }
+  
+   .footer-seperator{
+     position:relative;
+     background-color: yellow;
+     /* width:100%; */
+   
+  } 
