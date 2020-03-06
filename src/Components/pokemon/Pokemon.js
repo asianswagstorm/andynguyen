@@ -4,6 +4,7 @@ import Profile from "./pokemonHelper/Profile";
 import Evolution from "./pokemonHelper/Evolution";
 import Axios from "axios";
 import spinner from './spinner.gif';
+import './styles/Pokemon.css';
 
 const TYPE_COLORS = {
   bug: "B1C12E",
@@ -129,7 +130,6 @@ export default class Pokemon extends Component {
           .join(" ")
       );
       let habitat = (speciesData.habitat != null) ? capitalize_firstLetter(speciesData.habitat.name) : "Not Available" ;
-      //Initial hatch counter: one must walk 255 × (hatch_counter + 1) steps before this Pokémon's egg hatches, unless utilizing bonuses like Flame Body's.
       const hatchSteps = 255 * speciesData.hatch_counter;
 
       const evolution_url = speciesData.evolution_chain.url;
@@ -344,10 +344,17 @@ export default class Pokemon extends Component {
         );
       });
 
-    const pokeIndex = parseInt(this.props.match.params.pokemonIndex);
+    const pokeIndex = parseInt(this.props.match.params.pokemonIndex,10);
 
     return (
       <div className="col">
+        <header className="MyHeader"> 
+            <h1 id="my-games">
+                <a href="#/"> Pokedex </a>
+            </h1>
+        </header>
+
+
         <div className="pokemon-data">
         <div className="card">
           <div className="card-header">
@@ -376,53 +383,54 @@ export default class Pokemon extends Component {
             </div>
           </div>
 
-          <div className="card-body">
-            <div className="row align-items-center">
-              <div className=" col-md-3 ">
-              {this.state.imageLoading ? (
-              <img
-                src={spinner}
-                alt={"loading gif"}
-                style={{ width: '5em', height: '5em' }}
-                className="card-img-top rounded mx-auto d-block mt-2"
-              />
-            ) : null}
+          <div className="pokemon_card_body">
+            <div className="pokemon_with_stats">
+              <div className="pokemon_shown">
+                {this.state.imageLoading ? (
                 <img
-                  src={this.state.imageUrl}
-                  alt={"A Photograph of a Pokemon"}
-                  onLoad={() => this.setState({ imageLoading: false })}
-                  className="card-img-top rounded mx-auto mt-2"
+                    src={spinner}
+                    alt={"loading gif"}
+                    style={{ width: '5em', height: '5em' }}
+                    className="card-img-top rounded mx-auto d-block mt-2"
                 />
+                ) : null}
+                    <img
+                    src={this.state.imageUrl}
+                    alt={"A Photograph of a Pokemon"}
+                    onLoad={() => this.setState({ imageLoading: false })}
+                    className="card-img-top rounded mx-auto mt-2"
+                    />
               </div>
-              <div className="col-md-9">
+              <div className="pokemon_shown_name">
                 <h4 className="mx-auto">
-                  <div className="random">{this.state.name}</div>
+                  {this.state.name}
                 </h4>
                 {allStats}
               </div>
             </div>
             <div className="row mt-1">
-              <div className="col">
+              <div className="pokemon_description">
                 <p className="">{this.state.description}</p>
               </div>
             </div>
           </div>
 
-          <div className="card-body">
+          <div className="pokemon_card_body">
             <h5 className="card-title text-center">Profile</h5>
-            <div className="row">
-              <div className="col-md-6">{rightProfile}</div>
-              <div className="col-md-6">{leftProfile}</div>
+            <div className="pokemon_profile">
+              <div className="pokemon_profile_right">{rightProfile}</div>
+              <div className="pokemon_profile_left">{leftProfile}</div>
             </div>
           </div>
 
-          <div className="card-body">
+          <div className="pokemon_card_body">
             <h5 className="card-title text-center">Evolution</h5>
            <div className= "evolution-chart"  style={{alignContent: "end"}}>
            
                 {this.state.evolution_data ? (
                  
                   <Evolution
+                    updatePokemon = {(id) => this.updatePokemon(id)}
                     stage1={this.state.stage1}
                     stage2={this.state.stage2}
                     stage3={this.state.stage3}
@@ -439,13 +447,13 @@ export default class Pokemon extends Component {
                 
              </div>
           </div>
-          <div className="card-footer text-muted">
-            Pokemon Data Obtained From{" "}
+          <div className="pokemon_card_footer">
+            Pokemon Data Obtained From
             <a
               href="https://pokeapi.co/"
               target="_blank"
               rel="noopener noreferrer"
-              className="card-link"
+              className="poke_card_link"
             >
               PokeAPI.co
             </a>

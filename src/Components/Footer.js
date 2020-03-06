@@ -7,7 +7,11 @@ class Footer extends Component {
         return (
         <footer id="footer">
                 <div className="copyright">
-                   <strong> &copy; 2020<span > Andy Nguyen</span></strong>
+                   
+                    <span id="siteseal">
+                        <img id = "seal-img" src="https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif" alt="security_seal"></img>
+                    </span>
+                   <strong>  &copy; 2020<span > Andy Nguyen</span></strong>
                 </div>
         </footer>   
         );

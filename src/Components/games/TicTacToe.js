@@ -71,7 +71,7 @@ class TicTacToe extends Component {
     let possibleWinCombo = [...newPossibleWinCombo];
     let indexIfMoreThanOne = 0;
     let indexs = [];
-    console.log("possibleWinCombo",possibleWinCombo);
+    process.env.NODE_ENV.trim() !== 'production' && console.log("possibleWinCombo",possibleWinCombo);
   
     if(possibleWinCombo.length > 1){
 
@@ -81,19 +81,17 @@ class TicTacToe extends Component {
     while(isFine === false){
 
     let latestCompPosition = compPositionsArray[compPositionsArray.length - lastIndex];
-    console.log("last position", latestCompPosition);//undefined
-    possibleWinCombo.map((possible_indexes, key) => {
+    process.env.NODE_ENV.trim() !== 'production' && console.log("last position", latestCompPosition);//undefined
+    possibleWinCombo.forEach((possible_indexes, key) => {
           possible_indexes.forEach(index => {
             if(index === undefined || !latestCompPosition)
               isFine = true;
 
             if (index && latestCompPosition && ((index[0] === latestCompPosition[0]) && (index[1] === latestCompPosition[1]) && (ticTacToeBoxesCopy[index[0]][index[1]] !== 'X')))
               indexs.push(key);
-           
             })
-
         })
-        console.log("indexs", indexs);//what if more then 2 index? // wrong 
+        process.env.NODE_ENV.trim() !== 'production' && console.log("indexs", indexs);//what if more then 2 index? // wrong 
         lastIndex++;
         if(indexs.length > 0) //last position no longer available, check previous 
               isFine = true;
@@ -107,7 +105,7 @@ class TicTacToe extends Component {
 
    //returnBestWinCombo wrong!!!!
     const returningCombo = ([...possibleWinCombo].length > 1 && indexs.length > 0)  ? possibleWinCombo[indexs[indexIfMoreThanOne]] : (indexs.length === 0) && [...possibleWinCombo][0];
-    console.log("returningCombo", returningCombo);//wrong!!!! 
+    process.env.NODE_ENV.trim() !== 'production' && console.log("returningCombo", returningCombo);//wrong!!!! 
     return returningCombo;
   }; 
 
@@ -119,7 +117,7 @@ class TicTacToe extends Component {
     let checkIfExists = [];
     let possibleWinCombo = (playerType === "player1") ? [...this.props.player_one_possible_winning_combo] : [...this.props.possible_winning_combo];
 
-    console.log("last_position", last_position);
+    process.env.NODE_ENV.trim() !== 'production' && console.log("last_position", last_position);
 
     possibleWinCombo.map(winning_indexes => {
       winning_indexes.forEach( position => {
@@ -178,9 +176,9 @@ class TicTacToe extends Component {
       
         let possible_positions = [...best_postion].filter(position1 => ((position1[0] !== latestCompPosition[0]) || (position1[1] !== latestCompPosition[1])));
     
-        console.log("possible_positions",possible_positions); //wrong
+        process.env.NODE_ENV.trim() !== 'production' && console.log("possible_positions",possible_positions); //wrong
         let ticTacToeBoxesCopy = [...this.props.tictactoe_boxes]; 
-        console.log("ticTacToeBoxesCopy",ticTacToeBoxesCopy);
+        process.env.NODE_ENV.trim() !== 'production' && console.log("ticTacToeBoxesCopy",ticTacToeBoxesCopy);
         // console.log("ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]]:" , ticTacToeBoxesCopy[possible_positions[0][0]][possible_positions[0][1]] ) //??? 
         //TypeError: Cannot read property '[object Array]' of undefined
 
@@ -192,7 +190,7 @@ class TicTacToe extends Component {
          dispatch(updatePlayerOnePossibleWinIndex([])); 
         }
 
-        console.log("next_position",next_position);
+        process.env.NODE_ENV.trim() !== 'production'&& console.log("next_position",next_position);
         
         dispatch(updateNextMove(next_position));
         return (next_position) ? next_position : getNextPosition();
@@ -259,9 +257,9 @@ class TicTacToe extends Component {
   const {updatePlayerOnePossibleWinIndex} = this.props.action_props.tic_tac_toe_action;
   const playerOnePossibleWinCombo = [...this.props.player_one_possible_winning_combo];
   let indexToReturn = this.props.player1IndexPossibleWin;
-  playerOnePossibleWinCombo.map(win_combo => {
+  playerOnePossibleWinCombo.forEach(win_combo => {
     let countX = 0;
-    win_combo.map(index => {
+    win_combo.forEach(index => {
       if(ticTacToeBoxesCopy[index[0]][index[1]] === 'X')
         countX = countX + 1;
     } )
@@ -270,7 +268,7 @@ class TicTacToe extends Component {
       indexToReturn = [...win_combo].filter(element => ticTacToeBoxesCopy[element[0]][element[1]] !== 'X')[0];
     })
     dispatch(updatePlayerOnePossibleWinIndex(indexToReturn));
-    console.log("indexaboutToWin:", indexToReturn)
+    process.env.NODE_ENV.trim() !== 'production' && console.log("indexaboutToWin:", indexToReturn)
     return indexToReturn;
   };
 

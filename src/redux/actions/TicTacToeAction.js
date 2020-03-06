@@ -1,5 +1,4 @@
 import {TICTACTOE_TYPE} from "./types";
-import {tictactoe_boxes} from "../../Components/constants/TicTacToeConstants";
 
 export const adjust_number_of_turns = remaining_turns => {
     return {

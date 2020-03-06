@@ -52,7 +52,7 @@ export class App extends Component {
 }
 
 export const mapDispatchToProps = dispatch => {
-  console.log("game action", {games_action , tic_tac_toe_action}); // this.props is undefined
+  (process.env.NODE_ENV.trim() !== 'production') && console.log("game action", {games_action , tic_tac_toe_action}); // this.props is undefined
   return {
     games_action,
     tic_tac_toe_action,
