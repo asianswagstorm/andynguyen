@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./styles/PokemonCard.css";
 import spinner from "./spinner.gif";
+import {pokemonImage} from "./apiServices/pokeAPI";
+
 export default class PokemonCard extends Component {
   state = {
     name: "",
@@ -11,21 +13,15 @@ export default class PokemonCard extends Component {
   };
 
   componentDidMount() {
-    const { name, url, id } = this.props;
-
-    const pokemonIndex =
-      this.props.by_name === false
-        ? url.split("/")[url.split("/").length - 2]
-        : id;
-    //const imageUrl = `./sprites/pokemon/${pokemonIndex}.png`;
-    const imageUrl = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
+    const { name, pokemonIndex ,image } = this.props;
+    const imageUrl = image !== null ? image : pokemonImage(pokemonIndex);
 
     this.setState({
       name: name.charAt(0).toUpperCase() + name.slice(1),
       imageUrl,
       pokemonIndex
     });
-  }
+  };
 
   render() {
     

@@ -5,27 +5,8 @@ import Evolution from "./pokemonHelper/Evolution";
 import Axios from "axios";
 import spinner from './spinner.gif';
 import './styles/Pokemon.css';
-
-const TYPE_COLORS = {
-  bug: "B1C12E",
-  dark: "4F3A2D",
-  dragon: "755EDF",
-  electric: "FCBC17",
-  fairy: "F4B1F4",
-  fighting: "823551D",
-  fire: "E73B0C",
-  flying: "A3B3F7",
-  ghost: "6060B2",
-  grass: "7CFC00",
-  ground: "D3B357",
-  ice: "A3E7FD",
-  normal: "C8C4BC",
-  poison: "934594",
-  psychic: "ED4882",
-  rock: "B9A156",
-  steel: "B5B5C3",
-  water: "3295F6"
-};
+import {getPokeData,getPokeSpecies,pokemonImage} from "./apiServices/pokeAPI";
+import {TYPE_COLORS} from "./constants/pokemonConstants";
 
 export default class Pokemon extends Component {
   state = {
@@ -76,16 +57,9 @@ export default class Pokemon extends Component {
           .charAt(0)
           .toUpperCase() + string.slice(1);
 
-      const pokemonSpeciesLink = `https://pokeapi.co/api/v2/pokemon-species/${pokemonIndex}`;
-      const pokemonLink = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`;
-      const pokeData = await Axios.get(
-        //transforms data into JSON
-        `https://cors-anywhere.herokuapp.com/${pokemonLink}`
-      );
-      const pokeSpecies = await fetch(
-        `https://cors-anywhere.herokuapp.com/${pokemonSpeciesLink}`
-      );
-      const speciesData = await pokeSpecies.json();
+      const pokeData =  await getPokeData(pokemonIndex);
+      const speciesData = await getPokeSpecies(pokemonIndex).then(response => response.json());
+      
       const poke = pokeData.data;
       const types = poke.types.map(type => type.type.name);
       const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
@@ -166,7 +140,7 @@ export default class Pokemon extends Component {
             name: pokemon_name,
             height: poke.height * 10,
             weight: Math.round(poke.weight * (2.20462 / 10)),
-            imageUrl: `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`,
+            imageUrl: pokemonImage(pokemonIndex),
             stats: poke.stats,
             hp: poke.stats[5].base_stat,
             attack: poke.stats[4].base_stat,
@@ -195,7 +169,7 @@ export default class Pokemon extends Component {
             evs: evs
           });
     } catch (error) {
-      (process.env.NODE_ENV.trim() !== 'production') && console.log("Invalid pokemon ID");
+      (process.env.NODE_ENV.trim() !== 'production') && console.log("Invalid pokemon ID");//front end
       (process.env.NODE_ENV.trim() !== 'production') && console.log(error);
     }
   };
@@ -318,7 +292,7 @@ export default class Pokemon extends Component {
       );
     });
 
-    const rightProfile = profileData
+    const leftProfile = profileData
       .slice(0, profileData.length / 2)
       .map((x, index) => {
         return (
@@ -331,7 +305,7 @@ export default class Pokemon extends Component {
         );
       });
 
-    const leftProfile = profileData
+    const rightProfile = profileData
       .slice(profileData.length / 2, profileData.length)
       .map((x, index) => {
         return (
@@ -354,18 +328,17 @@ export default class Pokemon extends Component {
             </h1>
         </header>
 
-
         <div className="pokemon-data">
         <div className="card">
-          <div className="card-header">
+          <div className="pokemon_info">
             <div className="row">
-              <div className="col-5">{pokeIndex}</div>
+              <div className="poke_index">{pokeIndex}</div>
               <div className="col-7">
                   
-                <button onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "button is-pulled-left"> prev</button>
-                <button onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "button is-pulled-right"> next</button>
+                <button onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
+                <button onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
                
-                <div className="float-right">
+                <div className="pokemon_pill">
                   {this.state.types.map(x => (
                     <span
                       key={x.type.name}
@@ -416,19 +389,30 @@ export default class Pokemon extends Component {
           </div>
 
           <div className="pokemon_card_body">
-            <h5 className="card-title text-center">Profile</h5>
+            <div className="poke_profile_title">
+              <h5 id="poke">Profile</h5>
+            </div>  
             <div className="pokemon_profile">
-              <div className="pokemon_profile_right">{rightProfile}</div>
-              <div className="pokemon_profile_left">{leftProfile}</div>
+              <div className="pokemon_profile_left">
+                <div className="poke_left_content">
+                  {leftProfile}
+                </div>
+              </div>  
+              <div className="pokemon_profile_right">
+                <div className="poke_right_content">
+                  {rightProfile}
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="pokemon_card_body">
-            <h5 className="card-title text-center">Evolution</h5>
-           <div className= "evolution-chart"  style={{alignContent: "end"}}>
-           
+            <div className="poke_evolution_title">
+              <h5 id="poke">Evolution</h5>
+            </div>
+            
+            <div className= "evolution-chart"  style={{alignContent: "end"}}>
                 {this.state.evolution_data ? (
-                 
                   <Evolution
                     updatePokemon = {(id) => this.updatePokemon(id)}
                     stage1={this.state.stage1}

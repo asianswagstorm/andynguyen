@@ -2,90 +2,72 @@ import React, { Component } from "react";
 import Search from "./pokemonHelper/Search";
 import PokemonCard from "./PokemonCard";
 import NoResults from "./pokemonHelper/NoResults";
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 import "./styles/Pokemons.css";
+import {} from "./apiServices/pokeAPI";
 
-import axios from "axios";
-
-export default class Pokemons extends Component {
+class Pokemons extends Component {
   constructor(props) {
     super(props);
     this.state = {
       by_name: false,
-      url: "https://pokeapi.co/api/v2/pokemon/?limit=", //807
-      num_of_pokemon: 12,
-      pokemon: null,
-      isLoading: false,
-      searchQuery: "",
+      pokemon: [],
+      searchedPokemon: "",
       tracker: 0 
     };
   }
 
+  getNumPokemon = () => 12;
+
   async componentDidMount() {
-    const res = await axios.get(
-      `${this.state.url}${this.state.num_of_pokemon}`
-    ); 
-    
-    this.setState({ pokemon: res.data["results"] });
-    
+    const {dispatch} = this.props;
+    const {getPokemonsLimit} = this.props.action_props.pokemon_action;
+    await dispatch(getPokemonsLimit(this.getNumPokemon()));
+
+    this.setState({ by_name: false }); //name and url
     document.addEventListener("scroll", this.trackScrolling);
-  }
+  };
 
   componentWillUnmount() {
     document.removeEventListener("scroll", this.trackScrolling);
   }
 
   trackScrolling = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && this.state.tracker <= 792) {
       (process.env.NODE_ENV.trim() !== 'production') && console.log("you're at the bottom of the page");
       this.setState({
-        isLoading: true,
         error: undefined,
-        tracker: this.state.tracker + this.state.num_of_pokemon
+        tracker: this.state.tracker + this.getNumPokemon()
       });
-      
-      setTimeout( () => this.loadMore(), 1000);
-    }
+      setTimeout( async() => await this.loadMore(), 1000);
+    };
   };
 
-  loadMore = () => {
-
-    fetch(`${this.state.url}${this.state.tracker + this.state.num_of_pokemon}`)
-      .then(res => res.json())
-      .then(
-        res => {
-          this.setState({
-            pokemon: res.results,
-            cursor: res.cursor,
-            isLoading: false
-          });
-        },
-        error => {
-          this.setState({ isLoading: false, error });
-        }
-      );
-    this.setState({ isLoading: false, error: undefined });
+  loadMore = async () => {
+    const {dispatch} = this.props;
+    const {getPokemonsLimit} = this.props.action_props.pokemon_action;
+    await dispatch(getPokemonsLimit(this.state.tracker + 3))
+  
+    this.setState({ by_name: false, error: undefined });
   };
 
-  search = e => { //onChange???? 
-    e.preventDefault();
-    const poke = e.target.elements.pokename.value;
-    if (poke !== "") { //clean this up 
-      axios
-        .get(
-          `https://intern-pokedex.myriadapps.com/api/v1/pokemon?name=${poke}`
-        )
-        .then(res => {
-          (process.env.NODE_ENV.trim() !== 'production') && console.log('response',res.data.data);
-          if((res.data.data).length === 0 ){
-            this.setState({ searchQuery: poke });
-          }
-          this.setState({ pokemon: res.data.data, by_name: true });
-        });
+  change = async e => { 
+    const {dispatch} = this.props;
+    const {getPokemonsByName,getPokemonsLimit} = this.props.action_props.pokemon_action;
+  
+    const poke = (e.target.value).trim();
+    if (poke !== "") { 
+      dispatch(getPokemonsByName(poke));
+      this.setState({ by_name: true});
+    }else{
+      await dispatch(getPokemonsLimit(this.getNumPokemon()));
     }
     document.removeEventListener("scroll", this.trackScrolling);
   };
 
   render() {
+  
     return (
       <div>
         <header className="MyHeader"> 
@@ -97,31 +79,38 @@ export default class Pokemons extends Component {
         </header>
         <div className="row">
           <div className="pokemon_search">
-            <Search searchResult={this.search} />
+            <Search onChange={this.change} />
           </div>
         </div>
         <div className="pokemon_row">
-          {(this.state.pokemon && (this.state.pokemon).length > 0) ? (
+          {( [...this.props.pokemons].length > 0) ? (
             <div className="list_pokemon">
-              {this.state.pokemon.map(pokemon => (
-                <div className = "single_card_1">
+              {[...this.props.pokemons].map((pokemon,key) => (
+                <div key={key} className = "single_card_1">
                     <PokemonCard
-                    key={pokemon.name}
-                    name={pokemon.name}
-                    url={pokemon.url}
-                    id={pokemon.id}
-                    by_name={this.state.by_name}
+                      name={pokemon.name}
+                      image = {pokemon.image ? pokemon.image : null}
+                      pokemonIndex={!pokemon.url ? pokemon.id : pokemon.url.split("/")[pokemon.url.split("/").length - 2]}
                     />
-                </div>
-               
+                </div>   
               ))}
               
             </div>
           ) : (
-            <NoResults searchQuery = {this.state.searchQuery}/>
+            <NoResults searchedPokemon = {this.state.searchedPokemon}/>
           )}
         </div>
       </div>
     );
-  }
-}
+  };
+};
+
+const mapStateToProps = state => { 
+  // process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
+  const pokemonProps  = state.PokemonReducer.defaultPokemonStates; 
+  const {pokemons} = pokemonProps;
+
+  return {pokemons};
+};
+
+export default withRouter(connect(mapStateToProps)(Pokemons));

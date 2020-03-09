@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {pokemonImage} from "../apiServices/pokeAPI"
 
 export default class Evolution extends Component {
   render = () => {
@@ -9,9 +10,7 @@ export default class Evolution extends Component {
               <strong>Stage 1: </strong> <br />
                 <img
                   onClick= {() => this.props.updatePokemon(this.props.stage1ID)}
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    this.props.stage1ID
-                  }.png`}
+                  src={pokemonImage(this.props.stage1ID)}
                   alt={"A Photograph of a Stage 1 Pokemon"}
                 />
                 <br />
@@ -26,9 +25,7 @@ export default class Evolution extends Component {
               <strong>Stage 2: </strong> <br />
               <img
                 onClick= {() => this.props.updatePokemon(this.props.stage2ID)}
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                  this.props.stage2ID
-                }.png`}
+                src={pokemonImage(this.props.stage2ID)}
                 alt={"A Photograph of a Stage 2 Pokemon"}
               />
               <br />
@@ -43,9 +40,7 @@ export default class Evolution extends Component {
               <strong>Stage 3: </strong> <br />
                 <img 
                     onClick= {() => this.props.updatePokemon(this.props.stage3ID)}
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                      this.props.stage3ID
-                    }.png`}
+                    src={pokemonImage(this.props.stage3ID)}
                     alt={"A Photograph of a Stage 3 Pokemon"}/>
                 <br />
                 <strong>{this.props.stage3}</strong>

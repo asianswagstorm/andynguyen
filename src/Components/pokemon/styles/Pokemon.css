@@ -1,3 +1,7 @@
+div.pokemon-data{
+    min-width: 635px;
+}
+
 div.pokemon_card_body{
     display: flex;
     flex-wrap: wrap;
@@ -30,15 +34,46 @@ i.pokemon_arrow{
     color: black;
 }
 
+div.poke_index{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+div.pokemon_info{
+    margin-left: 135px;
+}
+
+button.previous_pokemon{
+    color:white;
+}
+
+button.next_pokemon{
+    color:white;
+    margin-left: 10px;
+}
+
+div.pokemon_pill{
+    margin-top: 25px;
+}
+
 div.progress{
     width:100%;
+}
+
+div.poke_profile_title{
+    width: 70%;
+    text-decoration: underline;
+}
+
+div.poke_evolution_title{
+    font-size: 25px;
+    text-decoration: underline;
 }
 
 div.pokemon_profile{
     display: flex;
     flex-wrap: wrap;
-    width:70%;
-    justify-content: center;
+    width: 100%;
     margin-left: auto ;
     margin-right: auto ;    
     font-size: large;
@@ -47,23 +82,29 @@ div.pokemon_profile{
 div.pokemon_profile_right{
     width:50%;
 }
+
 div.pokemon_profile_left{
     width:50%;
 }
 
+div.poke_left_content{
+    margin-left: auto;
+    width:70%;
+}
+
 div.profile_input{
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
 }
 
 div.profile_name{
-    width:100px;
+    height:12px;
+    width: 150px;
+   
 }
 
 div.profile_value{
-    margin-left: 25px;
-    width:300px;
+    width:250px;
+
 }
 
 div.pokemon_card_footer{

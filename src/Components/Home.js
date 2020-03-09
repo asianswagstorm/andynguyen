@@ -98,7 +98,7 @@ class Home extends Component {
         <section id="main">
           <section id="banner">
             <div className="inner">
-              <h1 className="intro-andy">Hey, I'm Andy</h1>
+              <h1 className="intro-andy">Hey, I'm Andy</h1> {/** redux function set timeout */}
               <p id="intro">
                 I'm a programmer. On the occasion I lift things up and put them
                 down.

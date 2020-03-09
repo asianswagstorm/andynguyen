@@ -15,6 +15,7 @@ import Pokemon from "./Components/pokemon/Pokemon";
 import * as games_action from './redux/actions/GamesAction';
 import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
 import * as connect_four_action from './redux/actions/ConnectFourAction';
+import * as pokemon_action from "./redux/actions/PokemonAction";
 //redux on pokemon
 import 'antd/dist/antd.css';
 
@@ -52,11 +53,12 @@ export class App extends Component {
 }
 
 export const mapDispatchToProps = dispatch => {
-  (process.env.NODE_ENV.trim() !== 'production') && console.log("game action", {games_action , tic_tac_toe_action}); // this.props is undefined
+  // (process.env.NODE_ENV.trim() !== 'production') && console.log("game action", {games_action , tic_tac_toe_action}); // this.props is undefined
   return {
     games_action,
     tic_tac_toe_action,
     connect_four_action,
+    pokemon_action,
     dispatch
   };
 };
