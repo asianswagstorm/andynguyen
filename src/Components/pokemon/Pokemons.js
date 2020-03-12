@@ -5,41 +5,34 @@ import NoResults from "./pokemonHelper/NoResults";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "./styles/Pokemons.css";
-import {} from "./apiServices/pokeAPI";
 
 class Pokemons extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      by_name: false,
-      pokemon: [],
-      searchedPokemon: "",
-      tracker: 0 
-    };
-  }
 
   getNumPokemon = () => 12;
 
-  async componentDidMount() {
+  componentDidMount() {
     const {dispatch} = this.props;
-    const {getPokemonsLimit} = this.props.action_props.pokemon_action;
-    await dispatch(getPokemonsLimit(this.getNumPokemon()));
-
-    this.setState({ by_name: false }); //name and url
+    const {getPokemonsLimit, getPokemonSpecies,getPokemonData} = this.props.action_props.pokemon_action;
+    dispatch(getPokemonsLimit(this.getNumPokemon()));
     document.addEventListener("scroll", this.trackScrolling);
+  
+    dispatch(getPokemonSpecies(1));
+    dispatch(getPokemonData(1));
   };
 
   componentWillUnmount() {
     document.removeEventListener("scroll", this.trackScrolling);
   }
 
+  /**
+   * @description scrolling bottom of page loads more pokemons.
+   */
   trackScrolling = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && this.state.tracker <= 792) {
-      (process.env.NODE_ENV.trim() !== 'production') && console.log("you're at the bottom of the page");
-      this.setState({
-        error: undefined,
-        tracker: this.state.tracker + this.getNumPokemon()
-      });
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight && this.props.tracker <= 792) {
+      const {dispatch} = this.props;
+      const {setPokeTracker} = this.props.action_props.pokemon_action;
+      // (process.env.NODE_ENV.trim() !== 'production') && console.log("you're at the bottom of the page");
+      dispatch(setPokeTracker(this.props.tracker + this.getNumPokemon()));
       setTimeout( async() => await this.loadMore(), 1000);
     };
   };
@@ -47,9 +40,7 @@ class Pokemons extends Component {
   loadMore = async () => {
     const {dispatch} = this.props;
     const {getPokemonsLimit} = this.props.action_props.pokemon_action;
-    await dispatch(getPokemonsLimit(this.state.tracker + 3))
-  
-    this.setState({ by_name: false, error: undefined });
+    await dispatch(getPokemonsLimit(this.props.tracker + 3))
   };
 
   change = async e => { 
@@ -59,15 +50,13 @@ class Pokemons extends Component {
     const poke = (e.target.value).trim();
     if (poke !== "") { 
       dispatch(getPokemonsByName(poke));
-      this.setState({ by_name: true});
     }else{
       await dispatch(getPokemonsLimit(this.getNumPokemon()));
     }
     document.removeEventListener("scroll", this.trackScrolling);
   };
 
-  render() {
-  
+  render = () => {
     return (
       <div>
         <header className="MyHeader"> 
@@ -88,6 +77,7 @@ class Pokemons extends Component {
               {[...this.props.pokemons].map((pokemon,key) => (
                 <div key={key} className = "single_card_1">
                     <PokemonCard
+                      action_props = {this.props.action_props}
                       name={pokemon.name}
                       image = {pokemon.image ? pokemon.image : null}
                       pokemonIndex={!pokemon.url ? pokemon.id : pokemon.url.split("/")[pokemon.url.split("/").length - 2]}
@@ -97,7 +87,7 @@ class Pokemons extends Component {
               
             </div>
           ) : (
-            <NoResults searchedPokemon = {this.state.searchedPokemon}/>
+            <NoResults searchedPokemon = {this.props.searchedPokemon}/>
           )}
         </div>
       </div>
@@ -106,11 +96,10 @@ class Pokemons extends Component {
 };
 
 const mapStateToProps = state => { 
-  // process.env.NODE_ENV.trim() !== 'production' && console.log('conect4 state: ', state)
   const pokemonProps  = state.PokemonReducer.defaultPokemonStates; 
-  const {pokemons} = pokemonProps;
+  const {pokemons,searchedPokemon,tracker} = pokemonProps;
 
-  return {pokemons};
+  return {pokemons,searchedPokemon,tracker};
 };
 
 export default withRouter(connect(mapStateToProps)(Pokemons));

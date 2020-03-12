@@ -1,39 +1,29 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 import "./styles/PokemonCard.css";
 import spinner from "./spinner.gif";
 import {pokemonImage} from "./apiServices/pokeAPI";
 
-export default class PokemonCard extends Component {
-  state = {
-    name: "",
-    imageUrl: "",
-    pokemonIndex: "",
-    imageLoading: true,
-    toManyRequests: false
-  };
-
-  componentDidMount() {
-    const { name, pokemonIndex ,image } = this.props;
-    const imageUrl = image !== null ? image : pokemonImage(pokemonIndex);
-
-    this.setState({
-      name: name.charAt(0).toUpperCase() + name.slice(1),
-      imageUrl,
-      pokemonIndex
-    });
+class PokemonCard extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      imageLoading: true,
+      toManyRequests: false
+    };
   };
 
   render() {
-    
+    const {  pokemonIndex, name } = this.props;
     return (
     
       <div className="individual_card">
-        <a className="link-hover" href={`#/Pokemon/${this.state.pokemonIndex}`}>
+        <a className="link-hover" href={`#/Pokemon/${pokemonIndex}`}>
             <div className="card">
-              <h5 className="card-header">{this.state.pokemonIndex}</h5>
+              <h5 className="card-header">{pokemonIndex}</h5>
              
               <div className="card-body mx-auto">
-                
                 {this.state.imageLoading ? (
                 <img
                   src={spinner}
@@ -43,7 +33,7 @@ export default class PokemonCard extends Component {
                 />
               ) : null}
               <img
-                src={this.state.imageUrl}
+                src={pokemonImage(pokemonIndex)}
                 alt="some pokemon"
                 onLoad={() => this.setState({ imageLoading: false })}
                 onError={() => this.setState({ toManyRequests: true })}
@@ -65,11 +55,17 @@ export default class PokemonCard extends Component {
                   </span>
                 </h6>
               ) : null}
-                <h3 className="card-title"> {this.state.name} </h3>
+                <h3 className="card-title"> {name.charAt(0).toUpperCase() + name.slice(1)} </h3>
               </div>
           </div>
         </a>
       </div> 
     );
   }
-}
+};
+
+const mapStateToProps = state => { 
+  return {};
+};
+
+export default withRouter(connect(mapStateToProps)(PokemonCard));

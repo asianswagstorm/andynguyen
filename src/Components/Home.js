@@ -103,7 +103,7 @@ class Home extends Component {
                 I'm a programmer. On the occasion I lift things up and put them
                 down.
               </p>
-              <ul className="actions">
+              {/* <ul className="actions">
                 <li>
                   <a 
                     id="cv-link"
@@ -115,7 +115,7 @@ class Home extends Component {
                     Download My CV
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </section>
 
