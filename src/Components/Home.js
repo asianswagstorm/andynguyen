@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-//import logo from '../logo.svg';
 import "../css/Home.css";
 import "../css/font-awesome.min.css";
 import Card from "./Card";
 import {tiles} from "./constants/Tiles";
+import { Wave, Random  } from 'react-animated-text';
 import { popUpNotification } from "./constants/HelperFunction/Functions";
 
 
@@ -94,28 +94,16 @@ class Home extends Component {
 
     return (
      <div>
-      {/* clean this up, possible carousel*/}
         <section id="main">
           <section id="banner">
             <div className="inner">
-              <h1 className="intro-andy">Hey, I'm Andy</h1> {/** redux function set timeout */}
+              <h1 className="intro-andy"><Wave text="Hey, I'm Andy" iterations={1} /> </h1> {/** redux function set timeout */}
               <p id="intro">
-                I'm a programmer. On the occasion I lift things up and put them
-                down.
+              <Random text="I'm a programmer. On the occasion I lift things up and put them
+                down." effect="fadeIn"
+                verticalFadeIn ="down"
+                effectChange={3.0}  />
               </p>
-              {/* <ul className="actions">
-                <li>
-                  <a 
-                    id="cv-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="Andy_Nguyen.pdf"
-                    className="button alt scrolly big"
-                  >
-                    Download My CV
-                  </a>
-                </li>
-              </ul> */}
             </div>
           </section>
 

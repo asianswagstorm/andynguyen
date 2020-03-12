@@ -52,32 +52,21 @@ class Pokemon extends Component {
 
   componentDidMount = () => this.updatePokemon(this.props.match.params.pokemonIndex)
   
-  //To remove!!! 
-  fetchProp = async (pokemonIndex) => {
+  updatePokemon = async (pokemonIndex) => {
     try {
-      const {dispatch} = this.props;
-      const {getPokemonSpecies,getPokemonData} = this.props.action_props.pokemon_action;
-      await dispatch(getPokemonSpecies(pokemonIndex));
-      await dispatch(getPokemonData(pokemonIndex));
-     
+      const pokemon = (await getPokeData(pokemonIndex)).data;
+      const speciesData =  await getPokeSpecies(pokemonIndex).then(response => response.json());
+      console.log("pokemon", pokemon);
+      console.log("speciesData", speciesData);
+
+      this.props.history.push(`/Pokemon/${pokemonIndex}`);
+  
+        
+      this.setUpPokeState(pokemon,speciesData);
     } catch (error) {
       (process.env.NODE_ENV.trim() !== 'production') && console.log("Invalid pokemon ID");//front end
       (process.env.NODE_ENV.trim() !== 'production') && console.log(error);
     }
-  }
-
-  updatePokemon = async (pokemonIndex) => {
-  
-    const pokemon = (await getPokeData(pokemonIndex)).data;
-    const speciesData =  await getPokeSpecies(pokemonIndex).then(response => response.json());
-    console.log("pokemon", pokemon);
-    console.log("speciesData", speciesData);
-
-    this.props.history.push(`/Pokemon/${pokemonIndex}`);
- 
-       
-    this.doSomething(pokemon,speciesData);
-      
   };
 
   capitalize_firstLetter = string =>
@@ -86,12 +75,12 @@ class Pokemon extends Component {
               .charAt(0)
               .toUpperCase() + string.slice(1);
 
-  doSomething = async(pokemon,speciesData) => {
+    setUpPokeState = async(pokemon,speciesData) => {
   
     const types = pokemon.types.map(type => type.type.name);
     const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
         
-          let description = "A Description";
+    let description = "A Description";
           speciesData.flavor_text_entries.some(x => {
             if (
               x.language.name === "en" &&
@@ -101,13 +90,10 @@ class Pokemon extends Component {
             }
             return null;
           });
+          
+  
 
-          const catchRate = Math.round(speciesData.capture_rate * (100 / 255));
-          const femaleRate = speciesData.gender_rate;
-          const genderRatioFemale = 12.5 * femaleRate;
-          const genderRatioMale = 12.5 * (8 - femaleRate);
-
-          const evs = pokemon.stats
+    const evs = pokemon.stats
             .filter(stat => (stat.effort > 0 ? true : false))
             .map(
               stat =>
@@ -119,42 +105,34 @@ class Pokemon extends Component {
             )
             .join(", ");
 
-          const eggGroups = speciesData.egg_groups.map(x =>
+    const eggGroups = speciesData.egg_groups.map(x =>
             this.capitalize_firstLetter(x.name)
           );
-          const abilities = pokemon.abilities.map(x =>
+    const abilities = pokemon.abilities.map(x =>
             x.ability.name
               .split("-")
               .map(s => this.capitalize_firstLetter(s))
               .join(" ")
           );
-          let habitat = (speciesData.habitat != null) ? this.capitalize_firstLetter(speciesData.habitat.name) : "Not Available" ;
-          const hatchSteps = 255 * speciesData.hatch_counter;
-
-          const evolution_url = speciesData.evolution_chain.url;
-          const evolution_data =
+    const habitat = (speciesData.habitat != null) ? this.capitalize_firstLetter(speciesData.habitat.name) : "Not Available" ;
+    const hatchSteps = 255 * speciesData.hatch_counter;
+    const evolution_url = speciesData.evolution_chain.url;
+    const evolution_data =
             evolution_url !== ""
               ? await getPokemonEvolution(evolution_url)
               : "not found";
 
-          const data_json = evolution_url !== "" && evolution_data.data.chain ;
-          (process.env.NODE_ENV.trim() !== 'production') &&  console.log(data_json);
-
-          const stage1 = this.capitalize_firstLetter(data_json.species.name);
-          (process.env.NODE_ENV.trim() !== 'production') && console.log("stage1 " + stage1);
-          const stage1ID = data_json.species.url.split("/")[6];
-
-          const stage2 = (data_json.evolves_to[0] != null) ? this.capitalize_firstLetter(data_json.evolves_to[0].species.name) : "None";
-          (process.env.NODE_ENV.trim() !== 'production') && console.log("stage2 " + stage2);
-          const stage2ID = (data_json.evolves_to[0] != null) ? data_json.evolves_to[0].species.url.split("/")[6] : 0;
-          
-          const stage3 = (data_json.evolves_to[0] != null) ? (( (data_json.evolves_to[0].evolves_to[0] != null) ) ? this.capitalize_firstLetter(
-            data_json.evolves_to[0].evolves_to[0].species.name) : "None") : "None" ;
-          (process.env.NODE_ENV.trim() !== 'production') && console.log("stage3 " + stage3);
-          const stage3ID = (data_json.evolves_to[0] != null) ? (( (data_json.evolves_to[0].evolves_to[0] != null) ) ? data_json.evolves_to[0].evolves_to[0].species.url.split(
-            "/")[6] : 0) : 0 ;
-
-          this.setState({
+    const data_json = evolution_url !== "" && evolution_data.data.chain ;
+    const stage1 = this.capitalize_firstLetter(data_json.species.name);
+    const stage1ID = data_json.species.url.split("/")[6];
+    const stage2 = (data_json.evolves_to[0] != null) ? this.capitalize_firstLetter(data_json.evolves_to[0].species.name) : "None";
+    const stage2ID = (data_json.evolves_to[0] != null) ? data_json.evolves_to[0].species.url.split("/")[6] : 0;
+    const stage3 = (data_json.evolves_to[0] != null) ? (( (data_json.evolves_to[0].evolves_to[0] != null) ) ? this.capitalize_firstLetter(
+    data_json.evolves_to[0].evolves_to[0].species.name) : "None") : "None" ;
+    const stage3ID = (data_json.evolves_to[0] != null) ? (( (data_json.evolves_to[0].evolves_to[0] != null) ) ? data_json.evolves_to[0].evolves_to[0].species.url.split(
+    "/")[6] : 0) : 0 ;
+    
+    this.setState({
                 pokemonIndex : pokemon.id,
                 name : this.capitalize_firstLetter(pokemon.name),
                 height: pokemon.height * 10,
@@ -167,16 +145,16 @@ class Pokemon extends Component {
                 specialAttack: pokemon.stats[2].base_stat,
                 specialDefense: pokemon.stats[1].base_stat,
                 speed: pokemon.stats[0].base_stat,
-                types,
+                types : pokemon.types,
                 themeColor,
                 description, 
-                catchRate,
+                catchRate : Math.round(speciesData.capture_rate * (100 / 255)),
                 eggGroups,
                 habitat,
                 hatchSteps,
                 abilities,
-                genderRatioFemale,
-                genderRatioMale,
+                genderRatioFemale : 12.5 * speciesData.gender_rate,
+                genderRatioMale : 12.5 * (8 - speciesData.gender_rate),
                 evolution_url,
                 evolution_data: JSON.stringify(data_json),
                 stage1,
@@ -347,7 +325,7 @@ class Pokemon extends Component {
         <div className="card">
           <div className="pokemon_info">
             <div className="row">
-              <div className="poke_index">{this.state.name} {this.state.pokemonIndex}</div>
+              <div className="poke_index">Pokedex #{this.state.pokemonIndex}</div>
               <div className="col-7">
                   
                 <button onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
@@ -355,8 +333,7 @@ class Pokemon extends Component {
                
                 <div className="pokemon_pill">
                   
-                  {(this.state.types).length > 0 && this.state.types.map((x, key) => (
-                    x.type && 
+                  {this.state.types.map((x, key) => (
                     <span
                       key={key}
                       className="badge badge-pill mr-1"
