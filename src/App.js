@@ -36,14 +36,14 @@ export class App extends Component {
         <Navbar/>
         <section id="main">
           <HashRouter>
-          <Switch>
-            {
-              routes_components.map((route, key) => 
-              <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
-              )
-            }  
-          </Switch>
-        </HashRouter>
+            <Switch>
+              {
+                routes_components.map((route, key) => 
+                <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
+                )
+              }  
+            </Switch>
+          </HashRouter>
           <Footer />
         </section>
       

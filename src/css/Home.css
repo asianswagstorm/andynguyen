@@ -89,14 +89,42 @@ header.MyHeader {
 		}
 
 /* Type */
+	div.heyThere{
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
 
+	/* div.heyThere h1.intro_name span{
+		text-shadow: 2px 2px rgb(231, 228, 228);
+	} */
 	h1.intro-andy{
-		text-shadow: 3px 3px rgb(146, 144, 144);
+		text-shadow: 2px 2px rgb(146, 144, 144);
 	}
 
-	p#intro{
-		text-shadow: 1.5px 1.5px black;
+	h1.intro_name{
+		text-shadow: 2px 2px rgb(146, 144, 144);
 	}
+
+
+
+	h2#intro{
+		color:white;
+		text-shadow: 2px 2px rgb(146, 144, 144);
+	}
+
+		@media screen and (max-width: 480px) {
+
+			h1.intro-andy{
+				text-shadow: 1px 1px rgb(146, 144, 144);
+			}
+		
+			h2#intro{
+				color:white;
+				font-size: 14.5px;
+				text-shadow: 1px 1px rgb(146, 144, 144);
+			}
+		}
 
 	a#cv-link{
 		text-shadow: 2px 2px black;
@@ -176,6 +204,13 @@ header.MyHeader {
 		font-size: 20px;
 		margin: 0 0 2em 0;
 	}
+
+	@media screen and (max-width: 480px) {
+		p#about-me {
+			font-size: 16px;
+		}
+	}
+
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 700;
@@ -321,7 +356,7 @@ header.MyHeader {
 	input[type="reset"],
 	input[type="button"],
 	button,
-	.button {
+	.language_button {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -349,7 +384,7 @@ header.MyHeader {
 		input[type="reset"].active,
 		input[type="button"].active,
 		button.active,
-		.button.active {
+		.language_button.active {
 			color: #FFF;
 			background: #778899;
 		}
@@ -358,16 +393,15 @@ header.MyHeader {
 			input[type="reset"].active:hover,
 			input[type="button"].active:hover,
 			button.active:hover,
-			.button.active:hover {
+			.language_button.active:hover {
 				color: #FFF;
-				background: #FF0000;
 			}
 
 		input[type="submit"]:hover,
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		button:hover,
-		.button:hover {
+		.language_button:hover {
 			color: #FFF;
 			background: lightslategrey;
 		}
@@ -376,7 +410,7 @@ header.MyHeader {
 		input[type="reset"].alt,
 		input[type="button"].alt,
 		button.alt,
-		.button.alt {
+		.language_button.alt {
 			background: none;
 			box-shadow: 0 0 0 2px rgba(144, 144, 144, 0.25);
 		}
@@ -385,7 +419,7 @@ header.MyHeader {
 			input[type="reset"].alt:hover,
 			input[type="button"].alt:hover,
 			button.alt:hover,
-			.button.alt:hover {
+			.language_button.alt:hover {
 				background: rgba(144, 144, 144, 0.075);
 				box-shadow: 0 0 0 2px rgba(144, 144, 144, 0.25);
 			}
@@ -394,7 +428,7 @@ header.MyHeader {
 		input[type="reset"].icon,
 		input[type="button"].icon,
 		button.icon,
-		.button.icon {
+		.language_button.icon {
 			padding-left: 1.35em;
 		}
 
@@ -402,7 +436,7 @@ header.MyHeader {
 			input[type="reset"].icon:before,
 			input[type="button"].icon:before,
 			button.icon:before,
-			.button.icon:before {
+			.language_button.icon:before {
 				margin-right: 0.5em;
 			}
 
@@ -410,7 +444,7 @@ header.MyHeader {
 		input[type="reset"].fit,
 		input[type="button"].fit,
 		button.fit,
-		.button.fit {
+		.language_button.fit {
 			display: block;
 			margin: 0 0 1em 0;
 			width: 100%;
@@ -420,7 +454,7 @@ header.MyHeader {
 		input[type="reset"].small,
 		input[type="button"].small,
 		button.small,
-		.button.small {
+		.language_button.small {
 			font-size: 0.8em;
 		}
 
@@ -428,7 +462,7 @@ header.MyHeader {
 		input[type="reset"].big,
 		input[type="button"].big,
 		button.big,
-		.button.big {
+		.language_button.big {
 			font-size: 1.35em;
 			padding: 0 2em;
 		}
@@ -440,8 +474,8 @@ header.MyHeader {
 		input[type="button"]:disabled,
 		button.disabled,
 		button:disabled,
-		.button.disabled,
-		.button:disabled {
+		.language_button.disabled,
+		.language_button:disabled {
 			-moz-pointer-events: none;
 			-webkit-pointer-events: none;
 			-ms-pointer-events: none;
@@ -455,8 +489,10 @@ header.MyHeader {
 			input[type="reset"],
 			input[type="button"],
 			button,
-			.button {
+			.language_button {
 				padding: 0;
+				/* width:100px; */
+				font-size: 10px;
 			}
 
 		}
@@ -1162,12 +1198,11 @@ header.MyHeader {
 						padding: 0;
 					}
 
-						ul #tabs li .button {
+						ul #tabs li .language_button {
 							width: 100%;
 						}
 
 				}
-
 
 				@media screen and (max-height: 375px) and (max-width: 667px)  {
 
@@ -1175,18 +1210,25 @@ header.MyHeader {
 						display: block;
 						margin: 0 0 .25em 0;
 						padding: 0;
+						
 					}
 
-						ul #tabs li .button {
+					ul #tabs li .language_button {
 							width: 100%;
-						}
-
+					}
 				}
 
 			@media screen and (max-width: 480px) {
 
-				ul, #tabs {
+				ul#tabs {
 					margin-bottom: 1em;
+					width:100%;
+					display: flex;
+					justify-content:space-between;
+				}
+
+				li button.language_button{
+					min-width:50px; 
 				}
 
 			}
@@ -1530,16 +1572,16 @@ header.MyHeader {
 
 /* Menu */
 
-	#nav {
+	nav#nav {
 		background: #0d1217;
 		z-index: 10002;
 		position: relative;
-		width: 4em;
+		width: 2em;
 	}
 
 		#nav ul {
 			list-style: none;
-			margin: 0;
+			margin:0;
 			padding: 0;
 			position: fixed;
 			top: 1em;
@@ -1548,7 +1590,7 @@ header.MyHeader {
 
 			#nav ul li {
 				padding: 0;
-				width: 3.75em;
+				width: 2em;
 				text-align: Center;
 				margin-bottom: 1em;
 			}
@@ -1564,13 +1606,13 @@ header.MyHeader {
 					}
 
 					#nav ul li a.active {
-						color: #19B5FE;
+						color: #19B5FE; 
 					}
 
 				@media screen and (max-width: 736px) {
 
 					#nav ul li {
-						width: 3.4em;
+						width: 1em;
 					}
 
 				}
@@ -1719,8 +1761,7 @@ header.MyHeader {
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		min-height: 75vh;
-		height: 75vh;
+		min-height: 75vh;	
 		position: relative;
 		background: #000;
 		background-image: url(./background_images/banner.jpg);
@@ -1831,11 +1872,9 @@ header.MyHeader {
 			}
 
 			@media screen and (max-width: 980px) {
-
 				#main #header {
 					padding: 1.15em 2em;
 				}
-
 			}
 
 			@media screen and (max-width: 736px) {

@@ -3,7 +3,7 @@ import "../css/Home.css";
 import "../css/font-awesome.min.css";
 import Card from "./Card";
 import {tiles} from "./constants/Tiles";
-import { Wave, Random  } from 'react-animated-text';
+import { Wave } from 'react-animated-text';
 import { popUpNotification } from "./constants/HelperFunction/Functions";
 
 
@@ -20,10 +20,15 @@ class Home extends Component {
     this.state = {
       filterOption: "",
       isToggleOn: true,
-      status: ""
+      status: "",
+      loaded:false
     };
     this.submitForm = this.submitForm.bind(this);
     this.escapeFunction = this.escapeFunction.bind(this);
+  }
+
+  componentDidMount = () => {
+    this.state.loaded === false && setTimeout(() => this.setState({loaded: true}) , 1000)
   }
 
   //use redux props clean this up
@@ -84,7 +89,7 @@ class Home extends Component {
           <button
             onClick={() => this.filter(x.languages !== "All" ? x.languages : "")}
             data-tag={x.languages}
-            className="button"
+            className="language_button"
           >
             {x.languages}
           </button>
@@ -97,13 +102,16 @@ class Home extends Component {
         <section id="main">
           <section id="banner">
             <div className="inner">
-              <h1 className="intro-andy"><Wave text="Hey, I'm Andy" iterations={1} /> </h1> {/** redux function set timeout */}
-              <p id="intro">
-              <Random text="I'm a programmer. On the occasion I lift things up and put them
-                down." effect="fadeIn"
-                verticalFadeIn ="down"
-                effectChange={3.0}  />
-              </p>
+              <div className="heyThere">
+                <h1 className="intro-andy">
+                  <Wave text="Hey! I'm " iterations={this.state.loaded === false ? 1 : 0} /> 
+                </h1> {/** redux function set timeout */}
+                { this.state.loaded === true && 
+                <h1 className="intro_name">
+                  <Wave text="Andy." iterations={1}/>
+                </h1> 
+                }
+             </div>
             </div>
           </section>
 
@@ -123,28 +131,24 @@ class Home extends Component {
             <div className="social column">
               <h3>About Me</h3>
               <p id="about-me">
-                My name's Andy Nguyen, a Montreal based software developer. A
-                recent Computer Science grad in the Web Services and Application
-                domain. I'm a problem solver, solving bugs or learning something
-                new fuels me to become a better developer. My interest
-                lies in web development, my years in university and my personal
-                projects have made me discover my passion for coding. I am
-                always learning and growing, looking for mentorship opportunities within a diverse team environment. I look forward to working with you.
+                My name is Andy Nguyen, a Montreal based software developer. A
+                recent Computer Science graduate, but am always learning. I chose this field because finding solutions to problems and developing quality software 
+                excites me. I am looking for mentorship opportunities within a diverse team, that can challenge me and help develop my skills as a software developer 
+                even further. I look forward to working with you.
               </p>
               <p id="about-me">
-                Outside of coding, I am a certified personal trainer and a {" "}
+                Outside of coding, I hold a personal training certification and I {" "} 
                 <a
                   href="http://www.fqd-quebec.com/lifter/528"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  competitive powerlifter{" "}
-                </a>{" "}
-                in the -83kg class part of the Quebec Powerlifting Federation. I
-                enjoy cooking delicious meals, mixology, photography and of course petting dogs.
+                  compete in powerlifting
+                </a>
+                {" "} within the Quebec Powerlifting Federation. My other interest include cooking, mixology, photography and of course petting dogs.
               </p>
 
-              <h3>Follow Me</h3>
+              <h3>My Socials</h3>
               <ul className="icons">
                 <li>
                   <a
@@ -178,15 +182,13 @@ class Home extends Component {
                 </li>
               </ul>
             </div>
-            {/* Clean this up and make a email server. */}
+          
             <div className="column">
               <h3>Get in Touch with Me</h3>
               <form
                 onSubmit={this.submitForm}
                 action="https://formspree.io/xjvyddlb"
                 method="POST"
-                // encType="text/plain"
-                // target="_blank"
               >
                 <div className="field half first">
                   <label htmlFor="name">Name
@@ -224,7 +226,6 @@ class Home extends Component {
                   </li>
                 </ul> }
                 {status === "ERROR" && popUpNotification('error', "Sorry, there was an error while submitting the form." )}
-
               </form>
             </div>
           </section>
@@ -232,6 +233,6 @@ class Home extends Component {
         </div>
     );
   };
-}
+};
 
 export default Home;
