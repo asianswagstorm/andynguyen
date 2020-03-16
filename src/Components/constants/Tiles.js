@@ -1,7 +1,7 @@
 
 export const tiles = [
     {
-      linkType: "link",
+      linkType: "external",
       href: "https://jamdo-487.herokuapp.com/",
       src: "images/thumbs/thumb1.jpg",
       alt: "",
@@ -10,7 +10,7 @@ export const tiles = [
       type: ["Python"]
     },
     {
-      linkType: "link",
+      linkType: "external",
       href: "https://airbnbmock.herokuapp.com/",
       src: "images/thumbs/thumb3.jpg",
       alt: "",
@@ -19,7 +19,7 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "link",
+      linkType: "external",
       href: "https://recipes-api-app.herokuapp.com/",
       src: "images/thumbs/thumb12.jpg",
       alt: "",
@@ -27,7 +27,7 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "link",
+      linkType: "internal",
       href: `#/Pokemon`,
       src: "images/thumbs/thumb13.jpg",
       alt: "",
@@ -35,7 +35,7 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "link",
+      linkType: "external",
       href: "https://spotify-app-andy.herokuapp.com/",
       src: "images/thumbs/thumb14.jpg",
       alt: "",
@@ -43,7 +43,7 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "link",
+      linkType: "internal",
       href: `#/TicTacToe`,
       src: "images/thumbs/thumb6.jpg",
       alt: "",
@@ -51,7 +51,7 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "link",
+      linkType: "internal",
       href: `#/Connect4`,
       src: "images/thumbs/thumb8.jpg",
       alt: "",
@@ -59,7 +59,7 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "modal",
+      linkType: "internal",
       href: `#/Experience1`,
       src: "images/thumbs/thumb7.jpg",
       alt: "",

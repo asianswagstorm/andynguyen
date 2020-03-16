@@ -4,6 +4,7 @@ import "../css/font-awesome.min.css";
 import Card from "./Card";
 import {tiles} from "./constants/Tiles";
 import { Wave } from 'react-animated-text';
+import Typist from 'react-typist';
 import { popUpNotification } from "./constants/HelperFunction/Functions";
 
 
@@ -75,6 +76,7 @@ class Home extends Component {
             key={index}
             href={value.href}
             imgSrc={value.src}
+            linkType = {value.linkType}
             alt=""
             title={value.title}
           />
@@ -104,12 +106,18 @@ class Home extends Component {
             <div className="inner">
               <div className="heyThere">
                 <h1 className="intro-andy">
-                  <Wave text="Hey! I'm " iterations={this.state.loaded === false ? 1 : 0} /> 
+                  <Wave text="Hey! " iterations={this.state.loaded === false ? 1 : 0} /> 
                 </h1> {/** redux function set timeout */}
                 { this.state.loaded === true && 
+                <span>
                 <h1 className="intro_name">
-                  <Wave text="Andy." iterations={1}/>
-                </h1> 
+                  <Wave text="I'm " iterations={1}/>
+                
+                  <Typist cursor={{ show: false }}  startDelay={800}>
+                    Andy.
+                  </Typist>
+                </h1>
+                </span>
                 }
              </div>
             </div>

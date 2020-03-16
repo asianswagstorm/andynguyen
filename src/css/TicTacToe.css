@@ -48,12 +48,14 @@ button#H-opponent.button.button-block{
     font-size: 20px;
     text-shadow: 1px 1px rgb(77, 74, 74);
     margin-right: 10px;
+    color: white;
 }
 
 button#C-opponent.button.button-block{
     font-size: 20px;
     text-shadow: 1px 1px rgb(77, 74, 74);
     margin-left: 10px;
+    color: white;
 }
 
 .badge {

@@ -68,6 +68,7 @@ class Pokemons extends Component {
         </header>
         <div className="row">
           <div className="pokemon_search">
+            <span className="icon fa-search" id = "search__icon"/>
             <Search onChange={this.change} />
           </div>
         </div>

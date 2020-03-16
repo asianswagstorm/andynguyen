@@ -103,6 +103,7 @@ header.MyHeader {
 	}
 
 	h1.intro_name{
+		display: flex;
 		text-shadow: 2px 2px rgb(146, 144, 144);
 	}
 
@@ -1609,12 +1610,21 @@ header.MyHeader {
 						color: #19B5FE; 
 					}
 
+				/*Iphone X WORKS */
+				@media screen and (max-width: 812px) { 
+
+					#nav ul li {
+						position: fixed;
+						margin-left: 5px;
+						
+					}
+				}
+
 				@media screen and (max-width: 736px) {
 
 					#nav ul li {
 						width: 1em;
 					}
-
 				}
 /* The Modal (background) */
 .modal {
@@ -1935,16 +1945,13 @@ div.job-section{
 			#footer {
 				padding: 3em 0 1em 0;
 			}
-
 		}
-
 
 		@media screen and (max-width: 736px) { 
 
 			#footer {
 				padding: 3em 0 1em 0;
 			}
-
 		}
 
 		/*Iphone X WORKS */
@@ -1953,7 +1960,9 @@ div.job-section{
 			#footer {
 				padding: 3em 0 1em 0;
 			}
-
+			#footer .copyright {
+				font-size: 16px;
+			}
 		}
 
 

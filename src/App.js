@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-
+import {CSSTransition,TransitionGroup,} from 'react-transition-group';
 import Home from "./Components/Home";
-// import Games from "./Components/Games";
 import TicTacToe from "./Components/games/TicTacToe";//test
 import ConnectFour from "./Components/games/ConnectFour";//test
 import NotFound from "./Components/NotFound";
@@ -22,7 +21,6 @@ import 'antd/dist/antd.css';
 export class App extends Component {
 
   render=()=>{
-    // const basePath = "/andynguyen"
     const routes_components = [ {path: `/`, component: Home},
                                 {path:  `/TicTacToe`, component: TicTacToe},
                                 {path:  `/Connect4`, component: ConnectFour},
@@ -31,18 +29,27 @@ export class App extends Component {
                                 {path:  `/Pokemon/:pokemonIndex`, component: Pokemon},
                                 {path: "*", component: NotFound}];
     return (
-
       <div className="page-wrap">
         <Navbar/>
         <section id="main">
           <HashRouter>
-            <Switch>
-              {
-                routes_components.map((route, key) => 
-                <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
-                )
-              }  
-            </Switch>
+            <Route render={({location}) => (
+              <TransitionGroup>
+                  <CSSTransition
+                    key={location.key}
+                    timeout={450}
+                    classNames="fade"
+                  >
+                    <Switch>
+                      {
+                        routes_components.map((route, key) => 
+                        <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
+                        )
+                      }  
+                    </Switch>
+                  </CSSTransition>
+                </TransitionGroup>
+            )} />
           </HashRouter>
           <Footer />
         </section>

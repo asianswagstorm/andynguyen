@@ -15,17 +15,25 @@
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    width: 55%;
+    width: 85%;
     margin-left: auto;
     margin-right: auto; 
   }
-  
-div.pokemon_search{
-    width:400px;
-    margin-top:15px;
-    margin-left: auto;
-    margin-right: auto;
-}
+
+  span#search__icon{
+    margin-right: 15px;
+    margin-top:7px;
+  }
+
+  div.pokemon_search{
+      display: flex;
+      flex-wrap: wrap;
+      width:400px;
+      margin-top:15px;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+  }
 
   #wrapper {
     min-height:100%;
