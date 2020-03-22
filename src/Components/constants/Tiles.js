@@ -19,8 +19,8 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "external",
-      href: "https://recipes-api-app.herokuapp.com/",
+      linkType: "internal",
+      href: "#/Recipes",
       src: "images/thumbs/thumb12.jpg",
       alt: "",
       title: "A recipe api app made with react. ",
