@@ -53,8 +53,14 @@ class App extends Component {
   render() {
     return (
       <div>
-     
-        <div className="content">
+        <header className="MyHeader"> 
+            <h1 id="my-games">
+            <a href="#/">
+               Recipe App
+            </a>
+            </h1>
+        </header>
+        <div className="recipe__section" >
         <Form getRecipe={this.getRecipe} />
         
         <Recipes recipes={this.state.recipes}  error = {this.state.error} api_limit = {this.state.api_limit} />

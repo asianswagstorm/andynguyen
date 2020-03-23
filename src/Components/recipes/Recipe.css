@@ -1,8 +1,9 @@
-body {
-  background:#f3f3f3;
+div.recipe__section{
+  min-height:70.5vh;
 }
 
-img {
+/* recipe images */
+img.recipe__box-img {
   width: 100%;
   height: 220px;
 }
@@ -11,28 +12,34 @@ a , a:hover {
   color: white;
 }
 
-
 button:focus {
   outline: none;
 }
 
-.App {
-  text-align: center;
+.recipes__wrapper{
+  width: 100%;
+  margin-left: 15px; 
+  height: auto;
 }
 
-.App-header {
-  background-color: #2c3e50;
-  padding: 30px;
-  color: white;
+.recipes{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+	
+}
+
+.recipes__box {
+  background: #fff;
+  padding-bottom: 2rem;
+  border-radius: 5px;
+  box-shadow: -1px 2px 34px -13px rgba(0,0,0,0.75);
+  text-align: left;
+  overflow: hidden;
   margin-bottom: 2rem;
-}
-
-.App-title {
-  font-size: 1.5em;
-  color: white;
-}
-.link {
-  color: white;
+  width: 340px;
+  margin-right: 25px; 
 }
 
 .recipe_buttons {
@@ -45,15 +52,6 @@ button:focus {
   text-transform: uppercase;
   font-weight: 500;
   margin-left: 0.7rem;
-}
-
-.recipes__box {
-  background: #fff;
-  padding-bottom: 2rem;
-  border-radius: 5px;
-  box-shadow: -1px 2px 34px -13px rgba(0,0,0,0.75);
-  text-align: left;
-  overflow: hidden;
 }
 
 .recipe__text {
@@ -81,22 +79,25 @@ button:focus {
   letter-spacing: 1px;
 }
 
-.form__input {
+form.recipeForm{
+  display: flex;
+  flex-wrap: nowrap;
+  width:100%;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.recipeForm__input {
   background: transparent;
   border: 0;
   border-bottom: solid 2px #2c3e50;
-  margin-right: 10px;
   letter-spacing: 2px;
-  width: 16.2%;
-  padding: 0.4rem;
   text-align: center;
 }
 
-.form__button {
+.recipeForm__button {
   border: solid 2px #2c3e50;
   background: transparent;
-  padding: 0.2rem 0.9rem;
-  margin: 0 0.2rem;
   border-radius: 1px;
   font-size: 1rem;
   text-transform: uppercase;
@@ -105,13 +106,14 @@ button:focus {
   color:#2c3e50;
 }
 
-.form__button:hover {
+.recipeForm__button:hover {
   background-color: #2c3e50;
   color:white;
 }
 
 input[type="text"] { 
   outline: none;
+  width:300px;
 }
 
 input:-webkit-autofill {
@@ -164,7 +166,7 @@ input:-webkit-autofill {
   font-weight: 300;
   letter-spacing: 2px;
   color: #2c3e50;
-  height: 90px;;
+  height: 90px;
   margin-left: 10px;
 }
 
