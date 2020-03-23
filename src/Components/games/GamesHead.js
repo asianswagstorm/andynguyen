@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Headers from "../Headers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {score_label, playerPicker } from "../constants/Games"; //tictactoe_boxes
@@ -23,16 +24,7 @@ class GamesHead extends Component {
   render = () => {
     return (
       <div>
-        <header className="MyHeader">
-     
-          <h1 id="my-games">
-            <a href="#/">
-               {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } {" "}
-            </a>
-          </h1>
-          <h2 id="my-games">Written in React with Redux</h2>
-        </header>
-
+        <Headers linkTo = "#/" headerTitle=  {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } origin="games"/>
         <div className="score-board">
           {score_label(this.props.gameType).map((label, key) => ( //this.props.gameType
             <div key={key} id={label.id} className="badge">

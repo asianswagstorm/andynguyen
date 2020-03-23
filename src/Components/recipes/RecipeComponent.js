@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Recipe.css';
-
+import Headers from "../Headers";
 import Form from "./Form";
 import Recipes from "./Recipes";
 import {recipeAPI} from "./recipeConstants";
@@ -45,7 +45,7 @@ class App extends Component {
     this.setState({ recipes }); //set the recipes state , equivalent to ES6 {recipes : recipes}
   }
 
-  //what ever happens here is when state changes. As soon as state is updated this is called.
+  //what ever happens here is when state changes. As soon as state is updated this is called. deprecated
   componentDidUpdate = () => {
     const recipes = JSON.stringify(this.state.recipes);
     localStorage.setItem("recipes", recipes);
@@ -53,13 +53,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className="MyHeader"> 
-            <h1 id="my-games">
-            <a href="#/">
-               Recipe App
-            </a>
-            </h1>
-        </header>
+        <Headers linkTo = "#/" headerTitle="Recipe App"/>
         <div className="recipe__section" >
         <Form getRecipe={this.getRecipe} />
         

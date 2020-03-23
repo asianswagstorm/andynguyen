@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Stats from "./pokemonHelper/Stats";
 import Profile from "./pokemonHelper/Profile";
 import Evolution from "./pokemonHelper/Evolution";
+import Headers from "../Headers";
 import spinner from './spinner.gif';
 import './styles/Pokemon.css';
 import { withRouter } from "react-router-dom";
@@ -315,12 +316,7 @@ class Pokemon extends Component {
 
     return (
       <div className="col">
-        <header className="MyHeader"> 
-            <h1 id="my-games">
-                <a href="#/"> Pokedex </a>
-            </h1>
-        </header>
-
+        <Headers linkTo = "#/Pokemon" headerTitle="Pokedex"/>
         <div className="pokemon-data">
         <div className="card">
           <div className="pokemon_info">

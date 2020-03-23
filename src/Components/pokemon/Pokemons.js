@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Headers from "../Headers";
 import Search from "./pokemonHelper/Search";
 import PokemonCard from "./PokemonCard";
 import NoResults from "./pokemonHelper/NoResults";
@@ -59,13 +60,7 @@ class Pokemons extends Component {
   render = () => {
     return (
       <div>
-        <header className="MyHeader"> 
-            <h1 id="my-games">
-            <a href="#/">
-               Pokedex
-            </a>
-            </h1>
-        </header>
+        <Headers linkTo = "#/" headerTitle="Pokedex"/>   
         <div className="row">
           <div className="pokemon_search">
             <span className="icon fa-search" id = "search__icon"/>

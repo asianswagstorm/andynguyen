@@ -1,5 +1,6 @@
 import React from 'react';
 import {recipeAPI} from "./recipeConstants";
+import Headers from "../Headers";
 const API_KEY = "";
 
 //ingredients
@@ -68,7 +69,7 @@ class Recipe extends React.Component {
     else
     return (
       <div className="App">
-      
+        <Headers linkTo = "#/Recipes" headerTitle="Recipe App"/>
       <div className="container">
       <div className="content">
         { this.state.activeRecipe.length !== 0 &&
@@ -76,7 +77,7 @@ class Recipe extends React.Component {
             <img className="active-recipe__img" src={recipe.image_url} alt={recipe.title}/>
             <h3 className="active-recipe__title">{ recipe.title }</h3>
             <p className="active-recipe__website"><strong>See the recipe in detail: </strong>
-              <span className="recipe_link"><a target = "_blank" rel="noopener noreferrer" href={recipe.source_url}>{recipe.publisher_url}</a></span>
+              <span className="recipe_link"><a id="recipe__link" target = "_blank" rel="noopener noreferrer" href={recipe.source_url}>{recipe.publisher_url}</a></span>
             </p>
             {/* list-group , list-group-item part of bootstrap */}
             <div className="active-recipe__ingredients">

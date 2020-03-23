@@ -8,10 +8,6 @@ img.recipe__box-img {
   height: 220px;
 }
 
-a , a:hover {
-  color: white;
-}
-
 button:focus {
   outline: none;
 }
@@ -42,16 +38,21 @@ button:focus {
   margin-right: 25px; 
 }
 
-.recipe_buttons {
+button.recipe__buttons {
   border: solid 2px #2c3e50;
   background: #2c3e50;
+  color: white;
   padding: 0.4rem 0.6rem;
-  margin: 0 0.2rem;
   border-radius: 1px;
   font-size: 0.8rem;
   text-transform: uppercase;
   font-weight: 500;
-  margin-left: 0.7rem;
+  width:28.89117647%;
+  margin-left: 35%;
+}
+
+a#view_recipe, a#recipe__link {
+  color:white;
 }
 
 .recipe__text {
@@ -65,6 +66,7 @@ button:focus {
   padding: 1.8rem 0 0.2rem 0;
 }
 
+/* ???? */
 .recipes__subtitle {
   text-transform: uppercase;
   font-weight: 600;
@@ -85,17 +87,26 @@ form.recipeForm{
   width:100%;
   justify-content: center;
   margin-top: 10px;
+  /* background-color: red; */
 }
 
-.recipeForm__input {
+input.recipeForm__input {
   background: transparent;
   border: 0;
   border-bottom: solid 2px #2c3e50;
   letter-spacing: 2px;
   text-align: center;
+  height: 45.59px;
+  width:300px;
 }
 
-.recipeForm__button {
+input.recipeForm__input:focus {
+  border: 0;
+  border-bottom: solid 2px #2c3e50;
+
+}
+
+button.recipeForm__button {
   border: solid 2px #2c3e50;
   background: transparent;
   border-radius: 1px;
@@ -104,16 +115,25 @@ form.recipeForm{
   font-weight: 500;
   margin-left: 0.7rem;
   color:#2c3e50;
+  height: 45.59px;
+}
+
+@media only screen and (max-width: 537px) and (max-height: 830px)  and (-webkit-min-device-pixel-ratio: 3)   {
+  input.recipeForm__input {
+   font-size: 12px;
+    width:200px;
+  }
+
+  button.recipeForm__button{
+    font-size: 12px;
+    width:100px;
+  }
+  
 }
 
 .recipeForm__button:hover {
   background-color: #2c3e50;
   color:white;
-}
-
-input[type="text"] { 
-  outline: none;
-  width:300px;
 }
 
 input:-webkit-autofill {
