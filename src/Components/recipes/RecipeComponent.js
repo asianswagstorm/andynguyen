@@ -3,65 +3,71 @@ import './Recipe.css';
 import Headers from "../Headers";
 import Form from "./Form";
 import Recipes from "./Recipes";
-import {recipeAPI} from "./recipeConstants";
-const API_KEY = "";
+// import {fetchRecipe} from "./RecipeServices";
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
-class App extends Component {
+class RecipeComponent extends Component {
   state = { //react 16, doesnt need constructor
-    recipes: [],
+    // recipes: [],
     error : '',
     api_limit : ''
   }
-
+  //cleanUP && add tests!!! 
   //use async await when you want async code to run like synchronous code
   getRecipe = async (e) => { //async functions return a promise
+    const {dispatch} = this.props;
+    const {getRecipes} = this.props.action_props.recipe_action;
+
     const recipeName = e.target.elements.recipeName.value;
     e.preventDefault();
-    const data = await fetch(`${recipeAPI}/api/search?key=${API_KEY}&q=${recipeName}&count=9`); 
-  
-    //without await response that resolves to a promise. With await response is the actual data
-    //await only waits for single promises.
+     
+    dispatch(getRecipes(recipeName));
     
-    const jsonData = await data.json();
-    // const jsonData  = {"count": 0, "recipes": []};
-    if (!jsonData) {
-      this.setState({ api_limit: "API Limit Reached" });
-      console.log("API Limit Reached");
-    } 
-    else if(jsonData.recipes.length === 0 ){ //
-      this.setState({ error: "No search result found" ,  recipes: []});
-      console.log("No search result found");
+    if(this.props.count === 0 ){ 
+      this.setState({ error: "No search result found" }); //,  recipes: []
+      process.env.NODE_ENV.trim() !== 'production' && console.log("No search result found");
     }
     else {
-    this.setState({ recipes: jsonData.recipes ,error: ''});
-    console.log(this.state.recipes);
+    // this.setState({ recipes: jsonData.recipes ,error: ''});
+    process.env.NODE_ENV.trim() !== 'production' && console.log(this.props.recipes);
     }
   }
 
-  //
+  //redux store losing state on refresh!!! 
   componentDidMount = () => { // the component has been rendered, componentDidMount is the best place to put calls to fetch data
-    const json = localStorage.getItem("recipes"); //localStorage property allows you to access a Storage object for the Document's origin
-    const recipes = JSON.parse(json);
-    this.setState({ recipes }); //set the recipes state , equivalent to ES6 {recipes : recipes}
-  }
+    const json = localStorage.getItem("recipeData"); 
+    if(json){
+      const {dispatch} = this.props;
+      const {setRecipes} = this.props.action_props.recipe_action;
+      dispatch(setRecipes(JSON.parse(json)))
+    }
+  };
 
   //what ever happens here is when state changes. As soon as state is updated this is called. deprecated
   componentDidUpdate = () => {
-    const recipes = JSON.stringify(this.state.recipes);
-    localStorage.setItem("recipes", recipes);
+    const recipes = this.props.recipes;
+    localStorage.setItem("recipeData", JSON.stringify({recipes, count : this.props.count}));
   }
-  render() {
+  render = () => {
     return (
       <div>
         <Headers linkTo = "#/" headerTitle="Recipe App"/>
         <div className="recipe__section" >
         <Form getRecipe={this.getRecipe} />
-        
-        <Recipes recipes={this.state.recipes}  error = {this.state.error} api_limit = {this.state.api_limit} />
+        {/*  recipes={this.props.recipes} error = {this.state.error} */}
+        <Recipes  api_limit = {this.state.api_limit} /> 
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
-export default App;
+const mapStateToProps = state => { 
+  const recipeProps  = state.RecipeReducer.defaultRecipeStates; 
+  const {recipes,count} = recipeProps;
+
+  return {recipes,count};
+};
+
+export default withRouter(connect(mapStateToProps)(RecipeComponent));

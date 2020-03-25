@@ -281,7 +281,7 @@ class ConnectFour extends Component {
             if([...this.props.rowIndexByColumn][computerColumn] >= 0)
                 isValidColumn = true;
             else{
-                let newAvailableCol = [...this.props.availableCols].filter(element => element !== computerColumn);
+                let newAvailableCol = this.filterAvailableColumns([...this.props.availableCols],computerColumn);
                 if(newAvailableCol.length === 0){
                     dispatch(setGameOver(true));
                     isValidColumn = true;
@@ -290,10 +290,12 @@ class ConnectFour extends Component {
                }
             }
         };
-
         return computerColumn;
     };
-
+    /**
+     * to avoid "Don't make functions within a loop"
+     */
+    filterAvailableColumns = (array, compCol ) => array.filter(element => element !== compCol);
     updateBoard = async (column) => {
         const {dispatch} = this.props;
         const {setCurrentPlayer, setGameMessage,setGameOver,setPlayer1Score,setPlayer2Score,setTie} = this.props.action_props.games_action;

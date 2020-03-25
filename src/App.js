@@ -17,6 +17,7 @@ import * as games_action from './redux/actions/GamesAction';
 import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
 import * as connect_four_action from './redux/actions/ConnectFourAction';
 import * as pokemon_action from "./redux/actions/PokemonAction";
+import * as recipe_action from "./redux/actions/RecipeAction";
 //redux on pokemon
 import 'antd/dist/antd.css';
 
@@ -70,6 +71,7 @@ export const mapDispatchToProps = dispatch => {
     tic_tac_toe_action,
     connect_four_action,
     pokemon_action,
+    recipe_action,
     dispatch
   };
 };

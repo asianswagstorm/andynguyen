@@ -82,20 +82,22 @@ class TicTacToe extends Component {
 
     let latestCompPosition = compPositionsArray[compPositionsArray.length - lastIndex];
     process.env.NODE_ENV.trim() !== 'production' && console.log("last position", latestCompPosition);//undefined
-    possibleWinCombo.forEach((possible_indexes, key) => {
-          possible_indexes.forEach(index => {
-            if(index === undefined || !latestCompPosition)
-              isFine = true;
-
-            if (index && latestCompPosition && ((index[0] === latestCompPosition[0]) && (index[1] === latestCompPosition[1]) && (ticTacToeBoxesCopy[index[0]][index[1]] !== 'X')))
-              indexs.push(key);
-            })
-        })
-        process.env.NODE_ENV.trim() !== 'production' && console.log("indexs", indexs);//what if more then 2 index? // wrong 
-        lastIndex++;
-        if(indexs.length > 0) //last position no longer available, check previous 
-              isFine = true;
-      };
+    for(let i = 0; i< possibleWinCombo.length ; i++){
+      const possible_indexes = possibleWinCombo[i];
+      for(let j = 0; j< possible_indexes.length ; j++){
+        const index = possible_indexes[j];
+        if(index === undefined || !latestCompPosition)
+          isFine = true;
+        if (index && latestCompPosition && ((index[0] === latestCompPosition[0]) && (index[1] === latestCompPosition[1]) && (ticTacToeBoxesCopy[index[0]][index[1]] !== 'X')))
+          indexs.push(i);
+      }
+    }
+ 
+    process.env.NODE_ENV.trim() !== 'production' && console.log("indexs", indexs);//what if more then 2 index? // wrong 
+    lastIndex++;
+    if(indexs.length > 0) //last position no longer available, check previous 
+      isFine = true;
+    }
     }
     if(indexs.length > 1){
       // alert("more than 1 index");

@@ -1,7 +1,6 @@
 import React from 'react';
-import {recipeAPI} from "./recipeConstants";
+import {fetchRecipeByID} from "./RecipeServices";
 import Headers from "../Headers";
-const API_KEY = "";
 
 //ingredients
 /*
@@ -28,17 +27,9 @@ class Recipe extends React.Component {
     //console.log(title);
     //redux prop
     const recipeID = this.props.match.params.id;//this.props.location.state.recipe_ID;
-    console.log(recipeID); //handle undefined
+    process.env.NODE_ENV.trim() !== 'production' && console.log(recipeID); //handle undefined
    
-    // start timeout
-    // setTimeout(() => {
-    // }, 1500);
-    // https://cors-anywhere.herokuapp.com/
-    // axios
-    const data = await fetch(`${recipeAPI}/api/get?key=${API_KEY}&rId=${recipeID}`);
-    //`https://food2fork.com/api/search?key=${API_KEY}&q=${title}`
-    
-    const jsonData = await data.json();
+    const jsonData = await fetchRecipeByID(recipeID);
     
     if (jsonData.recipe.length === 0) {
       this.setState({ message: "No such Recipe Found" })
@@ -46,12 +37,12 @@ class Recipe extends React.Component {
       this.setState({ activeRecipe: jsonData.recipe });//s[0]
     }
 
-    console.log(jsonData);
-    console.log(this.state.activeRecipe);
+    process.env.NODE_ENV.trim() !== 'production' && console.log(jsonData);
+    process.env.NODE_ENV.trim() !== 'production' && console.log(this.state.activeRecipe);
     } catch (error) {
-      console.log("Invalid recipe ID");
-      console.log(error);
-      this.setState({ message: "Uh oh, accident happend" })
+        process.env.NODE_ENV.trim() !== 'production' && console.log("Invalid recipe ID");
+        process.env.NODE_ENV.trim() !== 'production' &&console.log(error);
+      this.setState({ message: "Uh oh, accident happened" })
     }
   };
   

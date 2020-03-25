@@ -38,3 +38,7 @@ export const POKEMON_TYPE = {
     SET_POKEMON_SPECIES : "SET_POKEMON_SPECIES",
     SET_POKEMON_ID : "SET_POKEMON_ID"
 };
+
+export const RECIPE_TYPE = {
+    SET_RECIPES : "SET_RECIPES"
+};

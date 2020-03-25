@@ -1,4 +1,3 @@
-
 const defaultPokemonStates = {
     pokemons : [],
     hasErrors : false,
