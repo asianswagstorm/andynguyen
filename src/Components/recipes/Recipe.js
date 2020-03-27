@@ -1,100 +1,87 @@
 import React from 'react';
-import {fetchRecipeByID} from "./RecipeServices";
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
 import Headers from "../Headers";
 
-//ingredients
-/*
-recipe: List of Recipe Parameters ->
-	image_url: URL of the image
-	source_url: Original Url of the recipe on the publisher's site
-	f2f_url: Url of the recipe on Food2Fork.com
-	title: Title of the recipe
-	publisher: Name of the Publisher
-	publisher_url: Base url of the publisher
-	social_rank: The Social Ranking of the Recipe (As determined by our Ranking Algorithm)
-	ingredients: The ingredients of this recipe
-*/
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: #19B5FE;
+`;
 
 class Recipe extends React.Component {
   state = {
-    activeRecipe: [],
-    message: "Loading..."
+    message: "Loading...",
+    isLoading : true
   }
-  //component just mounted to the screen
-  componentDidMount = async () => { //react life-cycle hook: fired as soon as component mounted to web browser. Once component is loaded execute asyncly. 
+  componentDidMount = async () => {
+    const recipeID = this.props.match.params.id;
     try{
-    //const title = this.props.location.state.recipe_title; //handle undefined
-    //console.log(title);
-    //redux prop
-    const recipeID = this.props.match.params.id;//this.props.location.state.recipe_ID;
-    process.env.NODE_ENV.trim() !== 'production' && console.log(recipeID); //handle undefined
-   
-    const jsonData = await fetchRecipeByID(recipeID);
+      const {dispatch} = this.props;
+      const {getCurrentRecipe} = this.props.action_props.recipe_action;
+      dispatch(getCurrentRecipe(recipeID));
     
-    if (jsonData.recipe.length === 0) {
-      this.setState({ message: "No such Recipe Found" })
-    } else {
-      this.setState({ activeRecipe: jsonData.recipe });//s[0]
-    }
-
-    process.env.NODE_ENV.trim() !== 'production' && console.log(jsonData);
-    process.env.NODE_ENV.trim() !== 'production' && console.log(this.state.activeRecipe);
     } catch (error) {
-        process.env.NODE_ENV.trim() !== 'production' && console.log("Invalid recipe ID");
-        process.env.NODE_ENV.trim() !== 'production' &&console.log(error);
-      this.setState({ message: "Uh oh, accident happened" })
+      this.setState({ message: `No recipes corresponding to id ${recipeID}`, isLoading : false });
     }
   };
   
   render() {
-    const recipe = this.state.activeRecipe;
+    const recipe = this.props.currentRecipe;
+  
+    const filterRecipeName = (reciceName) => {
+      let nameToReturn = reciceName;
     
-    if(!recipe){
-      return (
-        <div className="App">
-      {/* clean up */}
-      <div className="container"></div>
-      <p>Food2Fork API has reach it's maximum Calls. </p> 
-      </div>
-   ); }
-    else
+      if (nameToReturn.includes("&nbsp;"))
+        nameToReturn = nameToReturn.replace("&nbsp;", " ");
+    
+      return nameToReturn;
+    };
+
     return (
       <div className="App">
         <Headers linkTo = "#/Recipes" headerTitle="Recipe App"/>
-      <div className="container">
-      <div className="content">
-        { this.state.activeRecipe.length !== 0 &&
-          <div className="active-recipe">
-            <img className="active-recipe__img" src={recipe.image_url} alt={recipe.title}/>
-            <h3 className="active-recipe__title">{ recipe.title }</h3>
-            <p className="active-recipe__website"><strong>See the recipe in detail: </strong>
-              <span className="recipe_link"><a id="recipe__link" target = "_blank" rel="noopener noreferrer" href={recipe.source_url}>{recipe.publisher_url}</a></span>
-            </p>
-            {/* list-group , list-group-item part of bootstrap */}
-            <div className="active-recipe__ingredients">
-            <ul className="list-group mt-4">
-                  <h4 className="mt-3 mb-4">Ingredients</h4>
-                  {recipe.ingredients.map((item, index) => {
-                    return (
-                      <li key={index} className="list-group-item text-slanted">
-                        {item}
-                      </li>
-                    );
-                  })}
-                </ul>
-            </div>    
-           
-            <h4 className="active-recipe__publisher"> 
-            <strong>Recipe Publisher:</strong> <span>{ recipe.publisher }</span>
-            </h4>
-          </div>
-        }
-  { this.state.activeRecipe.length === 0 &&
-      
-      <div >
-        {this.state.message}      
-      </div>
-  }
+        <div className="container">
+          <div className="content">
+            { recipe && recipe.length !== 0 ?
+              <div className="active-recipe">
+                <img className="active-recipe__img" src={recipe.image_url} alt={recipe.title}/>
+                <h3 className="active-recipe__title">{ filterRecipeName(recipe.title) }</h3>
+
+                <h4 className="active-recipe__publisher"> 
+                <strong>Recipe Publisher:</strong> <span>{ recipe.publisher }</span>
+                </h4>
+
+                <p className="active-recipe__website"><strong>See the recipe in detail: </strong>
+                  <span className="recipe_link"><a id="recipe__link" target = "_blank" rel="noopener noreferrer" href={recipe.source_url}>{recipe.publisher_url.replace("http", "https")}</a></span>
+                </p>
+                <div className="active-recipe__ingredients">
+                <ul className="ingredient__list">
+                      <h4 className="mt-3 mb-4">Ingredients</h4>
+                      {recipe.ingredients.map((item, index) => {
+                        return (
+                          <li key={index} className="list-group-item text-slanted">
+                            {item}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                </div>    
+              </div>
+            : 
+            <div className="recipe__loading" >
+              <ClipLoader
+                css={override}
+                size={150}
+                color={"#19B5FE"}
+                loading={this.state.isLoading}
+              />
+                {this.state.message}     
+            </div>
+            
+            }
   </div>
       </div>
       </div>
@@ -102,4 +89,11 @@ class Recipe extends React.Component {
   }
 };
 
-export default Recipe;
+const mapStateToProps = state => { 
+  const recipeProps  = state.RecipeReducer.defaultRecipeStates; 
+  const {currentRecipe} = recipeProps;
+
+  return {currentRecipe};
+};
+
+export default withRouter(connect(mapStateToProps)(Recipe));

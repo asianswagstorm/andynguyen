@@ -1862,34 +1862,38 @@ header.MyHeader {
 		}
 
 /* Main */
-
-	#main {
-		background: #f1f1f1;
+/* #f1f1f1 */
+	section#main {
+		background: #f1f1f1 ;
 		width: 100%;
 		min-height:100vh;
 	
 	}
+	/* !!! */
+	section#main__page {
+		min-height: 86.9vh
+	}
 
-		#main #header {
+	section#main #header {
 			background: #e6e6e6;
 			padding: 1.15em 3.5em;
 			text-align: right;
 		}
 
-			#main #header h1 {
+		section#main #header h1 {
 				margin: 1;
 				font-size: 1em;
 			}
 
 			@media screen and (max-width: 980px) {
-				#main #header {
+				section#main #header {
 					padding: 1.15em 2em;
 				}
 			}
 
 			@media screen and (max-width: 736px) {
 
-				#main #header {
+				section#main #header {
 					text-align: center;
 				}
 
@@ -1897,12 +1901,12 @@ header.MyHeader {
 
 			@media screen and (max-width: 667px) {
 
-				#main #header {
+				section#main #header {
 					text-align: center;
 				}
 
-				#main {
-					min-height:125vh;
+				section#main {
+					min-height:100vh;
 				}
 
 			}
@@ -1928,6 +1932,9 @@ div.job-section{
 		padding: 4em 0 2em 0;
 		background: #0d1217;
 		margin-left: 0.75px;
+		/* position: absolute; */
+		bottom: 0;
+		width:100%;
 	
 	}
 

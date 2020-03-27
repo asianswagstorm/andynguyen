@@ -1,7 +1,3 @@
-div.recipe__section{
-  min-height:70.5vh;
-}
-
 /* recipe images */
 img.recipe__box-img {
   width: 100%;
@@ -37,6 +33,16 @@ button:focus {
   margin-right: 25px; 
 }
 
+div.recipe__loading{
+  text-align: center;
+  font-size:25px;
+  font-weight: bold;
+}
+
+ul.ingredient__list{
+  margin-top: 10px;
+}
+
 button.recipe__buttons {
   border: solid 2px #2c3e50;
   background: #2c3e50;
@@ -63,6 +69,19 @@ a#view_recipe, a#recipe__link {
   text-transform: uppercase;
   font-size: 1.1rem;
   padding: 1.8rem 0 0.2rem 0;
+}
+
+div.error__box{
+  font-size:20px;
+  font-weight: 500;
+}
+
+p.error__message{
+  color:red;
+}
+
+p.inital__message{
+  color:black;
 }
 
 /* ???? */

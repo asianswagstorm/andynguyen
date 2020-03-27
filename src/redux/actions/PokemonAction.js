@@ -46,7 +46,7 @@ export const getPokemonData = pokemonIndex => dispatch => {
 export const getPokemonsLimit = numOfPoke => dispatch => {
     try{
         getPokemons(numOfPoke).then(
-            response =>  dispatch(setPokemon(response))
+            response =>  dispatch(setPokemon("",response))
         );
     }
     catch (error) {
@@ -54,11 +54,11 @@ export const getPokemonsLimit = numOfPoke => dispatch => {
     };
 };
 
-export const getPokemonsByName = name => dispatch => {
-    dispatch(setPokemon([]));
+export const getPokemonsByName = searchedPokemon => dispatch => {
+    dispatch(setPokemon("", []));
     try{
-        getPokemonByName(name).then(
-            response =>  dispatch(setPokemon(response))
+        getPokemonByName(searchedPokemon).then(
+            response =>  dispatch(setPokemon(searchedPokemon,response))
         );
     }
     catch (error) {
@@ -66,7 +66,8 @@ export const getPokemonsByName = name => dispatch => {
     };
 };
 
-export const setPokemon = pokemons => ({
+export const setPokemon = (searchedPokemon,pokemons) => ({
     type: POKEMON_TYPE.SET_POKEMONS,
+    searchedPokemon,
     pokemons
 });

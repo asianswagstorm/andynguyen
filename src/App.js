@@ -37,27 +37,30 @@ export class App extends Component {
       <div className="page-wrap">
         <Navbar/>
         <section id="main">
-          <HashRouter>
-            <Route render={({location}) => (
-              <TransitionGroup>
-                  <CSSTransition
-                    key={location.key}
-                    timeout={450}
-                    classNames="fade"
-                  >
-                    <Switch>
-                      {
-                        routes_components.map((route, key) => 
-                        <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
-                        )
-                      }  
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
-            )} />
-          </HashRouter>
+          <section id ="main__page">
+            <HashRouter>
+              <Route render={({location}) => (
+                <TransitionGroup>
+                    <CSSTransition
+                      key={location.key}
+                      timeout={450}
+                      classNames="fade"
+                    >
+                      <Switch>
+                        {
+                          routes_components.map((route, key) => 
+                          <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
+                          )
+                        }  
+                      </Switch>
+                    </CSSTransition>
+                  </TransitionGroup>
+              )} />
+            </HashRouter>
+          </section>
           <Footer />
         </section>
+        
       
       </div>
     );

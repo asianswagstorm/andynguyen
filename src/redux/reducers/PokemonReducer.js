@@ -25,7 +25,7 @@ const PokemonReducer = (state = DEFAULT_STATES, action) => {
         case "SET_POKEMONS":  
             return {
                 ...state,
-                defaultPokemonStates: {...state.defaultPokemonStates, pokemons : action.pokemons}
+                defaultPokemonStates: {...state.defaultPokemonStates, pokemons : action.pokemons,searchedPokemon : action.searchedPokemon }
             };
         case "SET_POKEMON_DATA":
             return {

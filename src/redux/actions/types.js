@@ -40,5 +40,6 @@ export const POKEMON_TYPE = {
 };
 
 export const RECIPE_TYPE = {
-    SET_RECIPES : "SET_RECIPES"
+    SET_RECIPES : "SET_RECIPES",
+    SET_CURRENT_RECIPE : "SET_CURRENT_RECIPE"
 };
