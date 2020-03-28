@@ -1612,6 +1612,9 @@ header.MyHeader {
 
 				/*Iphone X WORKS */
 				@media screen and (max-width: 812px) { 
+					nav#nav {
+						width: 0px;
+					}
 
 					#nav ul li {
 						position: fixed;

@@ -162,12 +162,34 @@ input:-webkit-autofill {
 /******** RECIPE.js ********/
 
 .active-recipe {
-  margin: 0 auto;
-  width: 60%;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 580px;
 }
 
+@media only screen and (max-width: 537px) and (max-height: 830px)  and (-webkit-min-device-pixel-ratio: 3)   {
+  .active-recipe {
+    width: 100%;
+  }
+
+  div.recipe__content {
+    margin-left: 10px;
+    width: 99%;
+  }
+  p.active-recipe__website, h3.active-recipe__title, h4.active-recipe__publisher{
+    font-size: 15px;
+  }
+
+  .ingredient__list{
+    font-size: 12px;
+
+  }
+  
+}
+/* change this for responsive!!! */
 .active-recipe__img {
-  height: 500px !important;
+  width:100%;
 }
 
 .active-recipe__title {
@@ -228,20 +250,6 @@ input:-webkit-autofill {
   font-weight: 500;
 }
 
-.App-footer {
-  background-color: #2c3e50;
-  height: 90px;
-  width:100%;
-  padding: 30px;
-  position: relative;
-  bottom:0;
-  left:0;
-  color: white;
-  margin-top: 7vh;
- 
-  
-}
-
 .error_box{
   position: absolute;
   right:40%;
@@ -253,9 +261,4 @@ input:-webkit-autofill {
   font-size: 2rem;
   text-align: center;
   color: #f3f3f3;
-}
-
-.content{
-  min-height: 72.5vh;
- 
 }

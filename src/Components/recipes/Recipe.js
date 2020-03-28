@@ -43,11 +43,11 @@ class Recipe extends React.Component {
     return (
       <div className="App">
         <Headers linkTo = "#/Recipes" headerTitle="Recipe App"/>
-        <div className="container">
-          <div className="content">
+          <div>
             { recipe && recipe.length !== 0 ?
               <div className="active-recipe">
                 <img className="active-recipe__img" src={recipe.image_url} alt={recipe.title}/>
+              <div className="recipe__content">
                 <h3 className="active-recipe__title">{ filterRecipeName(recipe.title) }</h3>
 
                 <h4 className="active-recipe__publisher"> 
@@ -70,6 +70,7 @@ class Recipe extends React.Component {
                     </ul>
                 </div>    
               </div>
+              </div>
             : 
             <div className="recipe__loading" >
               <ClipLoader
@@ -80,10 +81,8 @@ class Recipe extends React.Component {
               />
                 {this.state.message}     
             </div>
-            
             }
-  </div>
-      </div>
+        </div>
       </div>
     );
   }
