@@ -187,9 +187,10 @@ input:-webkit-autofill {
   }
   
 }
-/* change this for responsive!!! */
+/* change this for responsive!!! FIX later */
 .active-recipe__img {
   width:100%;
+  max-height: 400px;
 }
 
 .active-recipe__title {

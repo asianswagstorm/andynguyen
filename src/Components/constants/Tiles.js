@@ -35,8 +35,8 @@ export const tiles = [
       type: ["JavaScript"]
     },
     {
-      linkType: "external",
-      href: "https://spotify-app-andy.herokuapp.com/",
+      linkType: "internal",
+      href: "#/Spotify",
       src: "images/thumbs/thumb14.jpg",
       alt: "",
       title: "A spotify api app made with react. ",
