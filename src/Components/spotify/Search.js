@@ -17,43 +17,35 @@ class Search extends Component {
     this.props.searchArtist(this.state.artistQuery);
   };
 
+  /*
+  this.props.noResultsFound !== "" && (this.props.noResultsFound === "false") ? "artist_search_success" : "artist_search_error" 
+
+  */
+
+
   render() {
     return (
-      <div>
-        <div className="row justify-content-center">
-          <div className="col-12 col-md-10 col-lg-8">
-            <div className="card-body row no-gutters align-items-center">
-              <div className="col">
-                <input
-                  className={`form-control form-control-lg form-control-borderless h3 ${this.props.noResultsFound !== "" && "noSearch"}`}
-                  type="search"
-                  onChange={this.updateArtistQuery}
-                  onKeyPress={this.handleKeyPress}
-                  placeholder={" Search for an Artist"}
-                  required
-                />
-              </div>
+      <div className="artist__search__section">
+        <div className="search__artist" id={this.props.noResultsFound.className}>
+          <input
+            className= "search__input"
+            type="search"
+            onChange={this.updateArtistQuery}
+            onKeyPress={this.handleKeyPress}
+            placeholder={" Search for an Artist"}
+            required/>
+          <button
+            className={`search_button ${this.props.noResultsFound.className}`}
+            type="submit"
+            onClick={this.searchArtist}
+          >
+            <i className="fa fa-search"> </i>
+          </button>
+        </div>
 
-              <div className="col-auto">
-                <button
-                  className={`btn btn-lg ${(this.props.noResultsFound === "") ? "btn-success" : "btn-danger" } h3 `}
-                  type="submit"
-                  onClick={this.searchArtist}
-                >
-                  <div className="col-auto">
-                    <i className="fa fa-search"> </i>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* add a lively error*/}
-        <div className="row justify-content-center">
-        {this.props.noResultsFound !== "" && (
-          <div className="invalid-search"><strong>{this.props.noResultsFound}</strong></div>
-        ) }
-        </div>
+        {this.props.noResultsFound.message !== "" && 
+          <div className="invalid__search"><strong>{this.props.noResultsFound.message}</strong></div>
+        }
       </div>
     );
   }

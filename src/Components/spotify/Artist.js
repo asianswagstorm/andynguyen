@@ -15,8 +15,7 @@ const Artist = ({ artist }) => {
     x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
-    <div>
-      {/* Change this to a table row */}
+    <div className="artist__info">
       <h3>
         <strong>
           <a
@@ -29,11 +28,11 @@ const Artist = ({ artist }) => {
           </a>
         </strong>
       </h3>
-      <br />
+  
       <p>
         <h4>{numberWithCommas(followers.total)} Spotify Followers </h4>
       </p>
-      <br />
+    
       <p>
         <h4>
           {" "}
@@ -49,17 +48,12 @@ const Artist = ({ artist }) => {
             .join(", ")}
         </h4>{" "}
       </p>
-      <br />
+  
       <a href={uri}>
         <img
-          src={images[0] && images[0].url} // same image different heights
+          className="artist__profile__img"
+          src={images[0] && images[0].url} // change this depending on screen size. 
           alt="artist-profile"
-          style={{
-            width: 200,
-            height: 200,
-            borderRadius: 100,
-            objectFit: "cover"
-          }}
         />
       </a>
     </div>

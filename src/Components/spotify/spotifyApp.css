@@ -1,0 +1,153 @@
+.Spotify {
+  text-align: center;
+}
+
+div.spotify__content{
+  width: 100%;
+  /* background-color: aqua; */
+}
+
+div.artist__search__section{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+div.search__artist{
+  border-radius: 100px;
+  border: 1px solid black;
+  width: 229px;
+  margin:auto;
+  background-color: white;
+  height:42px;
+}
+
+div.search__artist:focus{
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(15, 245, 7, 0.5);
+}
+
+input.search__input:focus{
+  outline:none;
+}
+
+input.search__input {
+  border-style: none;
+  margin-right: 15px;
+  margin-left: 5px;
+  text-align: center;
+  max-width: 200px;
+}
+
+button.search_button{
+  border-radius: 100px;
+  color: white;
+  margin-right: 0;
+  min-width: 56px;
+}
+
+#artist_search_success{
+  border: 1px solid #5cb85c;
+}
+
+#artist_search_error{
+  border: 1px solid #d9534f;
+}
+
+button.search_button.artist_search_success{
+  background-color: #5cb85c;
+}
+
+button.search_button.artist_search_error{
+  background-color: #d9534f;
+}
+
+div.invalid__search{
+  color: #d9534f;
+  margin-top: 15px;
+}
+
+div.artist__info{
+  /* background-color: yellowgreen; */
+}
+
+img.artist__profile__img{
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-bottom: 15px;
+}
+
+div.artist__tracks{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+div.album__track{
+  width: 320px;
+  background-color: #191414;
+  margin: 10px;
+}
+
+div.track__image__icon{
+  height:100%;
+}
+
+img.track__image{
+  width:100%;
+}
+
+div.track__icon {
+  color: white;
+  background-color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  padding: 15px;
+  opacity: 0.8;
+  margin: auto;
+  transform: translateY(-180px);
+}
+
+div.track__text{
+  margin-top: 10px;
+}
+
+
+.track__icon:hover {
+  color: black;
+  background-color: lightgrey;
+}
+
+.external__links{
+  display: inline-flex;
+  align-self: center;
+  margin-bottom:5px;
+
+}
+
+i.fab.fa-youtube{
+  color:#ff0000;
+  margin-right: 10px;
+}
+
+.track__youtube:hover {
+  color: #F0735F;
+  text-decoration: none;
+}
+
+i.fab.fa-spotify{
+  color:#1DB954;
+}
+
+.track__spotify:hover {
+  color: #8DED38;
+  text-decoration: none;
+}
+
+
+
+h5.track__title{
+  color: white;
+
+}

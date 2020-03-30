@@ -1432,6 +1432,14 @@ header.MyHeader {
 
 /* header */
 
+header > h1#app-header ,header > h2#app-header,header > h3#app-header {
+    color: #19B5FE;
+    text-align: center;
+    text-shadow: 0.5px 0.5px rgb(188, 223, 243);
+    font-family: Arial, sans-serif;
+}
+
+
 .split-para      { margin:0px;}
 .split-para span { float:right;width:50%;margin-left:0px;}
 

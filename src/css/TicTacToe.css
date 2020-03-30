@@ -5,18 +5,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #e6e6e6;
-}
-
-header > h1#my-games ,header > h2#my-games {
-    color: #19B5FE;
-    text-align: center;
-    text-shadow: 1px 1px rgb(188, 223, 243);
-    font-family: Arial, sans-serif;
-}
-
-
 header > h3 {
     color: ghostwhite;
     text-align: center;

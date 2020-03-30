@@ -34,48 +34,51 @@ class Tracks extends Component {
       return <span> | | </span>;
     }
 
-    return <span> &#9654;</span>;
+    return <i className="fas fa-play"> </i> ;
   };
 
   render() {
     const { tracks, artist } = this.props;
 
     return (
-      <div className="container">
+      <div className="artist__tracks">
         {tracks.map(track => {
           const { id, name, album, preview_url, uri } = track;
 
           return (
             <div
               key={id}
-              className="track" //track
+              className="album__track" 
             >
-              <img
-                src={album.images[0].url}
-                alt="track-img"
-                className="card-img-top" //track-image
-              />
-              <div className="card-body" id="track-text">
-                <h5 className="card-title"> {name} </h5>
-                <div className="external-links">
+              <div classname="track__image__icon" >
+                <img
+                  src={album.images[0].url}
+                  alt="track-img"
+                  className="track__image" //track-image
+                />
+                <div className="track__icon" onClick={this.playAudio(preview_url)}>
+                  {this.trackIcon(track)}
+                </div>
+              </div>
+              <div className="track__text">
+                <h5 className="track__title"> {name} </h5>
+                <div className="external__links">
                   <a
-                    className="track-youtube"
+                    className="track__youtube"
                     target="_blank"
                     rel="noopener noreferrer"
                     href={`https://www.youtube.com/results?search_query=${name} by ${
                       artist.name
                     }`}
                   >
-                    <i className="fab fa-youtube"> </i>
+                    <i className="fab fa-youtube"> </i> {/* youtube opens modal and plays the video in modal. */}
                   </a>
-                  <a className="track-spotify" href={`${uri}?play=true`}>
+                  <a className="track__spotify" href={`${uri}?play=true`}>
                     <i className="fab fa-spotify"> </i>
                   </a>
                 </div>
               </div>
-              <p className="track-icon" onClick={this.playAudio(preview_url)}>
-                {this.trackIcon(track)}
-              </p>
+             
             </div>
           );
         })}
