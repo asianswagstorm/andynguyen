@@ -12,35 +12,43 @@ div.artist__search__section{
   margin-top: 15px;
 }
 
+/* media query for mobile!!!  */
 div.search__artist{
+  display: flex;
   border-radius: 100px;
   border: 1px solid black;
-  width: 229px;
+  max-width: 229px;
   margin:auto;
   background-color: white;
   height:42px;
 }
 
-div.search__artist:focus{
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(15, 245, 7, 0.5);
-}
-
 input.search__input:focus{
   outline:none;
 }
+div.spotify__input__section{
+  border-radius: 100px;
+  width:70%;
+}
 
 input.search__input {
+  border-radius: 100px;
+  height:100%;
   border-style: none;
-  margin-right: 15px;
-  margin-left: 5px;
+  color:black;
   text-align: center;
   max-width: 200px;
+}
+
+div.spotify__button__section{
+  background-color: black;
+  border-radius: 100px;
+  width:30%;
 }
 
 button.search_button{
   border-radius: 100px;
   color: white;
-  margin-right: 0;
   min-width: 56px;
 }
 
@@ -52,11 +60,11 @@ button.search_button{
   border: 1px solid #d9534f;
 }
 
-button.search_button.artist_search_success{
+button.search_button.artist_search_success, div.spotify__button__section.artist_search_success{
   background-color: #5cb85c;
 }
 
-button.search_button.artist_search_error{
+button.search_button.artist_search_error,div.spotify__button__section.artist_search_error{
   background-color: #d9534f;
 }
 

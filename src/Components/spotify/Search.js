@@ -27,20 +27,24 @@ class Search extends Component {
     return (
       <div className="artist__search__section">
         <div className="search__artist" id={this.props.noResultsFound.className}>
-          <input
-            className= "search__input"
-            type="search"
-            onChange={this.updateArtistQuery}
-            onKeyPress={this.handleKeyPress}
-            placeholder={" Search for an Artist"}
-            required/>
-          <button
-            className={`search_button ${this.props.noResultsFound.className}`}
-            type="submit"
-            onClick={this.searchArtist}
-          >
-            <i className="fa fa-search"> </i>
-          </button>
+          <div className = "spotify__input__section">
+            <input
+              className= "search__input"
+              type="search"
+              onChange={this.updateArtistQuery}
+              onKeyPress={this.handleKeyPress}
+              placeholder={" Search for an Artist"}
+              required/>
+          </div>
+          <div className = {`spotify__button__section ${this.props.noResultsFound.className}`} >
+            <button
+              className={`search_button ${this.props.noResultsFound.className}`}
+              type="submit"
+              onClick={this.searchArtist}
+            >
+              <i className="fa fa-search"> </i>
+            </button>
+          </div>
         </div>
 
         {this.props.noResultsFound.message !== "" && 
