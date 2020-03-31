@@ -40,16 +40,12 @@ input.search__input {
   max-width: 200px;
 }
 
-div.spotify__button__section{
-  background-color: black;
-  border-radius: 100px;
-  width:30%;
-}
+
 
 button.search_button{
   border-radius: 100px;
   color: white;
-  min-width: 56px;
+  width:30%;
 }
 
 #artist_search_success{
@@ -60,11 +56,11 @@ button.search_button{
   border: 1px solid #d9534f;
 }
 
-button.search_button.artist_search_success, div.spotify__button__section.artist_search_success{
+button.search_button.artist_search_success{
   background-color: #5cb85c;
 }
 
-button.search_button.artist_search_error,div.spotify__button__section.artist_search_error{
+button.search_button.artist_search_error{
   background-color: #d9534f;
 }
 

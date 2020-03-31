@@ -36,15 +36,13 @@ class Search extends Component {
               placeholder={" Search for an Artist"}
               required/>
           </div>
-          <div className = {`spotify__button__section ${this.props.noResultsFound.className}`} >
-            <button
+          <button
               className={`search_button ${this.props.noResultsFound.className}`}
               type="submit"
               onClick={this.searchArtist}
             >
               <i className="fa fa-search"> </i>
-            </button>
-          </div>
+          </button>
         </div>
 
         {this.props.noResultsFound.message !== "" && 
