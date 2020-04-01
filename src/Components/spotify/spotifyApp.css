@@ -31,7 +31,7 @@ div.spotify__input__section{
   width:70%;
 }
 
-button.close__suggestion{
+button.select__suggestion{
   color:white;
   height:20px;
   width: 100%;
@@ -65,15 +65,16 @@ div.artist__suggestion{
 ul.select-list-group__list { 
   list-style : none;
   padding : 0; 
-  background-color:rgba(228, 220, 220, 0.377);
-  width: 100%;
-  margin-top: 1px;
+  background-color:white;
+  width: 185px;
+ 
   border: 1px black solid;
+  position: absolute;
 }
 
 li.select-list-group__list-item{
   position: relative;
-  margin-bottom: 1px;
+  /* margin-bottom: 1px; */
 }
 
 li.select-list-group__list-item { 
@@ -83,15 +84,9 @@ li.select-list-group__list-item {
   background-color : white 
 }
 
-li.select-list-group__list-item:hover{ 
-  color : black; 
-  font-weight: bold;
-  border: 1px black solid;
+li#list__item__active{ 
   background-color : rgb(139, 135, 135) 
 }
-
-li.select-list-group__list-item li.current.select-list-group__list-item { color : white; background-color : pink }
-
 
 button.search_button{
   border-radius: 100px;
