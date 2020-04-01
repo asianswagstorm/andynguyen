@@ -31,15 +31,66 @@ div.spotify__input__section{
   width:70%;
 }
 
-input.search__input {
+button.close__suggestion{
+  color:white;
+  height:20px;
+  width: 100%;
+}
+
+select.search__select{
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  border-style: none;
+  /* transform: translateY(-40px); */
+}
+
+input.search__input{
   border-radius: 100px;
   height:100%;
   border-style: none;
   color:black;
   text-align: center;
   max-width: 200px;
+  margin : 0 ;
 }
 
+div.artist__suggestion{
+  width:160px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  /* background-color: green; */
+}
+
+ul.select-list-group__list { 
+  list-style : none;
+  padding : 0; 
+  background-color:rgba(228, 220, 220, 0.377);
+  width: 100%;
+  margin-top: 1px;
+  border: 1px black solid;
+}
+
+li.select-list-group__list-item{
+  position: relative;
+  margin-bottom: 1px;
+}
+
+li.select-list-group__list-item { 
+  color : black; 
+  font-weight: bold;
+  border: 1px black solid;
+  background-color : white 
+}
+
+li.select-list-group__list-item:hover{ 
+  color : black; 
+  font-weight: bold;
+  border: 1px black solid;
+  background-color : rgb(139, 135, 135) 
+}
+
+li.select-list-group__list-item li.current.select-list-group__list-item { color : white; background-color : pink }
 
 
 button.search_button{
@@ -122,9 +173,6 @@ div.track__text{
   transform: translateY(-80px);
 }
 
-option#select__artist__option{
-  font-size:10px;
-}
 
 .track__icon:hover {
   color: black;
