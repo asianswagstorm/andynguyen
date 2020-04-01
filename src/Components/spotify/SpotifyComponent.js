@@ -10,34 +10,6 @@ const API_ADDRESS = "https://spotify-api-wrapper.appspot.com";
 class SpotifyComponent extends Component {
   state = { artist: null, tracks: [], noResultsMessage: {className: "",message:""}};
 
-  /* I am using an API wrapper, no API authentication token required. This API limits to one search 
-  {"artists":
-      {
-            "href":"https://api.spotify.com/v1/search?query=${artistQuery}&type=artist&offset=0&limit=1",
-            "items":[
-                      "external_urls":
-                        {
-                           "spotify":,
-                           "followers":{"href", "total"},
-                           "genres":[],
-                           "href":,
-                           "id":,
-                           "images":[ ... 3 different height same image],
-                           "name":,
-                           "popularity":,
-                           "type":,
-                           "uri":
-                        }
-                    ],
-            "limit":1,
-            "next":null,
-            "offset":0,
-            "previous":null,
-            "total":0
-      }
-  }
-  */
-
   // clean this up!!!
   searchArtist = artistQuery => {
     fetch(`${API_ADDRESS}/artist/${artistQuery}`) //fetch artist , returns a Promise
@@ -45,7 +17,7 @@ class SpotifyComponent extends Component {
       .then(json => {
         if (Object.keys(json.artists.items).length !== 0) {
 
-          //"https://api.spotify.com/v1/search?query=michael&type=artist&offset=0&limit=1" official api requires a token
+          //"https://api.spotify.com/v1/search?query=michael&type=artist&offset=0&limit=1" official api requires a token// wrapper api only limits to 1 artist.
           const artist = json.artists.items[0];
 
           this.setState({ artist ,noResultsMessage: { className: "artist_search_success",
@@ -87,7 +59,7 @@ class SpotifyComponent extends Component {
               </h4>
               <p>
                 For the best experience possible have the Spotify desktop
-                application open or Spotify App installed.
+                application open or Spotify App installed. (Chrome Browser is recommended.)
               </p>
             </div>
           )}

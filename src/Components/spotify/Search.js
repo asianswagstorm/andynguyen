@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-
+import {filterArtistByName} from "./filterArtist";
 class Search extends Component {
-  state = { artistQuery: "" };
+  state = { artistQuery: "", listOfArtist: [] };
 
   updateArtistQuery = event => {
-    this.setState({ artistQuery: event.target.value });
+    const artistQuery = event.target.value;
+    this.setState({ listOfArtist : filterArtistByName(artistQuery), artistQuery });
   };
 
   handleKeyPress = event => {
@@ -28,13 +29,22 @@ class Search extends Component {
       <div className="artist__search__section">
         <div className="search__artist" id={this.props.noResultsFound.className}>
           <div className = "spotify__input__section">
+        
             <input
+              list="artists"
               className= "search__input"
               type="search"
               onChange={this.updateArtistQuery}
               onKeyPress={this.handleKeyPress}
               placeholder={" Search for an Artist"}
               required/>
+         
+          <datalist id="artists"  className= "search__datalist"> 
+            { this.state.listOfArtist.slice(0,7).map((artist, key) =>
+               <option id="select__artist__option" key={key} value={artist}> {artist} </option>) 
+            }
+          </datalist>
+         
           </div>
           <button
               className={`search_button ${this.props.noResultsFound.className}`}

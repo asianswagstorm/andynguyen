@@ -24,7 +24,7 @@ class Tracks extends Component {
 
   trackIcon = track => {
     if (!track.preview_url) {
-      return <span> N / A </span>;
+      return <span> N/A </span>;
     }
 
     if (
@@ -50,7 +50,7 @@ class Tracks extends Component {
               key={id}
               className="album__track" 
             >
-              <div classname="track__image__icon" >
+              <div className="track__image__icon" >
                 <img
                   src={album.images[0].url}
                   alt="track-img"

@@ -99,6 +99,11 @@ div.track__image__icon{
 
 img.track__image{
   width:100%;
+  height:320px;
+}
+
+select#select__artist{
+  color:black;
 }
 
 div.track__icon {
@@ -114,9 +119,12 @@ div.track__icon {
 }
 
 div.track__text{
-  margin-top: 10px;
+  transform: translateY(-80px);
 }
 
+option#select__artist__option{
+  font-size:10px;
+}
 
 .track__icon:hover {
   color: black;
