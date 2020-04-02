@@ -1,42 +1,36 @@
 import React, { Component } from "react";
+import {fetchArtist,getTopTracks} from "./spotifyServices";
 import "./spotifyApp.css";
 import Headers from "../Headers";
 import Search from "./Search";
 import Artist from "./Artist";
 import Tracks from "./Tracks";
 
-const API_ADDRESS = "https://spotify-api-wrapper.appspot.com";
-
 class SpotifyComponent extends Component {
   state = { artist: null, tracks: [], noResultsMessage: {className: "",message:""}};
-
-  // clean this up!!!
+  //Add Redux!!! 
   searchArtist = artistQuery => {
-    fetch(`${API_ADDRESS}/artist/${artistQuery}`) //fetch artist , returns a Promise
-      .then(response => response.json())
-      .then(json => {
-        if (Object.keys(json.artists.items).length !== 0) {
-
-          //"https://api.spotify.com/v1/search?query=michael&type=artist&offset=0&limit=1" official api requires a token// wrapper api only limits to 1 artist.
-          const artist = json.artists.items[0];
-
-          this.setState({ artist ,noResultsMessage: { className: "artist_search_success",
+    fetchArtist(artistQuery).then(json => {
+      if (Object.keys(json.artists.items).length !== 0) {
+        const artist = json.artists.items[0];
+        this.setState({ artist ,noResultsMessage: { className: "artist_search_success",
                                                       message : "" }});
-
-          fetch(`${API_ADDRESS}/artist/${artist.id}/top-tracks`) //fetch top tracks
-            .then(response => response.json())
-            .then(json => this.setState({ tracks: json.tracks })) //top 10 tracks
-            .catch(error => alert(error.message));
-        } else{
-          this.setState({ noResultsMessage: { className: "artist_search_error",
+        getTopTracks(artist.id).then(json => this.setState({ tracks: json.tracks })).catch(error => Error(error));
+      } 
+      else{
+        this.setState({ noResultsMessage: { className: "artist_search_error",
                                               message : `No artist found of the name ${artistQuery} ! Please Try another artist.` }});
-        }
-      })
-      .catch(error => alert(error.message));
+      }
+    }).catch(error => {
+        const message = (artistQuery.trim() === "") ? "Input cannot be blank" : "Input cannot have special characters!"; 
+        
+        this.setState({  noResultsMessage: { className: "artist_search_error",
+                                            message : message } })
+        Error(error);
+    });
   };
 
-  render() {
-
+  render = () => {
     const headerTitle =
       this.state.artist !== null ? "Music Master" : "Welcome to Music Master";
 
@@ -64,10 +58,9 @@ class SpotifyComponent extends Component {
             </div>
           )}
         </div>
-
       </div>
     );
-  }
-}
+  };
+};
 
 export default SpotifyComponent;

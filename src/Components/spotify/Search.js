@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {filterArtistByName} from "./filterArtist";
+import ArtistSuggestions from "./ArtistSuggestions";
 // import 'antd/dist/antd.css';
 const listLimit = 6;
 
@@ -39,42 +40,36 @@ class Search extends Component {
   };
 
   render() {
-
-    const artists = (<ul className="select-list-group__list">
-                        {(this.state.listOfArtist.slice(0, listLimit+1)).map((artist, key) =>
-                              <li className="select-list-group__list-item" id= {key === this.state.currentSelected ? "list__item__active" : "list__item__inactive"} key={key} onClick={() => this.searchArtist(artist)}
-                              onMouseEnter = {() => this.hoverArtist(artist, key)} >
-                                  {artist} 
-                              </li> 
-                          )}
-                    </ul>)
+    const {listOfArtist,artistQuery,hidden,currentSelected} = this.state;
+  
     return (
       <div className="artist__search__section">
         <div className="search__artist" id={this.props.noResultsFound.className}>
           <div className = "spotify__input__section">
-          <input
-              onKeyDown = {this.handleKeyDown}
-              list="artists"
-              className= "search__input"
-              type="search"
-              onChange={this.fetchArtistList}
-              onKeyPress={this.handleKeyPress}
-              onFocus = { () => this.setState({ hidden : true, currentSelected : -1 })}
-              placeholder={" Search for an Artist"}
-              required 
-              value={this.state.artistQuery}/> 
+            <input
+                onKeyDown = {this.handleKeyDown}
+                list="artists"
+                className= "search__input"
+                type="search"
+                onChange={this.fetchArtistList}
+                onKeyPress={this.handleKeyPress}
+                onFocus = { () => this.setState({ hidden : true, currentSelected : -1 })}
+                placeholder={" Search for an Artist"}
+                required 
+                value={artistQuery}/> 
 
-         {(this.state.listOfArtist.length > 0 &&  this.state.hidden === false) && 
-              <div className="artist__suggestion"> 
-                {artists}
-              </div>
-          }
-       
+          {(listOfArtist.length > 0 &&  hidden === false) && 
+                <ArtistSuggestions  listOfArtist={listOfArtist} 
+                                    currentSelected= {currentSelected} 
+                                    searchArtist={this.searchArtist} 
+                                    hoverArtist= {this.hoverArtist} 
+                                    listLimit={listLimit}/>
+            }
           </div>
           <button
               className={`search_button ${this.props.noResultsFound.className}`}
               type="submit"
-              onClick={() => this.searchArtist(this.state.artistQuery)}
+              onClick={() => this.searchArtist(artistQuery)}
             >
               <i className="fa fa-search"> </i>
           </button>
@@ -89,4 +84,3 @@ class Search extends Component {
 }
 
 export default Search;
-// {artist is type array???? }

@@ -4,7 +4,6 @@
 
 div.spotify__content{
   width: 100%;
-  /* background-color: aqua; */
 }
 
 div.artist__search__section{
@@ -59,7 +58,6 @@ div.artist__suggestion{
   display: flex;
   flex-direction: column;
   margin-left: 15px;
-  /* background-color: green; */
 }
 
 ul.select-list-group__list { 
@@ -131,6 +129,9 @@ div.artist__tracks{
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 10px;
+  max-width: 1359px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 div.album__track{
