@@ -14,16 +14,16 @@ class Search extends Component {
 
   handleKeyPress = event => {
     if (event.key === "Enter") {
-      this.searchArtist();
+      this.searchArtist(this.state.artistQuery);
     }
   };
 
   selectArtist = (artistQuery, currentSelected) =>  this.setState({ artistQuery, hidden : true ,currentSelected});
-  hoverArtist = (artistQuery, currentSelected) =>  this.setState({ artistQuery ,currentSelected});
+  hoverArtist = (artistQuery, currentSelected) =>  this.setState({ artistQuery,  currentSelected});
 
-  searchArtist = () => {
+  searchArtist = (artistQuery) => {
     this.setState({ hidden : true , currentSelected : -1 })
-    this.props.searchArtist(this.state.artistQuery);
+    this.props.searchArtist(artistQuery);
   };
 
   handleKeyDown = (event) => {
@@ -42,8 +42,8 @@ class Search extends Component {
 
     const artists = (<ul className="select-list-group__list">
                         {(this.state.listOfArtist.slice(0, listLimit+1)).map((artist, key) =>
-                              <li className="select-list-group__list-item" id= {key === this.state.currentSelected ? "list__item__active" : "list__item__inactive"} key={key} onClick={() => this.selectArtist(artist, key)}
-                              onMouseEnter = {() => this.hoverArtist(artist,key)} >
+                              <li className="select-list-group__list-item" id= {key === this.state.currentSelected ? "list__item__active" : "list__item__inactive"} key={key} onClick={() => this.searchArtist(artist)}
+                              onMouseEnter = {() => this.hoverArtist(artist, key)} >
                                   {artist} 
                               </li> 
                           )}
@@ -61,8 +61,8 @@ class Search extends Component {
               onKeyPress={this.handleKeyPress}
               onFocus = { () => this.setState({ hidden : true, currentSelected : -1 })}
               placeholder={" Search for an Artist"}
-              required
-              value={this.state.artistQuery}/>
+              required 
+              value={this.state.artistQuery}/> 
 
          {(this.state.listOfArtist.length > 0 &&  this.state.hidden === false) && 
               <div className="artist__suggestion"> 
@@ -74,7 +74,7 @@ class Search extends Component {
           <button
               className={`search_button ${this.props.noResultsFound.className}`}
               type="submit"
-              onClick={this.searchArtist}
+              onClick={() => this.searchArtist(this.state.artistQuery)}
             >
               <i className="fa fa-search"> </i>
           </button>
