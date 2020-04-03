@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-
+import {searchYoutube} from "./spotifyServices";
 class Tracks extends Component {
-  //extends Component because we use states.
-  state = { playing: false, audio: null, playingPreviewUrl: null };
+  state = { playing: false, audio: null, playingPreviewUrl: null};
 
   playAudio = previewUrl => () => {
     const audio = new Audio(previewUrl);
@@ -37,14 +36,20 @@ class Tracks extends Component {
     return <i className="fas fa-play"> </i> ;
   };
 
+  linkToYoutube = async(name,artist) => {
+    const link = await searchYoutube(`${name} by ${ artist.name}`);
+    const a  = document.createElement('a');
+    a.href = link;
+    a.setAttribute('target', '_blank');
+    a.click();
+  };
+
   render() {
     const { tracks, artist } = this.props;
-
     return (
       <div className="artist__tracks">
         {tracks.map(track => {
           const { id, name, album, preview_url, uri } = track;
-
           return (
             <div
               key={id}
@@ -54,7 +59,7 @@ class Tracks extends Component {
                 <img
                   src={album.images[0].url}
                   alt="track-img"
-                  className="track__image" //track-image
+                  className="track__image" 
                 />
                 <div className="track__icon" onClick={this.playAudio(preview_url)}>
                   {this.trackIcon(track)}
@@ -63,17 +68,12 @@ class Tracks extends Component {
               <div className="track__text">
                 <h5 className="track__title"> {name} </h5>
                 <div className="external__links">
-                  <a
-                    className="track__youtube"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://www.youtube.com/results?search_query=${name} by ${
-                      artist.name
-                    }`}
-                  >
-                    <i className="fab fa-youtube"> </i> {/* youtube opens modal and plays the video in modal. */}
-                  </a>
-                  <a className="track__spotify" href={`${uri}?play=true`}>
+
+                <div className="track__youtube">
+                 <i className="fab fa-youtube" onClick = {() => this.linkToYoutube(name,artist) }> </i>
+                </div>
+
+                <a className="track__spotify" href={`${uri}?play=true`}>
                     <i className="fab fa-spotify"> </i>
                   </a>
                 </div>
@@ -88,3 +88,4 @@ class Tracks extends Component {
 }
 
 export default Tracks;
+// props.history.push()

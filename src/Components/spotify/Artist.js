@@ -2,16 +2,14 @@ import React from "react";
 
 const Artist = ({ artist }) => {
   if (!artist) return null;
-
   const { images, name, followers, genres, uri } = artist;
-
-  let capitalize_firstLetter = string =>
+  const capitalize_firstLetter = string =>
     string
       .toLowerCase()
       .charAt(0)
       .toUpperCase() + string.slice(1);
 
-  let numberWithCommas = x =>
+  const numberWithCommas = x =>
     x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
@@ -45,7 +43,6 @@ const Artist = ({ artist }) => {
             .join(", ")}
       </h4>{" "}
      
-  
       <a href={uri}>
         {images[0] ? <img
           className="artist__profile__img"

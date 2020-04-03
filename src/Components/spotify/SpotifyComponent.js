@@ -7,43 +7,48 @@ import Artist from "./Artist";
 import Tracks from "./Tracks";
 
 class SpotifyComponent extends Component {
-  state = { artist: null, tracks: [], noResultsMessage: {className: "",message:""}};
-  //Add Redux!!! 
+  state = { artist: null, tracks: [], noResultsFound: {className: "",message:"", videos: []}};
+
+  /**
+   * @description fetchs artist of array size 1 (Spotify wrapper api only returns 1 artist).
+   *  Then gets the top 10 tracks of artist ID.
+   * TODO:  1) add youtube api 2)Add Redux!!!
+   **/ 
   searchArtist = artistQuery => {
     fetchArtist(artistQuery).then(json => {
       if (Object.keys(json.artists.items).length !== 0) {
         const artist = json.artists.items[0];
-        this.setState({ artist ,noResultsMessage: { className: "artist_search_success",
+        this.setState({ artist ,noResultsFound: { className: "artist_search_success",
                                                       message : "" }});
-        getTopTracks(artist.id).then(json => this.setState({ tracks: json.tracks })).catch(error => Error(error));
+        getTopTracks(artist.id).then(json =>  this.setState({ tracks: json.tracks })
+        ).catch(error => Error(error));
       } 
       else{
-        this.setState({ noResultsMessage: { className: "artist_search_error",
+        this.setState({ noResultsFound: { className: "artist_search_error",
                                               message : `No artist found of the name ${artistQuery} ! Please Try another artist.` }});
       }
     }).catch(error => {
         const message = (artistQuery.trim() === "") ? "Input cannot be blank" : "Input cannot have special characters!"; 
         
-        this.setState({  noResultsMessage: { className: "artist_search_error",
+        this.setState({  noResultsFound: { className: "artist_search_error",
                                             message : message } })
         Error(error);
     });
   };
 
   render = () => {
+    const {artist,tracks,noResultsFound} = this.state;
     const headerTitle =
-      this.state.artist !== null ? "Music Master" : "Welcome to Music Master";
-
+      artist !== null ? "Music Master" : "Welcome to Music Master";
     return (
       <div className="Spotify">
-        <Headers linkTo = "#/" headerTitle = {headerTitle} origin = "spotify" artist = {this.state.artist} />   
-        <Search searchArtist={this.searchArtist} noResultsFound = {this.state.noResultsMessage} />
-      
+        <Headers linkTo = "#/" headerTitle = {headerTitle} origin = "spotify" artist = {artist} />   
+        <Search searchArtist={this.searchArtist} noResultsFound = {noResultsFound} />
         <div className="spotify__content">    
-          {this.state.artist !== null ? (
+          {artist !== null ? (
             <div className="artist__section">
-                <Artist artist={this.state.artist} />
-                <Tracks tracks={this.state.tracks} artist={this.state.artist} />
+                <Artist artist={artist} />
+                <Tracks tracks={tracks} artist={artist} history={this.props.history} />
             </div>
           ) : (
             <div>
