@@ -25,8 +25,7 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.4",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0",
-    "youtube-api-search": "0.0.5"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "predeploy": "npm run build",

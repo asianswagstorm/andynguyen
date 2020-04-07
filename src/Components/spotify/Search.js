@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import {filterArtistByName} from "./filterArtist";
 import ArtistSuggestions from "./ArtistSuggestions";
-// import 'antd/dist/antd.css';
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 const listLimit = 6;
 
 class Search extends Component {
-  state = { artistQuery: "", listOfArtist: [], hidden: true, currentSelected: -1}; //, hoveredIndex : -1
+  state = { artistQuery: "", listOfArtist: [], hidden: true, currentSelected: -1}; 
 
   fetchArtistList = (event) => {
     const artistQuery = event.target.value;
@@ -24,7 +25,9 @@ class Search extends Component {
 
   searchArtist = (artistQuery) => {
     this.setState({ hidden : true , currentSelected : -1 })
-    this.props.searchArtist(artistQuery);
+    const {dispatch} = this.props;
+    const {getArtist} = this.props.action_props.music_master_action;
+    dispatch(getArtist(artistQuery));
   };
 
   handleKeyDown = (event) => {
@@ -41,7 +44,7 @@ class Search extends Component {
 
   render() {
     const {listOfArtist,artistQuery,hidden,currentSelected} = this.state;
-  
+    
     return (
       <div className="artist__search__section">
         <div className="search__artist" id={this.props.noResultsFound.className}>
@@ -83,4 +86,11 @@ class Search extends Component {
   }
 }
 
-export default Search;
+const mapStateToProps = state => { 
+  const musicProps  = state.MusicMasterReducer.defaultMusicStates; 
+  const {noResultsFound} = musicProps;
+
+  return {noResultsFound};
+};
+
+export default withRouter(connect(mapStateToProps)(Search));

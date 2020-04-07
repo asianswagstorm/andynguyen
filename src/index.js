@@ -24,7 +24,7 @@ store.subscribe(() => store.getState());
 const persistor = persistStore(store);
 ReactDOM.render(
     <Provider store = {store}>
-        <PersistGate persistor={persistor} loading={null}>
+        <PersistGate persistor={persistor}>
             <App/>
         </PersistGate>
     </Provider>, document.getElementById('root'));

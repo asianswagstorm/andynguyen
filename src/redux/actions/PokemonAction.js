@@ -55,10 +55,10 @@ export const getPokemonsLimit = numOfPoke => dispatch => {
 };
 
 export const getPokemonsByName = searchedPokemon => dispatch => {
-    dispatch(setPokemon("", []));
+    //dispatch(setPokemon("", [])); //reset
     try{
         getPokemonByName(searchedPokemon).then(
-            response =>  dispatch(setPokemon(searchedPokemon,response))
+            response => dispatch(setPokemon(searchedPokemon,response))
         );
     }
     catch (error) {

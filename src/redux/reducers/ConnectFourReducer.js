@@ -39,7 +39,7 @@ const connectFourReducer = (state = DEFAULT_STATES, action) => {
                 defaultConnectFourStates: {...state.defaultConnectFourStates, availableCols : action.availableCols}
             };
         default:
-            return {...state}; //save state
+            return state; //save state
     }
 };
 

@@ -28,7 +28,7 @@ class PokemonCard extends Component {
                 <img
                   src={spinner}
                   alt={"loading gif"}
-                  style={{ width: "5em", height: "5em" }}
+                  style={{ display: "block", width: "100%", height: "100%" }}
                   className="card-img-top rounded mx-auto d-block mt-2"
                 />
               ) : null}

@@ -18,27 +18,12 @@ class RecipeComponent extends Component {
     dispatch(getRecipes(recipeName));
   }
 
-  //redux store losing state on refresh!!! 
-  componentDidMount = () => { // the component has been rendered, componentDidMount is the best place to put calls to fetch data
-    const json = localStorage.getItem("recipeData"); 
-    if(json){
-      const {dispatch} = this.props;
-      const {setRecipes} = this.props.action_props.recipe_action;
-      dispatch(setRecipes(JSON.parse(json)))
-    }
-  };
-
-  //what ever happens here is when state changes. As soon as state is updated this is called. deprecated
-  componentDidUpdate = () => {
-    const recipes = this.props.recipes;
-    localStorage.setItem("recipeData", JSON.stringify({recipes, count : this.props.count, recipeName: this.props.recipeName}));
-  }
   render = () => {
     return (
       <div>
         <Headers linkTo = "#/" headerTitle="Recipe App"/>
         <div className="recipe__section" >
-        <Form getRecipe={this.getRecipe} />
+        <Form getRecipe={this.getRecipe} recipeName={this.props.recipeName} />
         <Recipes/> 
         </div>
       </div>

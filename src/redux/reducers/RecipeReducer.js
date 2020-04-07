@@ -20,7 +20,7 @@ const RecipeReducer = (state = DEFAULT_STATES, action) => {
                 defaultRecipeStates: {...state.defaultRecipeStates, currentRecipe: action.currentRecipe}
             };
         default:
-            return {...state};
+            return state;
     }
 };
 

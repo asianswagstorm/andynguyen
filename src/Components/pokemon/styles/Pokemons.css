@@ -22,7 +22,7 @@
   div.pokemon_search{
       display: flex;
       flex-wrap: wrap;
-      width:400px;
+      width:100%;
       margin-top:15px;
       margin-left: auto;
       margin-right: auto;

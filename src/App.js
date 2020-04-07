@@ -19,6 +19,7 @@ import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
 import * as connect_four_action from './redux/actions/ConnectFourAction';
 import * as pokemon_action from "./redux/actions/PokemonAction";
 import * as recipe_action from "./redux/actions/RecipeAction";
+import * as music_master_action from "./redux/actions/MusicMasterAction";
 //redux on pokemon
 import 'antd/dist/antd.css';
 
@@ -62,21 +63,19 @@ export class App extends Component {
           </section>
           <Footer />
         </section>
-        
-      
       </div>
     );
   }
 }
 
 export const mapDispatchToProps = dispatch => {
-  // (process.env.NODE_ENV.trim() !== 'production') && console.log("game action", {games_action , tic_tac_toe_action}); // this.props is undefined
   return {
     games_action,
     tic_tac_toe_action,
     connect_four_action,
     pokemon_action,
     recipe_action,
+    music_master_action,
     dispatch
   };
 };

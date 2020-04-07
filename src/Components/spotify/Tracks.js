@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import { popUpNotification } from "../constants/HelperFunction/Functions";
 import {searchYoutube} from "./spotifyServices";
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+
 class Tracks extends Component {
   state = { playing: false, audio: null, playingPreviewUrl: null};
 
@@ -37,11 +41,24 @@ class Tracks extends Component {
   };
 
   linkToYoutube = async(name,artist) => {
-    const link = await searchYoutube(`${name} by ${ artist.name}`);
-    const a  = document.createElement('a');
-    a.href = link;
-    a.setAttribute('target', '_blank');
-    a.click();
+    const {dispatch} = this.props;
+    const {setPreviousYoutube,setPreviousYoutubeLink} = this.props.action_props.music_master_action;
+    let link = this.props.previousYoutubeLink;
+
+    if(this.props.previousYoutubeSeach !== `${name} by ${ artist.name}`){
+      dispatch(setPreviousYoutube(`${name} by ${ artist.name}`));
+      link = await searchYoutube(`${name} by ${ artist.name}`);
+      dispatch(setPreviousYoutubeLink(link));
+    }
+
+    if(link !== "limitReached"){
+        const a  = document.createElement('a');
+        a.href = link;
+        a.setAttribute('target', '_blank');
+        a.click();
+    }
+    else
+      await popUpNotification("error", "YouTube API Limit reached try again tomorrow.");
   };
 
   render() {
@@ -69,8 +86,8 @@ class Tracks extends Component {
                 <h5 className="track__title"> {name} </h5>
                 <div className="external__links">
 
-                <div className="track__youtube">
-                 <i className="fab fa-youtube" onClick = {() => this.linkToYoutube(name,artist) }> </i>
+                <div className="track__youtube" onClick = {() => this.linkToYoutube(name,artist) }>
+                 <i className="fab fa-youtube"> </i>
                 </div>
 
                 <a className="track__spotify" href={`${uri}?play=true`}>
@@ -87,5 +104,11 @@ class Tracks extends Component {
   }
 }
 
-export default Tracks;
-// props.history.push()
+const mapStateToProps = state => { 
+  const musicProps  = state.MusicMasterReducer.defaultMusicStates; 
+  const {artist,tracks,previousYoutubeSeach,previousYoutubeLink} = musicProps;
+
+  return {artist,tracks,previousYoutubeSeach,previousYoutubeLink};
+};
+
+export default withRouter(connect(mapStateToProps)(Tracks));
