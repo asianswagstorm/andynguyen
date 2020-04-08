@@ -30,7 +30,6 @@ const Artist = ({ artist }) => {
       <h4>{numberWithCommas(followers.total)} Spotify Followers </h4>
  
       <h4>
-          {" "}
           {genres
             .map(genre =>
               genre
@@ -41,7 +40,7 @@ const Artist = ({ artist }) => {
                 .join(" ")
             )
             .join(", ")}
-      </h4>{" "}
+      </h4>
      
       <a href={uri}>
         {images[0] ? <img

@@ -9,6 +9,7 @@ export default class Evolution extends Component {
           <div className="pokemon_col">
               <strong>Stage 1: </strong> <br />
                 <img
+                  className="evolution__img"
                   onClick= {() => this.props.updatePokemon(this.props.stage1ID)}
                   src={pokemonImage(this.props.stage1ID)}
                   alt={"A Photograph of a Stage 1 Pokemon"}
@@ -24,6 +25,7 @@ export default class Evolution extends Component {
           <div className="pokemon_col">
               <strong>Stage 2: </strong> <br />
               <img
+                className="evolution__img"
                 onClick= {() => this.props.updatePokemon(this.props.stage2ID)}
                 src={pokemonImage(this.props.stage2ID)}
                 alt={"A Photograph of a Stage 2 Pokemon"}
@@ -39,6 +41,7 @@ export default class Evolution extends Component {
           <div className="pokemon_col">
               <strong>Stage 3: </strong> <br />
                 <img 
+                    className="evolution__img"
                     onClick= {() => this.props.updatePokemon(this.props.stage3ID)}
                     src={pokemonImage(this.props.stage3ID)}
                     alt={"A Photograph of a Stage 3 Pokemon"}/>

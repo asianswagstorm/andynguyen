@@ -39,35 +39,47 @@ div.poke_index{
     font-weight: bold;
 }
 
-div.pokemon_info{
+div.pokemon__info{
     margin-left: 135px;
 }
 
-button.previous_pokemon{
-    color:white;
-}
-
 button.next_pokemon{
-    color:white;
     margin-left: 10px;
 }
 
 div.pokemon_pill{
     margin-top: 25px;
+   
+}
+
+div.progress-bar{
+    border-radius: 100px;
+}
+
+div#stat__progress{
+  background-color: rgb(187, 184, 184);
 }
 
 div.progress{
     width:100%;
+  
+    border-radius: 100px;
 }
 
 div.poke_profile_title{
     width: 70%;
     text-decoration: underline;
+    text-align: center;
 }
 
 div.poke_evolution_title{
     font-size: 25px;
     text-decoration: underline;
+}
+
+div.progress-bar{
+    text-align: center;
+    font-size: 15px;
 }
 
 div.pokemon_profile{
@@ -80,11 +92,25 @@ div.pokemon_profile{
 }
 
 div.pokemon_profile_right{
-    width:50%;
+    width: 35%;
+
+}
+
+div.poke_right_content{
+    width:100%;
+    margin-left: auto ;
+    margin-right: auto ; 
 }
 
 div.pokemon_profile_left{
-    width:50%;
+    width: 65%;
+}
+
+div.poke_left_content{
+    width:90%;
+    margin-left: 25px;
+    margin-right: auto ; 
+     
 }
 
 div.poke_left_content{
@@ -103,7 +129,7 @@ div.profile_name{
 }
 
 div.profile_value{
-    width:250px;
+    width:300px;
 
 }
 
@@ -115,4 +141,78 @@ div.pokemon_card_footer{
 
 a.poke_card_link{
     margin-left: 10px;
+}
+
+button#toggle__pokemon__btn{
+    color:white;
+    width: 100px;
+}
+
+p.pokemon__description{
+    width: 80%;
+    margin-top: 10px;
+}
+
+div.gender-progress{
+    display: flex;
+    text-align: center;
+    font-size: 15px;
+}
+@media only screen and (max-width: 768px) {
+    div.pokemon-data{
+        min-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    h5#poke{
+        margin-left: -16px; 
+    }
+
+    div.pokemon__info{
+        margin-left: 35px;
+    }
+
+    div.poke_evolution_title{
+        font-size: 15px;
+    }
+
+    div.pokemon_col{
+        font-size: 12px; 
+    }
+
+    i.pokemon_arrow{
+        font-size: 50px;
+        color: black;
+    }
+
+    div.pokemon_card_footer{
+        font-size: 15px;
+    }
+
+    img.evolution__img{
+        width:75px;
+        height: 75px;
+    }
+
+    span.badge.badge-pill.mr-1{
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+
+    div.pokemon_profile_left, div.pokemon_profile_right{
+        width: 100%;
+    }
+
+    div.poke_left_content, div.poke_right_content{
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 10px;
+    }
+
+    div.gender-progress{
+        font-size: 12px;
+    }
+
 }

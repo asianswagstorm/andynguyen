@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import {fetchArtist,getTopTracks} from "./spotifyServices";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "./spotifyApp.css";

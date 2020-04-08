@@ -2,6 +2,7 @@ import axios from "axios";
 //clean this up , set props redux. 
 
 export const pokemonImage = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+export const pokemonGif = name => `https://projectpokemon.org/images/normal-sprite/${name.charAt(0).toLowerCase() + name.slice(1)}.gif`;
 
 export const getPokemonEvolution = async evolution_url => {
         try{

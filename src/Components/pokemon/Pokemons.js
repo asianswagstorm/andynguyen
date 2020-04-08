@@ -13,9 +13,10 @@ class Pokemons extends Component {
 
   componentDidMount = () => {
    const {dispatch} = this.props;
-   const {getPokemonsLimit} = this.props.action_props.pokemon_action;
+   const {getPokemonsLimit,setPokeTracker} = this.props.action_props.pokemon_action;
    
    if(this.props.searchedPokemon.trim() === ""){
+      dispatch(setPokeTracker(0));
       dispatch(getPokemonsLimit(this.getNumPokemon()));
       document.addEventListener("scroll", this.trackScrolling);
     }   
@@ -37,19 +38,30 @@ class Pokemons extends Component {
     };
   };
 
+  /**
+   * Fetch more pokemons
+   */
   loadMore = async () => {
     const {dispatch} = this.props;
     const {getPokemonsLimit} = this.props.action_props.pokemon_action;
     await dispatch(getPokemonsLimit(this.props.tracker + 3))
   };
 
+  searchPokemon = (poke) => {
+    const {dispatch} = this.props;
+    const {getPokemonsByName} = this.props.action_props.pokemon_action;
+    if (poke !== "") { 
+      dispatch(getPokemonsByName(poke));
+    }
+  };
+
   change = e => { 
     const {dispatch} = this.props;
-    const {getPokemonsByName,getPokemonsLimit} = this.props.action_props.pokemon_action;
+    const {getPokemonsLimit} = this.props.action_props.pokemon_action;
   
     const poke = (e.target.value).trim();
     if (poke !== "") { 
-      dispatch(getPokemonsByName(poke));
+     this.searchPokemon(poke);
     }
     else{
       dispatch(getPokemonsLimit(this.getNumPokemon()));
@@ -63,8 +75,10 @@ class Pokemons extends Component {
         <Headers linkTo = "#/" headerTitle="Pokedex"/>   
         <div className="row">
           <div className="pokemon_search">
-            <span className="icon fa-search" id = "search__icon"/>
-            <Search onChange={this.change} searchedPokemon={this.props.searchedPokemon} />
+            <div className="pokemon__search__button" onClick={() => this.searchPokemon(this.props.searchedPokemon)}>
+              <span className="icon fa-search" id = "search__icon"/>
+            </div>
+            <Search searchPokemon ={() => this.searchPokemon} onChange={this.change} searchedPokemon={this.props.searchedPokemon} />
           </div>
         </div>
         <div className="pokemon_row">

@@ -57,8 +57,8 @@ class Pokemon extends Component {
     try {
       const pokemon = (await getPokeData(pokemonIndex)).data;
       const speciesData =  await getPokeSpecies(pokemonIndex).then(response => response.json());
-      console.log("pokemon", pokemon);
-      console.log("speciesData", speciesData);
+      (process.env.NODE_ENV.trim() !== 'production') && console.log("pokemon", pokemon);
+      (process.env.NODE_ENV.trim() !== 'production') && console.log("speciesData", speciesData);
 
       this.props.history.push(`/Pokemon/${pokemonIndex}`);
   
@@ -169,33 +169,44 @@ class Pokemon extends Component {
   };
 
   render = () =>  {
+
+    const filterGenderRatio = ratio => {
+      if(ratio > 100)
+          return 100;
+      else if(ratio < 0)
+          return 0;
+      else return ratio;
+    };
+
     const gender_ratio = (
-      <div className="progress">
+      <div className="gender-progress"  style={{
+        width: '100%',
+      }}>
         <div
-          className="progress-bar"
+          className="female-progress-bar"
           role="progressbar"
           style={{
-            width: `${this.state.genderRatioFemale}%`,
+            width: `${filterGenderRatio(this.state.genderRatioFemale)}%`,
             backgroundColor: "#FF69B4"
           }}
           aria-valuenow="15"
           aria-valuemin="0"
           aria-valuemax="100"
         >
-          <small>{this.state.genderRatioFemale}</small>
+          <small>{filterGenderRatio(this.state.genderRatioFemale)} %</small>
         </div>
         <div
-          className="progress-bar"
+          className="male-progress-bar"
           role="progressbar"
           style={{
-            width: `${this.state.genderRatioMale}%`,
+            width: `${filterGenderRatio(this.state.genderRatioMale)}%`,
             backgroundColor: "#1976d2"
           }}
           aria-valuenow="30"
           aria-valuemin="0"
           aria-valuemax="100"
         >
-          <small>{this.state.genderRatioMale}</small>
+          <small>{filterGenderRatio(this.state.genderRatioMale)} %</small>
         </div>
       </div>
     );
@@ -319,13 +330,13 @@ class Pokemon extends Component {
         <Headers linkTo = "#/Pokemon" headerTitle="Pokedex"/>
         <div className="pokemon-data">
         <div className="card">
-          <div className="pokemon_info">
+          <div className="pokemon__info">
             <div className="row">
               <div className="poke_index">Pokedex #{this.state.pokemonIndex}</div>
               <div className="col-7">
                   
-                <button onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
-                <button onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
+                <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
+                <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
                
                 <div className="pokemon_pill">
                   
@@ -335,7 +346,9 @@ class Pokemon extends Component {
                       className="badge badge-pill mr-1"
                       style={{
                         backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
-                        color: "white"
+                        color: "white",
+                        borderRadius: "100px",
+                        width: "100px"
                       }}
                     >
                       {x.type.name}
@@ -353,7 +366,7 @@ class Pokemon extends Component {
                 <img
                     src={spinner}
                     alt={"loading gif"}
-                    style={{ width: '5em', height: '5em' }}
+                    style={{ width: '100%', height: '100%' }}
                     className="card-img-top rounded mx-auto d-block mt-2"
                 />
                 ) : null}
@@ -371,11 +384,9 @@ class Pokemon extends Component {
                 {allStats}
               </div>
             </div>
-            <div className="row mt-1">
-              <div className="pokemon_description">
-                <p className="">{this.state.description}</p>
-              </div>
-            </div>
+            
+                <p className="pokemon__description">{this.state.description}</p>
+            
           </div>
 
           <div className="pokemon_card_body">
