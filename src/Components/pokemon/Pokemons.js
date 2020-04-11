@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "./styles/Pokemons.css";
 
-class Pokemons extends Component {
+export class Pokemons extends Component {
 
   getNumPokemon = () => 12;
 
@@ -87,7 +87,6 @@ class Pokemons extends Component {
               {[...this.props.pokemons].map((pokemon,key) => (
                 <div key={key} className = "single_card_1">
                     <PokemonCard
-                      action_props = {this.props.action_props}
                       name={pokemon.name}
                       image = {pokemon.image ? pokemon.image : null}
                       pokemonIndex={!pokemon.url ? pokemon.id : pokemon.url.split("/")[pokemon.url.split("/").length - 2]}

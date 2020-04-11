@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
 import "./styles/PokemonCard.css";
 import spinner from "./spinner.gif";
 import {pokemonImage,pokemonGif} from "./apiServices/pokeAPI";
 
-class PokemonCard extends Component {
+export class PokemonCard extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -14,7 +12,6 @@ class PokemonCard extends Component {
       toManyRequests: false
     };
   };
-// pokemonImage(pokemonIndex)
   render() {
     const {  pokemonIndex, name } = this.props;
   
@@ -69,8 +66,4 @@ class PokemonCard extends Component {
   }
 };
 
-const mapStateToProps = state => { 
-  return {};
-};
-
-export default withRouter(connect(mapStateToProps)(PokemonCard));
+export default PokemonCard;

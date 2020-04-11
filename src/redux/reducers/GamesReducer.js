@@ -1,4 +1,4 @@
-const defaultGamesStates = {
+export const defaultGamesStates = {
     picked_player : false,
     compEnabled : false,  //human vs computer
     player1_score : 0,

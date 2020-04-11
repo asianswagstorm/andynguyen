@@ -6,7 +6,7 @@ import GamesHead from "./GamesHead";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
 
 //to do: highlight the winning cells  
-class ConnectFour extends Component {
+export class ConnectFour extends Component {
 
     componentDidMount = () => {
         const {dispatch} = this.props;

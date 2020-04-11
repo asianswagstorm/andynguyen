@@ -1,8 +1,12 @@
-import {tictactoe_boxes,winCombos} from "../../Components/constants/TicTacToeConstants";
+import {winCombos} from "../../Components/constants/TicTacToeConstants";
 
-const defaultTicTacToeStates = 
+export const defaultTicTacToeStates = 
 {
-    tictactoe_boxes,
+    tictactoe_boxes : [ 
+        ['','',''],
+        ['','',''],
+        ['','','']
+    ],
     winIndex : '',
     remaining_turns : 9,
     current_positions : [],
@@ -11,8 +15,6 @@ const defaultTicTacToeStates =
     next_moves : [],
     player1IndexPossibleWin : []
 };
-
-//current positions
 
 const DEFAULT_STATES = {defaultTicTacToeStates: {...defaultTicTacToeStates}};
 

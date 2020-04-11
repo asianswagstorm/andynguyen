@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "../css/Home.css";
 import "../css/font-awesome.min.css";
-import Card from "./Card";
-import {tiles} from "./constants/Tiles";
+import ListOfProjects from "./ListOfProjects";
 import { Wave } from 'react-animated-text';
 import Typist from 'react-typist';
 import { popUpNotification } from "./constants/HelperFunction/Functions";
@@ -25,7 +24,6 @@ class Home extends Component {
       loaded:false
     };
     this.submitForm = this.submitForm.bind(this);
-    this.escapeFunction = this.escapeFunction.bind(this);
   }
 
   componentDidMount = () => {
@@ -56,34 +54,9 @@ class Home extends Component {
     this.setState({ filterOption: type });
   };
 
-  escapeFunction = event => {
-    if (event.keyCode === 27) {
-      window.history.go(-1);
-    }
-  };
-
   render = () => {
     //use props from redux.
     const { status } = this.state;
-
-    const lifeList = tiles.map((value, index) => {
-      if (
-        value.type.includes(this.state.filterOption) ||
-        this.state.filterOption === ""
-      ) {
-        return (
-          <Card
-            key={index}
-            href={value.href}
-            imgSrc={value.src}
-            linkType = {value.linkType}
-            alt=""
-            title={value.title}
-          />
-        );
-      }
-      return false;
-    });
 
     const language_buttons = languages.map((x, index) => {
       return (
@@ -131,7 +104,7 @@ class Home extends Component {
                 <ul id="tabs">{language_buttons}</ul>
               </header>
 
-              <div className="content">{lifeList}</div>
+              <ListOfProjects filterOption={this.state.filterOption}/>
             </div>
           </section>
 

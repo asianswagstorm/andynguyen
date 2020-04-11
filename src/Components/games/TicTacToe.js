@@ -7,7 +7,7 @@ import {playerSymbols} from "../constants/Games";
 import { TicTacToeWinCombo,winIndexs} from "../constants/TicTacToeConstants"; //tictactoe_boxes
 import GamesHead from "./GamesHead";
 
-class TicTacToe extends Component {
+export class TicTacToe extends Component {
   
   componentDidMount = () => {
     const {dispatch} = this.props;

@@ -1,4 +1,4 @@
-const defaultPokemonStates = {
+export const defaultPokemonStates = {
     pokemons : [],
     hasErrors : false,
     tracker : 0,

@@ -1,8 +1,20 @@
-import {connectFourBoard,rowIndexByColumn} from "../../Components/constants/ConnectFourConstants";
+/**
+ * column x row 
+ * Clean this up by using a create object. 
+ */
+const connectFourBoard = [
+    {columnNumber : 0 , rowArrays: ["","","","","",""]}, 
+    {columnNumber : 1 , rowArrays: ["","","","","",""]}, 
+    {columnNumber : 2 , rowArrays: ["","","","","",""]}, 
+    {columnNumber : 3 , rowArrays: ["","","","","",""]}, 
+    {columnNumber : 4 , rowArrays: ["","","","","",""]}, 
+    {columnNumber : 5 , rowArrays: ["","","","","",""]}, 
+    {columnNumber : 6 , rowArrays: ["","","","","",""]}
+];
 
-const defaultConnectFourStates = {
+export const defaultConnectFourStates = {
     connectFourBoard,
-    rowIndexByColumn,
+    rowIndexByColumn : [5,5,5,5,5,5,5],
     computerCurrentColumn : 0, //for testing purposes.
     availableCols: [0,1,2,3,4,5,6] 
 };

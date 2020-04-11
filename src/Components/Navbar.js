@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
-
+import React  from 'react';
 import '../css/Home.css';
 
-class Navbar extends Component {
-    render = () => {
-        return (
-            <nav id="nav">
-            <ul>
-              <li><a href="#/" className="active"><span className="icon fa-home"></span></a></li>
-            </ul>
-             </nav>
-         );
-    };
-  };
+const Navbar = () =>  (
+  <nav id="nav">
+    <ul>
+      <li data-testid="nav__li__tag"><a href="#/" className="active"><span className="icon fa-home"></span></a></li>
+    </ul>
+  </nav>
+);
 
 export default Navbar;

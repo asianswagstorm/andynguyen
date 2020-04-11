@@ -3,13 +3,13 @@ import {HashRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {CSSTransition,TransitionGroup,} from 'react-transition-group';
 import Home from "./Components/Home";
-import TicTacToe from "./Components/games/TicTacToe";//test
-import ConnectFour from "./Components/games/ConnectFour";//test
+import TicTacToe from "./Components/games/TicTacToe";
+import ConnectFour from "./Components/games/ConnectFour";
 import NotFound from "./Components/NotFound";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Metso from "./Components/Metso";
-import Pokemons from "./Components/pokemon/Pokemons";
+import Pokemons from "./Components/pokemon/Pokemons"; //eslint-disable-line import/no-named-as-default
 import Pokemon from "./Components/pokemon/Pokemon";
 import RecipeComponent from "./Components/recipes/RecipeComponent";
 import Recipe from "./Components/recipes/Recipe";

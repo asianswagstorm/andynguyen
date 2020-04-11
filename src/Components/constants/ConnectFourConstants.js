@@ -1,17 +1,3 @@
-/**
- * column x row 
- * Clean this up by using a create object. 
- */
-export const connectFourBoard = [
-    {columnNumber : 0 , rowArrays: ["","","","","",""]}, 
-    {columnNumber : 1 , rowArrays: ["","","","","",""]}, 
-    {columnNumber : 2 , rowArrays: ["","","","","",""]}, 
-    {columnNumber : 3 , rowArrays: ["","","","","",""]}, 
-    {columnNumber : 4 , rowArrays: ["","","","","",""]}, 
-    {columnNumber : 5 , rowArrays: ["","","","","",""]}, 
-    {columnNumber : 6 , rowArrays: ["","","","","",""]}
-];
-
 //[column,row] 
 export const boardIndex = [
     [[0,0], [1,0], [2,0], [3,0] , [4,0], [5,0], [6,0]],
@@ -21,8 +7,6 @@ export const boardIndex = [
     [[0,4], [1,4], [2,4], [3,4] , [4,4], [5,2], [6,4]],
     [[0,5], [1,5], [2,5], [3,5] , [4,5], [5,2], [6,5]],
 ];
-
-export const rowIndexByColumn = [5,5,5,5,5,5,5];
 
 /**
  * unshift
