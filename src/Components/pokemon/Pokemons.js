@@ -96,6 +96,7 @@ export class Pokemons extends Component {
               
             </div>
           ) : (
+            this.props.apiLoaded === true &&
             <NoResults searchedPokemon = {this.props.searchedPokemon}/>
           )}
         </div>
@@ -106,9 +107,9 @@ export class Pokemons extends Component {
 
 const mapStateToProps = state => { 
   const pokemonProps  = state.PokemonReducer.defaultPokemonStates; 
-  const {pokemons,searchedPokemon,tracker} = pokemonProps;
+  const {pokemons,searchedPokemon,tracker, apiLoaded} = pokemonProps;
 
-  return {pokemons,searchedPokemon,tracker};
+  return {pokemons,searchedPokemon,tracker,apiLoaded};
 };
 
 export default withRouter(connect(mapStateToProps)(Pokemons));

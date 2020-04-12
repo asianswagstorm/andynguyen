@@ -5,7 +5,8 @@ export const defaultPokemonStates = {
     searchedPokemon : "",
     pokemon:{},
     pokemonIndex: 0,
-    speciesData:{}
+    speciesData:{},
+    apiLoaded : false
 };
 
 const DEFAULT_STATES = {defaultPokemonStates: {...defaultPokemonStates}};
@@ -25,7 +26,7 @@ const PokemonReducer = (state = DEFAULT_STATES, action) => {
         case "SET_POKEMONS":  
             return {
                 ...state,
-                defaultPokemonStates: {...state.defaultPokemonStates, pokemons : action.pokemons, searchedPokemon : action.searchedPokemon }
+                defaultPokemonStates: {...state.defaultPokemonStates, pokemons : action.pokemons, searchedPokemon : action.searchedPokemon, apiLoaded : action.apiLoaded }
             };
         case "SET_POKEMON_DATA":
             return {

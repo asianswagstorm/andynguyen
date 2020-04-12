@@ -69,5 +69,6 @@ export const getPokemonsByName = searchedPokemon => dispatch => {
 export const setPokemon = (searchedPokemon,pokemons) => ({
     type: POKEMON_TYPE.SET_POKEMONS,
     searchedPokemon,
-    pokemons
+    pokemons,
+    apiLoaded : true
 });

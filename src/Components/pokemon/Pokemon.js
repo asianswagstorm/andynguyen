@@ -3,12 +3,20 @@ import Stats from "./pokemonHelper/Stats";
 import Profile from "./pokemonHelper/Profile";
 import Evolution from "./pokemonHelper/Evolution";
 import Headers from "../Headers";
-import spinner from './spinner.gif';
+import { css } from "@emotion/core";
+import RingLoader from "react-spinners/RingLoader";
 import './styles/Pokemon.css';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import {pokemonImage,getPokemonEvolution,getPokeData,getPokeSpecies} from "./apiServices/pokeAPI";
 import {TYPE_COLORS} from "./constants/pokemonConstants";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  transform: translateY(50%);
+`;
 
 class Pokemon extends Component {
 
@@ -47,7 +55,8 @@ class Pokemon extends Component {
       stage3: "",
       stage3ID: "",
       themeColor: "#EF5350",
-      imageLoading: true
+      imageLoading: true,
+      pokemonLoaded : false
     }; 
   }
 
@@ -55,11 +64,9 @@ class Pokemon extends Component {
   
   updatePokemon = async (pokemonIndex) => {
     try {
+      this.setState({pokemonLoaded: false, imageLoading: true})
       const pokemon = (await getPokeData(pokemonIndex)).data;
       const speciesData =  await getPokeSpecies(pokemonIndex).then(response => response.json());
-      (process.env.NODE_ENV.trim() !== 'production') && console.log("pokemon", pokemon);
-      (process.env.NODE_ENV.trim() !== 'production') && console.log("speciesData", speciesData);
-
       this.props.history.push(`/Pokemon/${pokemonIndex}`);
   
         
@@ -91,8 +98,6 @@ class Pokemon extends Component {
             }
             return null;
           });
-          
-  
 
     const evs = pokemon.stats
             .filter(stat => (stat.effort > 0 ? true : false))
@@ -164,7 +169,8 @@ class Pokemon extends Component {
                 stage1ID,
                 stage2ID,
                 stage3ID,
-                evs
+                evs,
+                pokemonLoaded : true
               });
   };
 
@@ -329,121 +335,118 @@ class Pokemon extends Component {
       <div className="col">
         <Headers linkTo = "#/Pokemon" headerTitle="Pokedex"/>
         <div className="pokemon-data">
-        <div className="card">
-          <div className="pokemon__info">
-            <div className="row">
-              <div className="poke_index">Pokedex #{this.state.pokemonIndex}</div>
-              <div className="col-7">
-                  
-                <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
-                <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
-               
-                <div className="pokemon_pill">
-                  
-                  {this.state.types.map((x, key) => (
-                    <span
-                      key={key}
-                      className="badge badge-pill mr-1"
-                      style={{
-                        backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
-                        color: "white",
-                        borderRadius: "100px",
-                        width: "100px"
-                      }}
-                    >
-                      {x.type.name}
-                    </span>
-                  ))}
+          <div className="card">
+            {this.state.imageLoading && (
+                <div className="pokemon__loading">
+                    <RingLoader
+                      css={override}
+                      size={250}
+                      color={"#123abc"}
+                      loading={this.state.imageLoading}
+                    />  
+                </div>
+              )
+            }
+            {this.state.pokemonLoaded === true && (
+            <div>
+              <div className="pokemon__info">
+                <div className="row">
+                  <div className="poke_index">Pokedex #{this.state.pokemonIndex}</div>
+                    <div className="col-7"> 
+                      <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
+                      <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
+                      <div className="pokemon_pill">
+                        {this.state.types.map((x, key) => (
+                          <span
+                            key={key}
+                            className="badge badge-pill mr-1"
+                            style={{
+                              backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
+                              color: "white",
+                              borderRadius: "100px",
+                              width: "100px"
+                            }}
+                          >
+                            {x.type.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="pokemon_card_body">
+                  <div className="pokemon_with_stats">
+                    <div className="pokemon_shown">
+                      <img
+                        src={this.state.imageUrl}
+                        alt={"A Photograph of a Pokemon"}
+                        onLoad={() => this.setState({ imageLoading: false })}
+                        className="card-img-top rounded mx-auto mt-2"
+                      />
+                    </div>
+                    <div className="pokemon_shown_name">
+                      <h4 className="mx-auto">
+                        {this.state.name}
+                      </h4>
+                      {allStats}
+                    </div>
+                  </div>
+                  <p className="pokemon__description">{this.state.description}</p> 
+                </div>
+                <div className="pokemon_card_body">
+                  <div className="poke_profile_title">
+                    <h5 id="poke">Profile</h5>
+                  </div>  
+                <div className="pokemon_profile">
+                  <div className="pokemon_profile_left">
+                    <div className="poke_left_content">
+                      {leftProfile}
+                    </div>
+                  </div>  
+                  <div className="pokemon_profile_right">
+                    <div className="poke_right_content">
+                      {rightProfile}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="pokemon_card_body">
-            <div className="pokemon_with_stats">
-              <div className="pokemon_shown">
-                {this.state.imageLoading ? (
-                <img
-                    src={spinner}
-                    alt={"loading gif"}
-                    style={{ width: '100%', height: '100%' }}
-                    className="card-img-top rounded mx-auto d-block mt-2"
-                />
-                ) : null}
-                    <img
-                    src={this.state.imageUrl}
-                    alt={"A Photograph of a Pokemon"}
-                    onLoad={() => this.setState({ imageLoading: false })}
-                    className="card-img-top rounded mx-auto mt-2"
-                    />
-              </div>
-              <div className="pokemon_shown_name">
-                <h4 className="mx-auto">
-                  {this.state.name}
-                </h4>
-                {allStats}
-              </div>
-            </div>
-            
-                <p className="pokemon__description">{this.state.description}</p>
-            
-          </div>
-
-          <div className="pokemon_card_body">
-            <div className="poke_profile_title">
-              <h5 id="poke">Profile</h5>
-            </div>  
-            <div className="pokemon_profile">
-              <div className="pokemon_profile_left">
-                <div className="poke_left_content">
-                  {leftProfile}
+              <div className="pokemon_card_body">
+                <div className="poke_evolution_title">
+                  <h5 id="poke">Evolution</h5>
                 </div>
-              </div>  
-              <div className="pokemon_profile_right">
-                <div className="poke_right_content">
-                  {rightProfile}
+                <div className= "evolution-chart"  style={{alignContent: "end"}}>
+                    {this.state.evolution_data ? (
+                      <Evolution
+                        updatePokemon = {(id) => this.updatePokemon(id)}
+                        stage1={this.state.stage1}
+                        stage2={this.state.stage2}
+                        stage3={this.state.stage3}
+                        stage1ID={this.state.stage1ID}
+                        stage2ID={this.state.stage2ID}
+                        stage3ID={this.state.stage3ID}
+                      />
+                    ) : (
+                      <div
+                        className="loader"
+                        style={{ width: "50px", height: "50px" }}
+                      />
+                    )}
                 </div>
               </div>
+              <div className="pokemon_card_footer">
+                  Pokemon Data Obtained From
+                  <a
+                    href="https://pokeapi.co/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="poke_card_link"
+                  >
+                    PokeAPI.co
+                  </a>
+              </div> 
             </div>
+            )}
           </div>
-
-          <div className="pokemon_card_body">
-            <div className="poke_evolution_title">
-              <h5 id="poke">Evolution</h5>
-            </div>
-            
-            <div className= "evolution-chart"  style={{alignContent: "end"}}>
-                {this.state.evolution_data ? (
-                  <Evolution
-                    updatePokemon = {(id) => this.updatePokemon(id)}
-                    stage1={this.state.stage1}
-                    stage2={this.state.stage2}
-                    stage3={this.state.stage3}
-                    stage1ID={this.state.stage1ID}
-                    stage2ID={this.state.stage2ID}
-                    stage3ID={this.state.stage3ID}
-                  />
-                ) : (
-                  <div
-                    className="loader"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                )}
-                
-             </div>
-          </div>
-          <div className="pokemon_card_footer">
-            Pokemon Data Obtained From
-            <a
-              href="https://pokeapi.co/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="poke_card_link"
-            >
-              PokeAPI.co
-            </a>
-          </div>
-        </div>
         </div>
       </div>
     );
@@ -458,3 +461,4 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(connect(mapStateToProps)(Pokemon));
+

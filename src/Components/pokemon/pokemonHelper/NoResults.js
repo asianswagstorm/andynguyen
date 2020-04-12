@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
-class NoResults extends Component {
+export class NoResults extends Component {
   render = () => (
         <div className="no__results">
              <h5 className="no__results__text"> {`No pokemons found containing "${this.props.searchedPokemon}"`}</h5>

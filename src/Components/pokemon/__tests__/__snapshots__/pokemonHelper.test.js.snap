@@ -1,0 +1,1897 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot EvoSearchlution should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Search
+    onChange={[Function]}
+    searchedPokemon=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <input
+        className="poke__search__input"
+        defaultValue=""
+        name="pokename"
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Search Pokemon"
+        type="text"
+/>,
+      "className": "pokemon__search__form",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "className": "poke__search__input",
+        "defaultValue": "",
+        "name": "pokename",
+        "onChange": [Function],
+        "onKeyPress": [Function],
+        "placeholder": "Search Pokemon",
+        "type": "text",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": "input",
+    },
+    "type": "form",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <input
+          className="poke__search__input"
+          defaultValue=""
+          name="pokename"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          placeholder="Search Pokemon"
+          type="text"
+/>,
+        "className": "pokemon__search__form",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "poke__search__input",
+          "defaultValue": "",
+          "name": "pokename",
+          "onChange": [Function],
+          "onKeyPress": [Function],
+          "placeholder": "Search Pokemon",
+          "type": "text",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "input",
+      },
+      "type": "form",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifeCycleMethods": true,
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
+
+exports[`Snapshot Evolution should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Evolution
+    stage1=""
+    stage1ID=""
+    stage2=""
+    stage2ID=""
+    stage3=""
+    stage3ID=""
+    updatePokemon={[Function]}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="individual_pokemon_row"
+>
+        <div
+                className="pokemon_col"
+        >
+                <strong>
+                        Stage 1: 
+                </strong>
+                 
+                <br />
+                <img
+                        alt="A Photograph of a Stage 1 Pokemon"
+                        className="evolution__img"
+                        onClick={[Function]}
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+                />
+                <br />
+                <strong />
+        </div>
+        <div
+                className="pokemon_col"
+        >
+                <i
+                        className="pokemon_arrow"
+                >
+                         →  
+                </i>
+        </div>
+        <div
+                className="pokemon_col"
+        >
+                <strong>
+                        Stage 2: 
+                </strong>
+                 
+                <br />
+                <img
+                        alt="A Photograph of a Stage 2 Pokemon"
+                        className="evolution__img"
+                        onClick={[Function]}
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+                />
+                <br />
+                <strong />
+        </div>
+        <div
+                className="pokemon_col"
+        >
+                <i
+                        className="pokemon_arrow"
+                >
+                        →
+                </i>
+        </div>
+        <div
+                className="pokemon_col"
+        >
+                <strong>
+                        Stage 3: 
+                </strong>
+                 
+                <br />
+                <img
+                        alt="A Photograph of a Stage 3 Pokemon"
+                        className="evolution__img"
+                        onClick={[Function]}
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+                />
+                <br />
+                <strong />
+        </div>
+</div>,
+      "className": "pokemon_evolution",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="pokemon_col"
+>
+            <strong>
+                        Stage 1: 
+            </strong>
+             
+            <br />
+            <img
+                        alt="A Photograph of a Stage 1 Pokemon"
+                        className="evolution__img"
+                        onClick={[Function]}
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+            />
+            <br />
+            <strong />
+</div>,
+          <div
+            className="pokemon_col"
+>
+            <i
+                        className="pokemon_arrow"
+            >
+                         →  
+            </i>
+</div>,
+          <div
+            className="pokemon_col"
+>
+            <strong>
+                        Stage 2: 
+            </strong>
+             
+            <br />
+            <img
+                        alt="A Photograph of a Stage 2 Pokemon"
+                        className="evolution__img"
+                        onClick={[Function]}
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+            />
+            <br />
+            <strong />
+</div>,
+          <div
+            className="pokemon_col"
+>
+            <i
+                        className="pokemon_arrow"
+            >
+                        →
+            </i>
+</div>,
+          <div
+            className="pokemon_col"
+>
+            <strong>
+                        Stage 3: 
+            </strong>
+             
+            <br />
+            <img
+                        alt="A Photograph of a Stage 3 Pokemon"
+                        className="evolution__img"
+                        onClick={[Function]}
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+            />
+            <br />
+            <strong />
+</div>,
+        ],
+        "className": "individual_pokemon_row",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <strong>
+                Stage 1: 
+</strong>,
+              " ",
+              <br />,
+              <img
+                alt="A Photograph of a Stage 1 Pokemon"
+                className="evolution__img"
+                onClick={[Function]}
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+/>,
+              <br />,
+              <strong />,
+            ],
+            "className": "pokemon_col",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Stage 1: ",
+              },
+              "ref": null,
+              "rendered": "Stage 1: ",
+              "type": "strong",
+            },
+            " ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "A Photograph of a Stage 1 Pokemon",
+                "className": "evolution__img",
+                "onClick": [Function],
+                "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "",
+              },
+              "ref": null,
+              "rendered": "",
+              "type": "strong",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <i
+              className="pokemon_arrow"
+>
+               →  
+</i>,
+            "className": "pokemon_col",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": " →  ",
+              "className": "pokemon_arrow",
+            },
+            "ref": null,
+            "rendered": " →  ",
+            "type": "i",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <strong>
+                Stage 2: 
+</strong>,
+              " ",
+              <br />,
+              <img
+                alt="A Photograph of a Stage 2 Pokemon"
+                className="evolution__img"
+                onClick={[Function]}
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+/>,
+              <br />,
+              <strong />,
+            ],
+            "className": "pokemon_col",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Stage 2: ",
+              },
+              "ref": null,
+              "rendered": "Stage 2: ",
+              "type": "strong",
+            },
+            " ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "A Photograph of a Stage 2 Pokemon",
+                "className": "evolution__img",
+                "onClick": [Function],
+                "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "",
+              },
+              "ref": null,
+              "rendered": "",
+              "type": "strong",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <i
+              className="pokemon_arrow"
+>
+              →
+</i>,
+            "className": "pokemon_col",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "→",
+              "className": "pokemon_arrow",
+            },
+            "ref": null,
+            "rendered": "→",
+            "type": "i",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <strong>
+                Stage 3: 
+</strong>,
+              " ",
+              <br />,
+              <img
+                alt="A Photograph of a Stage 3 Pokemon"
+                className="evolution__img"
+                onClick={[Function]}
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+/>,
+              <br />,
+              <strong />,
+            ],
+            "className": "pokemon_col",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Stage 3: ",
+              },
+              "ref": null,
+              "rendered": "Stage 3: ",
+              "type": "strong",
+            },
+            " ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "A Photograph of a Stage 3 Pokemon",
+                "className": "evolution__img",
+                "onClick": [Function],
+                "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "",
+              },
+              "ref": null,
+              "rendered": "",
+              "type": "strong",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="individual_pokemon_row"
+>
+          <div
+                    className="pokemon_col"
+          >
+                    <strong>
+                              Stage 1: 
+                    </strong>
+                     
+                    <br />
+                    <img
+                              alt="A Photograph of a Stage 1 Pokemon"
+                              className="evolution__img"
+                              onClick={[Function]}
+                              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+                    />
+                    <br />
+                    <strong />
+          </div>
+          <div
+                    className="pokemon_col"
+          >
+                    <i
+                              className="pokemon_arrow"
+                    >
+                               →  
+                    </i>
+          </div>
+          <div
+                    className="pokemon_col"
+          >
+                    <strong>
+                              Stage 2: 
+                    </strong>
+                     
+                    <br />
+                    <img
+                              alt="A Photograph of a Stage 2 Pokemon"
+                              className="evolution__img"
+                              onClick={[Function]}
+                              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+                    />
+                    <br />
+                    <strong />
+          </div>
+          <div
+                    className="pokemon_col"
+          >
+                    <i
+                              className="pokemon_arrow"
+                    >
+                              →
+                    </i>
+          </div>
+          <div
+                    className="pokemon_col"
+          >
+                    <strong>
+                              Stage 3: 
+                    </strong>
+                     
+                    <br />
+                    <img
+                              alt="A Photograph of a Stage 3 Pokemon"
+                              className="evolution__img"
+                              onClick={[Function]}
+                              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+                    />
+                    <br />
+                    <strong />
+          </div>
+</div>,
+        "className": "pokemon_evolution",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="pokemon_col"
+>
+              <strong>
+                            Stage 1: 
+              </strong>
+               
+              <br />
+              <img
+                            alt="A Photograph of a Stage 1 Pokemon"
+                            className="evolution__img"
+                            onClick={[Function]}
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+              />
+              <br />
+              <strong />
+</div>,
+            <div
+              className="pokemon_col"
+>
+              <i
+                            className="pokemon_arrow"
+              >
+                             →  
+              </i>
+</div>,
+            <div
+              className="pokemon_col"
+>
+              <strong>
+                            Stage 2: 
+              </strong>
+               
+              <br />
+              <img
+                            alt="A Photograph of a Stage 2 Pokemon"
+                            className="evolution__img"
+                            onClick={[Function]}
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+              />
+              <br />
+              <strong />
+</div>,
+            <div
+              className="pokemon_col"
+>
+              <i
+                            className="pokemon_arrow"
+              >
+                            →
+              </i>
+</div>,
+            <div
+              className="pokemon_col"
+>
+              <strong>
+                            Stage 3: 
+              </strong>
+               
+              <br />
+              <img
+                            alt="A Photograph of a Stage 3 Pokemon"
+                            className="evolution__img"
+                            onClick={[Function]}
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+              />
+              <br />
+              <strong />
+</div>,
+          ],
+          "className": "individual_pokemon_row",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <strong>
+                  Stage 1: 
+</strong>,
+                " ",
+                <br />,
+                <img
+                  alt="A Photograph of a Stage 1 Pokemon"
+                  className="evolution__img"
+                  onClick={[Function]}
+                  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+/>,
+                <br />,
+                <strong />,
+              ],
+              "className": "pokemon_col",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Stage 1: ",
+                },
+                "ref": null,
+                "rendered": "Stage 1: ",
+                "type": "strong",
+              },
+              " ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "A Photograph of a Stage 1 Pokemon",
+                  "className": "evolution__img",
+                  "onClick": [Function],
+                  "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "",
+                },
+                "ref": null,
+                "rendered": "",
+                "type": "strong",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <i
+                className="pokemon_arrow"
+>
+                 →  
+</i>,
+              "className": "pokemon_col",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": " →  ",
+                "className": "pokemon_arrow",
+              },
+              "ref": null,
+              "rendered": " →  ",
+              "type": "i",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <strong>
+                  Stage 2: 
+</strong>,
+                " ",
+                <br />,
+                <img
+                  alt="A Photograph of a Stage 2 Pokemon"
+                  className="evolution__img"
+                  onClick={[Function]}
+                  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+/>,
+                <br />,
+                <strong />,
+              ],
+              "className": "pokemon_col",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Stage 2: ",
+                },
+                "ref": null,
+                "rendered": "Stage 2: ",
+                "type": "strong",
+              },
+              " ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "A Photograph of a Stage 2 Pokemon",
+                  "className": "evolution__img",
+                  "onClick": [Function],
+                  "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "",
+                },
+                "ref": null,
+                "rendered": "",
+                "type": "strong",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <i
+                className="pokemon_arrow"
+>
+                →
+</i>,
+              "className": "pokemon_col",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "→",
+                "className": "pokemon_arrow",
+              },
+              "ref": null,
+              "rendered": "→",
+              "type": "i",
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <strong>
+                  Stage 3: 
+</strong>,
+                " ",
+                <br />,
+                <img
+                  alt="A Photograph of a Stage 3 Pokemon"
+                  className="evolution__img"
+                  onClick={[Function]}
+                  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png"
+/>,
+                <br />,
+                <strong />,
+              ],
+              "className": "pokemon_col",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Stage 3: ",
+                },
+                "ref": null,
+                "rendered": "Stage 3: ",
+                "type": "strong",
+              },
+              " ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "A Photograph of a Stage 3 Pokemon",
+                  "className": "evolution__img",
+                  "onClick": [Function],
+                  "src": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/.png",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": "br",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "",
+                },
+                "ref": null,
+                "rendered": "",
+                "type": "strong",
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifeCycleMethods": true,
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
+
+exports[`Snapshot NoResults should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NoResults
+    searchedPokemon=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <h5
+        className="no__results__text"
+>
+         
+        No pokemons found containing ""
+</h5>,
+      "className": "no__results",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          " ",
+          "No pokemons found containing \\"\\"",
+        ],
+        "className": "no__results__text",
+      },
+      "ref": null,
+      "rendered": Array [
+        " ",
+        "No pokemons found containing \\"\\"",
+      ],
+      "type": "h5",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <h5
+          className="no__results__text"
+>
+           
+          No pokemons found containing ""
+</h5>,
+        "className": "no__results",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            " ",
+            "No pokemons found containing \\"\\"",
+          ],
+          "className": "no__results__text",
+        },
+        "ref": null,
+        "rendered": Array [
+          " ",
+          "No pokemons found containing \\"\\"",
+        ],
+        "type": "h5",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifeCycleMethods": true,
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
+
+exports[`Snapshot Profile should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Profile
+    genderRatioTrue={false}
+    profile_type=""
+    profile_value=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="profile_name"
+>
+          <h6
+                    className="float-right"
+          />
+</div>,
+        <div
+          className="profile_value"
+>
+          <h6
+                    className="float-left"
+          />
+</div>,
+      ],
+      "className": "profile_input",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <h6
+            className="float-right"
+/>,
+          "className": "profile_name",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "",
+            "className": "float-right",
+          },
+          "ref": null,
+          "rendered": "",
+          "type": "h6",
+        },
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <h6
+            className="float-left"
+/>,
+          "className": "profile_value",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "",
+            "className": "float-left",
+          },
+          "ref": null,
+          "rendered": "",
+          "type": "h6",
+        },
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="profile_name"
+>
+            <h6
+                        className="float-right"
+            />
+</div>,
+          <div
+            className="profile_value"
+>
+            <h6
+                        className="float-left"
+            />
+</div>,
+        ],
+        "className": "profile_input",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <h6
+              className="float-right"
+/>,
+            "className": "profile_name",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "",
+              "className": "float-right",
+            },
+            "ref": null,
+            "rendered": "",
+            "type": "h6",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <h6
+              className="float-left"
+/>,
+            "className": "profile_value",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "",
+              "className": "float-left",
+            },
+            "ref": null,
+            "rendered": "",
+            "type": "h6",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifeCycleMethods": true,
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
+
+exports[`Snapshot Search should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Search
+    onChange={[Function]}
+    searchedPokemon=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <input
+        className="poke__search__input"
+        defaultValue=""
+        name="pokename"
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Search Pokemon"
+        type="text"
+/>,
+      "className": "pokemon__search__form",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "className": "poke__search__input",
+        "defaultValue": "",
+        "name": "pokename",
+        "onChange": [Function],
+        "onKeyPress": [Function],
+        "placeholder": "Search Pokemon",
+        "type": "text",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": "input",
+    },
+    "type": "form",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <input
+          className="poke__search__input"
+          defaultValue=""
+          name="pokename"
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          placeholder="Search Pokemon"
+          type="text"
+/>,
+        "className": "pokemon__search__form",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "poke__search__input",
+          "defaultValue": "",
+          "name": "pokename",
+          "onChange": [Function],
+          "onKeyPress": [Function],
+          "placeholder": "Search Pokemon",
+          "type": "text",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "input",
+      },
+      "type": "form",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifeCycleMethods": true,
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
+
+exports[`Snapshot Stats should match snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Stats
+    stats_size=""
+    stats_type=""
+    themeColor=""
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="col-12 col-md-3"
+/>,
+        <div
+          className="col-12 col-md-9"
+>
+          <div
+                    className="progress"
+                    id="stat__progress"
+          >
+                    <div
+                              aria-valuemax="100"
+                              aria-valuemin="0"
+                              aria-valuenow="25"
+                              className="progress-bar "
+                              role="progressbar"
+                              style={
+                                        Object {
+                                                  "backgroundColor": "#",
+                                                  "width": "0%",
+                                                }
+                              }
+                    >
+                              <small
+                                        id="stat_size"
+                              />
+                    </div>
+          </div>
+</div>,
+      ],
+      "className": "pokemon_stats",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "",
+          "className": "col-12 col-md-3",
+        },
+        "ref": null,
+        "rendered": "",
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="progress"
+            id="stat__progress"
+>
+            <div
+                        aria-valuemax="100"
+                        aria-valuemin="0"
+                        aria-valuenow="25"
+                        className="progress-bar "
+                        role="progressbar"
+                        style={
+                                    Object {
+                                                "backgroundColor": "#",
+                                                "width": "0%",
+                                              }
+                        }
+            >
+                        <small
+                                    id="stat_size"
+                        />
+            </div>
+</div>,
+          "className": "col-12 col-md-9",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              aria-valuemax="100"
+              aria-valuemin="0"
+              aria-valuenow="25"
+              className="progress-bar "
+              role="progressbar"
+              style={
+                            Object {
+                                          "backgroundColor": "#",
+                                          "width": "0%",
+                                        }
+              }
+>
+              <small
+                            id="stat_size"
+              />
+</div>,
+            "className": "progress",
+            "id": "stat__progress",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "aria-valuemax": "100",
+              "aria-valuemin": "0",
+              "aria-valuenow": "25",
+              "children": <small
+                id="stat_size"
+/>,
+              "className": "progress-bar ",
+              "role": "progressbar",
+              "style": Object {
+                "backgroundColor": "#",
+                "width": "0%",
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "",
+                "id": "stat_size",
+              },
+              "ref": null,
+              "rendered": "",
+              "type": "small",
+            },
+            "type": "div",
+          },
+          "type": "div",
+        },
+        "type": "div",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="col-12 col-md-3"
+/>,
+          <div
+            className="col-12 col-md-9"
+>
+            <div
+                        className="progress"
+                        id="stat__progress"
+            >
+                        <div
+                                    aria-valuemax="100"
+                                    aria-valuemin="0"
+                                    aria-valuenow="25"
+                                    className="progress-bar "
+                                    role="progressbar"
+                                    style={
+                                                Object {
+                                                            "backgroundColor": "#",
+                                                            "width": "0%",
+                                                          }
+                                    }
+                        >
+                                    <small
+                                                id="stat_size"
+                                    />
+                        </div>
+            </div>
+</div>,
+        ],
+        "className": "pokemon_stats",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "",
+            "className": "col-12 col-md-3",
+          },
+          "ref": null,
+          "rendered": "",
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="progress"
+              id="stat__progress"
+>
+              <div
+                            aria-valuemax="100"
+                            aria-valuemin="0"
+                            aria-valuenow="25"
+                            className="progress-bar "
+                            role="progressbar"
+                            style={
+                                          Object {
+                                                        "backgroundColor": "#",
+                                                        "width": "0%",
+                                                      }
+                            }
+              >
+                            <small
+                                          id="stat_size"
+                            />
+              </div>
+</div>,
+            "className": "col-12 col-md-9",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="25"
+                className="progress-bar "
+                role="progressbar"
+                style={
+                                Object {
+                                                "backgroundColor": "#",
+                                                "width": "0%",
+                                              }
+                }
+>
+                <small
+                                id="stat_size"
+                />
+</div>,
+              "className": "progress",
+              "id": "stat__progress",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "aria-valuemax": "100",
+                "aria-valuemin": "0",
+                "aria-valuenow": "25",
+                "children": <small
+                  id="stat_size"
+/>,
+                "className": "progress-bar ",
+                "role": "progressbar",
+                "style": Object {
+                  "backgroundColor": "#",
+                  "width": "0%",
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "",
+                  "id": "stat_size",
+                },
+                "ref": null,
+                "rendered": "",
+                "type": "small",
+              },
+              "type": "div",
+            },
+            "type": "div",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "disableLifeCycleMethods": true,
+    Symbol(enzyme.__providerValues__): undefined,
+  },
+  Symbol(enzyme.__providerValues__): Map {},
+  Symbol(enzyme.__childContext__): null,
+}
+`;
