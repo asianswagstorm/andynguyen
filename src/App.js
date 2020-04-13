@@ -13,7 +13,10 @@ import Pokemons from "./Components/pokemon/Pokemons"; //eslint-disable-line impo
 import Pokemon from "./Components/pokemon/Pokemon";
 import RecipeComponent from "./Components/recipes/RecipeComponent";
 import Recipe from "./Components/recipes/Recipe";
-import SpotifyComponent from "./Components/spotify/SpotifyComponent"
+import SpotifyComponent from "./Components/spotify/SpotifyComponent";
+import CovidComponent from "./Components/covid/CovidComponent";
+import CanadaMap from "./Components/covid/CanadaCovid";
+
 import * as games_action from './redux/actions/GamesAction';
 import * as tic_tac_toe_action from './redux/actions/TicTacToeAction';
 import * as connect_four_action from './redux/actions/ConnectFourAction';
@@ -35,6 +38,8 @@ export class App extends Component {
                                 {path:  `/Recipes`, component: RecipeComponent},
                                 {path:  `/Recipes/:id`, component: Recipe},
                                 {path:  `/Spotify`, component: SpotifyComponent},
+                                {path:  `/Covid`, component: CovidComponent},
+                                {path:  `/CovidCanada`, component: CanadaMap},
                                 {path: "*", component: NotFound}];
     return (
       <div className="page-wrap">

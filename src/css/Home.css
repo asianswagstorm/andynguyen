@@ -1930,11 +1930,50 @@ p.job-description, span.tech-stack{
 	
 }
 
+img.stack__img{
+	height: 80px;
+	width: 80px;
+	margin-bottom: 10px; 
+	margin-right: 10px;
+}
+
 div.job-section{
 	/* background-color: red; */
 	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+@media only screen and (max-width: 768px) {
+
+	div.job-section{
+		width: 100%;
+	}
+
+	div.overview__job, h2.overview__job{
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	img.stack__img{
+		height: 60px;
+		width: 60px;
+		margin-bottom: 2px; 
+		margin-right: 5px;
+	}
+
+	p.job-description{
+		font-size: 14px;
+		color: black;
+		text-shadow: none;	
+	}
+
+	span.tech-stack{
+		font-size: 12px;
+		text-shadow: none;
+	}
+
 }
 
 /* Footer */

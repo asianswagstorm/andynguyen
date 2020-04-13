@@ -20,7 +20,14 @@ describe('Pokemons Card', () => {
 
     it('should contain individual__card', () =>{
         const wrapper = mountPokemonCard()
-        expect(wrapper.find('div.individual__card').length).toEqual(1)
+        expect(wrapper.find('div.individual__card').exists()).toBe(true)
     })
 })
 
+describe('Views', () => {
+    it('should have too many requests', () => {
+        const wrapper = shallowRenderPokemonCard()
+        wrapper.setState({ toManyRequests: true });
+        expect(wrapper.find('span.badge.badge-danger.mt-2').at(0).text()).toEqual("Too Many Requests");
+    })
+})
