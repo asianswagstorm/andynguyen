@@ -7,31 +7,39 @@ import {
 } from "react-simple-maps";
 import canada from "./topojsons/canada.topojson";
 import quebec from "./topojsons/quebec.json";
+import quebecData from "./manualCases/casesInQuebec.json";
 import montreal from "./topojsons/montreal.topojson";
+import montrealData from "./manualCases/casesInMontreal.json";
 import ReactTooltip from "react-tooltip";
 import {fetchDetailedNumberOfCasesByCountry} from "./coronavirusAPI";
 import Headers from "../Headers";
 //try to get if not then not available. 
-
+//make a chart color fill!!! 
 const CanadaMap =  () => { 
     const [content, setTooltipContent] = useState("");
-    // const [data, setCountryCases] = useState({});
-    // const [regionType, setRegionType] = "provincial";
+    const [regionType, setRegionType] =  useState({name: "Canada" , topojson: canada, data: {}});
 
-
+    const getDetailedCountryCases = async () => setRegionType({name: "Canada" , topojson: canada, data: await fetchDetailedNumberOfCasesByCountry("Canada")});
+    const updateMap = (name) => {
+        if(name === "Canada")
+            setRegionType({name: "Quebec" , topojson: quebec, data : quebecData});
+        else if(name === "Quebec")
+            setRegionType({name: "Montreal" , topojson: montreal, data : montrealData});
+        else if(name === "Montreal")
+            getDetailedCountryCases()
+    };
 
     useEffect( () => {
-        // console.log(quebec)
-        // const getDetailedCountryCases = async () => setCountryCases(await fetchDetailedNumberOfCasesByCountry("Canada"))
-        // getDetailedCountryCases()
+        getDetailedCountryCases()
     }, []);
+    
     return (
     <div>
-    <Headers linkTo = "#/Covid" headerTitle="Covid19 cases in Canada"/>  
+    <Headers linkTo = "#/Covid" headerTitle={`Covid19 cases in ${regionType.name}`}/>  
     <div className= "covid19">  
     <ComposableMap data-tip="" projectionConfig={{ scale: 180 }}>
         <ZoomableGroup>
-          <Geographies geography={canada}>
+          <Geographies geography={regionType.topojson}>
             {({ geographies }) =>
              geographies.map((geo) => {
                   return(
@@ -39,14 +47,19 @@ const CanadaMap =  () => {
                   key={geo.rsmKey}
                   geography={geo}
                   onMouseEnter={async () => {
-                    setTooltipContent((geo.properties && geo.properties.NAME) ? geo.properties.NAME : geo.id);
-                    // const {NAME} = geo.properties;
-                    // const recovered = data[[NAME]] ? data[[NAME]].recovered : 0;
-                    // const confirmed = data[[NAME]] ? data[[NAME]].confirmed : 0;
-                    // const deaths = data[[NAME]] ? data[[NAME]].deaths : 0; 
-                    // setTooltipContent(NAME);
-                    // setTooltipContent(`${NAME}—Confirmed: ${confirmed}—Deaths: ${deaths}—Recovered: ${recovered}`);  
+                    const {NAME} = geo.properties;
+                    setTooltipContent(NAME);
+                    let stringBuilder = NAME;
+                    const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
+                    stringBuilder = `${stringBuilder}—Confirmed: ${confirmed}`;
+                    if(regionType.name === "Canada"){
+                    const recovered = regionType.data[[NAME]] ? regionType.data[[NAME]].recovered : 0;
+                    const deaths = regionType.data[[NAME]] ? regionType.data[[NAME]].deaths : 0; 
+                    stringBuilder = `${stringBuilder}—Deaths: ${deaths}—Recovered: ${recovered}`;
+                   }
+                    setTooltipContent(stringBuilder);
                 }}
+                  onClick= {() => updateMap(regionType.name)}
                   onMouseLeave={() => {
                     setTooltipContent("");
                   }}
@@ -77,13 +90,12 @@ const CanadaMap =  () => {
       </ComposableMap> 
       {content !== "" && 
       <ReactTooltip place="top" type="dark" effect="float">
-              {/* <ul> 
+              <ul> 
                   {content.split("—").map((data, key) => 
                   <li key= {key}>  
                     {data} 
                    </li>)}
-              </ul> */}
-              {content}
+              </ul>
      </ReactTooltip>
     }
       </div>
@@ -93,75 +105,3 @@ const CanadaMap =  () => {
 
 export default CanadaMap;
 
-
-/*
-    const [content, setTooltipContent] = useState("");
-    const [data, setCountryCases] = useState({});
-    const [regionType, setRegionType] = "provincial";
-
-    useEffect( () => {
-        // console.log(quebec)
-        const getDetailedCountryCases = async () => setCountryCases(await fetchDetailedNumberOfCasesByCountry("Canada"))
-        getDetailedCountryCases()
-    }, []);
-    return (
-    <div>
-    <Headers linkTo = "#/Covid" headerTitle="Covid19 cases in Canada"/>  
-    <div className= "covid19">  
-    <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
-        <ZoomableGroup>
-          <Geographies geography={canada}>
-            {({ geographies }) =>
-             geographies.map((geo, key) => {
-                  return(
-                <Geography
-                  key={key}
-                  geography={geo}
-                  onMouseEnter={async () => {
-                    // setTooltipContent((geo.properties && geo.properties.NAME) ? geo.properties.NAME : geo.id);
-                    const {NAME} = geo.properties;
-                    const recovered = data[[NAME]] ? data[[NAME]].recovered : 0;
-                    const confirmed = data[[NAME]] ? data[[NAME]].confirmed : 0;
-                    const deaths = data[[NAME]] ? data[[NAME]].deaths : 0; 
-                    setTooltipContent(NAME);
-                    setTooltipContent(`${NAME}—Confirmed: ${confirmed}—Deaths: ${deaths}—Recovered: ${recovered}`);  
-                }}
-                  onMouseLeave={() => {
-                    setTooltipContent("");
-                  }}
-
-                  style={{
-                    default: {
-                      fill: "#D6D6DA",
-                      outline: "none"
-                    },
-                    hover: {
-                      fill: "#F53",
-                      outline: "none"
-                    },
-                    pressed: {
-                      fill: "#E42",
-                      outline: "none"
-                    }
-                  }}
-                />
-                )})
-            }
-          </Geographies>
-        </ZoomableGroup>
-      </ComposableMap> 
-      {content !== "" && 
-      <ReactTooltip place="top" type="dark" effect="float">
-              { <ul> 
-                  {content.split("—").map((data, key) => 
-                  <li key= {key}>  
-                    {data} 
-                   </li>)}
-              </ul> }
-            
-     </ReactTooltip>
-    }
-      </div>
-    </div>
-      ) 
-*/

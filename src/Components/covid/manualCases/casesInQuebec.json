@@ -1,0 +1,19 @@
+{
+    "Nord-du-Québec": {"confirmed" : 23},
+    "Abitibi-Témiscamingue":{"confirmed" : 138},
+    "Outaouais":{"confirmed" : 180},
+    "Laurentides":{"confirmed" : 663},
+    "Montérégie":{"confirmed" : 1565},
+    "Lanaudière":{"confirmed" : 946},
+    "Mauricie-et-Centre-du-Québec":{"confirmed" : 830},
+    "Capitale-Nationale" : {"confirmed" : 511},
+    "Chaudière-Appalaches": {"confirmed" : 286},
+    "Bas-Saint-Laurent" : {"confirmed" : 34},
+    "Gaspésie-Îles-de-la-Madeleine":{"confirmed" : 99},
+    "Saguenay – Lac-Saint-Jean" : {"confirmed" : 170},
+    "Côte-Nord":{"confirmed" : 96},
+    "Estrie":{"confirmed" : 721},
+    "Montréal":{"confirmed" : 6628},
+    "Laval":{"confirmed" : 1358},
+    "Total": {"confirmed" : 14248 }
+}

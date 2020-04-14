@@ -53,6 +53,8 @@ const MapChart =  ({ setTooltipContent, history }) =>
                   style={{
                     default: {
                       fill: "#D6D6DA",
+                      stroke: "black",
+                      strokeWidth: '0.1px',
                       outline: "none"
                     },
                     hover: {

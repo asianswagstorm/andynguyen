@@ -11,7 +11,7 @@ const CovidComponent = (props) => {
     const [content, setContent] = useState("");
     return (
         <div>
-              <Headers linkTo = "#/" headerTitle="SARS CoV2"/>   
+              <Headers linkTo = "#/" headerTitle="Global SARS CoV2 Cases"/>   
        
     <div className= "covid19"> 
             <div className="world__cases">
