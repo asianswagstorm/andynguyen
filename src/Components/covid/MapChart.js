@@ -6,9 +6,8 @@ import {
 } from "react-simple-maps";
 import {fetchNumberOfCasesByCountry} from "./coronavirusAPI";
 import "./styles/corona.css";
-
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+import worldTopo from "./topojsons/world.topojson";
+const geoUrl = worldTopo ;
 
 
 const filterName = (name) => {

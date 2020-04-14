@@ -2,11 +2,9 @@ const covid19GlobalLink = "https://covid19.mathdro.id/api/";
 const covid19ByCountryAPILINK =`${covid19GlobalLink}countries/`;
 
 export const fetchNumberOfCasesByCountry = async (country) => {
-
-return await fetch(`${covid19ByCountryAPILINK}${country}`).then(response => (
+    return await fetch(`${covid19ByCountryAPILINK}${country}`).then(response => (
     response.json()
 ))
-
 }
 
 export const fetchGlobalCases = async () => {
@@ -15,7 +13,7 @@ export const fetchGlobalCases = async () => {
         response.json()
     ))
 
-    return {confirmed : result.confirmed.value , recovered: result.confirmed.value , deaths: result.deaths.value}
+    return {confirmed : result.confirmed.value , recovered: result.recovered.value , deaths: result.deaths.value}
 }
 
 
@@ -27,7 +25,7 @@ export const fetchDetailedNumberOfCasesByCountry = async (country) => {
     ))    
 
     result.forEach(prov => 
-        alteredData = {...alteredData, [prov.provinceState] : {confirmed : prov.confirmed, deaths : prov.confirmed, recovered: prov.recovered} }
+        alteredData = {...alteredData, [prov.provinceState] : {confirmed : prov.confirmed, deaths : prov.deaths, recovered: prov.recovered} }
     )
     return alteredData;
 }
