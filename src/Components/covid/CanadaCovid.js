@@ -7,6 +7,7 @@ import {
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
 import {fetchDetailedNumberOfCasesByCountry} from "./coronavirusAPI";
+import Headers from "../Headers";
 //try to get if not then not available. 
 const canadaTopoJSON = 'https://raw.githubusercontent.com/rkini/Topojsons/master/canada.topojson'
 const filterCanadianProvinces = (abbreviation) => {
@@ -51,6 +52,8 @@ const CanadaMap =  () => {
     }, []);
     return (
     <div>
+    <Headers linkTo = "#/Covid" headerTitle="Covid19 cases in Canada"/>  
+    <div className= "covid19">  
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
         <ZoomableGroup>
           <Geographies geography={canadaTopoJSON}>
@@ -101,6 +104,7 @@ const CanadaMap =  () => {
               </ul>
      </ReactTooltip>
     }
+      </div>
     </div>
       ) 
 }

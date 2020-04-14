@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  ZoomableGroup,
   ComposableMap,
   Geographies,
   Geography
@@ -19,7 +18,7 @@ const filterName = (name) => {
         return name; 
 }
 
-const rounded = num => {
+export const rounded = num => {
     if (num > 1000000000) {
       return Math.round(num / 100000000) / 10 + "Bn";
     } else if (num > 1000000) {
@@ -30,10 +29,9 @@ const rounded = num => {
       return num;
     }
   };
-{/** I want it to redirect / change the map!!! onClick */}
 const MapChart =  ({ setTooltipContent, history }) => 
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
-        <ZoomableGroup>
+     
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map(geo => (
@@ -71,7 +69,7 @@ const MapChart =  ({ setTooltipContent, history }) =>
               ))
             }
           </Geographies>
-        </ZoomableGroup>
+        
       </ComposableMap>
 
 export default MapChart;
