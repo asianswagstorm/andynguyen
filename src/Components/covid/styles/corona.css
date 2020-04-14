@@ -27,8 +27,25 @@ div.covid19{
 
 button.nextMap__button{
     color:white;
+    width:200px;
+    border-radius: 100px;
 }
 
 div.world__cases{
     margin-left: 25px;
+    
+}
+
+@media only screen and (max-width: 768px) {
+    div.covid19__world{
+        font-size:12px;
+        margin-bottom: 10px;
+    }
+
+    button.nextMap__button{
+        font-size: 12px;
+        width:200px;
+    }
+
+
 }
