@@ -15,9 +15,10 @@ const CovidComponent = (props) => {
        
     <div className= "covid19"> 
             <div className="world__cases">
-                <WorldWideCases />
+                <WorldWideCases mapType="world"/>
+                <button className="nextMap__button" onClick = {() => props.history.push("/CovidCanada")  }  > See cases in Canada </button>
             </div>
-          <MapChart history = {props.history} setTooltipContent={setContent} />
+          <MapChart  setTooltipContent={setContent} />
          { content !== "" && 
          <ReactTooltip place="top" type="dark" effect="float">
               <ul> 
@@ -34,3 +35,5 @@ const CovidComponent = (props) => {
 }
 
 export default CovidComponent;
+
+ 

@@ -13,6 +13,7 @@ import montrealData from "./manualCases/casesInMontreal.json";
 import ReactTooltip from "react-tooltip";
 import {fetchDetailedNumberOfCasesByCountry} from "./coronavirusAPI";
 import Headers from "../Headers";
+import WorldWideCases from "./WorldWideCases";
 //try to get if not then not available. 
 //make a chart color fill!!! 
 const CanadaMap =  () => { 
@@ -29,13 +30,41 @@ const CanadaMap =  () => {
             getDetailedCountryCases()
     };
 
+    const nextMap = (name) => {
+        if(name === "Canada")
+            return "Quebec";
+        else if(name === "Quebec")
+            return"Montreal";
+        else if(name === "Montreal")
+            return "Canada";
+    };
+
+
     useEffect( () => {
         getDetailedCountryCases()
     }, []);
     
+    const handleEvent = async (geo) => {
+        const {NAME} = geo.properties;
+        setTooltipContent(NAME);
+        let stringBuilder = NAME;
+        const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
+        stringBuilder = `${stringBuilder}—Confirmed: ${confirmed}`;
+        if(regionType.name === "Canada"){
+            const recovered = regionType.data[[NAME]] ? regionType.data[[NAME]].recovered : 0;
+            const deaths = regionType.data[[NAME]] ? regionType.data[[NAME]].deaths : 0; 
+            stringBuilder = `${stringBuilder}—Deaths: ${deaths}—Recovered: ${recovered}`;
+       }
+        setTooltipContent(stringBuilder);
+      }
+
     return (
     <div>
     <Headers linkTo = "#/Covid" headerTitle={`Covid19 cases in ${regionType.name}`}/>  
+    <div className="world__cases">
+        <WorldWideCases mapType= {regionType.name} />
+         <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
+    </div>
     <div className= "covid19">  
     <ComposableMap data-tip="" projectionConfig={{ scale: 180 }}>
         <ZoomableGroup>
@@ -46,20 +75,9 @@ const CanadaMap =  () => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  onMouseEnter={async () => {
-                    const {NAME} = geo.properties;
-                    setTooltipContent(NAME);
-                    let stringBuilder = NAME;
-                    const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
-                    stringBuilder = `${stringBuilder}—Confirmed: ${confirmed}`;
-                    if(regionType.name === "Canada"){
-                    const recovered = regionType.data[[NAME]] ? regionType.data[[NAME]].recovered : 0;
-                    const deaths = regionType.data[[NAME]] ? regionType.data[[NAME]].deaths : 0; 
-                    stringBuilder = `${stringBuilder}—Deaths: ${deaths}—Recovered: ${recovered}`;
-                   }
-                    setTooltipContent(stringBuilder);
-                }}
-                  onClick= {() => updateMap(regionType.name)}
+                  onMouseEnter={() => handleEvent(geo)}
+                  onMouseDown={() => handleEvent(geo)}
+                  onClick={() => handleEvent(geo)}
                   onMouseLeave={() => {
                     setTooltipContent("");
                   }}

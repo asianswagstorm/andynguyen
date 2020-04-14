@@ -24,3 +24,11 @@ div.covid19{
     margin-left: auto;
     margin-right: auto;
 }
+
+button.nextMap__button{
+    color:white;
+}
+
+div.world__cases{
+    margin-left: 25px;
+}

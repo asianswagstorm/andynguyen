@@ -15,5 +15,6 @@
     "Estrie":{"confirmed" : 721},
     "Montréal":{"confirmed" : 6628},
     "Laval":{"confirmed" : 1358},
-    "Total": {"confirmed" : 14248 }
+    "Total": {"confirmed" : 14248, "deaths": 435 }
+    
 }

@@ -16,6 +16,15 @@ export const fetchGlobalCases = async () => {
     return {confirmed : result.confirmed.value , recovered: result.recovered.value , deaths: result.deaths.value}
 }
 
+export const fetchCanadianCases = async () => {
+    const result =  await fetch(`${covid19ByCountryAPILINK}Canada`).then(response => (
+        response.json()
+    ))
+
+    return {population: "37.59M" , confirmed : result.confirmed.value , recovered: result.recovered.value , deaths: result.deaths.value}
+}
+
+
 
 export const fetchDetailedNumberOfCasesByCountry = async (country) => {
     let alteredData = {};
