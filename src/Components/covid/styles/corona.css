@@ -4,8 +4,9 @@ rect {
 }
 
 div.covid19__world{
-    font-size:20px;
+    font-size:16px;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 ul.unordered__global{
@@ -19,6 +20,14 @@ span#global__covid__label{
     
 }
 
+span.covid__death{
+    color: red;
+}
+
+span.icon.fa-heart{
+    color:green;
+}
+
 div.covid19{
     width: 90%;
     margin-left: auto;
@@ -29,19 +38,23 @@ button.nextMap__button{
     color:white;
     width:200px;
     border-radius: 100px;
+    margin-left: 25px;
 }
 
-div.world__cases{
-    margin-left: 25px;
-    
-}
+
 
 @media only screen and (max-width: 768px) {
     div.covid19__world{
         font-size:12px;
         margin-bottom: 10px;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
+    ul.unordered__global{
+        font-size: 12px;   
+    }
     button.nextMap__button{
         font-size: 12px;
         width:200px;

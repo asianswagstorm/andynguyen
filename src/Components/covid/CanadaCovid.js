@@ -50,11 +50,14 @@ const CanadaMap =  () => {
         let stringBuilder = NAME;
         const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
         stringBuilder = `${stringBuilder}—Confirmed: ${confirmed}`;
+        if(regionType.name !== "Montreal"){
+            const deaths = regionType.data[[NAME]] ? regionType.data[[NAME]].deaths : 0; 
+            stringBuilder = `${stringBuilder}—Deaths: ${deaths}`;
+        }
         if(regionType.name === "Canada"){
             const recovered = regionType.data[[NAME]] ? regionType.data[[NAME]].recovered : 0;
-            const deaths = regionType.data[[NAME]] ? regionType.data[[NAME]].deaths : 0; 
-            stringBuilder = `${stringBuilder}—Deaths: ${deaths}—Recovered: ${recovered}`;
-       }
+            stringBuilder = `${stringBuilder}—Recoved: ${recovered}`;
+        }
         setTooltipContent(stringBuilder);
       }
 
