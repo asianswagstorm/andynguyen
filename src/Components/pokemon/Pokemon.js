@@ -350,30 +350,32 @@ class Pokemon extends Component {
             {this.state.pokemonLoaded === true && (
             <div>
               <div className="pokemon__info">
-                <div className="row">
-                  <div className="poke_index">Pokedex #{this.state.pokemonIndex}</div>
-                    <div className="col-7"> 
+                  <div className="poke_index row">Pokedex #{this.state.pokemonIndex}</div>
+                  
+                  <div className="prev__next__poke row"> 
                       <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
                       <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
-                      <div className="pokemon_pill">
-                        {this.state.types.map((x, key) => (
-                          <span
-                            key={key}
-                            className="badge badge-pill mr-1"
-                            style={{
-                              backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
-                              color: "white",
-                              borderRadius: "100px",
-                              width: "100px"
-                            }}
-                          >
-                            {x.type.name}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
                   </div>
-                </div>
+                    
+                  <div className="pokemon_pill row">
+                          {this.state.types.map((x, key) => (
+                            <span
+                              key={key}
+                              className="badge badge-pill"
+                              style={{
+                                backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
+                                color: "white",
+                                borderRadius: "100px",
+                                width: "100px",
+                                height: "25px"
+                              }}
+                            >
+                              {x.type.name}
+                            </span>
+                          ))}
+                  </div>
+              </div>
+
                 <div className="pokemon_card_body">
                   <div className="pokemon_with_stats">
                     <div className="pokemon_shown">
@@ -381,7 +383,7 @@ class Pokemon extends Component {
                         src={this.state.imageUrl}
                         alt={"A Photograph of a Pokemon"}
                         onLoad={() => this.setState({ imageLoading: false })}
-                        className="card-img-top rounded mx-auto mt-2"
+                        className="card-img-top"
                       />
                     </div>
                     <div className="pokemon_shown_name">
@@ -397,13 +399,13 @@ class Pokemon extends Component {
                   <div className="poke_profile_title">
                     <h5 id="poke">Profile</h5>
                   </div>  
-                <div className="pokemon_profile">
-                  <div className="pokemon_profile_left">
+                <div className="pokemon_profile row">
+                  <div className="pokemon_profile_left col-sm">
                     <div className="poke_left_content">
                       {leftProfile}
                     </div>
                   </div>  
-                  <div className="pokemon_profile_right">
+                  <div className="pokemon_profile_right col-sm">
                     <div className="poke_right_content">
                       {rightProfile}
                     </div>

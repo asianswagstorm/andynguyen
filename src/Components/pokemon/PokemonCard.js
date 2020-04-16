@@ -22,7 +22,7 @@ export class PokemonCard extends Component {
             <div className="card">
               <h5 className="card-header">{pokemonIndex}</h5>
              
-              <div className="card-body mx-auto">
+              <div className="card-body">
                 <div className="pokemon__image">
                   {this.state.imageLoading && (
                   <img

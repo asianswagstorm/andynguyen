@@ -23,6 +23,10 @@ div.pokemon__image{
     height: 260px;
 }
 
+h5.card-header{
+    width:100%;
+}
+
 img#pokemonImg{
     height: 100%;
     width:100%;

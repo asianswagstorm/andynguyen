@@ -7,28 +7,7 @@ import {
 import {fetchNumberOfCasesByCountry} from "./coronavirusAPI";
 import "./styles/corona.css";
 import worldTopo from "./topojsons/world.topojson";
-const geoUrl = worldTopo ;
-
-
-const filterName = (name) => {
-    if(name === "United States of America")
-        return "US";
-    else 
-        return name; 
-}
-
-export const rounded = num => {
-    if (num > 1000000000) {
-      return Math.round(num / 100000000) / 10 + "Bn";
-    } else if (num > 1000000) {
-      return Math.round(num / 100000) / 10 + "M";
-    } else if (num > 1000)  {
-      return Math.round(num / 100) / 10 + "K";
-    } else {
-      return num;
-    }
-  };
-
+import {addComma,filterName,rounded} from "./covidFunction";
 
 const MapChart =  ({ setTooltipContent }) =>{
   const handleEvent = async (geo) => {
@@ -38,12 +17,12 @@ const MapChart =  ({ setTooltipContent }) =>{
     const confirmed = data.confirmed ? data.confirmed.value : 'unknown';
     const deaths = data.deaths ? data.deaths.value : 'unknown'; 
   
-    setTooltipContent(`${NAME}—Population: ${rounded(POP_EST)}—Confirmed: ${rounded(confirmed)}—Deaths: ${rounded(deaths)}—Recovered: ${rounded(recovered)}—${ISO_A2}`);
+    setTooltipContent(`${NAME}—Population: ${rounded(POP_EST)}—Confirmed: ${addComma(confirmed)}—Deaths: ${addComma(deaths)}—Recovered: ${addComma(recovered)}—${ISO_A2}`);
   }
   return (
     <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
       
-    <Geographies geography={geoUrl}>
+    <Geographies geography={worldTopo}>
       {({ geographies }) =>
         geographies.map(geo => (
           <Geography

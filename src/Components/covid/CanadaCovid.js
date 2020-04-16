@@ -14,6 +14,7 @@ import ReactTooltip from "react-tooltip";
 import {fetchDetailedNumberOfCasesByCountry} from "./coronavirusAPI";
 import Headers from "../Headers";
 import WorldWideCases from "./WorldWideCases";
+import {addComma} from "./covidFunction";
 //try to get if not then not available. 
 //make a chart color fill!!! 
 const CanadaMap =  () => { 
@@ -39,9 +40,9 @@ const CanadaMap =  () => {
             return "Canada";
     };
 
-
     useEffect( () => {
         getDetailedCountryCases()
+        return () =>  null;
     }, []);
     
     const handleEvent = async (geo) => {
@@ -49,14 +50,14 @@ const CanadaMap =  () => {
         setTooltipContent(NAME);
         let stringBuilder = NAME;
         const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
-        stringBuilder = `${stringBuilder}—Confirmed: ${confirmed}`;
+        stringBuilder = `${stringBuilder}—Confirmed: ${addComma(confirmed)}`;
         if(regionType.name !== "Montreal"){
             const deaths = regionType.data[[NAME]] ? regionType.data[[NAME]].deaths : 0; 
-            stringBuilder = `${stringBuilder}—Deaths: ${deaths}`;
+            stringBuilder = `${stringBuilder}—Deaths: ${addComma(deaths)}`;
         }
         if(regionType.name === "Canada"){
             const recovered = regionType.data[[NAME]] ? regionType.data[[NAME]].recovered : 0;
-            stringBuilder = `${stringBuilder}—Recoved: ${recovered}`;
+            stringBuilder = `${stringBuilder}—Recoved: ${addComma(recovered)}`;
         }
         setTooltipContent(stringBuilder);
       }

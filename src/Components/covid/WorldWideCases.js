@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import {fetchGlobalCases, fetchCanadianCases} from "./coronavirusAPI";
 import quebecData from "./manualCases/casesInQuebec.json";
 import montrealData from "./manualCases/casesInMontreal.json";
+import CovidCard from "./CovidCard";
 
 const WorldWideCases = (props) => {
 
@@ -28,26 +29,20 @@ const WorldWideCases = (props) => {
 
     const CovidItems = (props) => {
         let listItems = [ 
-            {className : "" , itemLabel: "Population:", itemValue: worldCases.population },
-            {className : "" , itemLabel: "Confirmed Cases:", itemValue: worldCases.confirmed },
-            {className : "covid__death" , itemLabel: "Deaths:", itemValue: worldCases.deaths },
-            {className : "icon fa-heart" , itemLabel: "Recovered:", itemValue: worldCases.recovered}
+            {className : "" , itemLabel: "Population:", itemValue: worldCases.population , background :"secondary" },
+            {className : "" , itemLabel: "Confirmed Cases:", itemValue: worldCases.confirmed , background :"primary" },
+            {className : "covid__death" , itemLabel: "Deaths:", itemValue: worldCases.deaths , background :"danger"},
+            {className : "icon fa-heart" , itemLabel: "Recovered:", itemValue: worldCases.recovered , background :"success"}
         ]
 
         if(props.mapType === "Quebec")
             listItems = [...listItems, 
-                {className : "icon fa-heartbeat" , itemLabel: "Intensive Care:", itemValue: worldCases.intensiveCare },
-                {className : "icon fa-hospital-o" , itemLabel: "Hospitalized:", itemValue: worldCases.hospitalized }
+                {className : "icon fa-heartbeat" , itemLabel: "Intensive Care:", itemValue: worldCases.intensiveCare , background :"warning"},
+                {className : "icon fa-hospital-o" , itemLabel: "Hospitalized:", itemValue: worldCases.hospitalized, background :"info" }
             ]
         
         return( 
-            <ul className="unordered__global">
-                {listItems.map((item,key) => 
-                    <li key={key}>
-                        <span id="global__covid__label" className={item.className}> {item.itemLabel}</span> {item.itemValue}
-                    </li>
-                )}
-            </ul>
+            <CovidCard listItems = {listItems}/>
         );
     }   
 

@@ -15,7 +15,6 @@ div.pokemon_with_stats{
     width: 80%;
 }
 
-
 div.individual_pokemon_row{
     display: table;
     width: 100%; 
@@ -37,6 +36,7 @@ i.pokemon_arrow{
 div.poke_index{
     font-size: 18px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 div.pokemon__info{
@@ -162,6 +162,22 @@ div.gender-progress{
     text-align: center;
     font-size: 15px;
 }
+
+div.prev__next__poke, div.pokemon_pill{
+    margin-top: 10px;
+}
+
+span.badge.badge-pill{
+    text-shadow: none;
+}
+
+img.card-img-top{
+    height:250px;
+    width:250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media only screen and (max-width: 768px) {
     div.pokemon-data{
         min-width: 100%;
@@ -199,7 +215,7 @@ div.gender-progress{
         height: 75px;
     }
 
-    span.badge.badge-pill.mr-1{
+    span.badge.badge-pill{
         font-size: 15px;
         letter-spacing: 1px;
     }
