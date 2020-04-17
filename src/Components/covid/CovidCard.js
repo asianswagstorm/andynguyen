@@ -1,6 +1,5 @@
 import React from "react";
 import {Card ,CardDeck} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import {addComma} from "./covidFunction";
 const CovidCard = (props) => {
     return(
