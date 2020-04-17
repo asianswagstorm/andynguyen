@@ -20,7 +20,7 @@ class Metso extends Component {
                         {
                             [...tech_stack].map((tech, key) => (
                                     <li key = {key}>
-                                    <a href={tech.link} target="_blank" > <img src = {tech.image} alt={tech.name} className="stack__img" ></img></a>
+                                    <a href={tech.link} target="_blank" rel="noopener noreferrer"> <img src = {tech.image} alt={tech.name} className="stack__img" ></img></a>
                                     <span className="tech-stack">  {tech.description} </span>
                                     </li>
                             

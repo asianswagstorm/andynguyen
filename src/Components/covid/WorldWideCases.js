@@ -8,11 +8,9 @@ const WorldWideCases = (props) => {
 
     const [worldCases, setWorldCases] = useState({population: "7.594B", confirmed: 0, recovered: 0, deaths: 0 });
     const getWorldCases = async () => setWorldCases({...worldCases, ...(await fetchGlobalCases())});
-    const getCanadianCases = async () => setWorldCases({...worldCases, ...(await fetchCanadianCases())});
-    const getQuebecCases = async () => setWorldCases({population: "8.4854M", confirmed: quebecData.Total.confirmed, recovered: "NA", deaths: quebecData.Total.deaths, intensiveCare: quebecData.Total.intensiveCare, hospitalized: quebecData.Total.hospitalized });
+    const getCanadianCases = async () => setWorldCases({...worldCases, ...(await fetchCanadianCases())});//modify Quebec
+    const getQuebecCases = async () => setWorldCases({population: "8.4854M", confirmed: quebecData.Total.confirmed, recovered: quebecData.Total.recovered, deaths: quebecData.Total.deaths, intensiveCare: quebecData.Total.intensiveCare, hospitalized: quebecData.Total.hospitalized });
     const getMontrealCases = async () => setWorldCases({population: "1.78M", confirmed: montrealData.Total.confirmed, recovered: "NA", deaths: montrealData.Total.deaths });
-
-    //const add comma to number
 
     useEffect( () => {
         if( props.mapType === "world")
@@ -23,10 +21,9 @@ const WorldWideCases = (props) => {
             getQuebecCases()
         else if( props.mapType === "Montreal")
             getMontrealCases()
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [worldCases]);
-    //make it a styled component
-
+   
     const CovidItems = (props) => {
         let listItems = [ 
             {className : "" , itemLabel: "Population:", itemValue: worldCases.population , background :"secondary" },
