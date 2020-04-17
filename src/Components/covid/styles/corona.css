@@ -11,6 +11,28 @@ div.covid19__world{
     margin-right: auto;
 }
 
+div.covidCard{
+    color: white;
+    margin: 10px;
+    width: 250px;
+}
+
+h4.covid__number{
+    color: white;
+    text-shadow: 0.25px 0.25px black;
+    font-weight: normal;
+}
+div.card-body{
+    margin: 0px;
+    width: 250px;
+}
+
+h3#covidCardTitle{
+    text-shadow: 0.25px 0.25px black;
+    text-align: center;
+    
+}
+
 ul.unordered__global{
     display: flex;
     justify-content: center;

@@ -1,25 +1,18 @@
 import React from "react";
-import {Card ,CardDeck} from "react-bootstrap";
 import {addComma} from "./covidFunction";
 const CovidCard = (props) => {
     return(
-        <CardDeck>
+        <div className="row d-flex justify-content-center">
              {props.listItems.map((item,key) => 
-                <Card
-                    bg={item.background}
-                    text="white"
-                    className="text-center"
-                    style={{ margin: "10px" }}
-                    key={key}
-                >
-                    <Card.Body>
-                        <Card.Title> {item.itemLabel} </Card.Title>
-                        <Card.Text> {addComma(item.itemValue)} </Card.Text>
-                    </Card.Body>
-                </Card>
-                    
+                <div key ={key} className={`card text-center covidCard bg-${item.background}`} >
+                      <div className={`card-body covidCard`}>
+                        <h3 className={`text-light card-title ${item.className}`} id="covidCardTitle"> {item.itemLabel} </h3> 
+                            <h4 className="covid__number">{addComma(item.itemValue)}</h4> 
+                     </div>
+                </div>
                 )}
-        </CardDeck>
+        </div>
     )
 }
 export default CovidCard;
+

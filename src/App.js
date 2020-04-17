@@ -23,7 +23,7 @@ import * as connect_four_action from './redux/actions/ConnectFourAction';
 import * as pokemon_action from "./redux/actions/PokemonAction";
 import * as recipe_action from "./redux/actions/RecipeAction";
 import * as music_master_action from "./redux/actions/MusicMasterAction";
-//redux on pokemon
+
 import 'antd/dist/antd.css';
 
 export class App extends Component {

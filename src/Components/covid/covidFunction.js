@@ -1,4 +1,4 @@
-export const addComma = (value) =>  (value) ? value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") : value;
+export const addComma = (value) =>  (value) ? value.toLocaleString() : value;
 
 export const filterName = (name) => {
     if(name === "United States of America")

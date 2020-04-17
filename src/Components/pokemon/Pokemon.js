@@ -348,8 +348,8 @@ class Pokemon extends Component {
               )
             }
             {this.state.pokemonLoaded === true && (
-            <div>
-              <div className="pokemon__info">
+            <div className="card">
+              <div className="pokemon__info card-header">
                   <div className="poke_index row">Pokedex #{this.state.pokemonIndex}</div>
                   
                   <div className="prev__next__poke row"> 
@@ -361,7 +361,7 @@ class Pokemon extends Component {
                           {this.state.types.map((x, key) => (
                             <span
                               key={key}
-                              className="badge badge-pill"
+                              className="badge badge-pill mr-1"
                               style={{
                                 backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
                                 color: "white",
@@ -374,6 +374,7 @@ class Pokemon extends Component {
                             </span>
                           ))}
                   </div>
+                
               </div>
 
                 <div className="pokemon_card_body">

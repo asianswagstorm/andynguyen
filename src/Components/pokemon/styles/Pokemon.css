@@ -40,7 +40,7 @@ div.poke_index{
 }
 
 div.pokemon__info{
-    margin-left: 135px;
+    padding-left: 135px;
 }
 
 button.next_pokemon{
@@ -168,7 +168,11 @@ div.prev__next__poke, div.pokemon_pill{
 }
 
 span.badge.badge-pill{
-    text-shadow: none;
+    text-shadow: 0.5px 0.5px black;
+    min-height: 40px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: normal;
 }
 
 img.card-img-top{
@@ -190,7 +194,7 @@ img.card-img-top{
     }
 
     div.pokemon__info{
-        margin-left: 35px;
+       padding-left: 35px;
     }
 
     div.poke_evolution_title{
