@@ -21,7 +21,7 @@ export const fetchCanadianCases = async () => {
         response.json()
     ))
 
-    return {population: "37.59M" , confirmed : result.confirmed.value , recovered: result.recovered.value , deaths: result.deaths.value}
+    return {population: "38,844,182" , confirmed : result.confirmed.value , recovered: result.recovered.value , deaths: result.deaths.value}
 }
 
 

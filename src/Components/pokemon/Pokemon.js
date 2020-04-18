@@ -332,7 +332,7 @@ class Pokemon extends Component {
     const pokeIndex = parseInt(this.props.match.params.pokemonIndex,10);
 
     return (
-      <div className="col">
+      <div>
         <Headers linkTo = "#/Pokemon" headerTitle="Pokedex"/>
         <div className="pokemon-data">
           <div className="card">

@@ -41,7 +41,6 @@ ul.unordered__global{
 
 span#global__covid__label{
     font-weight: bold;
-    
 }
 
 div.covid19{
@@ -50,14 +49,16 @@ div.covid19{
     margin-right: auto;
 }
 
+div.covid19Canada{
+    width: 100%;
+}
+
 button.nextMap__button{
     color:white;
     width:200px;
     border-radius: 100px;
     margin-left: 25px;
 }
-
-
 
 @media only screen and (max-width: 768px) {
     div.covid19__world{

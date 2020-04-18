@@ -18,15 +18,16 @@ import {addComma} from "./covidFunction";
 //try to get if not then not available. 
 //make a chart color fill!!! 
 const CanadaMap =  () => { 
-    const [content, setTooltipContent] = useState("");
-    const [regionType, setRegionType] =  useState({name: "Canada" , topojson: canada, data: {}});
 
-    const getDetailedCountryCases = async () => setRegionType({name: "Canada" , topojson: canada, data: await fetchDetailedNumberOfCasesByCountry("Canada")});
+    const [content, setTooltipContent] = useState("");
+    const [enteredMap, setEnteredMap] = useState(false);
+    const [regionType, setRegionType] =  useState({name: "Canada" , topojson: canada, data: {}, mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
+    const getDetailedCountryCases = async () => setRegionType({name: "Canada" , topojson: canada, data: await fetchDetailedNumberOfCasesByCountry("Canada"), mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
     const updateMap = (name) => {
         if(name === "Canada")
-            setRegionType({name: "Quebec" , topojson: quebec, data : quebecData});
+            setRegionType({name: "Quebec" , topojson: quebec, data : quebecData , mapSize : {centerX : -68, centerY: 45, zoom:6, maxZoom: 15}});
         else if(name === "Quebec")
-            setRegionType({name: "Montreal" , topojson: montreal, data : montrealData});
+            setRegionType({name: "Montreal" , topojson: montreal, data : montrealData , mapSize : {centerX : -29, centerY: 500, zoom:3, maxZoom: 5}});
         else if(name === "Montreal")
             getDetailedCountryCases()
     };
@@ -46,6 +47,7 @@ const CanadaMap =  () => {
     }, []);
     
     const handleEvent = async (geo) => {
+        setEnteredMap(true);
         const {NAME} = geo.properties;
         setTooltipContent(NAME);
         let stringBuilder = NAME;
@@ -60,8 +62,9 @@ const CanadaMap =  () => {
             stringBuilder = `${stringBuilder}—Recoved: ${addComma(recovered)}`;
         }
         setTooltipContent(stringBuilder);
+      
       }
-
+// projectionConfig={{ scale: 180 }}
     return (
     <div>
     <Headers linkTo = "#/Covid" headerTitle={`Covid19 cases in ${regionType.name}`}/>  
@@ -69,9 +72,10 @@ const CanadaMap =  () => {
         <WorldWideCases mapType= {regionType.name} />
          <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
     </div>
-    <div className= "covid19">  
-    <ComposableMap data-tip="" projectionConfig={{ scale: 180 }}>
-        <ZoomableGroup>
+    <div className= "covid19Canada">  
+    <ComposableMap data-tip="">
+                                
+        <ZoomableGroup center={[ regionType.mapSize.centerX, regionType.mapSize.centerY ]}  zoom = {regionType.mapSize.zoom} minZoom = {regionType.mapSize.zoom} maxZoom = {regionType.mapSize.maxZoom}>
           <Geographies geography={regionType.topojson}>
             {({ geographies }) =>
              geographies.map((geo) => {
@@ -79,11 +83,11 @@ const CanadaMap =  () => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  onMouseEnter={() => handleEvent(geo)}
-                  onMouseDown={() => handleEvent(geo)}
                   onClick={() => handleEvent(geo)}
+                  onMouseEnter={() => handleEvent(geo)}
                   onMouseLeave={() => {
                     setTooltipContent("");
+                    setEnteredMap(false);
                   }}
 
                   style={{
@@ -110,16 +114,20 @@ const CanadaMap =  () => {
           </Geographies>
         </ZoomableGroup>
       </ComposableMap> 
-      {content !== "" && 
-      <ReactTooltip place="top" type="dark" effect="float">
-              <ul> 
-                  {content.split("—").map((data, key) => 
+      {enteredMap === true &&
+        <ReactTooltip place="top" type="dark" effect="float">
+          {( content === "" )  ?
+                "loading" :
+                <ul> 
+                {content.split("—").map((data, key) => 
                   <li key= {key}>  
                     {data} 
-                   </li>)}
-              </ul>
-     </ReactTooltip>
+                  </li>)}
+                </ul>
+          }
+      </ReactTooltip>
     }
+
       </div>
     </div>
       ) 
