@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.3ccdec60.chunk.css",
-    "main.js": "/static/js/main.7c525ef0.chunk.js",
-    "main.js.map": "/static/js/main.7c525ef0.chunk.js.map",
+    "main.css": "/static/css/main.42e3c7a1.chunk.css",
+    "main.js": "/static/js/main.820a6dc2.chunk.js",
+    "main.js.map": "/static/js/main.820a6dc2.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.240c0830.js",
     "runtime-main.js.map": "/static/js/runtime-main.240c0830.js.map",
     "static/css/2.ff8bd605.chunk.css": "/static/css/2.ff8bd605.chunk.css",
-    "static/js/2.f8b2dd72.chunk.js": "/static/js/2.f8b2dd72.chunk.js",
-    "static/js/2.f8b2dd72.chunk.js.map": "/static/js/2.f8b2dd72.chunk.js.map",
+    "static/js/2.00ff201d.chunk.js": "/static/js/2.00ff201d.chunk.js",
+    "static/js/2.00ff201d.chunk.js.map": "/static/js/2.00ff201d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.6edf53c52c734075fcf0fd7b0eb17670.js": "/precache-manifest.6edf53c52c734075fcf0fd7b0eb17670.js",
+    "precache-manifest.dce00b7a90c03ee0932c661b6f2cac2b.js": "/precache-manifest.dce00b7a90c03ee0932c661b6f2cac2b.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.ff8bd605.chunk.css.map": "/static/css/2.ff8bd605.chunk.css.map",
-    "static/css/main.3ccdec60.chunk.css.map": "/static/css/main.3ccdec60.chunk.css.map",
-    "static/js/2.f8b2dd72.chunk.js.LICENSE.txt": "/static/js/2.f8b2dd72.chunk.js.LICENSE.txt",
+    "static/css/main.42e3c7a1.chunk.css.map": "/static/css/main.42e3c7a1.chunk.css.map",
+    "static/js/2.00ff201d.chunk.js.LICENSE.txt": "/static/js/2.00ff201d.chunk.js.LICENSE.txt",
     "static/media/azure.png": "/static/media/azure.f935f7aa.png",
     "static/media/Home.css": "/static/media/banner.c0e4e852.jpg",
-    "static/media/canada.topojson": "/static/media/canada.c8d15567.topojson",
+    "static/media/canada.topojson": "/static/media/canada.f2da5a9b.topojson",
     "static/media/django.png": "/static/media/django.82f8cdf8.png",
     "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.e6cf7c6e.woff2",
     "static/media/montreal.topojson": "/static/media/montreal.6c4d02dc.topojson",
@@ -27,8 +27,8 @@
   "entrypoints": [
     "static/js/runtime-main.240c0830.js",
     "static/css/2.ff8bd605.chunk.css",
-    "static/js/2.f8b2dd72.chunk.js",
-    "static/css/main.3ccdec60.chunk.css",
-    "static/js/main.7c525ef0.chunk.js"
+    "static/js/2.00ff201d.chunk.js",
+    "static/css/main.42e3c7a1.chunk.css",
+    "static/js/main.820a6dc2.chunk.js"
   ]
 }
