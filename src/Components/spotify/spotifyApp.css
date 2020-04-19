@@ -4,6 +4,7 @@
 
 div.spotify__content{
   width: 100%;
+  margin-left: 0.75px;
 }
 
 div.artist__search__section{
@@ -16,7 +17,7 @@ div.search__artist{
   display: flex;
   border-radius: 100px;
   border: 1px solid black;
-  max-width: 229px;
+  width: 229px;
   margin:auto;
   background-color: white;
   height:42px;
@@ -43,8 +44,9 @@ select.search__select{
   /* transform: translateY(-40px); */
 }
 
-button.search_button {
+button.search_button.undefined, button.search_button.artist_search_success , button.search_button.artist_search_error {
   height: 40px;
+  width: 70.11px;
 }
 
 input.search__input{
@@ -53,8 +55,9 @@ input.search__input{
   border-style: none;
   color:black;
   text-align: center;
-  max-width: 200px;
+  width: 150px;
   margin : 0 ;
+  font-size: 14px;
 }
 
 div.artist__suggestion{
@@ -76,7 +79,7 @@ ul.select-list-group__list {
 
 li.select-list-group__list-item{
   position: relative;
-  /* margin-bottom: 1px; */
+ 
 }
 
 li.select-list-group__list-item { 
@@ -115,10 +118,6 @@ button.search_button.artist_search_error{
 div.invalid__search{
   color: #d9534f;
   margin-top: 15px;
-}
-
-div.artist__info{
-  /* background-color: yellowgreen; */
 }
 
 img.artist__profile__img{
@@ -173,7 +172,6 @@ div.track__text{
   transform: translateY(-80px);
 }
 
-
 .track__icon:hover {
   color: black;
   background-color: lightgrey;
@@ -205,9 +203,23 @@ i.fab.fa-spotify{
   text-decoration: none;
 }
 
-
-
 h5.track__title{
   color: white;
+}
 
+div.initial__spotify__messages{
+ 
+  font-size: 18px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  
+  div.initial__spotify__messages{
+    width: 90%;
+    padding-left: 35px;
+    font-size: 15px;
+  }
 }

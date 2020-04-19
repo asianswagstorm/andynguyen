@@ -16,7 +16,7 @@ import Headers from "../Headers";
 import WorldWideCases from "./WorldWideCases";
 import {addComma} from "./covidFunction";
 //try to get if not then not available. 
-//make a chart color fill!!! 
+//make a chart color fill (hot zones)!!! 
 const CanadaMap =  () => { 
 
     const [content, setTooltipContent] = useState("");
@@ -62,9 +62,18 @@ const CanadaMap =  () => {
             stringBuilder = `${stringBuilder}—Recoved: ${addComma(recovered)}`;
         }
         setTooltipContent(stringBuilder);
-      
-      }
-// projectionConfig={{ scale: 180 }}
+    }
+    //fix
+    const fillColor = geo => {
+      const {NAME} = geo.properties;
+      const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
+      let color = "#D6D6DA";
+      if(confirmed > 1000)
+        color = "#8b0000";
+
+      return color;
+    }
+
     return (
     <div>
     <Headers linkTo = "#/Covid" headerTitle={`Covid19 cases in ${regionType.name}`}/>  
@@ -92,7 +101,7 @@ const CanadaMap =  () => {
 
                   style={{
                     default: {
-                      fill: "#D6D6DA",
+                      fill: fillColor(geo),
                       stroke: "black",
                       strokeWidth: '0.1px',
                       outline: "none"

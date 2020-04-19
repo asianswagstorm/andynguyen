@@ -45,7 +45,7 @@ class GamesHead extends Component {
               className="button button-block"
               id="reset-game"
             >
-              Reset Game
+              <span id="reset__game"> Reset Game </span>
             </button>
           </div>
         )}

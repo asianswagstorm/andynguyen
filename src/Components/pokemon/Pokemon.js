@@ -309,8 +309,9 @@ class Pokemon extends Component {
         return (
           <Profile
             key={index}
-            profile_type={x.profile_type}
-            profile_value={x.profile_value}
+            profileSide="left"
+            profileType={x.profile_type}
+            profileValue={x.profile_value}
             genderRatioTrue={x.genderRatioTrue}
           />
         );
@@ -322,8 +323,9 @@ class Pokemon extends Component {
         return (
           <Profile
             key={index}
-            profile_type={x.profile_type}
-            profile_value={x.profile_value}
+            profileSide="right"
+            profileType={x.profile_type}
+            profileValue={x.profile_value}
             genderRatioTrue={x.genderRatioTrue}
           />
         );
@@ -401,12 +403,12 @@ class Pokemon extends Component {
                     <h5 id="poke">Profile</h5>
                   </div>  
                 <div className="pokemon_profile row">
-                  <div className="pokemon_profile_left col-sm">
+                  <div className="pokemon_profile_left col-sm-7">
                     <div className="poke_left_content">
                       {leftProfile}
                     </div>
                   </div>  
-                  <div className="pokemon_profile_right col-sm">
+                  <div className="pokemon_profile_right col-sm-5">
                     <div className="poke_right_content">
                       {rightProfile}
                     </div>

@@ -28,6 +28,10 @@ div.pokemon_col{
     vertical-align: middle;
 }
 
+div.pokemon_profile.row{
+    line-height: 12px;
+}
+
 i.pokemon_arrow{
     font-size: 100px;
     color: black;
@@ -124,12 +128,13 @@ div.poke_left_content{
 
 div.profile_input{
     display: flex;
+
+    margin-bottom: 15px;
 }
 
 div.profile_name{
     height:12px;
     width: 150px;
-   
 }
 
 div.profile_value{
@@ -182,6 +187,12 @@ img.card-img-top{
     margin-right: auto;
 }
 
+div.genderRatioBar{
+    line-height: 20px;
+    padding-right: 0;
+    
+}
+
 @media only screen and (max-width: 768px) {
     div.pokemon-data{
         min-width: 100%;
@@ -228,7 +239,21 @@ img.card-img-top{
         width: 100%;
     }
 
-    div.poke_left_content, div.poke_right_content{
+
+    div.poke_left_content{
+        margin-left: auto;
+        margin-right: 10px;
+        width: 87%;
+        margin-top: 10px;
+    }
+
+    div.profile_value.col-6{
+        padding-left: 0;
+    }
+
+  
+
+    div.poke_right_content{
         margin-left: auto;
         margin-right: auto;
         width: 80%;

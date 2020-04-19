@@ -23,7 +23,7 @@ class SpotifyComponent extends Component {
                 <Tracks action_props={this.props.action_props}/>
             </div>
           ) : (
-            <div>
+            <div className="initial__spotify__messages">
               <h3> Search for an artists to preview their top 10 songs. </h3>
               <h4>
                 This app uses a Spotify API Wrapper to show artists information.

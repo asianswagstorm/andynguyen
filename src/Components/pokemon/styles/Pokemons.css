@@ -15,7 +15,7 @@
   }
 
   div.pokemon__search__button{
-    height: 100%;
+    height: 38.5px;
     border: 1px solid #0D1217;
     border-right: none;
     width:38.5px;
@@ -56,6 +56,7 @@
     border: 1px solid #0D1217;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
+    height:38.5px;
   }
   
   .no__results{

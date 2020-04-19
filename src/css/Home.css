@@ -1878,11 +1878,11 @@ header > h1#app-header ,header > h2#app-header,header > h3#app-header {
 		background: #f1f1f1 ;
 		width: 100%;
 		min-height:100vh;
-	
 	}
 	/* !!! */
 	section#main__page {
-		min-height: 86.9vh
+		min-height: 86.9vh;
+		width: 99.99%;
 	}
 
 	section#main #header {
