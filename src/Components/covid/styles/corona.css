@@ -55,7 +55,7 @@ div.covid19Canada{
 
 button.nextMap__button{
     color:white;
-    width:200px;
+    width:250px;
     border-radius: 100px;
     margin-left: 25px;
 }
@@ -71,8 +71,8 @@ button.nextMap__button{
     }
     button.nextMap__button{
         font-size: 12px;
-        width:200px;
+        margin-left: 60px;
+        align-self: center;
     }
-
 
 }

@@ -43,6 +43,10 @@ select.search__select{
   /* transform: translateY(-40px); */
 }
 
+button.search_button {
+  height: 40px;
+}
+
 input.search__input{
   border-radius: 100px;
   height:100%;
