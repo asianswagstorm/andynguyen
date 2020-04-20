@@ -82,8 +82,7 @@ const CanadaMap =  () => {
          <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
     </div>
     <div className= "covid19Canada">  
-    <ComposableMap data-tip="">
-                                
+    <ComposableMap data-tip="">  
         <ZoomableGroup center={[ regionType.mapSize.centerX, regionType.mapSize.centerY ]}  zoom = {regionType.mapSize.zoom} minZoom = {regionType.mapSize.zoom} maxZoom = {regionType.mapSize.maxZoom}>
           <Geographies geography={regionType.topojson}>
             {({ geographies }) =>
