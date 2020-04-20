@@ -4,6 +4,7 @@ import "../css/font-awesome.min.css";
 import ListOfProjects from "./ListOfProjects";
 import { Wave } from 'react-animated-text';
 import Typist from 'react-typist';
+import CustomParticles from "./CustomParticles";
 import { popUpNotification } from "./constants/HelperFunction/Functions";
 
 
@@ -76,6 +77,8 @@ class Home extends Component {
      <div>
         <section id="main">
           <section id="banner">
+            
+          <CustomParticles />
             <div className="inner">
               <div className="heyThere">
                 <h1 className="intro-andy">

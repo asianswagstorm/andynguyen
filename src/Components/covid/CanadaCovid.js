@@ -14,9 +14,9 @@ import ReactTooltip from "react-tooltip";
 import {fetchDetailedNumberOfCasesByCountry} from "./coronavirusAPI";
 import Headers from "../Headers";
 import WorldWideCases from "./WorldWideCases";
+import SeverityChart from "./SeverityChart";
 import {addComma} from "./covidFunction";
-//try to get if not then not available. 
-//make a chart color fill (hot zones)!!! 
+
 const CanadaMap =  () => { 
 
     const [content, setTooltipContent] = useState("");
@@ -63,16 +63,72 @@ const CanadaMap =  () => {
         }
         setTooltipContent(stringBuilder);
     }
-    //fix
+    const CanadaSeverityLevels = (confirmedCase) => {
+      const {name} = regionType;
+
+      const severityLevels =  {
+        "Canada" : {
+          "high" : 10000,
+          "mediumHigh" : 2000,
+          "medium" : 1000,
+          "mediumLow" : 250,
+          "low" : 100,
+          "veryLow" : 1
+        },
+         "Quebec" : {
+          "high" : 5000,
+          "mediumHigh" : 2000,
+          "medium" : 1000,
+          "mediumLow" : 100,
+          "low" : 50,
+          "veryLow" : 1
+        },
+         "Montreal" : {
+          "high" : 500,
+          "mediumHigh" : 250,
+          "medium" : 100,
+          "mediumLow" : 50,
+          "low" : 10,
+          "veryLow" : 1
+        }
+      };
+
+      if(confirmedCase > severityLevels[name].high)
+          return "high";
+      else if(confirmedCase < severityLevels[name].high && confirmedCase >= severityLevels[name].mediumHigh)
+          return "mediumHigh";
+      else if(confirmedCase < severityLevels[name].mediumHigh && confirmedCase >= severityLevels[name].medium)
+          return "medium";
+      else if(confirmedCase < severityLevels[name].medium && confirmedCase >= severityLevels[name].mediumLow)
+          return "mediumLow";
+      else if(confirmedCase < severityLevels[name].mediumLow && confirmedCase >= severityLevels[name].low)
+          return "low";
+      else if(confirmedCase < severityLevels[name].low && confirmedCase >= severityLevels[name].veryLow)
+          return "veryLow";
+      else return "noCases";
+    };
+
     const fillColor = geo => {
       const {NAME} = geo.properties;
       const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
-      let color = "#D6D6DA";
-      if(confirmed > 1000)
-        color = "#8b0000";
-
-      return color;
-    }
+      const level = CanadaSeverityLevels(confirmed);
+      switch(level){
+        case "high":
+          return "#661a00"
+        case "mediumHigh":
+          return "#cc2900"
+        case "medium":
+          return "#ff4000"
+        case "mediumLow":
+          return "#ff9900"
+        case "low":
+          return "#ffff00"
+        case "veryLow":
+          return "#ffff99"
+        default:
+          return "#D6D6DA"
+      }
+    };
 
     return (
     <div>
@@ -82,6 +138,9 @@ const CanadaMap =  () => {
          <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
     </div>
     <div className= "covid19Canada">  
+    
+    <SeverityChart />
+    
     <ComposableMap data-tip="">  
         <ZoomableGroup center={[ regionType.mapSize.centerX, regionType.mapSize.centerY ]}  zoom = {regionType.mapSize.zoom} minZoom = {regionType.mapSize.zoom} maxZoom = {regionType.mapSize.maxZoom}>
           <Geographies geography={regionType.topojson}>
@@ -106,14 +165,16 @@ const CanadaMap =  () => {
                       outline: "none"
                     },
                     hover: {
-                      fill: "#F53",
+                      fill: fillColor(geo),
                       outline: "none",
                       stroke: "black",
                       strokeWidth: '0.1px',
+                      opacity: "0.3"
                     },
                     pressed: {
                       fill: "#E42",
-                      outline: "none"
+                      outline: "none",
+                      opacity: "0.3"
                     }
                   }}
                 />

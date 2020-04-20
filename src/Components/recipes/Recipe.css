@@ -34,6 +34,7 @@ button:focus {
 }
 
 div.recipe__loading{
+  margin-top: 25px;
   text-align: center;
   font-size:25px;
   font-weight: bold;
@@ -41,6 +42,11 @@ div.recipe__loading{
 
 ul.ingredient__list{
   margin-top: 10px;
+ 
+}
+
+ul.ingredient__list, li.ingredient__list__item{
+  font-family: Arial;
 }
 
 button.recipe__buttons {

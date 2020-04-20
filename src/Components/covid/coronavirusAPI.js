@@ -24,8 +24,6 @@ export const fetchCanadianCases = async () => {
     return {population: "38,844,182" , confirmed : result.confirmed.value , recovered: result.recovered.value , deaths: result.deaths.value}
 }
 
-
-
 export const fetchDetailedNumberOfCasesByCountry = async (country) => {
     let alteredData = {};
 

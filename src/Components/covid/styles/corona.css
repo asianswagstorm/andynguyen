@@ -60,10 +60,31 @@ button.nextMap__button{
     margin-left: 25px;
 }
 
+div.severity__chart{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+div.severity__level{
+    height: 25px; 
+    max-width: 14%;
+}
+
 @media only screen and (max-width: 768px) {
     div.covid19__world{
         font-size:12px;
         margin-bottom: 10px;
+    }
+    div.severity__chart{
+     font-size: 12px;   
+    }
+
+    div.severity__level{
+        max-width: 180px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     ul.unordered__global{

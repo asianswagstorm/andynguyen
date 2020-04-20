@@ -62,7 +62,7 @@ class Recipe extends React.Component {
                       <h4 className="mt-3 mb-4">Ingredients</h4>
                       {recipe.ingredients.map((item, index) => {
                         return (
-                          <li key={index} className="list-group-item text-slanted">
+                          <li key={index} className="list-group-item text-slanted ingredient__list__item">
                             {item}
                           </li>
                         );
