@@ -129,7 +129,7 @@ input.recipeForm__input:focus {
   border-bottom: solid 2px #2c3e50;
 }
 
-span#search__icon{
+span#recipe__search__icon{
   margin:auto;
 }
 
@@ -196,7 +196,7 @@ input:-webkit-autofill {
 
   }
 
-  span#search__icon{
+  span#recipe__search__icon{
     margin: 0;
     padding-left: 18px;
   }

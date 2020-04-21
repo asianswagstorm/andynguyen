@@ -115,21 +115,22 @@ class Home extends Component {
             <div className="social column">
               <h3>About Me</h3>
               <p id="about-me">
-                My name is Andy Nguyen, a Montreal based software developer. A
-                recent Computer Science graduate, but am always learning. I chose this field because finding solutions to problems and developing quality software 
-                excites me. I am looking for mentorship opportunities within a diverse team, that can challenge me and help develop my skills as a software developer 
-                even further. I look forward to working with you.
+                My name is Andy Nguyen, a Montreal native software developer. 
+                I am a computer science graduate, always on the pursuit of knowledge and self improvement. 
               </p>
               <p id="about-me">
-                Outside of coding, I hold a personal training certification and I {" "} 
-                <a
+                Software development is one of my life passions, because I find value in turning ideas into reality.  
+                Finding solutions to client facing problems sparks joy.
+                I am seeking to join a dynamic, passionate and energetic team that can provide me mentorship opportunities, to extend my knowledge in software development to greater lengths. Looking forward to working with you.
+              </p>
+              <p id="about-me">
+              Outside of coding, I hold a personal training certification and I compete in the  
+               <a
                   href="http://www.fqd-quebec.com/lifter/528"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  compete in powerlifting
-                </a>
-                {" "} within the Quebec Powerlifting Federation. My other interest include cooking, mixology, photography and of course petting dogs.
+                > Quebec Powerlifting Federation.</a>
+                 My passion for fitness has taught me dedication and confidence that directly translate to everything I do.  
               </p>
 
               <h3>My Socials</h3>
@@ -185,7 +186,7 @@ class Home extends Component {
                     name="_replyto"
                     id="email"
                     type="email"
-                    placeholder="Email"
+                    placeholder="example@example.com"
                   />
                   </label>
                 </div>
@@ -195,7 +196,7 @@ class Home extends Component {
                     name="message"
                     id="message"
                     rows="6"
-                    placeholder="Message"
+                    placeholder="i.e I like Dogs!"
                   />
                   </label>
                 </div>

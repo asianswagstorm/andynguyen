@@ -2,7 +2,9 @@ import React from "react";
 import {
   ComposableMap,
   Geographies,
-  Geography
+  Geography,
+  Graticule,
+  Sphere
 } from "react-simple-maps";
 import {fetchNumberOfCasesByCountry} from "./coronavirusAPI";
 import "./styles/corona.css";
@@ -21,39 +23,39 @@ const MapChart =  ({ setTooltipContent }) =>{
   }
   return (
     <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
-      
-    <Geographies geography={worldTopo}>
-      {({ geographies }) =>
-        geographies.map(geo => (
-          <Geography
-            key={geo.rsmKey}
-            geography={geo}
-            onMouseEnter={() => handleEvent(geo)}
-            onMouseDown={() => handleEvent(geo)}
-            onMouseLeave={() => {
-              setTooltipContent("");
-            }}
-            style={{
-              default: {
-                fill: "#D6D6DA",
-                stroke: "black",
-                strokeWidth: '0.1px',
-                outline: "none"
-              },
-              hover: {
-                fill: "#F53",
-                outline: "none"
-              },
-              pressed: {
-                fill: "#E42",
-                outline: "none"
-              }
-            }}
-          />
-        ))
-      }
-    </Geographies>
-
+      <Sphere stroke="#DDD" />
+      <Graticule stroke="#DDD" />
+      <Geographies geography={worldTopo}>
+        {({ geographies }) =>
+          geographies.map(geo => (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              onMouseEnter={() => handleEvent(geo)}
+              onMouseDown={() => handleEvent(geo)}
+              onMouseLeave={() => {
+                setTooltipContent("");
+              }}
+              style={{
+                default: {
+                  fill: "#D6D6DA",
+                  stroke: "black",
+                  strokeWidth: '0.1px',
+                  outline: "none"
+                },
+                hover: {
+                  fill: "#F53",
+                  outline: "none"
+                },
+                pressed: {
+                  fill: "#E42",
+                  outline: "none"
+                }
+              }}
+            />
+          ))
+        }
+      </Geographies>
   </ComposableMap>)
 } 
      

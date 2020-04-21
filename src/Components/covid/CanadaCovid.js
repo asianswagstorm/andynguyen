@@ -133,12 +133,14 @@ const CanadaMap =  () => {
     return (
     <div>
     <Headers linkTo = "#/Covid" headerTitle={`Covid19 cases in ${regionType.name}`}/>  
-    <div className="world__cases">
-        <WorldWideCases mapType= {regionType.name} />
-         <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
-    </div>
+    
     <div className= "covid19Canada">  
     
+      <div className="world__cases">
+          <WorldWideCases mapType= {regionType.name} />
+          <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
+      </div>
+
     <SeverityChart />
     
     <ComposableMap data-tip="">  

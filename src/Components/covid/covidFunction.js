@@ -1,4 +1,23 @@
-export const addComma = (value) =>  (value) ? value.toLocaleString() : value;
+export const addComma = (number) => { //replacement for .toLocaleString()
+  if(number){
+    if(number > 1000){
+      const modThousand = (number % 1000);
+      let remainder = modThousand.toString();
+      if(modThousand < 100)
+          remainder = `0${remainder}`;
+      else if(modThousand < 10)
+          remainder = `00${remainder}`;
+      else if(modThousand === 0)
+          remainder = "000";
+      const fixedNumber = Math.floor(number/1000);
+    
+      return `${addComma(fixedNumber).toString()},${remainder}` 
+    } 
+    else return number.toString();
+  }else{
+    return 0;
+  }
+};
 
 export const filterName = (name) => {
     if(name === "United States of America")

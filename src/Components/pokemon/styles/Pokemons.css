@@ -28,9 +28,8 @@
     background-color: rgb(107, 105, 105);
   }
 
-  span#search__icon{
+  span#pokemon__search__icon{
     display:block;
-    float:left;
     margin:7px 12.75px 0 12.75px;
   }
 

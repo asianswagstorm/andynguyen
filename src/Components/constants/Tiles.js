@@ -44,6 +44,14 @@ export const tiles = [
     },
     {
       linkType: "internal",
+      href: `#/Covid`,
+      src: "images/thumbs/thumb15.jpg",
+      alt: "",
+      title: "Covid19",
+      type: ["Covid19", "JavaScript"]
+    },
+    {
+      linkType: "internal",
       href: `#/TicTacToe`,
       src: "images/thumbs/thumb6.jpg",
       alt: "",
@@ -57,14 +65,6 @@ export const tiles = [
       alt: "",
       title: "Connect 4 Game.",
       type: ["JavaScript"]
-    },
-    {
-      linkType: "internal",
-      href: `#/Covid`,
-      src: "images/thumbs/thumb15.jpg",
-      alt: "",
-      title: "Covid19",
-      type: ["Covid19", "JavaScript"]
     },
     {
       linkType: "internal",

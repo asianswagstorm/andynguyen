@@ -6,7 +6,7 @@ const CustomParticles = () =>
     params={{
         particles: {
             number: {
-                value: 200,
+                value: (window.innerWidth  <= 400) ? 50 : 200,
                 density: {
                     enable: false
                 }

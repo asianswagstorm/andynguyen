@@ -76,7 +76,7 @@ export class Pokemons extends Component {
         <div className="pokemon_row">
           <div className="pokemon_search">
             <div className="pokemon__search__button" onClick={() => this.searchPokemon(this.props.searchedPokemon)}>
-              <span className="icon fa-search" id = "search__icon"/>
+              <span className="icon fa-search" id = "pokemon__search__icon"/>
             </div>
             <Search searchPokemon ={() => this.searchPokemon} onChange={this.change} searchedPokemon={this.props.searchedPokemon} />
           </div>
