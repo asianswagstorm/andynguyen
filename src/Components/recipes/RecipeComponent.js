@@ -9,6 +9,10 @@ import { connect } from 'react-redux';
 class RecipeComponent extends Component {
   //cleanUP && add tests!!! 
   //use async await when you want async code to run like synchronous code
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  }
+  
   getRecipe = async (e) => { //async functions return a promise
     const {dispatch} = this.props;
     const {getRecipes} = this.props.action_props.recipe_action;

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {metso} from "./constants/Jobs";
 class Metso extends Component {
+    componentDidMount = () => {
+        window.scrollTo(0, 0);
+    }
+
     render = () => {
         const {job_detail, product_explanation, tech_stack} = metso.job_overview;
 

@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState,useEffect }  from 'react';
 import MapChart from "./MapChart";
 import ReactTooltip from "react-tooltip";
 import Headers from "../Headers";
@@ -9,6 +9,12 @@ const getFlagByCOuntryCode =(country) => {
 
 const CovidComponent = (props) => {
     const [content, setContent] = useState("");
+    useEffect( () => {
+        window.scrollTo(0, 0);
+        return () =>  null;
+    }, []);
+
+
     return (
         <div>
             <Headers linkTo = "#/" headerTitle="Global SARS CoV2 Cases"/>   

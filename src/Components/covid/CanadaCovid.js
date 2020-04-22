@@ -42,6 +42,7 @@ const CanadaMap =  () => {
     };
 
     useEffect( () => {
+        window.scrollTo(0, 0);
         getDetailedCountryCases()
         return () =>  null;
     }, []);

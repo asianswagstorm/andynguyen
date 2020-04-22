@@ -27,7 +27,6 @@ import * as music_master_action from "./redux/actions/MusicMasterAction";
 import 'antd/dist/antd.css';
 
 export class App extends Component {
-
   render=()=>{
     const routes_components = [ {path: `/`, component: Home},
                                 {path:  `/TicTacToe`, component: TicTacToe},
@@ -41,7 +40,7 @@ export class App extends Component {
                                 {path:  `/Covid`, component: CovidComponent},
                                 {path:  `/CovidCanada`, component: CanadaMap},
                                 {path: "*", component: NotFound}];
-    return (
+      return (
       <div className="page-wrap">
         <Navbar/>
         <section id="main">

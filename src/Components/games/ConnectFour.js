@@ -9,6 +9,7 @@ import { popUpNotification } from "../constants/HelperFunction/Functions";
 export class ConnectFour extends Component {
 
     componentDidMount = () => {
+        window.scrollTo(0, 0);
         const {dispatch} = this.props;
         const {setGameType} = this.props.action_props.games_action;
         dispatch(setGameType("connectFour"));

@@ -11,7 +11,9 @@ export class Pokemons extends Component {
 
   getNumPokemon = () => 12;
 
-  componentDidMount = () => {
+  componentDidMount = () => { 
+   window.scrollTo(0, 0);
+    
    const {dispatch} = this.props;
    const {getPokemonsLimit,setPokeTracker} = this.props.action_props.pokemon_action;
    

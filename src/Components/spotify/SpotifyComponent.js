@@ -8,7 +8,10 @@ import Artist from "./Artist";
 import Tracks from "./Tracks";
 
 class SpotifyComponent extends Component {
-
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  }
+  
   render = () => {
    
     const headerTitle = this.props.artist !== null ? "Music Master" : "Welcome to Music Master";
