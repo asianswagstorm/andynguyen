@@ -55,7 +55,7 @@ const SeverityChart = (props) =>
         <div className ="row severity__chart" >
             {
                 severityLevel.map((levelDiv , key) => 
-                <div className = "severity__level col-sm-5" key = {key} style={{backgroundColor : levelDiv.color, color: `${key < 3 ? "white" : "black"}`, textShadow: `0.5px 0.5px ${key < 3 ? "black" : "white"}`, }}>
+                <div className = "severity__level col-sm-5" key = {key} style={{backgroundColor : levelDiv.color, color: `${key > 3 ? "white" : "black"}`, textShadow: `0.5px 0.5px ${key > 3 ? "black" : "white"}`, }}>
                     {regionSeverityLevels[levelDiv.level][props.region]}
                 </div>)
             }

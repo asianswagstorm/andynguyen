@@ -7,11 +7,9 @@ import {
 } from "react-simple-maps";
 import canada from "./topojsons/canada.topojson";
 import quebec from "./topojsons/quebec.json";
-import quebecData from "./manualCases/casesInQuebec.json";
 import montreal from "./topojsons/montreal.topojson";
-import montrealData from "./manualCases/casesInMontreal.json";
 import ReactTooltip from "react-tooltip";
-import {fetchDetailedNumberOfCasesByCountry} from "./coronavirusAPI";
+import {fetchDetailedNumberOfCasesByCountry,fetchMontrealCases,fetchQuebecCases} from "./coronavirusAPI";
 import Headers from "../Headers";
 import WorldWideCases from "./WorldWideCases";
 import SeverityChart from "./SeverityChart";
@@ -23,15 +21,19 @@ const CanadaMap =  () => {
     const [enteredMap, setEnteredMap] = useState(false);
     const [regionType, setRegionType] =  useState({name: "Canada" , topojson: canada, data: {}, mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
     const getDetailedCountryCases = async () => setRegionType({name: "Canada" , topojson: canada, data: await fetchDetailedNumberOfCasesByCountry("Canada"), mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
+    const getMontrealCases = async () => setRegionType({name: "Montreal" , topojson: montreal, data : await fetchMontrealCases() , mapSize : {centerX : -29, centerY: 500, zoom:3, maxZoom: 5}});
+    const getQuebecCases = async () => setRegionType({name: "Quebec" , topojson: quebec, data : await fetchQuebecCases() , mapSize : {centerX : -68, centerY: 45, zoom:6, maxZoom: 15}});
+
+   
     const updateMap = (name) => {
         if(name === "Canada")
-            setRegionType({name: "Quebec" , topojson: quebec, data : quebecData , mapSize : {centerX : -68, centerY: 45, zoom:6, maxZoom: 15}});
+            getQuebecCases()
         else if(name === "Quebec")
-            setRegionType({name: "Montreal" , topojson: montreal, data : montrealData , mapSize : {centerX : -29, centerY: 500, zoom:3, maxZoom: 5}});
+            getMontrealCases()
         else if(name === "Montreal")
             getDetailedCountryCases()
     };
-
+//montrealData
     const nextMap = (name) => {
         if(name === "Canada")
             return "Quebec";
@@ -93,7 +95,6 @@ const CanadaMap =  () => {
           "veryLow" : 1
         }
       };
-
       if(confirmedCase > severityLevels[name].high)
           return "high";
       else if(confirmedCase < severityLevels[name].high && confirmedCase >= severityLevels[name].mediumHigh)
@@ -112,7 +113,8 @@ const CanadaMap =  () => {
     const fillColor = geo => {
       const {NAME} = geo.properties;
       const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
-      const level = CanadaSeverityLevels(confirmed);
+
+      const level = CanadaSeverityLevels((confirmed.toString().includes(",") ? parseInt(confirmed.replace(",", "")) : parseInt(confirmed)));
       switch(level){
         case "high":
           return "#661a00"
