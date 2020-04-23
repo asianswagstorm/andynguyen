@@ -2,6 +2,14 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
+
+const override = css`
+  display: block;
+  margin: auto;
+  border-color: #19B5FE;
+`;
 
 
 const filterRecipeName = (reciceName) => {
@@ -15,10 +23,18 @@ const filterRecipeName = (reciceName) => {
 
   return nameToReturn;
 };
-
+// add loading  onLoad={() => }!!! 
 const Recipes = props => (
     <div className="recipes__wrapper">
       <div className="recipes">
+
+        <ClipLoader
+          css={override}
+          size={window.innerWidth  <= 400 ? 300 : 600}
+          color={"#19B5FE"}
+          loading={props.isLoading}
+        />
+        
         { (props.recipes.length > 0 ) ? props.recipes.map((recipe, key) => 
               <div key={key} className="recipes__box">
                 <img 
@@ -41,11 +57,13 @@ const Recipes = props => (
               </div>
         ) :  
         <div className="error__box"> {/** clean this section, make it nicer */}
-          {props.count === 0 ?
+          { props.isLoading === false && 
+          (props.count === 0 ?
             <p className="error__message"> {`No Recipes Found for ${props.recipeName}`}</p>
               :
+             
             <p className="inital__message"> Start by searching by a category.</p> 
-          }
+          )}
         </div>
         }
       </div>
@@ -54,9 +72,9 @@ const Recipes = props => (
 
 const mapStateToProps = state => { 
   const recipeProps  = state.RecipeReducer.defaultRecipeStates; 
-  const {recipes,count,recipeName} = recipeProps;
+  const {recipes,count,recipeName,isLoading} = recipeProps;
 
-  return {recipes,count,recipeName};
+  return {recipes,count,recipeName,isLoading};
 };
 
 export default withRouter(connect(mapStateToProps)(Recipes));

@@ -23,11 +23,12 @@ class RecipeComponent extends Component {
   }
 
   render = () => {
+    const {recipeName ,dispatch,action_props} = this.props;
     return (
       <div>
         <Headers linkTo = "#/" headerTitle="Recipe App"/>
         <div className="recipe__section" >
-        <Form getRecipe={this.getRecipe} recipeName={this.props.recipeName} />
+        <Form getRecipe={this.getRecipe} recipeName={recipeName} dispatch= {dispatch} recipe_action={action_props.recipe_action} />
         <Recipes/> 
         </div>
       </div>

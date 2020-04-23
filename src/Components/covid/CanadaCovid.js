@@ -70,7 +70,7 @@ const CanadaMap =  () => {
       const severityLevels =  {
         "Canada" : {
           "high" : 10000,
-          "mediumHigh" : 2000,
+          "mediumHigh" : 5000,
           "medium" : 1000,
           "mediumLow" : 250,
           "low" : 100,
@@ -142,7 +142,7 @@ const CanadaMap =  () => {
           <button className="nextMap__button" onClick = {() => updateMap(regionType.name) }>  {`See cases in ${nextMap(regionType.name)}`} </button>
       </div>
 
-    <SeverityChart />
+    <SeverityChart region = {regionType.name}/>
     
     <ComposableMap data-tip="">  
         <ZoomableGroup center={[ regionType.mapSize.centerX, regionType.mapSize.centerY ]}  zoom = {regionType.mapSize.zoom} minZoom = {regionType.mapSize.zoom} maxZoom = {regionType.mapSize.maxZoom}>

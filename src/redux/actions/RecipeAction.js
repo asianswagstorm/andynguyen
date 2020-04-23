@@ -7,7 +7,13 @@ export const setRecipes = recipes => ({
     recipes : (recipes.recipes).filter((recipe, key) => (   recipe.image_url !== recipes.recipes[(key-1 === -1) ? 1 : key-1].image_url && 
                                                             recipe.title !== recipes.recipes[(key-1 === -1) ? 1 : key-1].title               )), //remove duplicate
     count : recipes.count,
-    recipeName : recipes.recipeName
+    recipeName : recipes.recipeName,
+    isLoading : false
+});
+
+export const setIsLoading = isLoading => ({
+    type: RECIPE_TYPE.SET_IS_LOADING,
+    isLoading
 });
 
 export const getRecipes = recipeName => dispatch => {
