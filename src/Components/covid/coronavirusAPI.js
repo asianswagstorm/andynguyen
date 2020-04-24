@@ -8,7 +8,11 @@ const parseHubMontrealLink = `https://www.parsehub.com/api/v2/projects/${parseHu
 const parseHubQuebecLink = `https://www.parsehub.com/api/v2/projects/${parseHubQuebecProjectToken}/last_ready_run/data?api_key=${parseHubAPIKey}`;
 
 export const fetchQuebecCases = async () => {
-    const result = await fetch(`${corsAnywhere}${parseHubQuebecLink}`).then(response => (
+    const result = await fetch(`${corsAnywhere}${parseHubQuebecLink}`, {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      }).then(response => (
         response.json()
     ));
 
@@ -34,12 +38,15 @@ export const fetchQuebecCases = async () => {
         if(i !== 16 && i !==17)
             data = {...data, [name] :  {"confirmed": quebecConfirmedCase, "deaths" : quebecDeathCase}}
     }
-    // console.log(data)
     return data;
 }
 
 export const fetchMontrealCases = async () => {
-    const result = await fetch(`${corsAnywhere}${parseHubMontrealLink}`).then(response => (
+    const result = await fetch(`${corsAnywhere}${parseHubMontrealLink}`, {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      }).then(response => (
         response.json()
     ));
 
@@ -48,6 +55,7 @@ export const fetchMontrealCases = async () => {
         let montrealCase = result.montrealCases[i];
         data = {...data, [montrealCase.name] :  {"confirmed": (montrealCase.confirmed.includes("< ") ? montrealCase.confirmed.split("< ")[1] : montrealCase.confirmed)}}
     }
+    
    return data;
 }
 
