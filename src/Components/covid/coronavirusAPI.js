@@ -1,3 +1,4 @@
+import {filterName} from "./covidFunction";
 const covid19GlobalLink = "https://covid19.mathdro.id/api/";
 const covid19ByCountryAPILINK =`${covid19GlobalLink}countries/`;
 const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
@@ -6,6 +7,25 @@ const parseHubQuebecProjectToken = "t1hHqC7Bd1mm";
 const parseHubAPIKey = "tkS-vq_osspq";
 const parseHubMontrealLink = `https://www.parsehub.com/api/v2/projects/${parseHubMontrealProjectToken}/last_ready_run/data?api_key=${parseHubAPIKey}`;
 const parseHubQuebecLink = `https://www.parsehub.com/api/v2/projects/${parseHubQuebecProjectToken}/last_ready_run/data?api_key=${parseHubAPIKey}`;
+const covid193Key = "0fd490d094mshcada922c1ff45ecp16e7d3jsndd6ef22c3c16";
+const covid193Host = "covid-193.p.rapidapi.com";
+
+export const fetchAllCountries = async () => {
+    const result = await fetch(`${corsAnywhere}https://${covid193Host}/statistics`, {
+        headers: {
+          'x-rapidapi-host': covid193Host,
+          'x-rapidapi-key' : covid193Key
+        }
+      }).then(response => (
+        response.json()
+    ));
+
+    const newResponse = result.response.reduce((acc, country) => {
+        return { ...acc, [filterName(country.country)] : {"confirmed" : country.cases.total , "recovered": country.cases.recovered, "deaths" : country.deaths.total }}
+    }, {});
+
+    return newResponse;    
+};
 
 export const fetchQuebecCases = async () => {
     const result = await fetch(`${corsAnywhere}${parseHubQuebecLink}`, {

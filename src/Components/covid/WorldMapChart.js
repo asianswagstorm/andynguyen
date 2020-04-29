@@ -6,19 +6,18 @@ import {
   Graticule,
   Sphere
 } from "react-simple-maps";
-import {fetchNumberOfCasesByCountry} from "./coronavirusAPI";
 import "./styles/corona.css";
 import worldTopo from "./topojsons/world.topojson";
-import {addComma,filterName,rounded} from "./covidFunction";
+import {addComma,rounded} from "./covidFunction";
 
-const MapChart =  ({ setTooltipContent }) =>{
+const WorldMapChart =  ({ setTooltipContent,allCountry, fillColor }) =>{
   const handleEvent = async (geo) => {
     const { NAME, POP_EST, ISO_A2 } = geo.properties;
-    const data = await fetchNumberOfCasesByCountry(filterName(NAME));
-    const recovered = data.recovered ? data.recovered.value : 'unknown';
-    const confirmed = data.confirmed ? data.confirmed.value : 'unknown';
-    const deaths = data.deaths ? data.deaths.value : 'unknown'; 
-  
+    const data = allCountry[NAME] ;
+    const recovered = data ? data.recovered : 'unknown';
+    const confirmed = data ? data.confirmed : 'unknown';
+    const deaths = data ? data.deaths : 'unknown'; 
+    
     setTooltipContent(`${NAME}—Population: ${rounded(POP_EST)}—Confirmed: ${addComma(confirmed)}—Deaths: ${addComma(deaths)}—Recovered: ${addComma(recovered)}—${ISO_A2}`);
   }
   return (
@@ -38,7 +37,7 @@ const MapChart =  ({ setTooltipContent }) =>{
               }}
               style={{
                 default: {
-                  fill: "#D6D6DA",
+                  fill: fillColor(geo),//(allCountry[geo.properties.NAME] && allCountry[geo.properties.NAME].confirmed > 10000) ? "#661a00" : "#D6D6DA",
                   stroke: "black",
                   strokeWidth: '0.1px',
                   outline: "none"
@@ -60,4 +59,4 @@ const MapChart =  ({ setTooltipContent }) =>{
 } 
      
 
-export default MapChart;
+export default WorldMapChart;

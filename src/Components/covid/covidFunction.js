@@ -19,11 +19,35 @@ export const addComma = (number) => { //replacement for .toLocaleString()
   }
 };
 
-export const filterName = (name) => {
-    if(name === "United States of America")
-        return "US";
-    else 
-        return name; 
+export const filterName = name => {
+  let newName = name;
+  switch(name){
+    case "USA":
+        newName = "United States of America";
+        break;
+    case "UK":
+        newName = "United Kingdom";
+        break;
+    case "Bosnia-and-Herzegovina":
+        newName = "Bosnia and Herzegovina";
+        break;
+    case "North-Macedonia":
+      newName = "Macedonia";
+      break;
+    case "S-Korea":
+      newName = "South Korea";
+      break;
+    case "Trinidad-and-Tobago":
+      newName = "Trinidad and Tobago";
+      break;
+    default:
+        break;
+  }
+
+  if(newName.includes("-"))
+    newName = newName.replace("-", " ");
+  
+  return newName;
 };
 
 export const rounded = num => {

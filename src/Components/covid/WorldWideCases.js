@@ -12,7 +12,7 @@ const WorldWideCases = (props) => {
     const getMontrealCases = async () => setWorldCases({population: "1,704,694", ...(await fetchMontrealCases()).Total });
 
     useEffect( () => {
-        if( props.mapType === "world")
+        if( props.mapType === "World")
             getWorldCases()
         else if( props.mapType === "Canada")
             getCanadianCases()
