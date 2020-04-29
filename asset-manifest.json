@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.769589cd.chunk.css",
-    "main.js": "/static/js/main.bb685b6a.chunk.js",
-    "main.js.map": "/static/js/main.bb685b6a.chunk.js.map",
+    "main.js": "/static/js/main.4ae1ade7.chunk.js",
+    "main.js.map": "/static/js/main.4ae1ade7.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.240c0830.js",
     "runtime-main.js.map": "/static/js/runtime-main.240c0830.js.map",
     "static/css/2.ff8bd605.chunk.css": "/static/css/2.ff8bd605.chunk.css",
-    "static/js/2.6c15b2f3.chunk.js": "/static/js/2.6c15b2f3.chunk.js",
-    "static/js/2.6c15b2f3.chunk.js.map": "/static/js/2.6c15b2f3.chunk.js.map",
+    "static/js/2.e252b12d.chunk.js": "/static/js/2.e252b12d.chunk.js",
+    "static/js/2.e252b12d.chunk.js.map": "/static/js/2.e252b12d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.57c31f605a694cff093ebff7e8a3e045.js": "/precache-manifest.57c31f605a694cff093ebff7e8a3e045.js",
+    "precache-manifest.e165c075aaa2bbfbe76343fcae8c27ec.js": "/precache-manifest.e165c075aaa2bbfbe76343fcae8c27ec.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.ff8bd605.chunk.css.map": "/static/css/2.ff8bd605.chunk.css.map",
     "static/css/main.769589cd.chunk.css.map": "/static/css/main.769589cd.chunk.css.map",
-    "static/js/2.6c15b2f3.chunk.js.LICENSE.txt": "/static/js/2.6c15b2f3.chunk.js.LICENSE.txt",
+    "static/js/2.e252b12d.chunk.js.LICENSE.txt": "/static/js/2.e252b12d.chunk.js.LICENSE.txt",
     "static/media/azure.png": "/static/media/azure.f935f7aa.png",
     "static/media/canada.topojson": "/static/media/canada.f2da5a9b.topojson",
     "static/media/django.png": "/static/media/django.82f8cdf8.png",
@@ -21,13 +21,13 @@
     "static/media/montreal.topojson": "/static/media/montreal.be791fbe.topojson",
     "static/media/react.png": "/static/media/react.c3ba82a5.png",
     "static/media/redux.png": "/static/media/redux.c8f44df3.png",
-    "static/media/world.topojson": "/static/media/world.ab6bd653.topojson"
+    "static/media/world.topojson": "/static/media/world.d76fbe60.topojson"
   },
   "entrypoints": [
     "static/js/runtime-main.240c0830.js",
     "static/css/2.ff8bd605.chunk.css",
-    "static/js/2.6c15b2f3.chunk.js",
+    "static/js/2.e252b12d.chunk.js",
     "static/css/main.769589cd.chunk.css",
-    "static/js/main.bb685b6a.chunk.js"
+    "static/js/main.4ae1ade7.chunk.js"
   ]
 }
