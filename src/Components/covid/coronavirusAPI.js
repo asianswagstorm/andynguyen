@@ -70,7 +70,7 @@ export const fetchMontrealCases = async () => {
         response.json()
     ));
 
-    let data = {"Total" : {"confirmed" : result.montrealCases[34].confirmed, "recovered": "NA", "deaths" : result.totalDeath }};
+    let data = {"Total" : {"confirmed" : result.totalConfirmed, "recovered": "NA", "deaths" : result.totalDeath }};
     for(let i = 0; i < (result.montrealCases).length - 2 ; i++){
         let montrealCase = result.montrealCases[i];
         data = {...data, [montrealCase.name] :  {"confirmed": (montrealCase.confirmed.includes("< ") ? montrealCase.confirmed.split("< ")[1] : montrealCase.confirmed)}}

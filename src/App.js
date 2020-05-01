@@ -22,6 +22,7 @@ import * as connect_four_action from './redux/actions/ConnectFourAction';
 import * as pokemon_action from "./redux/actions/PokemonAction";
 import * as recipe_action from "./redux/actions/RecipeAction";
 import * as music_master_action from "./redux/actions/MusicMasterAction";
+import * as covid_action from "./redux/actions/CovidAction";
 
 import 'antd/dist/antd.css';
 
@@ -78,6 +79,7 @@ export const mapDispatchToProps = dispatch => {
     pokemon_action,
     recipe_action,
     music_master_action,
+    covid_action,
     dispatch
   };
 };

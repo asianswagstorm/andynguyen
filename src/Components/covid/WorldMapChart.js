@@ -10,7 +10,7 @@ import "./styles/corona.css";
 import worldTopo from "./topojsons/world.topojson";
 import {addComma,rounded} from "./covidFunction";
 
-const WorldMapChart =  ({ setTooltipContent,allCountry, fillColor }) =>{
+const WorldMapChart =  ({ setTooltipContent,allCountry, colorFill }) =>{
   const handleEvent = async (geo) => {
     const { NAME, POP_EST, ISO_A2 } = geo.properties;
     const data = allCountry[NAME] ;
@@ -35,28 +35,12 @@ const WorldMapChart =  ({ setTooltipContent,allCountry, fillColor }) =>{
               onMouseLeave={() => {
                 setTooltipContent("");
               }}
-              style={{
-                default: {
-                  fill: fillColor(geo),//(allCountry[geo.properties.NAME] && allCountry[geo.properties.NAME].confirmed > 10000) ? "#661a00" : "#D6D6DA",
-                  stroke: "black",
-                  strokeWidth: '0.1px',
-                  outline: "none"
-                },
-                hover: {
-                  fill: "#F53",
-                  outline: "none"
-                },
-                pressed: {
-                  fill: "#E42",
-                  outline: "none"
-                }
-              }}
+              style={colorFill(geo)}
             />
           ))
         }
       </Geographies>
   </ComposableMap>)
 } 
-     
-
+    
 export default WorldMapChart;

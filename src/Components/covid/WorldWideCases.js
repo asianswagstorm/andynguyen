@@ -1,42 +1,41 @@
 import React, { useState, useEffect }  from 'react';
-import {fetchGlobalCases, fetchCanadianCases,fetchQuebecCases,fetchMontrealCases} from "./coronavirusAPI";
+import {fetchGlobalCases,fetchQuebecCases} from "./coronavirusAPI";
 
 import CovidCard from "./CovidCard";
 
-const WorldWideCases = (props) => {
+const WorldWideCases = ({mapType,worldCases, quebecCases}) => {
 
-    const [worldCases, setWorldCases] = useState({population: "7,594,000,000", confirmed: 0, recovered: 0, deaths: 0 });
-    const getWorldCases = async () => setWorldCases({...worldCases, ...(await fetchGlobalCases())});
-    const getCanadianCases = async () => setWorldCases({...worldCases, ...(await fetchCanadianCases())});
-    const getQuebecCases = async () => setWorldCases({population: "8,485,400", ...(await fetchQuebecCases()).Total });
-    const getMontrealCases = async () => setWorldCases({population: "1,704,694", ...(await fetchMontrealCases()).Total });
+    const [covidCases, setCovidCases] = useState({population: "7,594,000,000", confirmed: 0, recovered: 0, deaths: 0 });
+    const getWorldCases = async () => setCovidCases({population: "7,594,000,000", ...(await fetchGlobalCases())});
+    const getCanadianCases = async () => setCovidCases({population: "38,844,182", confirmed: worldCases["Canada"].confirmed, recovered: worldCases["Canada"].recovered, deaths: worldCases["Canada"].deaths });
+    const getQuebecCases = async () => setCovidCases({population: "8,485,400", ...(await fetchQuebecCases()).Total });
+    const getMontrealCases = async () => setCovidCases({population: "1,704,694", confirmed: quebecCases["Montréal"].confirmed, recovered: "NA", deaths: quebecCases["Montréal"].deaths  });
 
     useEffect( () => {
-        if( props.mapType === "World")
+        if( mapType === "World")
             getWorldCases()
-        else if( props.mapType === "Canada")
+        else if( mapType === "Canada")
             getCanadianCases()
-        else if( props.mapType === "Quebec")
+        else if(mapType === "Quebec")
             getQuebecCases()
-        else if( props.mapType === "Montreal")
+        else if( mapType === "Montreal")
             getMontrealCases()
-
         return () =>  null;
     // eslint-disable-next-line react-hooks/exhaustive-deps   
-    }, [worldCases]);
+    }, [covidCases]);
    
-    const CovidItems = (props) => {
+    const CovidItems = () => {
         let listItems = [ 
-            {className : "icon fa-users" , itemLabel: "Population:", itemValue: worldCases.population , background :"secondary" },
-            {className : "" , itemLabel: "Confirmed Cases:", itemValue: worldCases.confirmed , background :"primary" },
-            {className : "covid__death" , itemLabel: "Deaths:", itemValue: worldCases.deaths , background :"danger"},
-            {className : "icon fa-heart" , itemLabel: "Recovered:", itemValue: worldCases.recovered , background :"success"}
+            {className : "icon fa-users" , itemLabel: "Population:", itemValue: covidCases.population , background :"secondary" },
+            {className : "" , itemLabel: "Confirmed Cases:", itemValue: covidCases.confirmed , background :"primary" },
+            {className : "covid__death" , itemLabel: "Deaths:", itemValue: covidCases.deaths , background :"danger"},
+            {className : "icon fa-heart" , itemLabel: "Recovered:", itemValue: covidCases.recovered , background :"success"}
         ]
 
-        if(props.mapType === "Quebec")
+        if(mapType === "Quebec")
             listItems = [...listItems, 
-                {className : "icon fa-heartbeat" , itemLabel: "Intensive Care:", itemValue: worldCases.intensiveCare , background :"warning"},
-                {className : "icon fa-hospital-o" , itemLabel: "Hospitalized:", itemValue: worldCases.hospitalized, background :"info" }
+                {className : "icon fa-heartbeat" , itemLabel: "Intensive Care:", itemValue: covidCases.intensiveCare , background :"warning"},
+                {className : "icon fa-hospital-o" , itemLabel: "Hospitalized:", itemValue: covidCases.hospitalized, background :"info" }
             ]
         
         return( 
@@ -46,9 +45,10 @@ const WorldWideCases = (props) => {
 
     return (
     <div className= "covid19__world"> 
-        <CovidItems mapType={props.mapType}/>
+        <CovidItems mapType={mapType}/>
     </div>
     )
 }
 
 export default WorldWideCases;
+

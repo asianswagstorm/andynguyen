@@ -1,4 +1,6 @@
 import React, { useState,useEffect }  from 'react';
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 import WorldMapChart from "./WorldMapChart";
 import CanadaMap from "./CanadaCovid";
 import ReactTooltip from "react-tooltip";
@@ -7,74 +9,95 @@ import WorldWideCases from "./WorldWideCases"
 import canada from "./topojsons/canada.topojson";
 import quebec from "./topojsons/quebec.json";
 import montreal from "./topojsons/montreal.topojson";
-import {fetchAllCountries,fetchDetailedNumberOfCasesByCountry,fetchMontrealCases,fetchQuebecCases} from "./coronavirusAPI";
+import { css } from "@emotion/core";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import SeverityChart from "./SeverityChart";
+
+const override = css`
+  align-self: center;
+  margin: 25px auto 150px auto;
+  border-color: #19B5FE;
+`;
 
 const getFlagByCountryCode =(country) => {
     return country.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0)+127397));
 }
 
-//montrealData
-const nextMap = (name) => {
-    if (name === "World")
-        return "Canada";
-    else if(name === "Canada")
-        return "Quebec";
-    else if(name === "Quebec")
-        return"Montreal";
-    else if(name === "Montreal")
-        return "World";
-};
-
 const CovidComponent = (props) => {
+    const {dispatch} = props;
+    const {fetchWorldCases,fetchCanadaCases,fetchQuebecCasesAction,fetchMontrealCasesAction} = props.action_props.covid_action;
     const [content, setContent] = useState("");
     const [regionType, setRegionType] =  useState({name: "World",data: {}});
-    const getAllCountry = async () => {setRegionType({name: "World", data: await fetchAllCountries()});};
-    const getDetailedCountryCases = async () => setRegionType({name: "Canada" , topojson: canada, data: await fetchDetailedNumberOfCasesByCountry("Canada"), mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
-    const getMontrealCases = async () => setRegionType({name: "Montreal" , topojson: montreal, data : await fetchMontrealCases() , mapSize : {centerX : -29, centerY: 500, zoom:3, maxZoom: 3}});
-    const getQuebecCases = async () => setRegionType({name: "Quebec" , topojson: quebec, data : await fetchQuebecCases() , mapSize : {centerX : -68, centerY: 45, zoom:6, maxZoom: 15}});
-
-    const updateMap = (name) => {
-        if(name === "World")
-            getDetailedCountryCases()
-        else if(name === "Canada")
-            getQuebecCases()
-        else if(name === "Quebec")
-            getMontrealCases()
-        else if(name === "Montreal")
-            getAllCountry()
+    const getAllCountry = () => {
+      setRegionType({name: "World"});
+      if(props.apiLoaded["World"] === false)
+        dispatch(fetchWorldCases(props.apiLoaded));
     };
-
-    
-    const SeverityLevelsChart = (confirmedCase) => {
-      const {name} = regionType;
-    
-      const severityLevels =  {
-        "World":{
-            "high" : 1000000,
-            "mediumHigh" : 100000,
-            "medium" : 50000,
-            "mediumLow" : 10000,
-            "low" : 1000,
-            "veryLow" : 1
-        },
-        "Canada" : {
+    const getDetailedCountryCases = () => {
+      setRegionType({name: "Canada" , topojson: canada, mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
+      if(props.apiLoaded["Canada"] === false)
+        dispatch(fetchCanadaCases(props.apiLoaded));
+    };
+    const getQuebecCases = () => {
+      setRegionType({name: "Quebec" , topojson: quebec, mapSize : {centerX : -68, centerY: 45, zoom:6, maxZoom: 15}});
+      if(props.apiLoaded["Quebec"] === false)
+        dispatch(fetchQuebecCasesAction(props.canadaCases,props.apiLoaded));
+    };
+    const getMontrealCases = () => {
+      setRegionType({name: "Montreal" , topojson: montreal, mapSize : {centerX : -29, centerY: 500, zoom:3, maxZoom: 3}});
+      if(props.apiLoaded["Montreal"] === false)
+        dispatch(fetchMontrealCasesAction(props.apiLoaded));
+    };
+   
+    const getProperData = {
+      "World" : {
+        header : "Global SARS CoV2 Cases",
+        data : props.worldCases,
+        next : () => getDetailedCountryCases(),
+        nextMap: "Canada",
+        severityLevel : {
+          "high" : 1000000,
+          "mediumHigh" : 100000,
+          "medium" : 50000,
+          "mediumLow" : 10000,
+          "low" : 1000,
+          "veryLow" : 1
+        }
+      },
+      "Canada" : {
+        header : "Covid 19 Cases in Canada",
+        data : props.canadaCases,
+        next : () => getQuebecCases(),
+        nextMap: "Quebec",
+        severityLevel : {
           "high" : 10000,
           "mediumHigh" : 5000,
           "medium" : 1000,
           "mediumLow" : 250,
           "low" : 100,
           "veryLow" : 1
-        },
-         "Quebec" : {
+        }
+      },
+      "Quebec" : {
+        header : "Covid 19 Cases in Quebec",
+        data : props.quebecCases,
+        next : () => getMontrealCases(),
+        nextMap: "Montreal",
+        severityLevel : {
           "high" : 5000,
           "mediumHigh" : 2000,
           "medium" : 1000,
           "mediumLow" : 100,
           "low" : 50,
           "veryLow" : 1
-        },
-         "Montreal" : {
+        }
+      },
+      "Montreal" : {
+        header : "Covid 19 Cases in Montreal",
+        data : props.montrealCases,
+        next :  () => getAllCountry(),
+        nextMap: "World",
+        severityLevel : {
           "high" : 500,
           "mediumHigh" : 250,
           "medium" : 100,
@@ -82,25 +105,31 @@ const CovidComponent = (props) => {
           "low" : 10,
           "veryLow" : 1
         }
-      };
-      if(confirmedCase > severityLevels[name].high)
+      }
+    };
+
+    const SeverityLevelsChart = (confirmedCase) => {
+      const {name} = regionType;
+    
+      if(confirmedCase > getProperData[name].severityLevel.high)
           return "high";
-      else if(confirmedCase < severityLevels[name].high && confirmedCase >= severityLevels[name].mediumHigh)
+      else if(confirmedCase < getProperData[name].severityLevel.high && confirmedCase >= getProperData[name].severityLevel.mediumHigh)
           return "mediumHigh";
-      else if(confirmedCase < severityLevels[name].mediumHigh && confirmedCase >= severityLevels[name].medium)
+      else if(confirmedCase < getProperData[name].severityLevel.mediumHigh && confirmedCase >= getProperData[name].severityLevel.medium)
           return "medium";
-      else if(confirmedCase < severityLevels[name].medium && confirmedCase >= severityLevels[name].mediumLow)
+      else if(confirmedCase < getProperData[name].severityLevel.medium && confirmedCase >= getProperData[name].severityLevel.mediumLow)
           return "mediumLow";
-      else if(confirmedCase < severityLevels[name].mediumLow && confirmedCase >= severityLevels[name].low)
+      else if(confirmedCase < getProperData[name].severityLevel.mediumLow && confirmedCase >= getProperData[name].severityLevel.low)
           return "low";
-      else if(confirmedCase < severityLevels[name].low && confirmedCase >= severityLevels[name].veryLow)
+      else if(confirmedCase < getProperData[name].severityLevel.low && confirmedCase >= getProperData[name].severityLevel.veryLow)
           return "veryLow";
       else return "noCases";
     };
     
     const fillColor = geo => {
       const {NAME} = geo.properties;
-      const confirmed = regionType.data[[NAME]] ? regionType.data[[NAME]].confirmed : 0;
+      const {data} = getProperData[regionType.name];
+      const confirmed = data[[NAME]] ? data[[NAME]].confirmed : 0;
     
       const level = SeverityLevelsChart((confirmed.toString().includes(",") ? parseInt(confirmed.replace(",", "")) : parseInt(confirmed)));
       switch(level){
@@ -120,27 +149,62 @@ const CovidComponent = (props) => {
           return "#D6D6DA"
       }
     };
+
+    const colorFill = (geo) => (
+        {
+            default: {
+              fill: fillColor(geo),
+              stroke: "black",
+              strokeWidth: '0.1px',
+              outline: "none"
+            },
+            hover: {
+              fill: fillColor(geo),
+              outline: "none",
+              stroke: "black",
+              strokeWidth: '0.1px',
+              opacity: "0.3"
+            },
+            pressed: {
+              fill: "#E42",
+              outline: "none",
+              opacity: "0.3"
+            }
+          }
+    );
     
     useEffect( () => {
-        window.scrollTo(0, 0);
-        getAllCountry();
-        return () =>  null;
+      window.scrollTo(0, 0);
+      getAllCountry();
+      //eslint-disable-next-line
     }, []);
+    
     return (
         <div>
-            <Headers linkTo = "#/" headerTitle="Global SARS CoV2 Cases"/>   
+            <Headers linkTo = "#/" headerTitle= {getProperData[regionType.name].header}/>   
             <div className= "covid19"> 
                     <div className="world__cases">
-                        <WorldWideCases mapType= {regionType.name}/>
-                        <button className="nextMap__button" onClick = {() => updateMap(regionType.name) } > {regionType.name !== "Montreal" ? `See cases in ${nextMap(regionType.name)}` : "See World Cases"} </button>
+                        <WorldWideCases mapType= {regionType.name} worldCases = {props.worldCases} quebecCases = {props.quebecCases}/>
+                        <button className="nextMap__button" onClick = {getProperData[regionType.name].next} > {regionType.name !== "Montreal" ? `See cases in ${getProperData[regionType.name].nextMap}` : "See World Cases"} </button>
                     </div>
-            
-            <SeverityChart region = {regionType.name}/>
-              
-                { regionType.name === "World" ?
-                    <WorldMapChart setTooltipContent={setContent} allCountry = {regionType.data} fillColor={fillColor} />
+              { (props.apiLoaded[regionType.name] === true ?  
+                (<div>
+                  <SeverityChart region = {regionType.name}/>
+                  {regionType.name === "World" ?
+                    <WorldMapChart setTooltipContent={setContent} allCountry={props.worldCases} colorFill={colorFill} />
                     : 
-                    <CanadaMap setTooltipContent={setContent} regionType={regionType} fillColor={fillColor}/>
+                    <CanadaMap setTooltipContent={setContent} data = {getProperData[regionType.name].data} regionType={regionType} colorFill={colorFill}/>
+                  }
+                </div>) :
+              
+                  <PacmanLoader
+                    css={override}
+                    size={window.innerWidth  <= 400 ? 50 : 120}
+                    color={"#FFEE00"}
+                    loading={!props.apiLoaded[regionType.name]}
+                  />
+               
+                )
                 }
                 { content !== "" && 
                 <ReactTooltip place="top" type="dark" effect="float">
@@ -157,6 +221,11 @@ const CovidComponent = (props) => {
     )
 }
 
-export default CovidComponent;
+const mapStateToProps = state => { 
+  const covidProps  = state.covidReducer.defaultCovidStates; 
+  const {worldCases,canadaCases,quebecCases,montrealCases, apiLoaded} = covidProps;
 
- 
+  return {worldCases,canadaCases,quebecCases,montrealCases,apiLoaded};
+};
+
+export default withRouter(connect(mapStateToProps)(CovidComponent));
