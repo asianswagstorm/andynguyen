@@ -12,7 +12,7 @@ import montreal from "./topojsons/montreal.topojson";
 import { css } from "@emotion/core";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import SeverityChart from "./SeverityChart";
-
+import CovidTable from "./CovidTable";
 const override = css`
   align-self: center;
   margin: 25px auto 150px auto;
@@ -98,11 +98,11 @@ const CovidComponent = (props) => {
         next :  () => getAllCountry(),
         nextMap: "World",
         severityLevel : {
-          "high" : 500,
-          "mediumHigh" : 250,
-          "medium" : 100,
-          "mediumLow" : 50,
-          "low" : 10,
+          "high" : 1000,
+          "mediumHigh" : 500,
+          "medium" : 250,
+          "mediumLow" : 100,
+          "low" : 50,
           "veryLow" : 1
         }
       }
@@ -110,7 +110,15 @@ const CovidComponent = (props) => {
 
     const SeverityLevelsChart = (confirmedCase) => {
       const {name} = regionType;
+      //(confirmed.toString().includes(",") ? parseInt(confirmed.replace(",", "")) : parseInt(confirmed))
     
+      if(confirmedCase.toString().includes(","))
+        confirmedCase =  confirmedCase.replace(",", "");
+      if(confirmedCase.toString().includes(" "))
+        confirmedCase =  confirmedCase.replace(" ", "");
+      
+      confirmedCase = parseInt(confirmedCase);
+      
       if(confirmedCase > getProperData[name].severityLevel.high)
           return "high";
       else if(confirmedCase < getProperData[name].severityLevel.high && confirmedCase >= getProperData[name].severityLevel.mediumHigh)
@@ -131,7 +139,7 @@ const CovidComponent = (props) => {
       const {data} = getProperData[regionType.name];
       const confirmed = data[[NAME]] ? data[[NAME]].confirmed : 0;
     
-      const level = SeverityLevelsChart((confirmed.toString().includes(",") ? parseInt(confirmed.replace(",", "")) : parseInt(confirmed)));
+      const level = SeverityLevelsChart(confirmed);
       switch(level){
         case "high":
           return "#661a00"
@@ -189,12 +197,14 @@ const CovidComponent = (props) => {
                     </div>
               { (props.apiLoaded[regionType.name] === true ?  
                 (<div>
+                  <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
                   <SeverityChart region = {regionType.name}/>
                   {regionType.name === "World" ?
-                    <WorldMapChart setTooltipContent={setContent} allCountry={props.worldCases} colorFill={colorFill} />
+                    <WorldMapChart setTooltipContent={setContent} data={getProperData[regionType.name].data} colorFill={colorFill} />
                     : 
                     <CanadaMap setTooltipContent={setContent} data = {getProperData[regionType.name].data} regionType={regionType} colorFill={colorFill}/>
                   }
+                 
                 </div>) :
               
                   <PacmanLoader

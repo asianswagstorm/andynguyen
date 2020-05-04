@@ -16,37 +16,37 @@ const regionSeverityLevels = {
                 "World" : "1M+",
                 "Canada" : "10K+",
                 "Quebec" : "5K+",
-                "Montreal" : "500+"
+                "Montreal" : "1000+"
     },
     "med-high" : {
         "World" : "100K to 1M",
         "Canada" : "5K to 10K",
         "Quebec" : "2K to 5K",
-        "Montreal" : "250 to 500"
+        "Montreal" : "500 to 1000"
     },
     "med" : {
         "World" : "50K to 100K",
         "Canada" : "1K to 5K",
         "Quebec" : "1K to 2K",
-        "Montreal" : "100 to 250"
+        "Montreal" : "250 to 500"
     },
     "med-low" : {
         "World" : "10K to 50K",
         "Canada" : "250 to 1000 ",
         "Quebec" : "100 to 1K",
-        "Montreal" : "50 to 100"
+        "Montreal" : "100 to 250"
     },
     "low" : {
         "World" : "1K to 10K",
         "Canada" : "100 to 250",
         "Quebec" : "50 to 100",
-        "Montreal" : "10 to 50"
+        "Montreal" : "50 to 100"
     },
     "lower" : {
         "World" : "1 to 1K",
         "Canada" : "1 to 100",
         "Quebec" : "1 to 50",
-        "Montreal" : "1 to 10"
+        "Montreal" : "1 to 50"
     },
     "no cases reported" : {
         "World" : "0",

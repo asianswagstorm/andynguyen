@@ -1,8 +1,8 @@
 export const defaultCovidStates = {
-    worldCases  : {population: "7,594,000,000", confirmed: 0, recovered: 0, deaths: 0 },
-    canadaCases : {population: "38,844,182", confirmed: 0, recovered: 0, deaths: 0 },
-    quebecCases : {population: "8,485,400", confirmed: 0, recovered: 0, deaths: 0 },
-    montrealCases : {population: "1,784,694", confirmed: 0, recovered: 0, deaths: 0 },
+    worldCases  : {},
+    canadaCases : {},
+    quebecCases : {},
+    montrealCases : {},
     apiLoaded : {   World : false,
                     Canada : false,
                     Quebec : false,

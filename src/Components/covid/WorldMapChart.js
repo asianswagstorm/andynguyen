@@ -10,13 +10,13 @@ import "./styles/corona.css";
 import worldTopo from "./topojsons/world.topojson";
 import {addComma,rounded} from "./covidFunction";
 
-const WorldMapChart =  ({ setTooltipContent,allCountry, colorFill }) =>{
+const WorldMapChart =  ({ setTooltipContent,data, colorFill }) =>{
   const handleEvent = async (geo) => {
     const { NAME, POP_EST, ISO_A2 } = geo.properties;
-    const data = allCountry[NAME] ;
-    const recovered = data ? data.recovered : 'unknown';
-    const confirmed = data ? data.confirmed : 'unknown';
-    const deaths = data ? data.deaths : 'unknown'; 
+    const country = data[NAME] ;
+    const recovered = country ? country.recovered : 'unknown';
+    const confirmed = country ? country.confirmed : 'unknown';
+    const deaths = country ? country.deaths : 'unknown'; 
     
     setTooltipContent(`${NAME}—Population: ${rounded(POP_EST)}—Confirmed: ${addComma(confirmed)}—Deaths: ${addComma(deaths)}—Recovered: ${addComma(recovered)}—${ISO_A2}`);
   }

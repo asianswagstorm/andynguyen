@@ -75,6 +75,32 @@ div.severity__level{
     border-radius: 100px;
 }
 
+div.covidTable{
+    height: 500px;
+    overflow-y: scroll;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+tr.countryCase__Head{
+    text-align: center;
+}
+
+tr.countryCase td.covid__td {
+    border:0.5px solid black;
+    font-size: 18px;
+    height:31px;
+    width: 25%;
+}
+
+th.covid__th  {  
+    border:1px solid black;
+    border-bottom: none;
+    font-size: 14px;
+    text-align: center;
+
+}
+
 @media only screen and (max-width: 768px) {
     div.covid19__world{
         font-size:12px;
@@ -98,5 +124,19 @@ div.severity__level{
         margin-left: 60px;
         align-self: center;
     }
+
+    tr.countryCase td.covid__td {
+        font-size: 12px;
+        width: 15%;
+    }
+    
+    th.covid__th  {  
+        width: 15%;
+        font-size: 11px;
+    }
+
+    /* div.covidTable{
+       width:100%;
+    } */
     
 }
