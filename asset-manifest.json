@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.22917854.chunk.css",
-    "main.js": "/static/js/main.c1065c3d.chunk.js",
-    "main.js.map": "/static/js/main.c1065c3d.chunk.js.map",
+    "main.css": "/static/css/main.e058d74c.chunk.css",
+    "main.js": "/static/js/main.cbb85d1d.chunk.js",
+    "main.js.map": "/static/js/main.cbb85d1d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.240c0830.js",
     "runtime-main.js.map": "/static/js/runtime-main.240c0830.js.map",
     "static/css/2.ff8bd605.chunk.css": "/static/css/2.ff8bd605.chunk.css",
-    "static/js/2.e4cf0db8.chunk.js": "/static/js/2.e4cf0db8.chunk.js",
-    "static/js/2.e4cf0db8.chunk.js.map": "/static/js/2.e4cf0db8.chunk.js.map",
+    "static/js/2.26ffaac3.chunk.js": "/static/js/2.26ffaac3.chunk.js",
+    "static/js/2.26ffaac3.chunk.js.map": "/static/js/2.26ffaac3.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.46436cac9c0fa717837c0bdd2706e657.js": "/precache-manifest.46436cac9c0fa717837c0bdd2706e657.js",
+    "precache-manifest.56de19f1f12ee542d25aa7cab2a3cf81.js": "/precache-manifest.56de19f1f12ee542d25aa7cab2a3cf81.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.ff8bd605.chunk.css.map": "/static/css/2.ff8bd605.chunk.css.map",
-    "static/css/main.22917854.chunk.css.map": "/static/css/main.22917854.chunk.css.map",
-    "static/js/2.e4cf0db8.chunk.js.LICENSE.txt": "/static/js/2.e4cf0db8.chunk.js.LICENSE.txt",
+    "static/css/main.e058d74c.chunk.css.map": "/static/css/main.e058d74c.chunk.css.map",
+    "static/js/2.26ffaac3.chunk.js.LICENSE.txt": "/static/js/2.26ffaac3.chunk.js.LICENSE.txt",
     "static/media/azure.png": "/static/media/azure.f935f7aa.png",
     "static/media/canada.topojson": "/static/media/canada.f2da5a9b.topojson",
     "static/media/django.png": "/static/media/django.82f8cdf8.png",
@@ -21,13 +21,14 @@
     "static/media/montreal.topojson": "/static/media/montreal.be791fbe.topojson",
     "static/media/react.png": "/static/media/react.c3ba82a5.png",
     "static/media/redux.png": "/static/media/redux.c8f44df3.png",
-    "static/media/world.topojson": "/static/media/world.d76fbe60.topojson"
+    "static/media/washYourHands.gif": "/static/media/washYourHands.458f41b9.gif",
+    "static/media/world.topojson": "/static/media/world.88f5513c.topojson"
   },
   "entrypoints": [
     "static/js/runtime-main.240c0830.js",
     "static/css/2.ff8bd605.chunk.css",
-    "static/js/2.e4cf0db8.chunk.js",
-    "static/css/main.22917854.chunk.css",
-    "static/js/main.c1065c3d.chunk.js"
+    "static/js/2.26ffaac3.chunk.js",
+    "static/css/main.e058d74c.chunk.css",
+    "static/js/main.cbb85d1d.chunk.js"
   ]
 }
