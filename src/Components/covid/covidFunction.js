@@ -23,7 +23,7 @@ export const filterName = name => {
   let newName = name;
   switch(name){
     case "USA":
-        newName = "United States of America";
+        newName = "United States";
         break;
     case "UK":
         newName = "United Kingdom";
@@ -34,11 +34,41 @@ export const filterName = name => {
     case "North-Macedonia":
       newName = "Macedonia";
       break;
+    case "St-Vincent-Grenadines":
+      newName = "Saint Vincent and the Grenadines";
+      break;
     case "S-Korea":
       newName = "South Korea";
       break;
     case "Trinidad-and-Tobago":
       newName = "Trinidad and Tobago";
+      break;
+    case "Turks-and-Caicos":
+      newName = "Turks and Caicos";
+      break;
+    case "Papua-New-Guinea":
+      newName = "Papua New Guinea";
+      break;
+    case "UAE":
+      newName = "United Arab Emirates";
+      break;
+    case "Saint-Kitts-and-Nevis":
+      newName = "Saint Kitts and Nevis";
+      break;
+    case "US-Virgin-Islands":
+      newName = "US Virgin Islands";
+      break;
+    case "Antigua-and-Barbuda":
+      newName = "Antigua and Barbuda";
+      break;
+    case "Cabo-Verde":
+      newName = "Cape Verde";
+      break;
+    case "British-Virgin-Islands":
+      newName = "British Virgin Islands";
+      break;
+    case "Cura&ccedil;ao":
+      newName = "Curaçao";
       break;
     default:
         break;

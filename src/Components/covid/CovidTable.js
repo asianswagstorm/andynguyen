@@ -1,8 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import {addComma} from "./covidFunction";
 const CovidTable = ({regionType, data}) => {
-    const areas = Object.keys(data);
-    const cases = Object.values(data);
+    const [areas, setAreas] = useState(Object.keys(data));
+    const [cases, setCases] = useState(Object.values(data));
 
     return(
         <div className="covidTable table-responsive">

@@ -9,19 +9,9 @@ import WorldWideCases from "./WorldWideCases"
 import canada from "./topojsons/canada.topojson";
 import quebec from "./topojsons/quebec.json";
 import montreal from "./topojsons/montreal.topojson";
-import { css } from "@emotion/core";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import washHands from "./gifs/washYourHands.gif";
 import SeverityChart from "./SeverityChart";
 import CovidTable from "./CovidTable";
-const override = css`
-  align-self: center;
-  margin: 25px auto 150px auto;
-  border-color: #19B5FE;
-`;
-
-const getFlagByCountryCode =(country) => {
-    return country.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0)+127397));
-}
 
 const CovidComponent = (props) => {
     const {dispatch} = props;
@@ -191,12 +181,13 @@ const CovidComponent = (props) => {
         <div>
             <Headers linkTo = "#/" headerTitle= {getProperData[regionType.name].header}/>   
             <div className= "covid19"> 
+             { (props.apiLoaded[regionType.name] === true ?  
+                (<div>   
                     <div className="world__cases">
                         <WorldWideCases mapType= {regionType.name} worldCases = {props.worldCases} quebecCases = {props.quebecCases}/>
                         <button className="nextMap__button" onClick = {getProperData[regionType.name].next} > {regionType.name !== "Montreal" ? `See cases in ${getProperData[regionType.name].nextMap}` : "See World Cases"} </button>
                     </div>
-              { (props.apiLoaded[regionType.name] === true ?  
-                (<div>
+           
                   <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
                   <SeverityChart region = {regionType.name}/>
                   {regionType.name === "World" ?
@@ -207,12 +198,10 @@ const CovidComponent = (props) => {
                  
                 </div>) :
               
-                  <PacmanLoader
-                    css={override}
-                    size={window.innerWidth  <= 400 ? 50 : 120}
-                    color={"#FFEE00"}
-                    loading={!props.apiLoaded[regionType.name]}
-                  />
+                  (<div className="CovidLoading">
+                      <img src= {washHands} alt="washHands"/>
+                    </div>
+                  )
                
                 )
                 }
@@ -220,9 +209,9 @@ const CovidComponent = (props) => {
                 <ReactTooltip place="top" type="dark" effect="float">
                     <ul> 
                         {content.split("—").map((data, key) => 
-                        <li key= {key}> {(key !== 5) ? data : 
-                            regionType.name === "World" && getFlagByCountryCode(data)
-                        } </li>)}
+                        <li key= {key}>  
+                          {data}
+                         </li>)}
                     </ul>
                     </ReactTooltip>
                 }

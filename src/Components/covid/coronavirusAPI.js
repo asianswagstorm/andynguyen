@@ -11,7 +11,7 @@ const covid193Key = "0fd490d094mshcada922c1ff45ecp16e7d3jsndd6ef22c3c16";
 const covid193Host = "covid-193.p.rapidapi.com";
 
 export const fetchAllCountries = async () => {
-    const result = await fetch(`${corsAnywhere}https://${covid193Host}/statistics`, {
+    const result = await fetch(`https://${covid193Host}/statistics`, {
         headers: {
           'x-rapidapi-host': covid193Host,
           'x-rapidapi-key' : covid193Key
