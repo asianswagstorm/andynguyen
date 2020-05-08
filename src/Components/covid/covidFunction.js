@@ -19,6 +19,18 @@ export const addComma = (number) => { //replacement for .toLocaleString()
   }
 };
 
+export const stringToInt = stringNum => {
+  if(typeof stringNum === "string" && stringNum !== "NA"){
+    if(stringNum.includes(","))
+      stringNum = stringNum.replace(",","")
+    if(stringNum.includes(" "))
+      stringNum = stringNum.replace(" ","")
+    return parseInt(stringNum.trim())
+  }
+  else 
+    return stringNum
+};
+
 export const filterName = name => {
   let newName = name;
   switch(name){

@@ -1,4 +1,4 @@
-const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
+const corsAnywhere = "https://cors-anywhere-asianswagstorm.herokuapp.com/";
 const recipeAPI =  `${corsAnywhere}https://recipesapi.herokuapp.com`;
 
 //write test 

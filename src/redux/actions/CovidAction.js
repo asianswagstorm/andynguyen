@@ -34,7 +34,7 @@ export const fetchWorldCases = (apiLoaded) => async dispatch => {
 
 const modifyCanadianCase = (canadaCases, newQuebec) => ({
     type : COVID_TYPE.MODIFY_CANADIAN_CASES,
-    canadaCases : {...canadaCases, Quebec: newQuebec.Total}
+    canadaCases : {...canadaCases, Quebec: {locationName: "Quebec", ...newQuebec.Total}}
 });
 
 export const fetchCanadaCases = (apiLoaded) => async dispatch => {

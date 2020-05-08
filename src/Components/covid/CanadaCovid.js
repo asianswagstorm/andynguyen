@@ -15,13 +15,12 @@ const CanadaMap =  ({data,regionType,setTooltipContent,colorFill}) => {
       let stringBuilder = NAME;
       const confirmed = data[[NAME]] ? data[[NAME]].confirmed : 0;
       stringBuilder = `${stringBuilder}—Confirmed: ${addComma(confirmed)}`;
-      if(regionType.name !== "Montreal"){
-          const deaths = data[[NAME]] ? data[[NAME]].deaths : 0; 
-          stringBuilder = `${stringBuilder}—Deaths: ${addComma(deaths)}`;
-      }
+      const deaths = data[[NAME]] ? data[[NAME]].deaths : 0; 
+      stringBuilder = `${stringBuilder}—Deaths: ${addComma(deaths)}`;
+      
       if(regionType.name === "Canada"){
           const recovered =data[[NAME]] ? data[[NAME]].recovered : 0;
-          stringBuilder = `${stringBuilder}—Recoved: ${addComma(recovered)}`;
+          stringBuilder = `${stringBuilder}—Recovered: ${addComma(recovered)}`;
       }
       setTooltipContent(stringBuilder);
     }

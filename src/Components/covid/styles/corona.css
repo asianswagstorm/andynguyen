@@ -107,6 +107,10 @@ div.CovidLoading{
     margin-top: 25px;
 }
 
+img.washHands{
+    width:100%;
+}
+
 @media only screen and (max-width: 768px) {
     div.covid19__world{
         font-size:12px;
@@ -129,6 +133,11 @@ div.CovidLoading{
         font-size: 12px;
         margin-left: 60px;
         align-self: center;
+    }
+
+    div.CovidLoading{
+        width:100%;
+        margin-top: 25px;
     }
 
     tr.countryCase td.covid__td {

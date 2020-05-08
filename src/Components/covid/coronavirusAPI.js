@@ -1,7 +1,7 @@
 import {filterName} from "./covidFunction";
 const covid19GlobalLink = "https://covid19.mathdro.id/api/";
 const covid19ByCountryAPILINK =`${covid19GlobalLink}countries/`;
-const corsAnywhere = "https://cors-anywhere.herokuapp.com/";
+const corsAnywhere = "https://cors-anywhere-asianswagstorm.herokuapp.com/";
 const parseHubMontrealProjectToken = "tJP0snf3WbuT";
 const parseHubQuebecProjectToken = "t1hHqC7Bd1mm";
 const parseHubAPIKey = "tkS-vq_osspq";
@@ -12,25 +12,27 @@ const covid193Host = "covid-193.p.rapidapi.com";
 
 export const fetchAllCountries = async () => {
     const result = await fetch(`https://${covid193Host}/statistics`, {
+        method: 'get',    
         headers: {
-          'x-rapidapi-host': covid193Host,
-          'x-rapidapi-key' : covid193Key
-        }
+            'x-rapidapi-host': covid193Host,
+            'x-rapidapi-key' : covid193Key
+            }
       }).then(response => (
         response.json()
     ));
 
     const newResponse = result.response.reduce((acc, country) => {
-        return { ...acc, [filterName(country.country)] : {"confirmed" : country.cases.total , "recovered": country.cases.recovered, "deaths" : country.deaths.total }}
+        return { ...acc, [filterName(country.country)] : {"locationName": filterName(country.country), "confirmed" : country.cases.total , "recovered": country.cases.recovered, "deaths" : country.deaths.total }}
     }, {});
 
     return newResponse;    
 };
 
 export const fetchQuebecCases = async () => {
-    const result = await fetch(`${corsAnywhere}${parseHubQuebecLink}`, {
+    const result = await fetch(`${corsAnywhere}${parseHubQuebecLink}`, { 
+        method: 'get',
         headers: {
-          'Cache-Control': 'no-cache'
+          'Cache-Control': 'no-cache',
         }
       }).then(response => (
         response.json()
@@ -56,24 +58,26 @@ export const fetchQuebecCases = async () => {
             quebecDeathCase = reduceDeathsNumber(9) + reduceDeathsNumber(16) + reduceDeathsNumber(17);
         }
         if(i !== 16 && i !==17)
-            data = {...data, [name] :  {"confirmed": quebecConfirmedCase, "deaths" : quebecDeathCase}}
+            data = {...data, [name] :  {"locationName": name, "confirmed": quebecConfirmedCase, "deaths" : quebecDeathCase}}
     }
     return data;
 }
 
 export const fetchMontrealCases = async () => {
-    const result = await fetch(`${corsAnywhere}${parseHubMontrealLink}`, {
+    const result = await fetch(`${corsAnywhere}${parseHubMontrealLink}`, { 
+        method: 'get', 
         headers: {
-          'Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache'
         }
       }).then(response => (
         response.json()
     ));
+    const replaceLessThan = (number) =>number.includes("< ") ? number.split("< ")[1] : number;
 
     let data = {"Total" : {"confirmed" : result.totalConfirmed, "recovered": "NA", "deaths" : result.totalDeath }};
     for(let i = 0; i < (result.montrealCases).length - 2 ; i++){
         let montrealCase = result.montrealCases[i];
-        data = {...data, [montrealCase.name] :  {"confirmed": (montrealCase.confirmed.includes("< ") ? montrealCase.confirmed.split("< ")[1] : montrealCase.confirmed)}}
+        data = {...data, [montrealCase.name] :  {"locationName": montrealCase.name, "confirmed": replaceLessThan(montrealCase.confirmed), "deaths": replaceLessThan(montrealCase.deaths)}}
     }
     
    return data;
@@ -110,7 +114,7 @@ export const fetchDetailedNumberOfCasesByCountry = async (country) => {
     ))    
 
     result.forEach(prov => 
-        alteredData = {...alteredData, [prov.provinceState] : {confirmed : prov.confirmed, deaths : prov.deaths, recovered: prov.recovered} }
+        alteredData = {...alteredData, [prov.provinceState] : {locationName: prov.provinceState, confirmed : prov.confirmed, deaths : prov.deaths, recovered: prov.recovered} }
     )
     return alteredData;
 }

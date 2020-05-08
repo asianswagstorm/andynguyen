@@ -3,10 +3,11 @@ import axios from "axios";
 
 export const pokemonImage = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 export const pokemonGif = name => `https://projectpokemon.org/images/normal-sprite/${name.charAt(0).toLowerCase() + name.slice(1)}.gif`;
+const corsAnywhere = "https://cors-anywhere-asianswagstorm.herokuapp.com/";
 
 export const getPokemonEvolution = async evolution_url => {
         try{
-            const evolutionLink =  `https://cors-anywhere.herokuapp.com/${evolution_url}`; 
+            const evolutionLink =  `${corsAnywhere}${evolution_url}`; 
             return await axios.get(evolutionLink).then(
                 response => response
             );
@@ -42,7 +43,7 @@ export const getPokemonByName = async name => {
 export const getPokeData = async index => {
     try{
         const pokemonLink = `https://pokeapi.co/api/v2/pokemon/${index}`;
-        return await axios.get(`https://cors-anywhere.herokuapp.com/${pokemonLink}`).then(
+        return await axios.get(`${corsAnywhere}${pokemonLink}`).then(
             response => response
         );
     } 
@@ -54,7 +55,7 @@ export const getPokeData = async index => {
 export const getPokeSpecies = async index => {
     try{
         const pokemonSpeciesLink = `https://pokeapi.co/api/v2/pokemon-species/${index}`;
-        return await fetch(`https://cors-anywhere.herokuapp.com/${pokemonSpeciesLink}`).then(
+        return await fetch(`${corsAnywhere}${pokemonSpeciesLink}`).then(
             response => response
         );
     } 

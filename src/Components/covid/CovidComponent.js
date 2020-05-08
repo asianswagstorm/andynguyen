@@ -24,12 +24,12 @@ const CovidComponent = (props) => {
         dispatch(fetchWorldCases(props.apiLoaded));
     };
     const getDetailedCountryCases = () => {
-      setRegionType({name: "Canada" , topojson: canada, mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 5}});
+      setRegionType({name: "Canada" , topojson: canada, mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 3}});
       if(props.apiLoaded["Canada"] === false)
         dispatch(fetchCanadaCases(props.apiLoaded));
     };
     const getQuebecCases = () => {
-      setRegionType({name: "Quebec" , topojson: quebec, mapSize : {centerX : -68, centerY: 45, zoom:6, maxZoom: 15}});
+      setRegionType({name: "Quebec" , topojson: quebec, mapSize : {centerX : -68, centerY: 50, zoom:8, maxZoom: 8}});
       if(props.apiLoaded["Quebec"] === false)
         dispatch(fetchQuebecCasesAction(props.canadaCases,props.apiLoaded));
     };
@@ -174,6 +174,7 @@ const CovidComponent = (props) => {
     useEffect( () => {
       window.scrollTo(0, 0);
       getAllCountry();
+      return () =>  null;
       //eslint-disable-next-line
     }, []);
     
@@ -199,7 +200,7 @@ const CovidComponent = (props) => {
                 </div>) :
               
                   (<div className="CovidLoading">
-                      <img src= {washHands} alt="washHands"/>
+                      <img src= {washHands} alt="washHands" className="washHands"/>
                     </div>
                   )
                
