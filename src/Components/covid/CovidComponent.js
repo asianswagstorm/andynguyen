@@ -9,9 +9,10 @@ import WorldWideCases from "./WorldWideCases"
 import canada from "./topojsons/canada.topojson";
 import quebec from "./topojsons/quebec.json";
 import montreal from "./topojsons/montreal.topojson";
-import washHands from "./gifs/washYourHands.gif";
 import SeverityChart from "./SeverityChart";
 import CovidTable from "./CovidTable";
+import XYPlot from "./XYPlot";
+import Loading from "./Loading";
 
 const CovidComponent = (props) => {
     const {dispatch} = props;
@@ -190,6 +191,16 @@ const CovidComponent = (props) => {
                     </div>
            
                   <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
+
+                  { regionType.name === "Canada" && 
+                  <div>
+                    <XYPlot props = {props}  caseType="totalCases" label="Total Cases" />
+                    <XYPlot props = {props}  caseType="newCase" label="New Cases" />
+                    <XYPlot props = {props}  caseType="totalDeath" label="Total Deaths" />
+                    <XYPlot  props = {props} caseType="newDeath" label="New Deaths" />
+                  </div>
+                  }
+
                   <SeverityChart region = {regionType.name}/>
                   {regionType.name === "World" ?
                     <WorldMapChart setTooltipContent={setContent} data={getProperData[regionType.name].data} colorFill={colorFill} />
@@ -199,9 +210,7 @@ const CovidComponent = (props) => {
                  
                 </div>) :
               
-                  (<div className="CovidLoading">
-                      <img src= {washHands} alt="washHands" className="washHands"/>
-                    </div>
+                  (<Loading/>
                   )
                
                 )

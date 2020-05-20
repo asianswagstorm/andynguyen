@@ -3,6 +3,11 @@ export const defaultCovidStates = {
     canadaCases : {},
     quebecCases : {},
     montrealCases : {},
+    selectedCountry : "Canada",
+    newCase: {country: "Canada", loaded: false , data: []},
+    newDeath: {country: "Canada",loaded: false , data: []},
+    totalCases: {country: "Canada",loaded: false , data: []},
+    totalDeath: {country: "Canada",loaded: false , data: []},
     apiLoaded : {   World : false,
                     Canada : false,
                     Quebec : false,
@@ -13,6 +18,26 @@ export const defaultCovidStates = {
 const DEFAULT_STATES = {defaultCovidStates: {...defaultCovidStates}};
 const covidReducer = (state = DEFAULT_STATES, action) => {
     switch(action.type) {
+        case 'SET_COUNTRY_NEW_CASES': 
+            return {
+                ...state,
+                defaultCovidStates: {...state.defaultCovidStates, newCase: action.newCase}
+            };
+        case 'SET_COUNTRY_NEW_DEATHS': 
+            return {
+                ...state,
+                defaultCovidStates: {...state.defaultCovidStates, newDeath: action.newDeath}
+            };
+        case 'SET_COUNTRY_TOTAL_CASES': 
+            return {
+                ...state,
+                defaultCovidStates: {...state.defaultCovidStates, totalCases: action.totalCases}
+            };
+        case 'SET_COUNTRY_TOTAL_DEATHS': 
+            return {
+                ...state,
+                defaultCovidStates: {...state.defaultCovidStates, totalDeath: action.totalDeath}
+            };
         case 'SET_WORLD_CASES':
             return {
                 ...state,
