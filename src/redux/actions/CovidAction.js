@@ -1,5 +1,5 @@
 import {COVID_TYPE} from "./types";
-import {fetchAllCountries,fetchDetailedNumberOfCasesByCountry,fetchQuebecCases,fetchMontrealCases,fetchGraphData} from "../../Components/covid/coronavirusAPI";
+import {fetchAllCountries,fetchDetailedNumberOfCasesByCountry,fetchQuebecCases,fetchMontrealCases,fetchGraphData,fetchQuebecGraph,fetchMontrealGraph} from "../../Components/covid/coronavirusAPI";
 
 const setWorldCases = (worldCases) => ({
     type : COVID_TYPE.SET_WORLD_CASES,
@@ -37,41 +37,38 @@ const modifyCanadianCase = (canadaCases, newQuebec) => ({
     canadaCases : {...canadaCases, Quebec: {locationName: "Quebec", ...newQuebec.Total}}
 });
 
-const setNewCases = newCase => ({
-    type : COVID_TYPE.SET_COUNTRY_NEW_CASES,
-    newCase
+const setGraphData = graphData => ({
+        type : COVID_TYPE.SET_GRAPH_DATA,
+        graphData
 });
 
-const setNewDeaths = newDeath => ({
-    type : COVID_TYPE.SET_COUNTRY_NEW_DEATHS,
-    newDeath
+const setQuebecGraphData = quebecGraphData => ({
+    type : COVID_TYPE.SET_QUEBEC_GRAPH_DATA,
+    quebecGraphData
 });
 
-const setTotalCases = totalCases => ({
-    type : COVID_TYPE.SET_COUNTRY_TOTAL_CASES,
-    totalCases
+const setMontrealGraphData = montrealGraphData => ({
+    type : COVID_TYPE.SET_MONTREAL_GRAPH_DATA,
+    montrealGraphData
 });
 
-const setTotalDeaths = totalDeath => ({
-    type : COVID_TYPE.SET_COUNTRY_TOTAL_DEATHS,
-    totalDeath
-});
-
-export const fetchCountryGraphData = (selectedCountry,caseType) => async dispatch => {
-    
-    Promise.resolve(await fetchGraphData(selectedCountry, caseType)).then(res => {
-        let data =  {country: selectedCountry, loaded: true, data : res }
-        
-        const toReturn = {
-            "newCase"    : setNewCases(data),
-            "newDeath"  : setNewDeaths(data), 
-            "totalCases" : setTotalCases(data),
-            "totalDeath" : setTotalDeaths(data)
-        };
-        return dispatch(toReturn[caseType]);
+export const fetchQuebecGraphData = () => async dispatch => {
+    Promise.resolve(await fetchQuebecGraph()).then(res => {
+        dispatch(setQuebecGraphData({loaded: true, allData: res}));
     });
 };
 
+export const fetchMontrealGraphData = () => async dispatch => {
+    Promise.resolve(await fetchMontrealGraph()).then(res => {
+        dispatch(setMontrealGraphData({loaded: true, allData: res}));
+    });
+};
+
+export const fetchCountryGraphData = (selectedCountry) => async dispatch => {
+    Promise.resolve(await fetchGraphData(selectedCountry)).then(res => {
+        dispatch(setGraphData({loaded: true, data: res}));
+    });
+};
 
 export const fetchCanadaCases = (apiLoaded) => async dispatch => {
     const canadaCase = await fetchDetailedNumberOfCasesByCountry("Canada")

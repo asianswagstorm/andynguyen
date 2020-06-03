@@ -2,17 +2,13 @@ import {filterName} from "./covidFunction";
 const covid19GlobalLink = "https://covid19.mathdro.id/api/";
 const covid19ByCountryAPILINK =`${covid19GlobalLink}countries/`;
 const corsAnywhere = "https://cors-anywhere-asianswagstorm.herokuapp.com/";
-const parseHubMontrealProjectToken = "tJP0snf3WbuT";
-const parseHubQuebecProjectToken = "t1hHqC7Bd1mm";
-const parseHubAPIKey = "tkS-vq_osspq";
-const parseHubMontrealLink = `https://www.parsehub.com/api/v2/projects/${parseHubMontrealProjectToken}/last_ready_run/data?api_key=${parseHubAPIKey}`;
-const parseHubQuebecLink = `https://www.parsehub.com/api/v2/projects/${parseHubQuebecProjectToken}/last_ready_run/data?api_key=${parseHubAPIKey}`;
+const MontrealLink = `https://covid-world-data-andy.herokuapp.com/montreal`;
+const QuebecLink = `https://covid-world-data-andy.herokuapp.com/quebec`;
 const covid193Key = "0fd490d094mshcada922c1ff45ecp16e7d3jsndd6ef22c3c16";
 const covid193Host = "covid-193.p.rapidapi.com";
 const covidGraphData = "https://covid-world-data-andy.herokuapp.com/world";
-
-export const fetchGraphData = async (country, caseType) => {
-    const result = await fetch(`${corsAnywhere}${covidGraphData}/${country}/${caseType}`, {
+export const fetchGraphData = async (country) => {
+    const result = await fetch(`${corsAnywhere}${covidGraphData}/${country}/line`, {
         method: 'get', 
         headers: {
           'Cache-Control': 'no-cache',
@@ -40,8 +36,8 @@ export const fetchAllCountries = async () => {
     return newResponse;    
 };
 
-export const fetchQuebecCases = async () => {
-    const result = await fetch(`${corsAnywhere}${parseHubQuebecLink}`, { 
+export const fetchQuebecGraph = async () => {
+    const result = await fetch(`${corsAnywhere}${QuebecLink}/line`, { 
         method: 'get',
         headers: {
           'Cache-Control': 'no-cache',
@@ -50,33 +46,37 @@ export const fetchQuebecCases = async () => {
         response.json()
     ));
 
-    let data = {"Total" : { "confirmed" : result.confirmed[20].confirmed.replace(" ", ","), "recovered": 3068, "deaths" : result.deaths[20].deaths.replace(" ", ","),
-                            "intensiveCare": result.hospital[1].name.split("Nombre en soins intensifs : ")[1].replace(" ", ","),
-                            "hospitalized": result.hospital[2].name.split("Nombre total d’hospitalisations1 : ")[1].replace(" ", ",")}};
-    let name = "";
-    let quebecConfirmedCase= "0";
-    let quebecDeathCase = "0";
-    for(let i = 0; i < (result.confirmed).length - 1 ; i++){
-        if(i !== 9 && i !== 16 && i !==17){
-            name = result.confirmed[i].name.includes(" - ") ?  result.confirmed[i].name.split(" - ")[1] : result.confirmed[i].name;
-            quebecConfirmedCase = result.confirmed[i].confirmed.replace(" ", ",");
-            quebecDeathCase = result.deaths[i].deaths.replace(" ", ",");
+    return result;
+};
+
+export const fetchMontrealGraph = async () => {
+    const result = await fetch(`${corsAnywhere}${MontrealLink}/line`, { 
+        method: 'get',
+        headers: {
+          'Cache-Control': 'no-cache',
         }
-        if(i === 9){ 
-            name = "Nord-du-Québec – Nunavik – Terres-Cries-de-la-Baie-James";
-            const reduceConfirmedNumber = i => parseInt(result.confirmed[i].confirmed.replace(" ", ""));
-            const reduceDeathsNumber = i => parseInt(result.deaths[i].deaths.replace(" ", ""));
-            quebecConfirmedCase = reduceConfirmedNumber(9) + reduceConfirmedNumber(16) + reduceConfirmedNumber(17);
-            quebecDeathCase = reduceDeathsNumber(9) + reduceDeathsNumber(16) + reduceDeathsNumber(17);
+      }).then(response => (
+        response.json()
+    ));
+    return result;
+};
+
+export const fetchQuebecCases = async () => {
+    const result = await fetch(`${corsAnywhere}${QuebecLink}`, { 
+        method: 'get',
+        headers: {
+          'Cache-Control': 'no-cache',
         }
-        if(i !== 16 && i !==17)
-            data = {...data, [name] :  {"locationName": name, "confirmed": quebecConfirmedCase, "deaths" : quebecDeathCase}}
-    }
-    return data;
-}
+      }).then(response => (
+        response.json()
+    ));
+
+    const recent = (result.length - 1);
+    return result[recent];
+};
 
 export const fetchMontrealCases = async () => {
-    const result = await fetch(`${corsAnywhere}${parseHubMontrealLink}`, { 
+    const result = await fetch(`${corsAnywhere}${MontrealLink}`, { 
         method: 'get', 
         headers: {
             'Cache-Control': 'no-cache'
@@ -84,16 +84,10 @@ export const fetchMontrealCases = async () => {
       }).then(response => (
         response.json()
     ));
-    const replaceLessThan = (number) =>number.includes("< ") ? number.split("< ")[1] : number;
-
-    let data = {"Total" : {"confirmed" : result.totalConfirmed, "recovered": "NA", "deaths" : result.totalDeath }};
-    for(let i = 0; i < (result.montrealCases).length - 2 ; i++){
-        let montrealCase = result.montrealCases[i];
-        data = {...data, [montrealCase.name] :  {"locationName": montrealCase.name, "confirmed": replaceLessThan(montrealCase.confirmed), "deaths": replaceLessThan(montrealCase.deaths)}}
-    }
-    
-   return data;
-}
+ 
+    const recent = (result.length - 1);
+    return result[recent];
+};
 
 export const fetchNumberOfCasesByCountry = async (country) => {
     return await fetch(`${covid19ByCountryAPILINK}${country}`).then(response => (

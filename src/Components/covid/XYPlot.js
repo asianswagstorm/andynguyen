@@ -4,20 +4,19 @@ import { connect } from 'react-redux';
 import Chart from 'react-google-charts';
 
 import Loading from "./Loading";
-const XYPlot = ({props,selectedCountry,worldCases,caseType,label,newCase,newDeath,totalCases,totalDeath}) => {
+const XYPlot = ({props,selectedCountry,worldCases,graphData,regionType,quebecGraphData,montrealGraphData}) => {
     const {dispatch} = props;
-    const {fetchCountryGraphData} = props.action_props.covid_action;
-    const getNewCases = async () => await dispatch(fetchCountryGraphData(selectedCountry,"newCase")); 
-    const geTotalCases = async() => await dispatch(fetchCountryGraphData(selectedCountry,"totalCases")); 
-    const getNewDeaths = async() => await dispatch(fetchCountryGraphData(selectedCountry,"newDeath")); 
-    const getTotalDeaths = async() => await  dispatch(fetchCountryGraphData(selectedCountry,"totalDeath")); 
+    const {fetchCountryGraphData,fetchQuebecGraphData, fetchMontrealGraphData} = props.action_props.covid_action;
+    const getCases = async () => await dispatch(fetchCountryGraphData(selectedCountry)); 
+    const getQuebecCases = async () => await dispatch(fetchQuebecGraphData()); //Total DNW!!!!
+    const getMontrealCases = async () => await dispatch(fetchMontrealGraphData()); //Total for Montréal  DNW!!!! 
 
-    const stringDateToDate = (array) => {
+    const stringDateToDate = (array,caseType) => {
         array.forEach(subArray => 
             subArray[0] = new Date(subArray[0])
         )
 
-        if(worldCases[selectedCountry]){
+        if(regionType === "Canada"  && worldCases[selectedCountry]){
             if(caseType === "totalCases") array.push([new Date(Date.now()) ,worldCases[selectedCountry].confirmed]);
             if(caseType === "totalDeath") array.push([new Date(Date.now()) ,worldCases[selectedCountry].deaths]);
         } 
@@ -25,60 +24,74 @@ const XYPlot = ({props,selectedCountry,worldCases,caseType,label,newCase,newDeat
     };
 
     useEffect( () => {
-        if(newCase.loaded === false){
-            getNewCases();
+        if(graphData.loaded === false && regionType === "Canada" ){
+            getCases();
         }
-        if (newDeath.loaded === false){
-            getNewDeaths();
+        if(quebecGraphData.loaded === false && regionType === "Quebec" ){
+            getQuebecCases();
         }
-        if (totalCases.loaded === false){
-            geTotalCases();
-        }
-        if (totalDeath.loaded === false){
-            getTotalDeaths();
+        if(montrealGraphData.loaded === false && regionType === "Montreal" ){
+            getMontrealCases();
         }
         return () =>  null;
         //eslint-disable-next-line
       }, []);
 
-    const dataToreturn = {
-              "newCase" : newCase,
-              "totalCases" : totalCases,
-              "newDeath" : newDeath,
-              "totalDeath" : totalDeath
+    const caseTypes = [
+        {
+            name : "newCase", label: "New Cases"
+        },
+        {
+            name : "totalCases", label: "Total Cases"
+        },
+        {
+            name : "newDeath", label: "New Deaths"
+        },
+        {
+            name : "totalDeath", label: "Total Deaths"
+        }
+    ];
+
+    const myGraphByRegionType = {
+        "Canada" : graphData.data,
+        "Quebec" :quebecGraphData.allData["Total"],
+        "Montreal" : montrealGraphData.allData["Total for Montréal"]
     };
-    
+
     return(
-          <div>
-            { dataToreturn[caseType].data.length > 1 ? 
-                <Chart
-                    width={'100%'}
-                    height={'400px'}
-                    chartType="LineChart"
-                    loader={<Loading/>}
-                    data={stringDateToDate(dataToreturn[caseType].data)}
-                    options={{
-                    hAxis: {
-                        title: 'Day',
-                    },
-                    vAxis: {
-                        title: label,
-                    },
-                    }}
-                    rootProps={{ 'data-testid': '1' }}
-                /> 
-                : <Loading/>
-            } 
-          </div>
-        
-      )
+        <div>
+            {
+                caseTypes.map((caseType, key) => 
+                    myGraphByRegionType[regionType][caseType.name].length > 1 ? 
+                        <Chart
+                            key = {key}
+                            width={'100%'}
+                            height={'400px'}
+                            chartType="LineChart"
+                            loader={<Loading/>}
+                            data={stringDateToDate(myGraphByRegionType[regionType][caseType.name], caseType.name)}
+                            options={{
+                            hAxis: {
+                                title: 'Day',
+                            },
+                            vAxis: {
+                                title: caseType.name,
+                            },
+                            }}
+                            rootProps={{ 'data-testid': '1' }}
+                        /> 
+                        : <Loading key = {key}/>
+                )
+            }
+        </div>
+    );  
 };
 
 const mapStateToProps = state => { 
     const covidProps  = state.covidReducer.defaultCovidStates; 
-    const {worldCases,selectedCountry,newCase,newDeath,totalCases,totalDeath} = covidProps;
+    const {worldCases,selectedCountry,graphData,quebecGraphData,montrealGraphData } = covidProps;
   
-    return {worldCases,selectedCountry,newCase,newDeath,totalCases,totalDeath};
+    return {worldCases,selectedCountry,graphData,quebecGraphData,montrealGraphData};
 };
   
 export default withRouter(connect(mapStateToProps)(XYPlot));

@@ -64,6 +64,13 @@ const CovidTable = ({regionType, data}) => {
                         <th className="table-success covid__th" onClick = {() => sortTableByType("recovered")}>Recovered</th>
                         }
                         <th className="table-danger covid__th" onClick = {() => sortTableByType("deaths")}>Deaths</th>
+                        
+                        {(regionType === "Quebec" || regionType === "Montreal") && 
+                            <th className="table-info covid__th" > New Cases</th> 
+                        }
+                        {(regionType === "Quebec" || regionType === "Montreal") && 
+                           <th className="table-warning covid__th" > New Deaths</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +82,14 @@ const CovidTable = ({regionType, data}) => {
                         {regionType === "World" &&
                         <td className="table-success covid__td">{addComma(area.recovered)}</td>
                         }
-                        <td className="table-danger covid__td ">{cases[key].deaths ? addComma(area.deaths) : "NA"}</td>
+                        <td className="table-danger covid__td ">{addComma(area.deaths)}</td>
+                        {(regionType === "Quebec" || regionType === "Montreal") && 
+                            <td className="table-info covid__td">{addComma(area.newCase)}</td> 
+                        }
+                        {(regionType === "Quebec" || regionType === "Montreal") && 
+                            <td className="table-warning covid__td">{addComma(area.newDeath)}</td> 
+                        }
+
                         
                     </tr>)
                     )

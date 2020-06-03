@@ -4,10 +4,9 @@ export const defaultCovidStates = {
     quebecCases : {},
     montrealCases : {},
     selectedCountry : "Canada",
-    newCase: {country: "Canada", loaded: false , data: []},
-    newDeath: {country: "Canada",loaded: false , data: []},
-    totalCases: {country: "Canada",loaded: false , data: []},
-    totalDeath: {country: "Canada",loaded: false , data: []},
+    graphData : {loaded: false, data: {newCase : [] , newDeath: [], totalCases: [], totalDeath: [] }},
+    quebecGraphData : {loaded: false, allData : {}},
+    montrealGraphData : {loaded: false, allData : {}},
     apiLoaded : {   World : false,
                     Canada : false,
                     Quebec : false,
@@ -18,26 +17,21 @@ export const defaultCovidStates = {
 const DEFAULT_STATES = {defaultCovidStates: {...defaultCovidStates}};
 const covidReducer = (state = DEFAULT_STATES, action) => {
     switch(action.type) {
-        case 'SET_COUNTRY_NEW_CASES': 
+        case 'SET_GRAPH_DATA':
             return {
                 ...state,
-                defaultCovidStates: {...state.defaultCovidStates, newCase: action.newCase}
-            };
-        case 'SET_COUNTRY_NEW_DEATHS': 
+                defaultCovidStates: {...state.defaultCovidStates, graphData: action.graphData}
+            };    
+        case 'SET_QUEBEC_GRAPH_DATA':
             return {
                 ...state,
-                defaultCovidStates: {...state.defaultCovidStates, newDeath: action.newDeath}
-            };
-        case 'SET_COUNTRY_TOTAL_CASES': 
+                defaultCovidStates: {...state.defaultCovidStates, quebecGraphData: action.quebecGraphData}
+            };  
+        case 'SET_MONTREAL_GRAPH_DATA':
             return {
                 ...state,
-                defaultCovidStates: {...state.defaultCovidStates, totalCases: action.totalCases}
-            };
-        case 'SET_COUNTRY_TOTAL_DEATHS': 
-            return {
-                ...state,
-                defaultCovidStates: {...state.defaultCovidStates, totalDeath: action.totalDeath}
-            };
+                defaultCovidStates: {...state.defaultCovidStates, montrealGraphData: action.montrealGraphData}
+            };  
         case 'SET_WORLD_CASES':
             return {
                 ...state,

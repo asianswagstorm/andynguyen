@@ -192,12 +192,9 @@ const CovidComponent = (props) => {
            
                   <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
 
-                  { regionType.name === "Canada" && 
+                  { regionType.name !== "World" && 
                   <div>
-                    <XYPlot props = {props}  caseType="totalCases" label="Total Cases" />
-                    <XYPlot props = {props}  caseType="newCase" label="New Cases" />
-                    <XYPlot props = {props}  caseType="totalDeath" label="Total Deaths" />
-                    <XYPlot  props = {props} caseType="newDeath" label="New Deaths" />
+                    <XYPlot props = {props}  regionType = {regionType.name} />
                   </div>
                   }
 
