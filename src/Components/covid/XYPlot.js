@@ -53,23 +53,23 @@ const XYPlot = ({props,selectedCountry,worldCases,graphData,regionType,quebecGra
     ];
 
     const myGraphByRegionType = {
-        "Canada" : graphData.data,
-        "Quebec" :quebecGraphData.allData["Total"],
-        "Montreal" : montrealGraphData.allData["Total for Montréal"]
+        "Canada" : {data: graphData.data , loaded: graphData.loaded} ,
+        "Quebec" : {data: quebecGraphData.allData["Total"], loaded: quebecGraphData.loaded},
+        "Montreal" : {data: montrealGraphData.allData["Total for Montréal"], loaded: montrealGraphData.loaded}
     };
 
     return(
         <div>
             {
                 caseTypes.map((caseType, key) => 
-                    myGraphByRegionType[regionType][caseType.name].length > 1 ? 
+                    (myGraphByRegionType[regionType].loaded === true && myGraphByRegionType[regionType].data[caseType.name].length) > 1 ? 
                         <Chart
                             key = {key}
                             width={'100%'}
                             height={'400px'}
                             chartType="LineChart"
                             loader={<Loading/>}
-                            data={stringDateToDate(myGraphByRegionType[regionType][caseType.name], caseType.name)}
+                            data={stringDateToDate(myGraphByRegionType[regionType].data[caseType.name], caseType.name)}
                             options={{
                             hAxis: {
                                 title: 'Day',
