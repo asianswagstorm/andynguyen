@@ -38,8 +38,14 @@ const modifyCanadianCase = (canadaCases, newQuebec) => ({
 });
 
 const setGraphData = graphData => ({
-        type : COVID_TYPE.SET_GRAPH_DATA,
-        graphData
+    type : COVID_TYPE.SET_GRAPH_DATA,
+    graphData
+});
+
+export const modifiedCanadianGraph = (canadian_graph_updated, graphData) => ({
+    type : COVID_TYPE.MODIFY_CANADIAN_GRAPH,
+    graphData,
+    canadian_graph_updated
 });
 
 const setQuebecGraphData = quebecGraphData => ({

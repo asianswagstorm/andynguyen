@@ -11,7 +11,8 @@ export const defaultCovidStates = {
                     Canada : false,
                     Quebec : false,
                     Montreal : false
-                }
+                },
+    canadian_graph_updated : {totalCases: false ,totalDeath: false}
 }
 
 const DEFAULT_STATES = {defaultCovidStates: {...defaultCovidStates}};
@@ -62,6 +63,11 @@ const covidReducer = (state = DEFAULT_STATES, action) => {
                 ...state, 
                 defaultCovidStates: {...state.defaultCovidStates, apiLoaded: action.apiLoaded }
             };
+        case 'MODIFY_CANADIAN_GRAPH':
+            return {
+                ...state, 
+                defaultCovidStates: {...state.defaultCovidStates, canadian_graph_updated: action.canadian_graph_updated, graphData: action.graphData }
+            }
         default:
             return state; 
     } 
