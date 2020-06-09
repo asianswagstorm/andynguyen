@@ -1,15 +1,14 @@
 import React, { useState, useEffect }  from 'react';
-import {fetchQuebecCases} from "./coronavirusAPI";
-
+import {addComma} from "./covidFunction";
 import CovidCard from "./CovidCard";
 
 const WorldWideCases = ({mapType,worldCases, quebecCases}) => {
-
+    const latestWorld = worldCases.latest;
     const [covidCases, setCovidCases] = useState({population: "7,594,000,000", confirmed: 0, recovered: 0, deaths: 0 });
-    const getWorldCases = () => setCovidCases({population: "7,594,000,000", confirmed: worldCases["All"].confirmed, recovered: worldCases["All"].recovered, deaths: worldCases["All"].deaths});
-    const getCanadianCases = () => setCovidCases({population: "38,844,182", confirmed: worldCases["Canada"].confirmed, recovered: worldCases["Canada"].recovered, deaths: worldCases["Canada"].deaths });
-    const getQuebecCases = async () => setCovidCases({population: "8,485,400", recovered: "16,803", ...(await fetchQuebecCases()).Total });
-    const getMontrealCases = () => setCovidCases({population: "1,704,694", confirmed: quebecCases["Montréal"].confirmed, recovered: "NA", deaths: quebecCases["Montréal"].deaths  });
+    const getWorldCases = () => setCovidCases({population: "7,594,000,000", confirmed: latestWorld.confirmed, recovered: latestWorld.recovered, deaths: latestWorld.deaths});
+    const getCanadianCases = () => setCovidCases({population: addComma(worldCases.records["Canada"].population), confirmed:  addComma(worldCases.records["Canada"].confirmed), recovered: worldCases.records["Canada"].recovered, deaths: worldCases.records["Canada"].deaths });
+    const getQuebecCases = async () => setCovidCases({population: "8,485,400", recovered: "17,764", ...quebecCases.records["Total"] });
+    const getMontrealCases = () => setCovidCases({population: "1,704,694", confirmed: quebecCases.records["Montréal"].confirmed, recovered: "NA", deaths: quebecCases.records["Montréal"].deaths  });
 
     useEffect( () => {
         if( mapType === "World")

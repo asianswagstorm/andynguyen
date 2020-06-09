@@ -12,7 +12,7 @@ const CanadaMap =  ({data,regionType,setTooltipContent,colorFill}) => {
     const handleEvent = async (geo) => {
       const {NAME} = geo.properties;
       setTooltipContent(NAME);
-      let stringBuilder = NAME;
+      let stringBuilder = "";
       const confirmed = data[[NAME]] ? data[[NAME]].confirmed : 0;
       stringBuilder = `${stringBuilder}—Confirmed: ${addComma(confirmed)}`;
       const deaths = data[[NAME]] ? data[[NAME]].deaths : 0; 
@@ -20,8 +20,10 @@ const CanadaMap =  ({data,regionType,setTooltipContent,colorFill}) => {
       
       if(regionType.name === "Canada"){
           const recovered =data[[NAME]] ? data[[NAME]].recovered : 0;
-          stringBuilder = `${stringBuilder}—Recovered: ${addComma(recovered)}`;
+          const population =data[[NAME]] ? data[[NAME]].population : 0;
+          stringBuilder = `Population: ${addComma(population)}${stringBuilder}—Recovered: ${addComma(recovered)}`;
       }
+      stringBuilder = `${NAME}—${stringBuilder}`;
       setTooltipContent(stringBuilder);
     }
 

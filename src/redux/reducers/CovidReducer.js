@@ -4,35 +4,16 @@ export const defaultCovidStates = {
     quebecCases : {},
     montrealCases : {},
     selectedCountry : "Canada",
-    graphData : {loaded: false, data: {newCase : [] , newDeath: [], totalCases: [], totalDeath: [] }},
-    quebecGraphData : {loaded: false, allData : {}},
-    montrealGraphData : {loaded: false, allData : {}},
     apiLoaded : {   World : false,
                     Canada : false,
                     Quebec : false,
                     Montreal : false
-                },
-    canadian_graph_updated : {totalCases: false ,totalDeath: false}
+                }
 }
 
 const DEFAULT_STATES = {defaultCovidStates: {...defaultCovidStates}};
 const covidReducer = (state = DEFAULT_STATES, action) => {
     switch(action.type) {
-        case 'SET_GRAPH_DATA':
-            return {
-                ...state,
-                defaultCovidStates: {...state.defaultCovidStates, graphData: action.graphData}
-            };    
-        case 'SET_QUEBEC_GRAPH_DATA':
-            return {
-                ...state,
-                defaultCovidStates: {...state.defaultCovidStates, quebecGraphData: action.quebecGraphData}
-            };  
-        case 'SET_MONTREAL_GRAPH_DATA':
-            return {
-                ...state,
-                defaultCovidStates: {...state.defaultCovidStates, montrealGraphData: action.montrealGraphData}
-            };  
         case 'SET_WORLD_CASES':
             return {
                 ...state,
@@ -63,11 +44,6 @@ const covidReducer = (state = DEFAULT_STATES, action) => {
                 ...state, 
                 defaultCovidStates: {...state.defaultCovidStates, apiLoaded: action.apiLoaded }
             };
-        case 'MODIFY_CANADIAN_GRAPH':
-            return {
-                ...state, 
-                defaultCovidStates: {...state.defaultCovidStates, canadian_graph_updated: action.canadian_graph_updated, graphData: action.graphData }
-            }
         default:
             return state; 
     } 

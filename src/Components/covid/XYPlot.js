@@ -1,16 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import Chart from 'react-google-charts';
 
 import Loading from "./Loading";
-const XYPlot = ({props,selectedCountry,worldCases,graphData,regionType,quebecGraphData,montrealGraphData,canadian_graph_updated}) => {
-    const {dispatch} = props;
-    const {fetchCountryGraphData,fetchQuebecGraphData, fetchMontrealGraphData,modifiedCanadianGraph} = props.action_props.covid_action;
-    const getCases = async () => await dispatch(fetchCountryGraphData(selectedCountry)); 
-    const getQuebecCases = async () => await dispatch(fetchQuebecGraphData()); 
-    const getMontrealCases = async () => await dispatch(fetchMontrealGraphData()); 
-
+const XYPlot = ({worldCases,canadaCases,quebecCases,regionType,montrealCases,apiLoaded}) => {
     const stringDateToDate = (array) => {
         array.forEach(subArray => {
             if(typeof subArray[0] === "string"){
@@ -21,29 +15,9 @@ const XYPlot = ({props,selectedCountry,worldCases,graphData,regionType,quebecGra
                 subArray[0] = new Date(year, month, day);
             }
         })
-
-        if(regionType === "Canada"  && worldCases[selectedCountry] && (canadian_graph_updated["totalCases"] === false && canadian_graph_updated["totalDeath"] === false)){
-            graphData.data["totalCases"][graphData.data["totalCases"].length -1][1] = worldCases[selectedCountry].confirmed;
-            graphData.data["totalDeath"][graphData.data["totalDeath"].length -1][1] = worldCases[selectedCountry].deaths;
-            dispatch(modifiedCanadianGraph({ "totalCases": true, "totalDeath" : true }, graphData));
-        }; 
         
         return array;
     };
-
-    useEffect( () => {
-        if(graphData.loaded === false && regionType === "Canada" ){
-            getCases();
-        }
-        if(quebecGraphData.loaded === false && regionType === "Quebec" ){
-            getQuebecCases();
-        }
-        if(montrealGraphData.loaded === false && regionType === "Montreal" ){
-            getMontrealCases();
-        }
-        return () =>  null;
-        //eslint-disable-next-line
-      }, []);
 
     const caseTypes = [
         {
@@ -61,9 +35,10 @@ const XYPlot = ({props,selectedCountry,worldCases,graphData,regionType,quebecGra
     ];
 
     const myGraphByRegionType = {
-        "Canada" : {data: graphData.data , loaded: graphData.loaded} ,
-        "Quebec" : {data: quebecGraphData.allData["Total"], loaded: quebecGraphData.loaded},
-        "Montreal" : {data: montrealGraphData.allData["Total for Montréal"], loaded: montrealGraphData.loaded}
+        "World" : {data: worldCases.graph , loaded: apiLoaded.World} ,
+        "Canada" : {data: canadaCases.graph , loaded: apiLoaded.Canada} ,
+        "Quebec" : {data:  quebecCases.graph ? quebecCases.graph["Total"] : [[]], loaded: apiLoaded.Quebec},
+        "Montreal" : {data:  montrealCases.graph ? montrealCases.graph["Total for Montréal"] : [[]], loaded: apiLoaded.Montreal}
     };
 
     return(
@@ -97,9 +72,9 @@ const XYPlot = ({props,selectedCountry,worldCases,graphData,regionType,quebecGra
 
 const mapStateToProps = state => { 
     const covidProps  = state.covidReducer.defaultCovidStates; 
-    const {worldCases,selectedCountry,graphData,quebecGraphData,montrealGraphData,canadian_graph_updated } = covidProps;
-  
-    return {worldCases,selectedCountry,graphData,quebecGraphData,montrealGraphData,canadian_graph_updated};
+    const {worldCases,canadaCases,quebecCases,montrealCases,selectedCountry,apiLoaded } = covidProps;
+ 
+    return {worldCases,canadaCases,quebecCases,montrealCases,selectedCountry,apiLoaded};
 };
   
 export default withRouter(connect(mapStateToProps)(XYPlot));

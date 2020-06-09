@@ -17,8 +17,9 @@ const WorldMapChart =  ({ setTooltipContent,data, colorFill }) =>{
     const recovered = country ? country.recovered : 'unknown';
     const confirmed = country ? country.confirmed : 'unknown';
     const deaths = country ? country.deaths : 'unknown'; 
+    const population = country ? country.population : 'unknown'; 
     
-    setTooltipContent(`${NAME}—Confirmed: ${addComma(confirmed)}—Deaths: ${addComma(deaths)}—Recovered: ${addComma(recovered)}`);
+    setTooltipContent(`${NAME}—Population: ${addComma(population)}—Confirmed: ${addComma(confirmed)}—Deaths: ${addComma(deaths)}—Recovered: ${addComma(recovered)}`);
   }
   return (
     <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>

@@ -43,7 +43,7 @@ const CovidComponent = (props) => {
     const getProperData = {
       "World" : {
         header : "Global SARS CoV2 Cases",
-        data : props.worldCases,
+        data : props.worldCases.records,
         next : () => getDetailedCountryCases(),
         nextMap: "Canada",
         severityLevel : {
@@ -57,7 +57,7 @@ const CovidComponent = (props) => {
       },
       "Canada" : {
         header : "Covid 19 Cases in Canada",
-        data : props.canadaCases,
+        data : props.canadaCases.records,
         next : () => getQuebecCases(),
         nextMap: "Quebec",
         severityLevel : {
@@ -71,7 +71,7 @@ const CovidComponent = (props) => {
       },
       "Quebec" : {
         header : "Covid 19 Cases in Quebec",
-        data : props.quebecCases,
+        data : props.quebecCases.records,
         next : () => getMontrealCases(),
         nextMap: "Montreal",
         severityLevel : {
@@ -85,7 +85,7 @@ const CovidComponent = (props) => {
       },
       "Montreal" : {
         header : "Covid 19 Cases in Montreal",
-        data : props.montrealCases,
+        data : props.montrealCases.records,
         next :  () => getAllCountry(),
         nextMap: "World",
         severityLevel : {
@@ -192,7 +192,7 @@ const CovidComponent = (props) => {
            
                   <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
 
-                  { regionType.name !== "World" && 
+                  {
                   <div>
                     <XYPlot props = {props}  regionType = {regionType.name} />
                   </div>
