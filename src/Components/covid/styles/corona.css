@@ -86,11 +86,22 @@ tr.countryCase__Head{
     text-align: center;
 }
 
-tr.countryCase td.covid__td {
+tr.countryCase td.covid__td{
     border:0.5px solid black;
     font-size: 18px;
     height:31px;
+}
+
+td#country__data{
+    width: 15%;
+}
+
+td#country__name {
     width: 20%;
+}
+
+td#country__number{
+    width: 5%;
 }
 
 th.covid__th  {  
@@ -105,6 +116,11 @@ div.CovidLoading{
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
+}
+
+div.covid__chart{
+    margin-bottom: 25px;
+    border: 1px solid black;
 }
 
 img.washHands{

@@ -1,7 +1,6 @@
 import React from "react";
 
 const severityLevel = [
-   
     {level : "no cases reported" , color : "#D6D6DA" },
     {level : "lower" , color : "#ffff99" }, 
     {level : "low" , color : "#ffff00" }, 
@@ -16,25 +15,25 @@ const regionSeverityLevels = {
                 "World" : "1M+",
                 "Canada" : "10K+",
                 "Quebec" : "5K+",
-                "Montreal" : "1000+"
+                "Montreal" : "2000+"
     },
     "med-high" : {
         "World" : "100K to 1M",
         "Canada" : "5K to 10K",
         "Quebec" : "2K to 5K",
-        "Montreal" : "500 to 1000"
+        "Montreal" : "1000 to 2000"
     },
     "med" : {
         "World" : "50K to 100K",
         "Canada" : "1K to 5K",
         "Quebec" : "1K to 2K",
-        "Montreal" : "250 to 500"
+        "Montreal" : "500 to 1000"
     },
     "med-low" : {
         "World" : "10K to 50K",
         "Canada" : "250 to 1000 ",
         "Quebec" : "100 to 1K",
-        "Montreal" : "100 to 250"
+        "Montreal" : "100 to 500"
     },
     "low" : {
         "World" : "1K to 10K",
@@ -56,7 +55,6 @@ const regionSeverityLevels = {
     }, 
 }
 
-//props.region
 const SeverityChart = (props) => 
     <div className= "container">
         <div className ="row severity__chart" >

@@ -89,9 +89,9 @@ const CovidComponent = (props) => {
         next :  () => getAllCountry(),
         nextMap: "World",
         severityLevel : {
-          "high" : 1000,
-          "mediumHigh" : 500,
-          "medium" : 250,
+          "high" : 2000,
+          "mediumHigh" : 1000,
+          "medium" : 500,
           "mediumLow" : 100,
           "low" : 50,
           "veryLow" : 1

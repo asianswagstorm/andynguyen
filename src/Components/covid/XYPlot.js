@@ -46,23 +46,26 @@ const XYPlot = ({worldCases,canadaCases,quebecCases,regionType,montrealCases,api
             {
                 caseTypes.map((caseType, key) => 
                     (myGraphByRegionType[regionType].loaded === true && myGraphByRegionType[regionType].data[caseType.name].length) > 1 ? 
-                        <Chart
-                            key = {key}
-                            width={'100%'}
-                            height={'400px'}
-                            chartType="LineChart"
-                            loader={<Loading/>}
-                            data={stringDateToDate(myGraphByRegionType[regionType].data[caseType.name])}
-                            options={{
-                            hAxis: {
-                                title: 'Day',
-                            },
-                            vAxis: {
-                                title: caseType.name,
-                            },
-                            }}
-                            rootProps={{ 'data-testid': '1' }}
-                        /> 
+                        <div className="covid__chart" key = {key}>
+                            <Chart
+                                width = {'100%'}
+                                height = {'400px'}
+                                chartType = "LineChart"
+                                loader = {<Loading/>}
+                                data = {stringDateToDate(myGraphByRegionType[regionType].data[caseType.name])}
+                                options =   {
+                                                {
+                                                    hAxis: {
+                                                        title: 'Day',
+                                                    },
+                                                    vAxis: {
+                                                        title: caseType.name,
+                                                    }
+                                                }
+                                            }   
+                                rootProps={{ 'data-testid': '1' }}
+                            /> 
+                        </div>
                         : <Loading key = {key}/>
                 )
             }

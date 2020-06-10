@@ -51,46 +51,106 @@ const CovidTable = ({regionType, data}) => {
         setIncreaseDecrease({...increaseDecrease, [regionType] : {...increaseDecrease[regionType], byCase : {...increaseDecrease[regionType].byCase, [dataType] : "increase" } }} ) :
         setIncreaseDecrease({...increaseDecrease, [regionType] : {...increaseDecrease[regionType], byCase : {...increaseDecrease[regionType].byCase, [dataType] : "decrease" } }} );
     };
+    
+    const tableHeadContent = () => {
+        let contentHeadArray = [
+            {
+                table_id : "country__number" , class_name : "covid__th", click_function : () => null, name: "#"
+            },
+            {
+                table_id : "country__name" , class_name : "covid__th", click_function : () => sortByAreaName(), name: "Area"
+            },
+            {
+                table_id : "" , class_name : "table-primary covid__th", click_function : () => sortTableByType("confirmed"), name: "Confirmed"
+            }
+        ];
+
+        if(regionType === "World")
+            contentHeadArray.push(
+                {
+                    table_id : "" , class_name : "table-success covid__th", click_function : () => sortTableByType("recovered"), name: "Recovered"
+                }
+            );
+
+            contentHeadArray.push(
+                {
+                    table_id : "" , class_name : "table-danger covid__th", click_function : () => sortTableByType("deaths"), name: "Deaths"
+                }
+        );
+
+        if(regionType === "Quebec" || regionType === "Montreal"  ){
+            contentHeadArray.push(
+                {
+                    table_id : "" , class_name : "table-info covid__th", click_function : () => sortTableByType("newCase"), name: "New Cases"
+                }
+            );
+            contentHeadArray.push(
+                {
+                    table_id : "" , class_name : "table-warning covid__th", click_function : () => sortTableByType("newDeath"), name: "New Deaths"
+                }
+            );
+        };
+
+        return contentHeadArray;
+    };
+
+    const tableDataContent = (area,key) => {
+        let contentDataArray = [
+            {
+                table_id : "country__number" , class_name : "covid__td", data: key+1
+            },
+            {
+                table_id : "country__name" , class_name : "covid__td", data: area.locationName
+            },
+            {
+                table_id : "country__data" , class_name : "table-primary covid__td", data: addComma(area.confirmed)
+            }
+        ];
+
+        if(regionType === "World")
+            contentDataArray.push(
+                {
+                    table_id : "country__data" , class_name : "table-success covid__td", data: addComma(area.recovered)
+                }
+            );
+
+            contentDataArray.push(
+                {
+                    table_id : "country__data" , class_name : "table-danger covid__td",  data: addComma(area.deaths)
+                }
+        );
+
+        if(regionType === "Quebec" || regionType === "Montreal"){
+            contentDataArray.push(
+                {
+                    table_id : "country__data" , class_name : "table-info covid__td", data: addComma(area.newCase)
+                }
+            );
+            contentDataArray.push(
+                {
+                    table_id : "country__data" , class_name : "table-warning covid__td",  data: addComma(area.newDeath)
+                }
+            );
+        };
+        return contentDataArray;
+    };
 
     return(
         <div className="covidTable table-responsive">
             <table className="table-sm table-striped covidTable">
                 <thead>
                     <tr className ="countryCase__Head">
-                        <th id="country__number" className="covid__th">#</th>
-                        <th id="country__name" className="covid__th" onClick = {() => sortByAreaName()} >Area</th>
-                        <th className="table-primary covid__th" onClick = {() => sortTableByType("confirmed")}>Confirmed</th>
-                        { regionType === "World" &&
-                        <th className="table-success covid__th" onClick = {() => sortTableByType("recovered")}>Recovered</th>
-                        }
-                        <th className="table-danger covid__th" onClick = {() => sortTableByType("deaths")}>Deaths</th>
-                        
-                        {(regionType === "Quebec" || regionType === "Montreal") && 
-                            <th className="table-info covid__th" > New Cases</th> 
-                        }
-                        {(regionType === "Quebec" || regionType === "Montreal") && 
-                           <th className="table-warning covid__th" > New Deaths</th>
+                        {
+                           tableHeadContent().map((table_head, key) => <th key={key} className={table_head.class_name} id={table_head.table_id} onClick = {table_head.click_function}> {table_head.name} </th>)
                         }
                     </tr>
                 </thead>
                 <tbody>
                 {cases.filter(area => area.locationName).map((area, key) => (
                     <tr className ="countryCase" key={key}>
-                        <th id="country__number" className="covid__th" >{key+1}</th>
-                        <th id="country__name" className="covid__th" >{area.locationName}</th>
-                        <td className="table-primary covid__td">{addComma(area.confirmed)}</td>
-                        {regionType === "World" &&
-                        <td className="table-success covid__td">{addComma(area.recovered)}</td>
-                        }
-                        <td className="table-danger covid__td ">{addComma(area.deaths)}</td>
-                        {(regionType === "Quebec" || regionType === "Montreal") && 
-                            <td className="table-info covid__td">{addComma(area.newCase)}</td> 
-                        }
-                        {(regionType === "Quebec" || regionType === "Montreal") && 
-                            <td className="table-warning covid__td">{addComma(area.newDeath)}</td> 
-                        }
-
-                        
+                      {
+                          tableDataContent(area, key).map((table_data, key1) => <td key={key1} className={table_data.class_name} id={table_data.table_id}> {table_data.data} </td>)
+                      }
                     </tr>)
                     )
                 }
