@@ -1874,7 +1874,7 @@ header > h1#app-header ,header > h2#app-header,header > h3#app-header {
 /* Main */
 /* #f1f1f1 */
 	section#main {
-		background: #f1f1f1 ;
+		background: #f1f1f1;
 		width: 100%;
 		min-height:100vh;
 	}

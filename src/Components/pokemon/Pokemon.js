@@ -337,7 +337,7 @@ class Pokemon extends Component {
       <div>
         <Headers linkTo = "#/Pokemon" headerTitle="Pokedex"/>
         <div className="pokemon-data">
-          <div className="card">
+        
             {this.state.imageLoading && (
                 <div className="pokemon__loading">
                     <RingLoader
@@ -350,109 +350,110 @@ class Pokemon extends Component {
               )
             }
             {this.state.pokemonLoaded === true && (
-            <div className="card">
-              <div className="pokemon__info card-header">
-                  <div className="poke_index row">Pokedex #{this.state.pokemonIndex}</div>
-                  
-                  <div className="prev__next__poke row"> 
-                      <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
-                      <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
-                  </div>
+              <div className="card">
+                <div className="card">
+                  <div className="pokemon__info card-header">
+                      <div className="poke_index row">Pokedex #{this.state.pokemonIndex}</div>
+                      
+                      <div className="prev__next__poke row"> 
+                          <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex >= 2) ? pokeIndex - 1 : 807 )}  className= "previous_pokemon"> prev</button>
+                          <button id="toggle__pokemon__btn" onClick={() => this.updatePokemon((pokeIndex < 807) ? pokeIndex + 1 : 1) }  className= "next_pokemon"> next</button>
+                      </div>
+                        
+                      <div className="pokemon_pill row">
+                              {this.state.types.map((x, key) => (
+                                <span
+                                  key={key}
+                                  className="badge badge-pill mr-1"
+                                  style={{
+                                    backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
+                                    color: "white",
+                                    borderRadius: "100px",
+                                    width: "100px",
+                                    height: "25px"
+                                  }}
+                                >
+                                  {x.type.name}
+                                </span>
+                              ))}
+                      </div>
                     
-                  <div className="pokemon_pill row">
-                          {this.state.types.map((x, key) => (
-                            <span
-                              key={key}
-                              className="badge badge-pill mr-1"
-                              style={{
-                                backgroundColor: `#${TYPE_COLORS[x.type.name]}`,
-                                color: "white",
-                                borderRadius: "100px",
-                                width: "100px",
-                                height: "25px"
-                              }}
-                            >
-                              {x.type.name}
-                            </span>
-                          ))}
                   </div>
-                
-              </div>
 
-                <div className="pokemon_card_body">
-                  <div className="pokemon_with_stats">
-                    <div className="pokemon_shown">
-                      <img
-                        src={this.state.imageUrl}
-                        alt={"A Photograph of a Pokemon"}
-                        onLoad={() => this.setState({ imageLoading: false })}
-                        className="card-img-top"
-                      />
+                    <div className="pokemon_card_body">
+                      <div className="pokemon_with_stats">
+                        <div className="pokemon_shown">
+                          <img
+                            src={this.state.imageUrl}
+                            alt={"A Photograph of a Pokemon"}
+                            onLoad={() => this.setState({ imageLoading: false })}
+                            className="card-img-top"
+                          />
+                        </div>
+                        <div className="pokemon_shown_name">
+                          <h4 className="mx-auto">
+                            {this.state.name}
+                          </h4>
+                          {allStats}
+                        </div>
+                      </div>
+                      <p className="pokemon__description">{this.state.description}</p> 
                     </div>
-                    <div className="pokemon_shown_name">
-                      <h4 className="mx-auto">
-                        {this.state.name}
-                      </h4>
-                      {allStats}
+                    <div className="pokemon_card_body">
+                      <div className="poke_profile_title">
+                        <h5 id="poke">Profile</h5>
+                      </div>  
+                    <div className="pokemon_profile row">
+                      <div className="pokemon_profile_left col-sm-7">
+                        <div className="poke_left_content">
+                          {leftProfile}
+                        </div>
+                      </div>  
+                      <div className="pokemon_profile_right col-sm-5">
+                        <div className="poke_right_content">
+                          {rightProfile}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <p className="pokemon__description">{this.state.description}</p> 
-                </div>
-                <div className="pokemon_card_body">
-                  <div className="poke_profile_title">
-                    <h5 id="poke">Profile</h5>
-                  </div>  
-                <div className="pokemon_profile row">
-                  <div className="pokemon_profile_left col-sm-7">
-                    <div className="poke_left_content">
-                      {leftProfile}
+                  <div className="pokemon_card_body">
+                    <div className="poke_evolution_title">
+                      <h5 id="poke">Evolution</h5>
                     </div>
-                  </div>  
-                  <div className="pokemon_profile_right col-sm-5">
-                    <div className="poke_right_content">
-                      {rightProfile}
+                    <div className= "evolution-chart"  style={{alignContent: "end"}}>
+                        {this.state.evolution_data ? (
+                          <Evolution
+                            updatePokemon = {(id) => this.updatePokemon(id)}
+                            stage1={this.state.stage1}
+                            stage2={this.state.stage2}
+                            stage3={this.state.stage3}
+                            stage1ID={this.state.stage1ID}
+                            stage2ID={this.state.stage2ID}
+                            stage3ID={this.state.stage3ID}
+                          />
+                        ) : (
+                          <div
+                            className="loader"
+                            style={{ width: "50px", height: "50px" }}
+                          />
+                        )}
                     </div>
                   </div>
+                  <div className="pokemon_card_footer">
+                      Pokemon Data Obtained From
+                      <a
+                        href="https://pokeapi.co/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="poke_card_link"
+                      >
+                        PokeAPI.co
+                      </a>
+                  </div> 
                 </div>
               </div>
-              <div className="pokemon_card_body">
-                <div className="poke_evolution_title">
-                  <h5 id="poke">Evolution</h5>
-                </div>
-                <div className= "evolution-chart"  style={{alignContent: "end"}}>
-                    {this.state.evolution_data ? (
-                      <Evolution
-                        updatePokemon = {(id) => this.updatePokemon(id)}
-                        stage1={this.state.stage1}
-                        stage2={this.state.stage2}
-                        stage3={this.state.stage3}
-                        stage1ID={this.state.stage1ID}
-                        stage2ID={this.state.stage2ID}
-                        stage3ID={this.state.stage3ID}
-                      />
-                    ) : (
-                      <div
-                        className="loader"
-                        style={{ width: "50px", height: "50px" }}
-                      />
-                    )}
-                </div>
-              </div>
-              <div className="pokemon_card_footer">
-                  Pokemon Data Obtained From
-                  <a
-                    href="https://pokeapi.co/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="poke_card_link"
-                  >
-                    PokeAPI.co
-                  </a>
-              </div> 
-            </div>
             )}
           </div>
-        </div>
       </div>
     );
   };

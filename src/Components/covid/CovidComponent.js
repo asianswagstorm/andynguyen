@@ -25,9 +25,9 @@ const CovidComponent = (props) => {
         dispatch(fetchWorldCases(props.apiLoaded));
     };
     const getDetailedCountryCases = () => {
-      setRegionType({name: "Canada" , topojson: canada, mapSize : {centerX : 0, centerY: 498, zoom:3, maxZoom: 3}});
+      setRegionType({name: "Canada" , topojson: canada, mapSize : {centerX : -10, centerY: 498, zoom:3, maxZoom: 3}});
       if(props.apiLoaded["Canada"] === false)
-        dispatch(fetchCanadaCases(props.apiLoaded));
+        dispatch(fetchCanadaCases(props.apiLoaded,props.canadianGraphLoaded));
     };
     const getQuebecCases = () => {
       setRegionType({name: "Quebec" , topojson: quebec, mapSize : {centerX : -68, centerY: 50, zoom:8, maxZoom: 8}});
@@ -35,7 +35,7 @@ const CovidComponent = (props) => {
         dispatch(fetchQuebecCasesAction(props.canadaCases,props.apiLoaded));
     };
     const getMontrealCases = () => {
-      setRegionType({name: "Montreal" , topojson: montreal, mapSize : {centerX : -29, centerY: 500, zoom:3, maxZoom: 3}});
+      setRegionType({name: "Montreal" , topojson: montreal, mapSize : {centerX : -25, centerY: 500, zoom:3, maxZoom: 3}});
       if(props.apiLoaded["Montreal"] === false)
         dispatch(fetchMontrealCasesAction(props.apiLoaded));
     };
@@ -183,35 +183,27 @@ const CovidComponent = (props) => {
         <div>
             <Headers linkTo = "#/" headerTitle= {getProperData[regionType.name].header}/>   
             <div className= "covid19"> 
-             { (props.apiLoaded[regionType.name] === true ?  
+             { props.apiLoaded[regionType.name] === true ?  
                 (<div>   
                     <div className="world__cases">
                         <WorldWideCases mapType= {regionType.name} worldCases = {props.worldCases} quebecCases = {props.quebecCases}/>
                         <button className="nextMap__button" onClick = {getProperData[regionType.name].next} > {regionType.name !== "Montreal" ? `See cases in ${getProperData[regionType.name].nextMap}` : "See World Cases"} </button>
                     </div>
-           
-                  <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
-
-                  {
-                  <div>
-                    <XYPlot props = {props}  regionType = {regionType.name} />
-                  </div>
-                  }
-
-                  <SeverityChart region = {regionType.name}/>
-                  {regionType.name === "World" ?
-                    <WorldMapChart setTooltipContent={setContent} data={getProperData[regionType.name].data} colorFill={colorFill} />
-                    : 
-                    <CanadaMap setTooltipContent={setContent} data = {getProperData[regionType.name].data} regionType={regionType} colorFill={colorFill}/>
-                  }
-                 
-                </div>) :
-              
-                  (<Loading/>
-                  )
-               
-                )
-                }
+          
+                    <div className = "covid__table">
+                      <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
+                    </div>
+                   
+                    <XYPlot props = {props} data = {getProperData[regionType.name].data} regionType = {regionType.name} />     
+                    <SeverityChart region = {regionType.name}/>
+                    {regionType.name === "World" ?
+                      <WorldMapChart setTooltipContent={setContent} data={getProperData[regionType.name].data} colorFill={colorFill} />
+                      : 
+                      <CanadaMap setTooltipContent={setContent} data = {getProperData[regionType.name].data} regionType={regionType} colorFill={colorFill}/>
+                    }
+                  </div>) :
+                  <Loading/>
+            }
                 { content !== "" && 
                 <ReactTooltip place="top" type="dark" effect="float">
                     <ul> 
@@ -229,9 +221,9 @@ const CovidComponent = (props) => {
 
 const mapStateToProps = state => { 
   const covidProps  = state.covidReducer.defaultCovidStates; 
-  const {worldCases,canadaCases,quebecCases,montrealCases, apiLoaded} = covidProps;
+  const {worldCases,canadaCases,quebecCases,montrealCases, apiLoaded,canadianGraphLoaded} = covidProps;
 
-  return {worldCases,canadaCases,quebecCases,montrealCases,apiLoaded};
+  return {worldCases,canadaCases,quebecCases,montrealCases,apiLoaded,canadianGraphLoaded};
 };
 
 export default withRouter(connect(mapStateToProps)(CovidComponent));

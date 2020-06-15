@@ -1,17 +1,17 @@
 import React,{useState,useEffect} from "react";
-import {addComma,stringToInt} from "./covidFunction";
+import {addComma,stringToInt,filterExclude} from "./covidFunction"
 const CovidTable = ({regionType, data}) => {
     const sortingCondition = {  byCase :    {   confirmed: "decrease",
                                                 recovered: "decrease",
                                                 deaths: "decrease"},
                                 alphabetibal: "decrease"}
-    const [cases, setCases] = useState(Object.values(data));
+    const [cases, setCases] = useState(() => filterExclude(regionType,Object.values(data)));
     const [increaseDecrease, setIncreaseDecrease] = useState({ "World" :    sortingCondition,
                                                                "Canada" :   sortingCondition,
                                                                "Quebec" :   sortingCondition,
                                                                "Montreal" : sortingCondition});
     useEffect( () => {
-        setCases(Object.values(data));
+        setCases(() => filterExclude(regionType, Object.values(data)));
         return () =>  null;
     // eslint-disable-next-line react-hooks/exhaustive-deps   
     }, [regionType]);
@@ -145,7 +145,7 @@ const CovidTable = ({regionType, data}) => {
                         }
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="covid__data">
                 {cases.filter(area => area.locationName).map((area, key) => (
                     <tr className ="countryCase" key={key}>
                       {

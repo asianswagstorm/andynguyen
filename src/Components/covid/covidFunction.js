@@ -103,3 +103,20 @@ export const rounded = num => {
       return num;
     }
 };
+
+export const filterExclude = (regionType, array) => {
+  const toExclude = ["date","__v","_id"]
+  const quebecRegionsToExclude = [ "Hors Québec", "Nord-du-Québec", "Nunavik","Terres-Cries-de-la-Baie-James", "Région à déterminer",...toExclude];
+  const montrealRegionsToExclude = [ "Territory to be confirmed2",...toExclude];
+
+  const toExcludeArray = {
+      "World" : [],
+      "Canada" : ["Repatriated Canadians"],
+      "Quebec" : quebecRegionsToExclude,
+      "Montreal" : montrealRegionsToExclude
+  };
+
+  if(regionType === "Canada")
+    array.push({"locationName" : "Canada"});
+  return array.filter(region => !toExcludeArray[regionType].includes(region.locationName))
+};

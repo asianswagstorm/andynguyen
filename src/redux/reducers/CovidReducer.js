@@ -8,7 +8,23 @@ export const defaultCovidStates = {
                     Canada : false,
                     Quebec : false,
                     Montreal : false
-                }
+                },
+    canadianGraphLoaded : {
+        "Canada" : false,
+        "Quebec" : false,
+        "Ontario" : false,
+        "Alberta" : false,
+        "British Columbia" : false,
+        "Nova Scotia" : false,
+        "Saskatchewan" : false,
+        "Manitoba" : false,
+        "Newfoundland and Labrador" : false,
+        "New Brunswick" : false,
+        "Prince Edward Island": false,
+        "Yukon": false,
+        "Northwest Territories": false,
+        "Nunavut": false
+    }
 }
 
 const DEFAULT_STATES = {defaultCovidStates: {...defaultCovidStates}};
@@ -43,6 +59,11 @@ const covidReducer = (state = DEFAULT_STATES, action) => {
             return {
                 ...state, 
                 defaultCovidStates: {...state.defaultCovidStates, apiLoaded: action.apiLoaded }
+            };
+        case 'CANADIAN_GRAPH_LOADED':
+            return {
+                ...state, 
+                defaultCovidStates: {...state.defaultCovidStates, canadianGraphLoaded: action.canadianGraphLoaded }
             };
         default:
             return state; 

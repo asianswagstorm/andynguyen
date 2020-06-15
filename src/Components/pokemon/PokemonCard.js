@@ -21,7 +21,6 @@ export class PokemonCard extends Component {
         <a className="link-hover" href={`#/Pokemon/${pokemonIndex}`}>
             <div className="card">
               <h5 className="card-header">{pokemonIndex}</h5>
-             
               <div className="card-body">
                 <div className="pokemon__image">
                   {this.state.imageLoading && (

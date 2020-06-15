@@ -1,5 +1,5 @@
 import {COVID_TYPE} from "./types";
-import {fetchCoronaVirusCases} from "../../Components/covid/coronavirusAPI";
+import {fetchCoronaVirusCases,updateCanadianGraph} from "../../Components/covid/coronavirusAPI";
 
 const setWorldCases = (worldCases) => ({
     type : COVID_TYPE.SET_WORLD_CASES,
@@ -44,10 +44,12 @@ const modifyCanadianCase = (canadaCases, newQuebec) => ({
                     }
 });
 
-export const fetchCanadaCases = (apiLoaded) => async dispatch => {
+export const fetchCanadaCases = (apiLoaded,canadianGraphLoaded) => async dispatch => {
     const canadaCase = await fetchCoronaVirusCases("Canada");
     dispatch(setCanadaCases(canadaCase));
     dispatch(setAPILoaded(apiLoaded, "Canada"));
+    const newGraphLoaded = {...canadianGraphLoaded, "Canada": true};
+    dispatch(updateCanadianGraphLoaded(newGraphLoaded));
 }
 
 export const fetchQuebecCasesAction = (canadaCases,apiLoaded) => async dispatch => {
@@ -62,3 +64,18 @@ export const fetchMontrealCasesAction = (apiLoaded) => async dispatch => {
     dispatch(setMontrealCases(montrealCase));
     dispatch(setAPILoaded(apiLoaded, "Montreal"));
 }
+
+const updateCanadianGraphLoaded = (canadianGraphLoaded) => ({
+    type: COVID_TYPE.CANADIAN_GRAPH_LOADED,
+    canadianGraphLoaded
+});
+
+export const updateCanadianRegionGraph = (canadianGraphLoaded,canadaCases, country, state) => async dispatch => {
+    const {records} = canadaCases;
+    const updatedGraphData = await updateCanadianGraph(records,country,state);
+    console.log("updatedGraphData",updatedGraphData)
+    const newCanadianCases = {...canadaCases, graph: {...canadaCases.graph, [state] : updatedGraphData} };
+    dispatch(setCanadaCases(newCanadianCases));
+    const newGraphLoaded = {...canadianGraphLoaded, [state]: true};
+    dispatch(updateCanadianGraphLoaded(newGraphLoaded));
+};

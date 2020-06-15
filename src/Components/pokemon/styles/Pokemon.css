@@ -99,11 +99,11 @@ div.pokemon_profile_right{
     width: 35%;
 }
 
-
 div.pokemon__loading{
     min-height: 70vh;
-
+    background: #f1f1f1;
 }
+
 div.poke_right_content{
     width:100%;
     margin-left: auto ;

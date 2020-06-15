@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import Chart from 'react-google-charts';
+import {filterExclude} from "./covidFunction";
 
 import Loading from "./Loading";
-const XYPlot = ({worldCases,canadaCases,quebecCases,regionType,montrealCases,apiLoaded}) => {
+const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCases,apiLoaded,data,canadianGraphLoaded}) => {
+
+    const [selectedRegion, setSelectedRegion] = useState(   {  "Canada" : "Canada",
+                                                                "Quebec" : "Total",
+                                                                "Montreal" : "Total for Montréal"     
+                                                            });
+
     const stringDateToDate = (array) => {
         array.forEach(subArray => {
             if(typeof subArray[0] === "string"){
@@ -19,33 +26,56 @@ const XYPlot = ({worldCases,canadaCases,quebecCases,regionType,montrealCases,api
         return array;
     };
 
+    const handleRegionSelect = (event) => {
+        const region = event.target.value;
+        if(regionType === "Canada" && region !== "Canada"){
+            const {dispatch} = props;
+            const {updateCanadianRegionGraph} = props.action_props.covid_action;
+            //(canadianGraphLoaded,canadaCases, country, state)
+            dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region));
+        }
+
+
+        setSelectedRegion(prevState => ({...prevState, [regionType] : region}))
+    }
+
     const caseTypes = [
-        {
-            name : "newCase", label: "New Cases"
-        },
         {
             name : "totalCases", label: "Total Cases"
         },
         {
-            name : "newDeath", label: "New Deaths"
+            name : "newCase", label: "New Cases"
         },
         {
             name : "totalDeath", label: "Total Deaths"
+        },
+        {
+            name : "newDeath", label: "New Deaths"
         }
     ];
 
     const myGraphByRegionType = {
-        "World" : {data: worldCases.graph , loaded: apiLoaded.World} ,
-        "Canada" : {data: canadaCases.graph , loaded: apiLoaded.Canada} ,
-        "Quebec" : {data:  quebecCases.graph ? quebecCases.graph["Total"] : [[]], loaded: apiLoaded.Quebec},
-        "Montreal" : {data:  montrealCases.graph ? montrealCases.graph["Total for Montréal"] : [[]], loaded: apiLoaded.Montreal}
+        "World" : {records: () => filterExclude(regionType,Object.values(data)), data: worldCases.graph , loaded: apiLoaded.World} ,
+        "Canada" : {records: () => filterExclude(regionType,Object.values(data)),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
+             loaded:(selectedRegion[regionType] === "Canada" ? apiLoaded.Canada : canadianGraphLoaded[selectedRegion[regionType]])} ,
+        "Quebec" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,17), data:  quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec},
+        "Montreal" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,34), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
     };
 
     return(
         <div>
+            {(regionType === "Canada" || regionType === "Quebec" || regionType === "Montreal") &&  
+                    
+                <select className="region__selection mdb-select md-form" onChange = {event => handleRegionSelect(event)} >
+                    {
+                            (myGraphByRegionType[regionType].records()).reverse().map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
+                    }
+                </select>
+            }
+
             {
                 caseTypes.map((caseType, key) => 
-                    (myGraphByRegionType[regionType].loaded === true && myGraphByRegionType[regionType].data[caseType.name].length) > 1 ? 
+                    (myGraphByRegionType[regionType].loaded === true && myGraphByRegionType[regionType].data && myGraphByRegionType[regionType].data[caseType.name].length > 1)  ? 
                         <div className="covid__chart" key = {key}>
                             <Chart
                                 width = {'100%'}
@@ -59,7 +89,10 @@ const XYPlot = ({worldCases,canadaCases,quebecCases,regionType,montrealCases,api
                                                         title: 'Day',
                                                     },
                                                     vAxis: {
-                                                        title: caseType.name,
+                                                        title: caseType.label,
+                                                    },
+                                                    backgroundColor: {
+                                                        fill : '#f1f1f1'
                                                     }
                                                 }
                                             }   
@@ -75,9 +108,9 @@ const XYPlot = ({worldCases,canadaCases,quebecCases,regionType,montrealCases,api
 
 const mapStateToProps = state => { 
     const covidProps  = state.covidReducer.defaultCovidStates; 
-    const {worldCases,canadaCases,quebecCases,montrealCases,selectedCountry,apiLoaded } = covidProps;
+    const {worldCases,canadaCases,quebecCases,montrealCases,selectedCountry,apiLoaded ,canadianGraphLoaded} = covidProps;
  
-    return {worldCases,canadaCases,quebecCases,montrealCases,selectedCountry,apiLoaded};
+    return {worldCases,canadaCases,quebecCases,montrealCases,selectedCountry,apiLoaded,canadianGraphLoaded};
 };
   
 export default withRouter(connect(mapStateToProps)(XYPlot));
