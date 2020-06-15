@@ -73,7 +73,6 @@ const updateCanadianGraphLoaded = (canadianGraphLoaded) => ({
 export const updateCanadianRegionGraph = (canadianGraphLoaded,canadaCases, country, state) => async dispatch => {
     const {records} = canadaCases;
     const updatedGraphData = await updateCanadianGraph(records,country,state);
-    console.log("updatedGraphData",updatedGraphData)
     const newCanadianCases = {...canadaCases, graph: {...canadaCases.graph, [state] : updatedGraphData} };
     dispatch(setCanadaCases(newCanadianCases));
     const newGraphLoaded = {...canadianGraphLoaded, [state]: true};
