@@ -194,7 +194,7 @@ const CovidComponent = (props) => {
                       <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
                     </div>
                    
-                    <XYPlot props = {props} data = {getProperData[regionType.name].data} regionType = {regionType.name} />     
+                    {/* <XYPlot props = {props} data = {getProperData[regionType.name].data} regionType = {regionType.name} />      */}
                     <SeverityChart region = {regionType.name}/>
                     {regionType.name === "World" ?
                       <WorldMapChart setTooltipContent={setContent} data={getProperData[regionType.name].data} colorFill={colorFill} />

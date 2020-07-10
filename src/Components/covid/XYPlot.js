@@ -83,7 +83,7 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
                 </select>
             {
                 caseTypes.map((caseType, key) => 
-                    (myGraphByRegionType(regionType).loaded === true && myGraphByRegionType(regionType).data && myGraphByRegionType(regionType).data[caseType.name].length > 1)  ? 
+                    (myGraphByRegionType(regionType).loaded === true && myGraphByRegionType(regionType).data && myGraphByRegionType(regionType).data[caseType.name] && myGraphByRegionType(regionType).data[caseType.name].length > 1)  ? 
                         <div className="covid__chart" key = {key}>
                             <Chart
                                 width = {'100%'}
