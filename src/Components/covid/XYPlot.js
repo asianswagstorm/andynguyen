@@ -62,34 +62,35 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
         }
     ];
 
-    const myGraphByRegionType = {
-        "World" : {records: () => filterExclude(regionType,Object.values(data)), data: (regionType === "World") && (worldCases.graph  ? worldCases.graph[selectedRegion[regionType]].graph : [[]]), loaded: (regionType === "World") && (selectedRegion[regionType] === "World" ? apiLoaded.World : worldCases.graph[selectedRegion[regionType]].loaded)} ,
-        "Canada" : {records: () => filterExclude(regionType,Object.values(data)),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
-             loaded:(selectedRegion[regionType] === "Canada" ? apiLoaded.Canada : canadianGraphLoaded[selectedRegion[regionType]])} ,
-        "Quebec" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,17), data: quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec},
-        "Montreal" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,34), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
+    const myGraphByRegionType = (type) => {
+        if(type === "World")
+            return {records: () => filterExclude(regionType,Object.values(data)), data: worldCases.graph  ? worldCases.graph[selectedRegion[regionType]].graph : [[]], loaded: selectedRegion[regionType] === "World" ? apiLoaded.World : worldCases.graph[selectedRegion[regionType]].loaded} 
+        if (type === "Canada")     
+            return {records: () => filterExclude(regionType,Object.values(data)),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
+                loaded:(selectedRegion[regionType] === "Canada" ? apiLoaded.Canada : canadianGraphLoaded[selectedRegion[regionType]])} 
+        if (type === "Quebec")     
+                return {records: () => filterExclude(regionType,Object.values(data)).splice(0,17), data: quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec}
+        if (type === "Montreal")     
+                return {records: () => filterExclude(regionType,Object.values(data)).splice(0,34), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
     };
 
     return(
         <div>
-            {/* {(regionType === "Canada" || regionType === "Quebec" || regionType === "Montreal") &&   */}
                 <select className="region__selection mdb-select md-form" onChange = {event => handleRegionSelect(event)} >
                     {
-                            (myGraphByRegionType[regionType].records()).reverse().map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
+                            (myGraphByRegionType(regionType).records()).reverse().map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
                     }
                 </select>
-            {/* } */}
-
             {
                 caseTypes.map((caseType, key) => 
-                    (myGraphByRegionType[regionType].loaded === true && myGraphByRegionType[regionType].data && myGraphByRegionType[regionType].data[caseType.name].length > 1)  ? 
+                    (myGraphByRegionType(regionType).loaded === true && myGraphByRegionType(regionType).data && myGraphByRegionType(regionType).data[caseType.name].length > 1)  ? 
                         <div className="covid__chart" key = {key}>
                             <Chart
                                 width = {'100%'}
                                 height = {'400px'}
                                 chartType = "LineChart"
                                 loader = {<Loading/>}
-                                data = {stringDateToDate(myGraphByRegionType[regionType].data[caseType.name])}
+                                data = {stringDateToDate(myGraphByRegionType(regionType).data[caseType.name])}
                                 options =   {
                                                 {
                                                     hAxis: {
