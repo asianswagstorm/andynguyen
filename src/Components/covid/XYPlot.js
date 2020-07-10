@@ -76,11 +76,13 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
 
     return(
         <div>
+            {(myGraphByRegionType(regionType)) && 
                 <select className="region__selection mdb-select md-form" onChange = {event => handleRegionSelect(event)} >
                     {
                             (myGraphByRegionType(regionType).records()).reverse().map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
                     }
                 </select>
+            }
             {
                 caseTypes.map((caseType, key) => 
                     (myGraphByRegionType(regionType).loaded === true && myGraphByRegionType(regionType).data && myGraphByRegionType(regionType).data[caseType.name] && myGraphByRegionType(regionType).data[caseType.name].length > 1)  ? 
