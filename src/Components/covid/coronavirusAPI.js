@@ -1,3 +1,4 @@
+const corsAnywhere = "https://cors-anywhere-asianswagstorm.herokuapp.com/";
 const covidWorld = "https://covid-world-data-andy.herokuapp.com/world";
 const QuebecLink = `https://covid-world-data-andy.herokuapp.com/quebec`; 
 const MontrealLink = `https://covid-world-data-andy.herokuapp.com/montreal`; 
@@ -17,7 +18,7 @@ const linkToReturn = (type) => {
 };
 
 export const fetchCoronaVirusCases = async (type) => {
-    const result = await fetch(`${linkToReturn(type)}`, { 
+    const result = await fetch(`${corsAnywhere}${linkToReturn(type)}`, { 
         headers: {
             'Cache-Control': 'no-cache',
             'Authorization': `Bearer ${jwtKey}`
@@ -30,7 +31,7 @@ export const fetchCoronaVirusCases = async (type) => {
 };
 
 export const updateCanadianGraph = async (regions, country, state) => {
-    const result = await fetch(`${covidWorld}/${country}/${state}`, { 
+    const result = await fetch(`${corsAnywhere}${covidWorld}/${country}/${state}`, { 
         method: 'POST',    
         headers: {
             'Cache-Control': 'no-cache',
