@@ -7,7 +7,9 @@ import {filterExclude} from "./covidFunction";
 import Loading from "./Loading";
 const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCases,apiLoaded,data,canadianGraphLoaded}) => {
 
-    const [selectedRegion, setSelectedRegion] = useState(   {  "Canada" : "Canada",
+    const [selectedRegion, setSelectedRegion] = useState(   {  
+                                                                "World" : "World",
+                                                                "Canada" : "Canada",
                                                                 "Quebec" : "Total",
                                                                 "Montreal" : "Total for Montréal"     
                                                             });
@@ -28,50 +30,55 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
 
     const handleRegionSelect = (event) => {
         const region = event.target.value;
-        if(regionType === "Canada" && region !== "Canada"){
+        if(regionType === "Canada" && region !== "Canada" &&  canadianGraphLoaded[region] === false){
             const {dispatch} = props;
             const {updateCanadianRegionGraph} = props.action_props.covid_action;
-            //(canadianGraphLoaded,canadaCases, country, state)
+          
             dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region));
         }
 
+        if(regionType === "World" && region !== "World" &&  worldCases.graph[region].loaded === false){
+            const {dispatch} = props;
+            const {updateWorldGraph} = props.action_props.covid_action;//update worldGraph!!! 
+          
+            dispatch(updateWorldGraph(worldCases, region));
+        }
 
         setSelectedRegion(prevState => ({...prevState, [regionType] : region}))
     }
 
     const caseTypes = [
         {
-            name : "totalCases", label: "Total Cases"
-        },
-        {
             name : "newCase", label: "New Cases"
         },
         {
-            name : "totalDeath", label: "Total Deaths"
+            name : "newDeath", label: "New Deaths"
         },
         {
-            name : "newDeath", label: "New Deaths"
+            name : "totalCases", label: "Total Cases"
+        },
+        {
+            name : "totalDeath", label: "Total Deaths"
         }
     ];
 
     const myGraphByRegionType = {
-        "World" : {records: () => filterExclude(regionType,Object.values(data)), data: worldCases.graph , loaded: apiLoaded.World} ,
+        "World" : {records: () => filterExclude(regionType,Object.values(data)), data: (regionType === "World") && (worldCases.graph  ? worldCases.graph[selectedRegion[regionType]].graph : [[]]), loaded: (regionType === "World") && (selectedRegion[regionType] === "World" ? apiLoaded.World : worldCases.graph[selectedRegion[regionType]].loaded)} ,
         "Canada" : {records: () => filterExclude(regionType,Object.values(data)),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
              loaded:(selectedRegion[regionType] === "Canada" ? apiLoaded.Canada : canadianGraphLoaded[selectedRegion[regionType]])} ,
-        "Quebec" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,17), data:  quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec},
+        "Quebec" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,17), data: quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec},
         "Montreal" : {records: () => filterExclude(regionType,Object.values(data)).splice(0,34), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
     };
 
     return(
         <div>
-            {(regionType === "Canada" || regionType === "Quebec" || regionType === "Montreal") &&  
-                    
+            {/* {(regionType === "Canada" || regionType === "Quebec" || regionType === "Montreal") &&   */}
                 <select className="region__selection mdb-select md-form" onChange = {event => handleRegionSelect(event)} >
                     {
                             (myGraphByRegionType[regionType].records()).reverse().map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
                     }
                 </select>
-            }
+            {/* } */}
 
             {
                 caseTypes.map((caseType, key) => 

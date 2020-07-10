@@ -118,5 +118,9 @@ export const filterExclude = (regionType, array) => {
 
   if(regionType === "Canada")
     array.push({"locationName" : "Canada"});
+  
+  if(regionType === "World")
+    array.push({"locationName" : "World"});
+
   return array.filter(region => !toExcludeArray[regionType].includes(region.locationName))
 };

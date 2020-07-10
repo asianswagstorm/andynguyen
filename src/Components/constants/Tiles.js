@@ -18,14 +18,14 @@ export const tiles = [
         "An airbnb replica front page created with react JS (first time using React) ",
       type: ["JavaScript"]
     },
-    {
-      linkType: "internal",
-      href: "#/Recipes",
-      src: "images/thumbs/thumb12.jpg",
-      alt: "",
-      title: "A recipe api app made with react. ",
-      type: ["JavaScript"]
-    },
+    // {
+    //   linkType: "internal",
+    //   href: "#/Recipes",
+    //   src: "images/thumbs/thumb12.jpg",
+    //   alt: "",
+    //   title: "A recipe api app made with react. ",
+    //   type: ["JavaScript"]
+    // },
     {
       linkType: "internal",
       href: `#/Pokemon`,

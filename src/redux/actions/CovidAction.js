@@ -32,6 +32,13 @@ export const fetchWorldCases = (apiLoaded) => async dispatch => {
     dispatch(setAPILoaded(apiLoaded, "World"));
 }
 
+export const updateWorldGraph = (worldCases, country) => async dispatch => {
+    const countryGraph = await fetchCoronaVirusCases(country);
+    const graphData = countryGraph.graph[country] ? countryGraph.graph[country] : countryGraph.graph;
+    let newWorldCases = {...worldCases, graph: {...worldCases.graph, [country]: {graph: graphData, loaded: true}}}
+    dispatch(setWorldCases(newWorldCases));
+}
+
 const modifyCanadianCase = (canadaCases, newQuebec) => ({
     type : COVID_TYPE.MODIFY_CANADIAN_CASES,
     canadaCases :   {   ...canadaCases, records: { ...canadaCases.records,  Quebec: {    ...canadaCases.records.Quebec, 
