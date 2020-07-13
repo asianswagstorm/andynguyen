@@ -104,7 +104,7 @@ export const rounded = num => {
     }
 };
 
-export const filterExclude = (regionType, array) => {
+export const filterExclude = (regionType, array, data) => {
   const toExclude = ["date","__v","_id"]
   const quebecRegionsToExclude = [ "Hors Québec", "Nord-du-Québec", "Nunavik","Terres-Cries-de-la-Baie-James", "Région à déterminer",...toExclude];
   const montrealRegionsToExclude = [ "Territory to be confirmed2",...toExclude];
@@ -116,11 +116,13 @@ export const filterExclude = (regionType, array) => {
       "Montreal" : montrealRegionsToExclude
   };
 
-  if(regionType === "Canada")
-    array.push({"locationName" : "Canada"});
-  
-  if(regionType === "World")
-    array.push({"locationName" : "World"});
+  if(data && data.confirmed && data.recovered && data.deaths){
+    if(regionType === "Canada")
+      array.unshift({"locationName" : "Canada", "confirmed": data.confirmed, "recovered": data.recovered, "deaths": data.deaths});
+    
+    if(regionType === "World")
+      array.unshift({"locationName" : "World", "confirmed": data.confirmed, "recovered": data.recovered, "deaths": data.deaths});
+  }
 
   return array.filter(region => !toExcludeArray[regionType].includes(region.locationName))
 };

@@ -1,17 +1,25 @@
 import React,{useState,useEffect} from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 import {addComma,stringToInt,filterExclude} from "./covidFunction"
-const CovidTable = ({regionType, data}) => {
+const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, setSelectedRegion,worldCases}) => { 
     const sortingCondition = {  byCase :    {   confirmed: "decrease",
                                                 recovered: "decrease",
                                                 deaths: "decrease"},
-                                alphabetibal: "decrease"}
+                                alphabetical: "decrease"}
     const [cases, setCases] = useState(() => filterExclude(regionType,Object.values(data)));
     const [increaseDecrease, setIncreaseDecrease] = useState({ "World" :    sortingCondition,
                                                                "Canada" :   sortingCondition,
                                                                "Quebec" :   sortingCondition,
                                                                "Montreal" : sortingCondition});
     useEffect( () => {
-        setCases(() => filterExclude(regionType, Object.values(data)));
+        let myData = {};
+        if(regionType === "World")
+            myData = worldCases.latest;
+        else if(regionType === "Canada")
+            myData = worldCases.records["Canada"];
+    
+        setCases(() => filterExclude(regionType, Object.values(data),myData));
         return () =>  null;
     // eslint-disable-next-line react-hooks/exhaustive-deps   
     }, [regionType]);
@@ -38,10 +46,10 @@ const CovidTable = ({regionType, data}) => {
             if(a.locationName > b.locationName) { return 1; }
             return 0;} )
         
-        setCases((increaseDecrease[regionType].alphabetibal === "decrease") ? sortedCases : sortedCases.reverse());
-        (increaseDecrease[regionType].alphabetibal === "decrease") ?
-        setIncreaseDecrease({...increaseDecrease, [regionType] : {...increaseDecrease[regionType], alphabetibal : "increase"}} ) :
-        setIncreaseDecrease({...increaseDecrease, [regionType] : {...increaseDecrease[regionType], alphabetibal : "decrease"}} );
+        setCases((increaseDecrease[regionType].alphabetical === "decrease") ? sortedCases : sortedCases.reverse());
+        (increaseDecrease[regionType].alphabetical === "decrease") ?
+        setIncreaseDecrease({...increaseDecrease, [regionType] : {...increaseDecrease[regionType], alphabetical : "increase"}} ) :
+        setIncreaseDecrease({...increaseDecrease, [regionType] : {...increaseDecrease[regionType], alphabetical : "decrease"}} );
     };
     
     const sortTableByType = (dataType) => {
@@ -94,41 +102,60 @@ const CovidTable = ({regionType, data}) => {
         return contentHeadArray;
     };
 
+    const updateGraph = (region) => {
+        if(regionType === "Canada" && region !== "Canada" &&  canadianGraphLoaded[region] === false){
+            const {dispatch} = props;
+            const {updateCanadianRegionGraph} = props.action_props.covid_action;
+          
+            dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region));
+        }
+
+        if(regionType === "World" && region !== "World" &&  worldCases.graph[region].loaded === false){
+            const {dispatch} = props;
+            const {updateWorldGraph} = props.action_props.covid_action;
+          
+            dispatch(updateWorldGraph(worldCases, region));
+        }
+
+        setSelectedRegion(prevState => ({...prevState, [regionType] : region}))
+    };
+
+
     const tableDataContent = (area,key) => {
         let contentDataArray = [
             {
-                table_id : "country__number" , class_name : "covid__td", data: key+1
+                table_id : "country__number" , class_name : "covid__td", data: key+1, click_function: () => null
             },
             {
-                table_id : "country__name" , class_name : "covid__td", data: area.locationName
+                table_id : "country__name" , class_name : "covid__td", data: area.locationName, click_function: () => updateGraph(area.locationName)
             },
             {
-                table_id : "country__data" , class_name : "table-primary covid__td", data: addComma(area.confirmed)
+                table_id : "country__data" , class_name : "table-primary covid__td", data: addComma(area.confirmed), click_function: () => null
             }
         ];
 
         if(regionType === "World")
             contentDataArray.push(
                 {
-                    table_id : "country__data" , class_name : "table-success covid__td", data: addComma(area.recovered)
+                    table_id : "country__data" , class_name : "table-success covid__td", data: addComma(area.recovered), click_function: () => null
                 }
             );
 
             contentDataArray.push(
                 {
-                    table_id : "country__data" , class_name : "table-danger covid__td",  data: addComma(area.deaths)
+                    table_id : "country__data" , class_name : "table-danger covid__td",  data: addComma(area.deaths), click_function: () => null
                 }
         );
 
         if(regionType === "Quebec" || regionType === "Montreal"){
             contentDataArray.push(
                 {
-                    table_id : "country__data" , class_name : "table-info covid__td", data: addComma(area.newCase)
+                    table_id : "country__data" , class_name : "table-info covid__td", data: addComma(area.newCase), click_function: () => null
                 }
             );
             contentDataArray.push(
                 {
-                    table_id : "country__data" , class_name : "table-warning covid__td",  data: addComma(area.newDeath)
+                    table_id : "country__data" , class_name : "table-warning covid__td",  data: addComma(area.newDeath), click_function: () => null
                 }
             );
         };
@@ -149,7 +176,7 @@ const CovidTable = ({regionType, data}) => {
                 {cases.filter(area => area.locationName).map((area, key) => (
                     <tr className ="countryCase" key={key}>
                       {
-                          tableDataContent(area, key).map((table_data, key1) => <td key={key1} className={table_data.class_name} id={table_data.table_id}> {table_data.data} </td>)
+                          tableDataContent(area, key).map((table_data, key1) => <td key={key1} className={table_data.class_name} id={table_data.table_id} onClick = {table_data.click_function}> {table_data.data} </td>)
                       }
                     </tr>)
                     )
@@ -160,4 +187,11 @@ const CovidTable = ({regionType, data}) => {
     );
 };
 
-export default CovidTable;
+const mapStateToProps = state => { 
+    const covidProps  = state.covidReducer.defaultCovidStates; 
+    const {canadaCases ,canadianGraphLoaded} = covidProps;
+ 
+    return {canadaCases,canadianGraphLoaded};
+};
+  
+export default withRouter(connect(mapStateToProps)(CovidTable));

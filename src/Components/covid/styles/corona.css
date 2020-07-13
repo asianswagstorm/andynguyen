@@ -120,6 +120,10 @@ td#country__name {
     width: 20%;
 }
 
+td#country__name:hover {
+    background-color: rgba(128, 128, 128, 0.411);
+}
+
 td#country__number{
     width: 5%;
 }

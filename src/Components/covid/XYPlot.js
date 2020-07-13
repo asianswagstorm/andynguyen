@@ -1,18 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import Chart from 'react-google-charts';
 import {filterExclude} from "./covidFunction";
 
 import Loading from "./Loading";
-const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCases,apiLoaded,data,canadianGraphLoaded}) => {
-
-    const [selectedRegion, setSelectedRegion] = useState(   {  
-                                                                "World" : "World",
-                                                                "Canada" : "Canada",
-                                                                "Quebec" : "Total",
-                                                                "Montreal" : "Total for Montréal"     
-                                                            });
+const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCases,apiLoaded,data,canadianGraphLoaded, selectedRegion, setSelectedRegion}) => {
 
     const stringDateToDate = (array) => {
         array.forEach(subArray => {
@@ -64,25 +57,24 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
 
     const myGraphByRegionType = (type) => {
         if(type === "World")
-            return {records: () => filterExclude(regionType,Object.values(data)), data: worldCases.graph  ? worldCases.graph[selectedRegion[regionType]].graph : [[]], loaded: selectedRegion[regionType] === "World" ? apiLoaded.World : worldCases.graph[selectedRegion[regionType]].loaded} 
+            return {records: () => filterExclude(regionType,Object.values(data),worldCases.latest), data: worldCases.graph  ? worldCases.graph[selectedRegion[regionType]].graph : [[]], loaded: selectedRegion[regionType] === "World" ? apiLoaded.World : worldCases.graph[selectedRegion[regionType]].loaded} 
         if (type === "Canada")     
-            return {records: () => filterExclude(regionType,Object.values(data)),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
+            return {records: () => filterExclude(regionType,Object.values(data),worldCases.records["Canada"]),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
                 loaded:(selectedRegion[regionType] === "Canada" ? apiLoaded.Canada : canadianGraphLoaded[selectedRegion[regionType]])} 
         if (type === "Quebec")     
-                return {records: () => filterExclude(regionType,Object.values(data)).splice(0,17), data: quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec}
+                return {records: () => filterExclude(regionType,Object.values(data), {}).splice(0,17).reverse(), data: quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec}
         if (type === "Montreal")     
-                return {records: () => filterExclude(regionType,Object.values(data)).splice(0,34), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
+                return {records: () => filterExclude(regionType,Object.values(data), {}).splice(0,34).reverse(), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
     };
 
+    const selectGraph = <select className="region__selection mdb-select md-form" onChange = { event => handleRegionSelect(event)} value = {selectedRegion[regionType]} >
+                            {
+                                    (myGraphByRegionType(regionType).records()).map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
+                            }
+                        </select>
     return(
         <div>
-            {(myGraphByRegionType(regionType)) && 
-                <select className="region__selection mdb-select md-form" onChange = {event => handleRegionSelect(event)} >
-                    {
-                            (myGraphByRegionType(regionType).records()).reverse().map((region,key) => <option key = {key} value={region.locationName}> {region.locationName}</option>)
-                    }
-                </select>
-            }
+            {(myGraphByRegionType(regionType)) && selectGraph }
             {
                 caseTypes.map((caseType, key) => 
                     (myGraphByRegionType(regionType).loaded === true && myGraphByRegionType(regionType).data && myGraphByRegionType(regionType).data[caseType.name] && myGraphByRegionType(regionType).data[caseType.name].length > 1)  ? 

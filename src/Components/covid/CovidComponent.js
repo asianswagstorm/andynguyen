@@ -19,6 +19,13 @@ const CovidComponent = (props) => {
     const {fetchWorldCases,fetchCanadaCases,fetchQuebecCasesAction,fetchMontrealCasesAction} = props.action_props.covid_action;
     const [content, setContent] = useState("");
     const [regionType, setRegionType] =  useState({name: "World",data: {}});
+    const [selectedRegion, setSelectedRegion] = useState(   {  
+                                                                "World" : "World",
+                                                                "Canada" : "Canada",
+                                                                "Quebec" : "Total",
+                                                                "Montreal" : "Total for Montréal"     
+                                                            });
+
     const getAllCountry = () => {
       setRegionType({name: "World"});
       if(props.apiLoaded["World"] === false)
@@ -191,10 +198,10 @@ const CovidComponent = (props) => {
                     </div>
           
                     <div className = "covid__table">
-                      <CovidTable data = {getProperData[regionType.name].data} regionType = {regionType.name}/>
+                      <CovidTable props = {props}  data = {getProperData[regionType.name].data} regionType = {regionType.name} worldCases = {props.worldCases} setSelectedRegion = {setSelectedRegion}/>
                     </div>
                    
-                    <XYPlot props = {props} data = {getProperData[regionType.name].data} regionType = {regionType.name} />     
+                    <XYPlot props = {props} data = {getProperData[regionType.name].data} regionType = {regionType.name}  worldCases = {props.worldCases} selectedRegion = {selectedRegion} setSelectedRegion = {setSelectedRegion} />     
                     <SeverityChart region = {regionType.name}/>
                     {regionType.name === "World" ?
                       <WorldMapChart setTooltipContent={setContent} data={getProperData[regionType.name].data} colorFill={colorFill} />
