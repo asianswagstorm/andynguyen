@@ -1,8 +1,8 @@
-export const addComma = (number) => { //replacement for .toLocaleString()
+export const addComma = (number) => { 
   if(number){
     if(number > 1000){
       const modThousand = (number % 1000);
-      let remainder = modThousand.toString(); //001
+      let remainder = modThousand.toString(); 
       if(modThousand === 0)
           remainder = "000";
       else if(modThousand < 10)
