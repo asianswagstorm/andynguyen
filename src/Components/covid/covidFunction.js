@@ -2,13 +2,13 @@ export const addComma = (number) => { //replacement for .toLocaleString()
   if(number){
     if(number > 1000){
       const modThousand = (number % 1000);
-      let remainder = modThousand.toString();
-      if(modThousand < 100)
-          remainder = `0${remainder}`;
+      let remainder = modThousand.toString(); //001
+      if(modThousand === 0)
+          remainder = "000";
       else if(modThousand < 10)
           remainder = `00${remainder}`;
-      else if(modThousand === 0)
-          remainder = "000";
+      else if(modThousand < 100)
+          remainder = `0${remainder}`;
       const fixedNumber = Math.floor(number/1000);
     
       return `${addComma(fixedNumber).toString()},${remainder}` 
