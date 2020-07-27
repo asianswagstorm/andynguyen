@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import Headers from "../Headers";
+import Headers from "../../Headers";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import {score_label, playerPicker } from "../constants/Games"; //tictactoe_boxes
+import {score_label, playerPicker } from "../../constants/Games"; //tictactoe_boxes
+import * as gameAction from "../../../redux/actions/GamesAction";
+import "./gameHeadStyles.scss";
 
 class GamesHead extends Component {
 
     setPlayerType = isCompEnabled => {
         const {dispatch} = this.props;
-        const {setOpponent,pickedPlayer,setGameMessage} = this.props.action_props.games_action;
+        const {setOpponent,pickedPlayer,setGameMessage} = this.props.gameAction;
         dispatch(setOpponent(isCompEnabled));
         dispatch(pickedPlayer(true));
         dispatch(setGameMessage('Make your move.'));
@@ -16,7 +18,7 @@ class GamesHead extends Component {
 
     resetGame = () => {
         const {dispatch} = this.props;
-        const {resetGame} = this.props.action_props.games_action;
+        const {resetGame} = this.props.gameAction;
         
         dispatch(resetGame(this.props.gameType));
     };
@@ -70,18 +72,23 @@ class GamesHead extends Component {
   };
 };
 
-const mapStateToProps = state => { 
 
-    const GamesProps  = state.gamesReducer.defaultGamesStates;  //rename
+const mapDispatchToProps = (dispatch) => ({
+  gameAction,
+  dispatch
+});
+
+const mapStateToProps = state => { 
+    const GamesProps  = state.gamesReducer.defaultGamesStates;  
     const { 
             player1_score,
             player2_score,game_message,
             picked_player,
             gameType
-          } = GamesProps; //games props
+          } = GamesProps; 
     return {
         player1_score, player2_score,game_message,picked_player,gameType
     };
-  };
+};
   
-export default withRouter(connect(mapStateToProps)(GamesHead)); 
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(GamesHead)); 

@@ -10,6 +10,7 @@
     "d3-array": "^2.4.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "node-sass": "^4.14.1",
     "react": "^16.4.1",
     "react-animated-text": "^0.1.4",
     "react-app-polyfill": "^1.0.6",

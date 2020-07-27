@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import "../../css/ConnectFour.css";
-import GamesHead from "./GamesHead";
+import GamesHead from "./gameComponent/GamesHead";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
 
 //to do: highlight the winning cells  
@@ -370,7 +370,7 @@ export class ConnectFour extends Component {
          
         return (
         <section id="main">
-            <GamesHead action_props = {this.props.action_props} />
+            <GamesHead />
             <div className="connectFourArea"> 
                 <div className="connectFourBoard" id={`game-board${(this.props.picked_player === true && this.props.gameOver === false) ? "" : "-disabled"}`}>  
                 {[...this.props.connectFourBoard].map((column, column_key) => (

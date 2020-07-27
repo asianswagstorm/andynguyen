@@ -39,6 +39,7 @@ export class App extends Component {
                                 {path:  `/Spotify`, component: SpotifyComponent},
                                 {path:  `/Covid`, component: CovidComponent},
                                 {path: "*", component: NotFound}];
+      
       return (
       <div className="page-wrap">
         <Navbar/>
@@ -55,7 +56,7 @@ export class App extends Component {
                       <Switch>
                         {
                           routes_components.map((route, key) => 
-                          <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/>
+                          <Route key={key} exact path = {route.path} render={props => <route.component {...props} action_props={this.props}/>}/> 
                           )
                         }  
                       </Switch>
@@ -71,6 +72,7 @@ export class App extends Component {
   }
 }
 
+//can just do this in the index!!! 
 export const mapDispatchToProps = dispatch => {
   return {
     games_action,

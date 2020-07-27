@@ -1,0 +1,25 @@
+$buttonTextShadow: 1px 1px rgb(77, 74, 74);
+$buttonColor: #FFFF;
+
+.reset{
+    button#reset-game.button.button-block{
+        font-size: 25px;
+        text-shadow: $buttonTextShadow;
+    }
+}
+
+.play{
+    button#H-opponent.button.button-block{
+        font-size: 20px;
+        margin-right: 10px;
+        text-shadow: $buttonTextShadow;
+        color: $buttonColor;
+       
+    }
+
+    button#C-opponent.button.button-block{
+        font-size: 20px;
+        text-shadow: $buttonTextShadow;
+        color: $buttonColor;
+    }
+}

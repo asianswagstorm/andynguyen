@@ -23,6 +23,11 @@ div.search__artist{
   height:42px;
 }
 
+i.fa.fa-search{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 input.search__input:focus{
   outline:none;
 }
