@@ -13,6 +13,7 @@ class Tracks extends Component {
     if (!this.state.playing) {
       audio.play();
       this.setState({ playing: true, audio, playingPreviewUrl: previewUrl });
+      audio.onended = () =>  this.setState({ playing: false });
     } else {
       this.state.audio.pause(); //pause part of javaScript Audio
 
@@ -32,12 +33,12 @@ class Tracks extends Component {
 
     if (
       this.state.playing &&
-      this.state.playingPreviewUrl === track.preview_url
+      this.state.playingPreviewUrl === track.preview_url 
     ) {
       return <span> | | </span>;
     }
-
-    return <i className="fas fa-play"> </i> ;
+    else 
+      return <i className="fas fa-play"> </i> ;
   };
 
   linkToYoutube = async(name,artist) => {
@@ -70,32 +71,29 @@ class Tracks extends Component {
           return (
             <div
               key={id}
-              className="album__track" 
+              className="card album__track" 
             >
               <div className="track__image__icon" >
                 <img
                   src={album.images[0].url}
                   alt="track-img"
-                  className="track__image" 
+                  className="card-img track__image" 
                 />
-                <div className="track__icon" onClick={this.playAudio(preview_url)}>
+                <div className="card-img-overlay track__icon" onClick={this.playAudio(preview_url)}>
                   {this.trackIcon(track)}
                 </div>
               </div>
-              <div className="track__text">
-                <h5 className="track__title"> {name} </h5>
-                <div className="external__links">
-
-                <div className="track__youtube" onClick = {() => this.linkToYoutube(name,artist) }>
-                 <i className="fab fa-youtube"> </i>
+              <div className="card-body track__text">
+                  <h5 className="card-title track__title"> {name} </h5>
+                  <div className="card-text external__links">
+                    <div className="track__youtube" >
+                      <i className="fab fa-youtube" onClick = {() => this.linkToYoutube(name,artist) }> </i>
+                    </div>
+                    <a className="track__spotify" href={`${uri}?play=true`}>
+                      <i className="fab fa-spotify"> </i>
+                    </a>
+                  </div>
                 </div>
-
-                <a className="track__spotify" href={`${uri}?play=true`}>
-                    <i className="fab fa-spotify"> </i>
-                  </a>
-                </div>
-              </div>
-             
             </div>
           );
         })}

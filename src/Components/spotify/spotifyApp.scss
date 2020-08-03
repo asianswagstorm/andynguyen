@@ -1,0 +1,232 @@
+.Spotify {
+  text-align: center;
+
+  i.fab.fa-spotify{
+    color:#1DB954;
+  }
+
+  i.fab.fa-youtube{
+    color:#ff0000;
+  }
+
+  div.artist__search__section{
+    margin-bottom: 15px;
+    margin-top: 15px;
+  
+    #artist_search_success{
+      border: 1px solid #5cb85c;
+    }
+    
+    #artist_search_error{
+      border: 1px solid #d9534f;
+    }
+
+    div.search__artist{
+      display: flex;
+      border-radius: 100px;
+      border: 1px solid black;
+      width: 229px;
+      margin:auto;
+      background-color: white;
+      height:42px;
+
+      div.spotify__input__section{
+        border-radius: inherit;
+        width:70%;
+
+        input.search__input{
+          border-radius: 100px;
+          height:100%;
+          border-style: none;
+          color:black;
+          text-align: center;
+          width: 150px;
+          margin : 0 ;
+          font-size: 14px;
+          font-weight: 300;
+        }
+
+        input.search__input::placeholder{
+          color:rgb(165, 164, 164);
+        }
+
+        input.search__input:focus{
+          outline:none;
+        }
+
+        div.artist__suggestion{
+          width:160px;
+          display: flex;
+          flex-direction: column;
+          margin-left: 15px;
+
+          ul.select-list-group__list { 
+            list-style : none;
+            padding : 0; 
+            background-color:white;
+            width: 185px;
+            border: 1px black solid;
+            position: absolute;
+ 
+            li.select-list-group__list-item { 
+              position: relative;
+              color : black; 
+              font-weight: bold;
+              border: inherit;
+              background-color : inherit 
+            }
+            
+            li#list__item__active{ 
+              background-color : rgb(139, 135, 135) 
+            }
+          }
+        }
+      }
+
+      button.search_button{
+        border-radius: 100px;
+        color: white;
+        width:30%;
+
+        .undefined, .artist_search_success , .artist_search_error {
+          height: 40px;
+          width: 70.11px;
+        }
+
+        i.fa.fa-search{
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
+    }
+
+    button.search_button.artist_search_success{
+      background-color: #5cb85c;
+    }
+
+    button.search_button.artist_search_error{
+      background-color: #d9534f;
+    }
+
+
+    div.invalid__search{
+      color: #d9534f;
+      margin-top: 15px;
+    }
+  }
+
+  div.spotify__content{
+    width: 100%;
+    margin-left: 0.75px;
+    div.artist__section{
+
+      div.artist__info{
+        img.artist__profile__img{
+          width: 200px;
+          height: 200px;
+          border-radius: 100px;
+          margin-bottom: 15px;
+        }   
+      }
+     
+      div.artist__tracks{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 10px;
+        max-width: 1359px;
+        margin-left: auto;
+        margin-right: auto;
+
+        div.card.album__track{
+          border: none;
+          width: 320px;
+          background-color: #191414;
+          margin: 10px;
+          transition: all 0.5s;
+          box-shadow: 0 0 5px 3px rgb(151, 150, 150);
+
+          div.track__image__icon{
+            height:320px;
+         
+            img.card-img.track__image{
+              height:inherit
+            }
+
+            div.card-img-overlay.track__icon{
+              color: white;
+              background-color: black;
+              width: 50px;
+              height: 50px;
+              border-radius: 25px;
+              padding: 14px;
+              opacity: 0.8;
+              margin: auto;
+            }
+
+            div.track__icon:hover {
+              color: black;
+              background-color: lightgrey;
+            }
+          }
+          
+          div.card-body.track__text{
+            position: relative;
+            width: inherit;
+            margin: auto;
+           
+            h5.card-title.track__title{
+              font-size: 16px;
+              color: white;
+            }
+
+            div.card-text.external__links{
+              display: inline-flex;
+              align-self: center;
+              margin-bottom:5px;
+            
+              div.track__youtube{
+                i.fab.fa-youtube{
+                  margin-right: 10px;
+                }
+                
+                i.fab.fa-youtube:hover {
+                  color: #F0735F;
+                  text-decoration: none;
+                }
+              }
+              a.track__spotify{
+                i.fab.fa-spotify:hover {
+                  color: #8DED38;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+
+        div.card.album__track:hover{
+          transform: scale(1.1);
+          margin: 25px;
+          box-shadow: none;
+        }
+      }
+    }
+    
+    div.initial__spotify__messages{
+      font-size: 18px;
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  
+  div.initial__spotify__messages{
+    width: 90%;
+    padding-left: 35px;
+    font-size: 15px;
+  }
+}

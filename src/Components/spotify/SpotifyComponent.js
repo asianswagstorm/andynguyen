@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import "./spotifyApp.css";
+import "./spotifyApp.scss";
 import Headers from "../Headers";
 import Search from "./Search";
 import Artist from "./Artist";
@@ -13,7 +13,6 @@ class SpotifyComponent extends Component {
   }
   
   render = () => {
-   
     const headerTitle = this.props.artist !== null ? "Music Master" : "Welcome to Music Master";
     return (
       <div className="Spotify">

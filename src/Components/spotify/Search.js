@@ -61,12 +61,12 @@ class Search extends Component {
                 required 
                 value={artistQuery}/> 
 
-          {(listOfArtist.length > 0 &&  hidden === false) && 
-                <ArtistSuggestions  listOfArtist={listOfArtist} 
-                                    currentSelected= {currentSelected} 
-                                    searchArtist={this.searchArtist} 
-                                    hoverArtist= {this.hoverArtist} 
-                                    listLimit={listLimit}/>
+            {(listOfArtist.length > 0 &&  hidden === false) && 
+                  <ArtistSuggestions  listOfArtist={listOfArtist} 
+                                      currentSelected= {currentSelected} 
+                                      searchArtist={this.searchArtist} 
+                                      hoverArtist= {this.hoverArtist} 
+                                      listLimit={listLimit}/>
             }
           </div>
           <button

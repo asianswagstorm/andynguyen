@@ -21,6 +21,12 @@ div.pokemon__image{
     display: block;
     width: 100%;
     height: 200px; 
+    transition: all 0.5s;
+}
+
+div.pokemon__image:hover{
+   transform: scale(1.1);
+   box-shadow: none;
 }
 
 h5.card-header{
