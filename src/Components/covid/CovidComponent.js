@@ -54,28 +54,29 @@ const CovidComponent = (props) => {
         next : () => getDetailedCountryCases(),
         nextMap: "Canada",
         severityLevel : {
-          "high" : 1000000,
-          "mediumHigh" : 100000,
-          "medium" : 50000,
-          "mediumLow" : 10000,
-          "low" : 1000,
+          "high" : 5000000,
+          "mediumHigh" : 1000000,
+          "medium" : 100000,
+          "mediumLow" : 50000,
+          "low" : 10000,
           "veryLow" : 1
         }
       },
       "Canada" : {
         header : "Covid 19 Cases in Canada",
         data : props.canadaCases.records,
-        next : () => getQuebecCases(),
-        nextMap: "Quebec",
+        next : () => getAllCountry(),//getQuebecCases(),
+        nextMap: "World",//"Quebec",
         severityLevel : {
-          "high" : 10000,
-          "mediumHigh" : 5000,
-          "medium" : 1000,
-          "mediumLow" : 250,
-          "low" : 100,
+          "high" : 200000,
+          "mediumHigh" : 100000,
+          "medium" : 50000,
+          "mediumLow" : 10000,
+          "low" : 1000,
           "veryLow" : 1
         }
-      },
+      }
+      /*,
       "Quebec" : {
         header : "Covid 19 Cases in Quebec",
         data : props.quebecCases.records,
@@ -103,32 +104,34 @@ const CovidComponent = (props) => {
           "low" : 50,
           "veryLow" : 1
         }
-      }
+      }*/
     };
 
     const SeverityLevelsChart = (confirmedCase) => {
       const {name} = regionType;
-      //(confirmed.toString().includes(",") ? parseInt(confirmed.replace(",", "")) : parseInt(confirmed))
-    
-      if(confirmedCase.toString().includes(","))
-        confirmedCase =  confirmedCase.replace(",", "");
-      if(confirmedCase.toString().includes(" "))
-        confirmedCase =  confirmedCase.replace(" ", "");
-      
-      confirmedCase = parseInt(confirmedCase);
-      
-      if(confirmedCase > getProperData[name].severityLevel.high)
-          return "high";
-      else if(confirmedCase < getProperData[name].severityLevel.high && confirmedCase >= getProperData[name].severityLevel.mediumHigh)
-          return "mediumHigh";
-      else if(confirmedCase < getProperData[name].severityLevel.mediumHigh && confirmedCase >= getProperData[name].severityLevel.medium)
-          return "medium";
-      else if(confirmedCase < getProperData[name].severityLevel.medium && confirmedCase >= getProperData[name].severityLevel.mediumLow)
-          return "mediumLow";
-      else if(confirmedCase < getProperData[name].severityLevel.mediumLow && confirmedCase >= getProperData[name].severityLevel.low)
-          return "low";
-      else if(confirmedCase < getProperData[name].severityLevel.low && confirmedCase >= getProperData[name].severityLevel.veryLow)
-          return "veryLow";
+      if(confirmedCase){
+        
+        if(confirmedCase.toString().includes(","))
+          confirmedCase =  confirmedCase.replace(",", "");
+        if(confirmedCase.toString().includes(" "))
+          confirmedCase =  confirmedCase.replace(" ", "");
+        
+        confirmedCase = parseInt(confirmedCase);
+        
+        if(confirmedCase > getProperData[name].severityLevel.high)
+            return "high";
+        else if(confirmedCase < getProperData[name].severityLevel.high && confirmedCase >= getProperData[name].severityLevel.mediumHigh)
+            return "mediumHigh";
+        else if(confirmedCase < getProperData[name].severityLevel.mediumHigh && confirmedCase >= getProperData[name].severityLevel.medium)
+            return "medium";
+        else if(confirmedCase < getProperData[name].severityLevel.medium && confirmedCase >= getProperData[name].severityLevel.mediumLow)
+            return "mediumLow";
+        else if(confirmedCase < getProperData[name].severityLevel.mediumLow && confirmedCase >= getProperData[name].severityLevel.low)
+            return "low";
+        else if(confirmedCase < getProperData[name].severityLevel.low && confirmedCase >= getProperData[name].severityLevel.veryLow)
+            return "veryLow";
+        else return "noCases";
+      }
       else return "noCases";
     };
     

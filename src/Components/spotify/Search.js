@@ -74,7 +74,7 @@ class Search extends Component {
               type="submit"
               onClick={() => this.searchArtist(artistQuery)}
             >
-              <i className="fa fa-search"> </i>
+              <span className="search__icon"> <i className="fa fa-search"> </i> </span>
           </button>
         </div>
 

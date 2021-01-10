@@ -116,12 +116,14 @@ class Home extends Component {
               <h3>About Me</h3>
               <p id="about-me">
                 My name is Andy Nguyen, a Montreal native software developer. 
-                I am a computer science graduate, always on the pursuit of knowledge and self improvement. 
+                I am a computer science graduate, who's always on the pursuit of knowledge and self improvement. 
               </p>
               <p id="about-me">
-                Software development is one of my life passions, because I find value in turning ideas into reality.  
-                Finding solutions to client facing problems sparks joy.
-                I am seeking to join a dynamic, passionate and energetic team that can provide me mentorship opportunities, to extend my knowledge in software development to greater lengths. Looking forward to working with you.
+                Software development is one of my life passions, because I find value in turning creative ideas into reality.  
+                Finding solutions to client facing / challenging problems sparks joy within me.
+                I am seeking to join a dynamic, passionate, fun and energetic team whom can provide mentorship opportunities, to help extend my knowledge in software development to greater lengths.
+                While having a blast creating awesome software.
+                 Looking forward to working with you.
               </p>
               <p id="about-me">
               Outside of coding, I hold a personal training certification and I compete in the  
@@ -130,7 +132,8 @@ class Home extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 > Quebec Powerlifting Federation.</a>
-                 My passion for fitness has taught me dedication and confidence that directly translate to everything I do.  
+                 My passion for fitness has taught me dedication and confidence that directly translates to everything I do in life. 
+                 Other hobbies include being an amature chef, a dog enthusiast and a tech admirer.  
               </p>
 
               <h3>My Socials</h3>

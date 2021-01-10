@@ -83,20 +83,22 @@
         }
       }
 
+      i.fa{
+        height:14px;
+        width:13px;
+        .fa-search{
+          margin: auto;
+        }
+      }
+
       button.search_button{
         border-radius: 100px;
         color: white;
         width:30%;
-
-        .undefined, .artist_search_success , .artist_search_error {
-          height: 40px;
-          width: 70.11px;
-        }
-
-        i.fa.fa-search{
-          margin-top: auto;
-          margin-bottom: auto;
-        }
+        min-height: 40px;
+        max-height: 40px;
+        height: 100%;
+        text-align: center;
       }
     }
 

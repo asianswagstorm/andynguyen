@@ -1,8 +1,8 @@
 const API_ADDRESS = "https://spotify-api-wrapper.appspot.com";
 const youtubeAPI = "https://www.googleapis.com/youtube/v3/search?part=snippet";
-const key1 = 'AIzaSyBrS1TQF-LT5yGw115YUaHVKA9TtwZKf_c';
-const key2 = 'AIzaSyAcXqxP5fOSDrx2uFq_HGc7pkdhsopM7j4';
-const key3 = 'AIzaSyC12rqg-RtPR3duIAya_iYKEjkCy0hw_TM';
+const key1 = 'AIzaSyAwj8j0jYM4pOFeFzLaJubzKjboPs_nwKk';
+const key2 = 'AIzaSyBq72gwkgijg4wWbsiIoS7XSR9fdHK0Hso';
+const key3 = 'AIzaSyDgY16LgxjrgXdyiPeg8xNtIsjPYfi5WHw';
 
 export const fetchArtist = artistQuery => 
     (fetch(`${API_ADDRESS}/artist/${artistQuery}`) 
