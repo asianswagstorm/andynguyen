@@ -1,5 +1,5 @@
-const covidWorld = "http://localhost:8080/world"; //https://covid-world-data-andy.herokuapp.com/
-const QuebecLink = `http://localhost:8080/world/Canada/Quebec`; 
+const covidWorld = "https://covid-world-data-andy.herokuapp.com/world"; 
+const QuebecLink = `https://covid-world-data-andy.herokuapp.com/world/Canada/Quebec`; 
 const MontrealLink = `https://covid-world-data-andy.herokuapp.com/montreal`; 
 const jwtKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMzQ1Njc4OTEwIiwibmFtZSI6Ik93bmVyIiwiaXNWYWxpZCI6dHJ1ZX0.2XiynBEvXwIKla8KNbTR9GaZASLdOyWQQqyhziyTFSo";
 
