@@ -16,7 +16,7 @@ const languages = [
 
 const socials = [
   {
-    link: "https://www.linkedin.com/in/%F0%9F%98%84-andy-nguyen-84818b15b/",
+    link: "https://www.linkedin.com/in/😄-andy-nguyen-84818b15b/",
     type: "LinkedIn"
   },
   {
