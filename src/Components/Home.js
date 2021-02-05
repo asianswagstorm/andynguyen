@@ -5,8 +5,7 @@ import ListOfProjects from "./ListOfProjects";
 import { Wave } from 'react-animated-text';
 import Typist from 'react-typist';
 import CustomParticles from "./CustomParticles";
-import { popUpNotification } from "./constants/HelperFunction/Functions";
-
+import { popUpNotification,sanitize } from "./constants/HelperFunction/Functions";
 
 const languages = [
   { languages: "All" },
@@ -15,14 +14,30 @@ const languages = [
   { languages: "Python" }
 ];
 
+const socials = [
+  {
+    link: "https://www.linkedin.com/in/%F0%9F%98%84-andy-nguyen-84818b15b/",
+    type: "LinkedIn"
+  },
+  {
+    link: "https://github.com/asianswagstorm",
+    type: "Github"
+  },
+  {
+    link: "https://www.instagram.com/asianswagstorm/?hl=en",
+    type: "Instagram"
+  }
+];
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filterOption: "",
       isToggleOn: true,
-      status: "",
-      loaded:false
+      loaded:false,
+      contactInfo: {name: "", _replyto: "", message: ""},
+      hasEmpty: true
     };
     this.submitForm = this.submitForm.bind(this);
   }
@@ -32,33 +47,50 @@ class Home extends Component {
   }
 
   //use redux props clean this up
+//<script type="application/text"> console.log("hello") </script>
+
   submitForm = (event) => {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
-    const xhr = new XMLHttpRequest();
-    xhr.open(form.method, form.action);
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        form.reset();
-        this.setState({ status: "SUCCESS" });
-      } else {
-        this.setState({ status: "ERROR" });
-      }
-    };
-    xhr.send(data);
+    
+    if(!this.state.hasEmpty){
+      const xhr = new XMLHttpRequest();
+      const {name, _replyto, message} = this.state.contactInfo;
+      data.set("name", name);
+      data.set("_replyto", _replyto);
+      data.set("message", message);
+
+      xhr.open(form.method, form.action);
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+          //form.reset();
+          popUpNotification('success', "Thanks for reaching out, I will get back to you shortly." )
+        } else {
+            popUpNotification('error', "Sorry, there was an error while submitting the form." )
+        }
+      };
+      xhr.send(data);
+      this.setState({ hasEmpty: true } );
+    }
+    
   };
 
   filter = type => {
     this.setState({ filterOption: type });
   };
 
+  setContactInfo = (event) => {
+    const {name,value} = event.target;
+    const contactInfo = {...this.state.contactInfo, [name] : sanitize(value)} 
+    const hasEmpty = Object.values(contactInfo).some(variable => variable.trim(" ") === "")
+    this.setState({ contactInfo, hasEmpty } );
+  }
+
   render = () => {
     //use props from redux.
-    const { status } = this.state;
-
     const language_buttons = languages.map((x, index) => {
       return (
         <li key={index}>
@@ -138,36 +170,20 @@ class Home extends Component {
 
               <h3>My Socials</h3>
               <ul className="icons">
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://www.linkedin.com/in/andy-nguyen-84818b15b/"
-                    className="icon fa-linkedin"
-                  >
-                    <span className="label">LinkedIn</span>
-                  </a>
+                {
+                socials.map(social => 
+                 <li>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href= {social.link}
+                      className={`icon fa-${social.type.toLowerCase()}`}
+                    >
+                      <span className="label">{social.type}</span>
+                    </a>
                 </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://github.com/asianswagstorm"
-                    className="icon fa-github"
-                  >
-                    <span className="label">Github</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://www.instagram.com/asianswagstorm/?hl=en"
-                    className="icon fa-instagram"
-                  >
-                    <span className="label">Instagram</span>
-                  </a>
-                </li>
+                )  
+              }
               </ul>
             </div>
           
@@ -180,16 +196,17 @@ class Home extends Component {
               >
                 <div className="field half first">
                   <label htmlFor="name">Name
-                  <input name="name" id="name" type="text" placeholder="Name" />
+                  <input name="name" id="name" type="text" placeholder="Name" onChange={this.setContactInfo}/>
                   </label>
                 </div>
                 <div className="field half">
                   <label htmlFor="_replyto">Email
                   <input
                     name="_replyto"
-                    id="email"
+                    id="_replyto"
                     type="email"
                     placeholder="example@example.com"
+                    onChange={this.setContactInfo}
                   />
                   </label>
                 </div>
@@ -200,20 +217,21 @@ class Home extends Component {
                     id="message"
                     rows="6"
                     placeholder="i.e I like Dogs!"
+                    onChange={this.setContactInfo}
                   />
                   </label>
                 </div>
-                {status === "SUCCESS" ?  popUpNotification('success', "Thanks for reaching out, I will get back to you shortly." ) : 
+              
                 <ul className="actions">
                   <li>
                     <input
                       value="Send Message"
                       className="button"
                       type="submit"
+                      disabled={this.state.hasEmpty}
                     />
                   </li>
-                </ul> }
-                {status === "ERROR" && popUpNotification('error', "Sorry, there was an error while submitting the form." )}
+                </ul> 
               </form>
             </div>
           </section>
