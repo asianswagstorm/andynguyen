@@ -23,11 +23,19 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
 
     const handleRegionSelect = (event) => {
         const region = event.target.value;
+
+        if(regionType === "Quebec" && region !== "Quebec" && Object.keys(props.quebecCases.graph[region]).length > 0){
+            const {dispatch} = props;
+            const {updateCanadianRegionGraph2} = props.action_props.covid_action;
+          
+            dispatch(updateCanadianRegionGraph2(props.quebecCases, "Canada", regionType, region));
+        }
+
         if(regionType === "Canada" && region !== "Canada" &&  canadianGraphLoaded[region] === false){
             const {dispatch} = props;
             const {updateCanadianRegionGraph} = props.action_props.covid_action;
           
-            dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region));
+            dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region, props.apiLoaded));
         }
 
         if(regionType === "World" && region !== "World" &&  worldCases.graph[region].loaded === false){
@@ -55,14 +63,19 @@ const XYPlot = ({props,worldCases,canadaCases,quebecCases,regionType,montrealCas
         }
     ];
 
+    const getGraph = () => 
+        canadaCases.graph[selectedRegion[regionType]].hasOwnProperty('graph') ? canadaCases.graph[selectedRegion[regionType]].graph[selectedRegion[regionType]] : canadaCases.graph[selectedRegion[regionType]];
+
+    const getQuebecGraph = () => quebecCases.graph[selectedRegion[regionType]];
+
     const myGraphByRegionType = (type) => {
         if(type === "World")
             return {records: () => filterExclude(regionType,Object.values(data),worldCases.latest), data: worldCases.graph  ? worldCases.graph[selectedRegion[regionType]].graph : [[]], loaded: selectedRegion[regionType] === "World" ? apiLoaded.World : worldCases.graph[selectedRegion[regionType]].loaded} 
         if (type === "Canada")     
-            return {records: () => filterExclude(regionType,Object.values(data),worldCases.records["Canada"]),data: canadaCases.graph ? canadaCases.graph[selectedRegion[regionType]] : [[]] ,
+            return {records: () => filterExclude(regionType,Object.values(data),worldCases.records["Canada"]),data: canadaCases.graph ? getGraph() : [[]] ,
                 loaded:(selectedRegion[regionType] === "Canada" ? apiLoaded.Canada : canadianGraphLoaded[selectedRegion[regionType]])} 
         if (type === "Quebec")     
-                return {records: () => filterExclude(regionType,Object.values(data), {}).splice(0,17).reverse(), data: quebecCases.graph ? quebecCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Quebec}
+                return {records: () => filterExclude(regionType,Object.values(data), {}), data: quebecCases.graph ? getQuebecGraph() : [[]], loaded: apiLoaded.Quebec}
         if (type === "Montreal")     
                 return {records: () => filterExclude(regionType,Object.values(data), {}).splice(0,34).reverse(), data:  montrealCases.graph ? montrealCases.graph[selectedRegion[regionType]] : [[]], loaded: apiLoaded.Montreal}
     };

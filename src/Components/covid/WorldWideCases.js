@@ -7,7 +7,7 @@ const WorldWideCases = ({mapType,worldCases, quebecCases}) => {
     const [covidCases, setCovidCases] = useState({population: "7,594,000,000", confirmed: 0, recovered: 0, deaths: 0 });
     const getWorldCases = () => setCovidCases({population: "7,594,000,000", confirmed: latestWorld.confirmed, recovered: latestWorld.recovered, deaths: latestWorld.deaths});
     const getCanadianCases = () => setCovidCases({population: addComma(worldCases.records["Canada"].population), confirmed:  addComma(worldCases.records["Canada"].confirmed), recovered: worldCases.records["Canada"].recovered, deaths: worldCases.records["Canada"].deaths });
-    const getQuebecCases = async () => setCovidCases({population: "8,485,400", recovered: "22,213", ...quebecCases.records["Total"] });
+    const getQuebecCases = async () => setCovidCases({population: "8,485,400", recovered: addComma(quebecCases.latest.recovered), confirmed: addComma(quebecCases.latest.confirmed),deaths: addComma(quebecCases.latest.deaths)  });
     const getMontrealCases = () => setCovidCases({population: "1,704,694", confirmed: quebecCases.records["Montréal"].confirmed, recovered: "NA", deaths: quebecCases.records["Montréal"].deaths  });
 
     useEffect( () => {
@@ -30,12 +30,6 @@ const WorldWideCases = ({mapType,worldCases, quebecCases}) => {
             {className : "covid__death" , itemLabel: "Deaths:", itemValue: covidCases.deaths , background :"danger"},
             {className : "icon fa-heart" , itemLabel: "Recovered:", itemValue: covidCases.recovered , background :"success"}
         ]
-
-        if(mapType === "Quebec")
-            listItems = [...listItems, 
-                {className : "icon fa-heartbeat" , itemLabel: "Intensive Care:", itemValue: covidCases.intensiveCare , background :"warning"},
-                {className : "icon fa-hospital-o" , itemLabel: "Hospitalized:", itemValue: covidCases.hospitalized, background :"info" }
-            ]
         
         return( 
             <CovidCard listItems = {listItems}/>

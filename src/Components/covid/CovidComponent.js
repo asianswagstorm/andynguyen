@@ -8,7 +8,7 @@ import Headers from "../Headers";
 import WorldWideCases from "./WorldWideCases"
 import canada from "./topojsons/canada.topojson";
 import quebec from "./topojsons/quebec.json";
-import montreal from "./topojsons/montreal.topojson";
+//import montreal from "./topojsons/montreal.topojson";
 import SeverityChart from "./SeverityChart";
 import CovidTable from "./CovidTable";
 import XYPlot from "./XYPlot";
@@ -16,14 +16,13 @@ import Loading from "./Loading";
 
 const CovidComponent = (props) => {
     const {dispatch} = props;
-    const {fetchWorldCases,fetchCanadaCases,fetchQuebecCasesAction,fetchMontrealCasesAction} = props.action_props.covid_action;
+    const {fetchWorldCases,fetchCanadaCases,fetchQuebecCasesAction} = props.action_props.covid_action;
     const [content, setContent] = useState("");
     const [regionType, setRegionType] =  useState({name: "World",data: {}});
     const [selectedRegion, setSelectedRegion] = useState(   {  
                                                                 "World" : "World",
                                                                 "Canada" : "Canada",
-                                                                "Quebec" : "Total",
-                                                                "Montreal" : "Total for Montréal"     
+                                                                "Quebec" : "Quebec"    
                                                             });
 
     const getAllCountry = () => {
@@ -36,15 +35,10 @@ const CovidComponent = (props) => {
       if(props.apiLoaded["Canada"] === false)
         dispatch(fetchCanadaCases(props.apiLoaded,props.canadianGraphLoaded));
     };
-    const getQuebecCases = () => {
+    const getQuebecCases = async () => {
       setRegionType({name: "Quebec" , topojson: quebec, mapSize : {centerX : -68, centerY: 50, zoom:8, maxZoom: 8}});
       if(props.apiLoaded["Quebec"] === false)
-        dispatch(fetchQuebecCasesAction(props.canadaCases,props.apiLoaded));
-    };
-    const getMontrealCases = () => {
-      setRegionType({name: "Montreal" , topojson: montreal, mapSize : {centerX : -25, centerY: 500, zoom:3, maxZoom: 3}});
-      if(props.apiLoaded["Montreal"] === false)
-        dispatch(fetchMontrealCasesAction(props.apiLoaded));
+        dispatch(fetchQuebecCasesAction(props.canadaCases, props.apiLoaded));
     };
    
     const getProperData = {
@@ -65,8 +59,8 @@ const CovidComponent = (props) => {
       "Canada" : {
         header : "Covid 19 Cases in Canada",
         data : props.canadaCases.records,
-        next : () => getAllCountry(),//getQuebecCases(),
-        nextMap: "World",//"Quebec",
+        next : () => getQuebecCases(),
+        nextMap: "Quebec",
         severityLevel : {
           "high" : 200000,
           "mediumHigh" : 100000,
@@ -75,13 +69,12 @@ const CovidComponent = (props) => {
           "low" : 1000,
           "veryLow" : 1
         }
-      }
-      /*,
+      },
       "Quebec" : {
         header : "Covid 19 Cases in Quebec",
         data : props.quebecCases.records,
-        next : () => getMontrealCases(),
-        nextMap: "Montreal",
+        next : () => getAllCountry(),
+        nextMap: "World",
         severityLevel : {
           "high" : 5000,
           "mediumHigh" : 2000,
@@ -90,7 +83,9 @@ const CovidComponent = (props) => {
           "low" : 50,
           "veryLow" : 1
         }
-      },
+      }
+      /*
+      ,
       "Montreal" : {
         header : "Covid 19 Cases in Montreal",
         data : props.montrealCases.records,

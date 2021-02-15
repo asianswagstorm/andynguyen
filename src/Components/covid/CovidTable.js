@@ -86,7 +86,7 @@ const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, se
                 }
         );
 
-        if(regionType === "Quebec" || regionType === "Montreal"  ){
+        if(regionType === "Montreal" ){
             contentHeadArray.push(
                 {
                     table_id : "" , class_name : "table-info covid__th", click_function : () => sortTableByType("newCase"), name: "New Cases"
@@ -103,11 +103,18 @@ const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, se
     };
 
     const updateGraph = (region) => {
+        if(regionType === "Quebec" && region !== "Quebec" && Object.keys(props.quebecCases.graph[region]).length <= 0){
+            const {dispatch} = props;
+            const {updateCanadianRegionGraph2} = props.action_props.covid_action;
+          
+            dispatch(updateCanadianRegionGraph2(props.quebecCases, "Canada", regionType, region));
+        }
+
         if(regionType === "Canada" && region !== "Canada" &&  canadianGraphLoaded[region] === false){
             const {dispatch} = props;
             const {updateCanadianRegionGraph} = props.action_props.covid_action;
           
-            dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region));
+            dispatch(updateCanadianRegionGraph(canadianGraphLoaded,canadaCases, regionType, region, props.apiLoaded));
         }
 
         if(regionType === "World" && region !== "World" &&  worldCases.graph[region].loaded === false){
@@ -147,7 +154,7 @@ const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, se
                 }
         );
 
-        if(regionType === "Quebec" || regionType === "Montreal"){
+        if(regionType === "Montreal"){
             contentDataArray.push(
                 {
                     table_id : "country__data" , class_name : "table-info covid__td", data: addComma(area.newCase), click_function: () => null
@@ -189,9 +196,9 @@ const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, se
 
 const mapStateToProps = state => { 
     const covidProps  = state.covidReducer.defaultCovidStates; 
-    const {canadaCases ,canadianGraphLoaded} = covidProps;
+    const {canadaCases ,canadianGraphLoaded, apiLoaded, quebecCases} = covidProps;
  
-    return {canadaCases,canadianGraphLoaded};
+    return {canadaCases,canadianGraphLoaded,quebecCases,apiLoaded};
 };
   
 export default withRouter(connect(mapStateToProps)(CovidTable));

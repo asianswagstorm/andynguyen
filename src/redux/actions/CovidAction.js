@@ -1,5 +1,5 @@
 import {COVID_TYPE} from "./types";
-import {fetchCoronaVirusCases,updateCanadianGraph} from "../../Components/covid/coronavirusAPI";
+import {fetchCoronaVirusCases,updateCanadianGraph,updateRegionGraph} from "../../Components/covid/coronavirusAPI";
 
 const setWorldCases = (worldCases) => ({
     type : COVID_TYPE.SET_WORLD_CASES,
@@ -39,31 +39,26 @@ export const updateWorldGraph = (worldCases, country) => async dispatch => {
     dispatch(setWorldCases(newWorldCases));
 }
 
-const modifyCanadianCase = (canadaCases, newQuebec) => ({
-    type : COVID_TYPE.MODIFY_CANADIAN_CASES,
-    canadaCases :   {   ...canadaCases, records: { ...canadaCases.records,  Quebec: {    ...canadaCases.records.Quebec, 
-                                                                                        confirmed: newQuebec.confirmed,
-                                                                                        deaths: newQuebec.deaths,
-                                                                                        hospitalized : newQuebec.hospitalized,
-                                                                                        intensiveCare : newQuebec.intensiveCare
-                                                                                    }
-                                            }
-                    }
-});
+const canada = "Canada";
+const quebec = "Quebec";
 
 export const fetchCanadaCases = (apiLoaded,canadianGraphLoaded) => async dispatch => {
-    const canadaCase = await fetchCoronaVirusCases("Canada");
+    const canadaCase = await fetchCoronaVirusCases(canada);
     dispatch(setCanadaCases(canadaCase));
-    dispatch(setAPILoaded(apiLoaded, "Canada"));
-    const newGraphLoaded = {...canadianGraphLoaded, "Canada": true};
+    dispatch(setAPILoaded(apiLoaded, canada));
+    const newGraphLoaded = {...canadianGraphLoaded, canada: true};
     dispatch(updateCanadianGraphLoaded(newGraphLoaded));
 }
 
 export const fetchQuebecCasesAction = (canadaCases,apiLoaded) => async dispatch => {
-    const quebecCase = await fetchCoronaVirusCases("quebec");
-    dispatch(setQuebecCases(quebecCase));
-    dispatch(modifyCanadianCase(canadaCases,quebecCase.records.Total));
-    dispatch(setAPILoaded(apiLoaded, "Quebec"));
+        if(!apiLoaded.Quebec){
+            console.log(quebec);
+            let quebecCase =  await updateCanadianGraph(canadaCases.records,canada,quebec); // canadaCases.graph.Quebec empty
+        
+            dispatch(setQuebecCases(quebecCase));
+            dispatch(setAPILoaded(apiLoaded, quebec)); //DNW
+            //dispatch(modifyCanadianCase(canadaCases,quebecCase.records.Total));
+        }
 }
 
 export const fetchMontrealCasesAction = (apiLoaded) => async dispatch => {
@@ -77,10 +72,20 @@ const updateCanadianGraphLoaded = (canadianGraphLoaded) => ({
     canadianGraphLoaded
 });
 
-export const updateCanadianRegionGraph = (canadianGraphLoaded,canadaCases, country, state) => async dispatch => {
+export const updateCanadianRegionGraph2 = (quebecCases, country, state,region) => async dispatch => {
+    const {records} = quebecCases;
+    const updatedGraphData = await updateRegionGraph(records,country,state, region);
+    const newQuebecCases = {...quebecCases, graph: {...quebecCases.graph, [region] : updatedGraphData} };
+    dispatch(setQuebecCases(newQuebecCases));
+};
+
+export const updateCanadianRegionGraph = (canadianGraphLoaded,canadaCases, country, state,apiLoaded) => async dispatch => {
     const {records} = canadaCases;
     const updatedGraphData = await updateCanadianGraph(records,country,state);
     const newCanadianCases = {...canadaCases, graph: {...canadaCases.graph, [state] : updatedGraphData} };
+    if(state === quebec){
+        dispatch(fetchQuebecCasesAction(newCanadianCases,apiLoaded));
+    }
     dispatch(setCanadaCases(newCanadianCases));
     const newGraphLoaded = {...canadianGraphLoaded, [state]: true};
     dispatch(updateCanadianGraphLoaded(newGraphLoaded));
