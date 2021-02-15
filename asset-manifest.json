@@ -1,24 +1,23 @@
 {
   "files": {
     "main.css": "/static/css/main.307ef014.chunk.css",
-    "main.js": "/static/js/main.079d1fca.chunk.js",
-    "main.js.map": "/static/js/main.079d1fca.chunk.js.map",
+    "main.js": "/static/js/main.bea77a1b.chunk.js",
+    "main.js.map": "/static/js/main.bea77a1b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.240c0830.js",
     "runtime-main.js.map": "/static/js/runtime-main.240c0830.js.map",
     "static/css/2.ff8bd605.chunk.css": "/static/css/2.ff8bd605.chunk.css",
-    "static/js/2.29a2ac93.chunk.js": "/static/js/2.29a2ac93.chunk.js",
-    "static/js/2.29a2ac93.chunk.js.map": "/static/js/2.29a2ac93.chunk.js.map",
+    "static/js/2.686138fd.chunk.js": "/static/js/2.686138fd.chunk.js",
+    "static/js/2.686138fd.chunk.js.map": "/static/js/2.686138fd.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.2774ca9fccf5ef63c8a845d409146948.js": "/precache-manifest.2774ca9fccf5ef63c8a845d409146948.js",
+    "precache-manifest.df8c732ed5a78600ebe015e01f3a1fc5.js": "/precache-manifest.df8c732ed5a78600ebe015e01f3a1fc5.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.ff8bd605.chunk.css.map": "/static/css/2.ff8bd605.chunk.css.map",
     "static/css/main.307ef014.chunk.css.map": "/static/css/main.307ef014.chunk.css.map",
-    "static/js/2.29a2ac93.chunk.js.LICENSE.txt": "/static/js/2.29a2ac93.chunk.js.LICENSE.txt",
+    "static/js/2.686138fd.chunk.js.LICENSE.txt": "/static/js/2.686138fd.chunk.js.LICENSE.txt",
     "static/media/azure.png": "/static/media/azure.f935f7aa.png",
     "static/media/canada.topojson": "/static/media/canada.f2da5a9b.topojson",
     "static/media/django.png": "/static/media/django.82f8cdf8.png",
     "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.e6cf7c6e.woff2",
-    "static/media/montreal.topojson": "/static/media/montreal.626b9143.topojson",
     "static/media/react.png": "/static/media/react.c3ba82a5.png",
     "static/media/redux.png": "/static/media/redux.c8f44df3.png",
     "static/media/washYourHands.gif": "/static/media/washYourHands.458f41b9.gif",
@@ -27,8 +26,8 @@
   "entrypoints": [
     "static/js/runtime-main.240c0830.js",
     "static/css/2.ff8bd605.chunk.css",
-    "static/js/2.29a2ac93.chunk.js",
+    "static/js/2.686138fd.chunk.js",
     "static/css/main.307ef014.chunk.css",
-    "static/js/main.079d1fca.chunk.js"
+    "static/js/main.bea77a1b.chunk.js"
   ]
 }
