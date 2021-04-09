@@ -158,9 +158,9 @@ class Home extends Component {
                  Looking forward to working with you.
               </p>
               <p id="about-me">
-              Outside of coding, I hold a personal training certification and I compete in the  
+              Outside of coding, I hold a personal training certification and I compete in the 
                <a
-                  href="http://www.fqd-quebec.com/lifter/528"
+                  href="https://www.fqd-quebec.com/athletes/528"
                   target="_blank"
                   rel="noopener noreferrer"
                 > Quebec Powerlifting Federation.</a>
