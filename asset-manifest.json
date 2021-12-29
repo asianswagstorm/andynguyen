@@ -1,28 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.c7f4c212.chunk.css",
-    "main.js": "/static/js/main.df541ede.chunk.js",
-    "runtime-main.js": "/static/js/runtime-main.240c0830.js",
-    "static/css/2.e9609898.chunk.css": "/static/css/2.e9609898.chunk.css",
-    "static/js/2.dbfe94be.chunk.js": "/static/js/2.dbfe94be.chunk.js",
-    "index.html": "/index.html",
-    "precache-manifest.865d05b0a1841ddd3c7c35292675e9a3.js": "/precache-manifest.865d05b0a1841ddd3c7c35292675e9a3.js",
-    "service-worker.js": "/service-worker.js",
-    "static/js/2.dbfe94be.chunk.js.LICENSE.txt": "/static/js/2.dbfe94be.chunk.js.LICENSE.txt",
-    "static/media/azure.png": "/static/media/azure.f935f7aa.png",
-    "static/media/canada.topojson": "/static/media/canada.f2da5a9b.topojson",
-    "static/media/django.png": "/static/media/django.82f8cdf8.png",
-    "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.e6cf7c6e.woff2",
-    "static/media/react.png": "/static/media/react.c3ba82a5.png",
-    "static/media/redux.png": "/static/media/redux.c8f44df3.png",
-    "static/media/washYourHands.gif": "/static/media/washYourHands.458f41b9.gif",
-    "static/media/world.topojson": "/static/media/world.a37caa41.topojson"
+    "main.css": "/static/css/main.45257e9b.css",
+    "main.js": "/static/js/main.6ad1654e.js",
+    "static/media/washYourHands.gif": "/static/media/washYourHands.25817802b8f241abeb3b.gif",
+    "static/media/world.topojson": "/static/media/world.a454808470c95162a5e6.topojson",
+    "static/media/fontawesome-webfont.svg?v=4.6.3": "/static/media/fontawesome-webfont.3b270ae3f01b143951b0.svg",
+    "static/media/canada.topojson": "/static/media/canada.81056ce6e192811cdb9d.topojson",
+    "static/media/redux.png": "/static/media/redux.1b4bb5fceb01b19da59d.png",
+    "static/media/fontawesome-webfont.ttf?v=4.6.3": "/static/media/fontawesome-webfont.f0af1680f082547a7aae.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.6.3": "/static/media/fontawesome-webfont.f7f1738ca345185e0185.woff",
+    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.09b9015b1ecaf95655b1.eot",
+    "static/media/fontawesome-webfont.woff2?v=4.6.3": "/static/media/fontawesome-webfont.0317d582b93c20f68e05.woff2",
+    "static/media/django.png": "/static/media/django.bda731e0ef0e61c0a63b.png",
+    "static/media/azure.png": "/static/media/azure.4ceed261790221daef37.png",
+    "static/media/react.png": "/static/media/react.44319306359c7112276d.png",
+    "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/js/runtime-main.240c0830.js",
-    "static/css/2.e9609898.chunk.css",
-    "static/js/2.dbfe94be.chunk.js",
-    "static/css/main.c7f4c212.chunk.css",
-    "static/js/main.df541ede.chunk.js"
+    "static/css/main.45257e9b.css",
+    "static/js/main.6ad1654e.js"
   ]
 }
