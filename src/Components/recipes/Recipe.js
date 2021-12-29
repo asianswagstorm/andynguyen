@@ -1,11 +1,10 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 import Headers from "../Headers";
 
-const override = css`
+const override = `
   display: block;
   margin: 0 auto;
   border-color: #19B5FE;

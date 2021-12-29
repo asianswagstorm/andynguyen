@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import ClipLoader from "react-spinners/ClipLoader";
-import { css } from "@emotion/core";
 
-const override = css`
+const override = `
   display: block;
   margin: auto;
   border-color: #19B5FE;

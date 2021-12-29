@@ -52,7 +52,6 @@ export const fetchCanadaCases = (apiLoaded,canadianGraphLoaded) => async dispatc
 
 export const fetchQuebecCasesAction = (canadaCases,apiLoaded) => async dispatch => {
         if(!apiLoaded.Quebec){
-            console.log(quebec);
             let quebecCase =  await updateCanadianGraph(canadaCases.records,canada,quebec); // canadaCases.graph.Quebec empty
         
             dispatch(setQuebecCases(quebecCase));

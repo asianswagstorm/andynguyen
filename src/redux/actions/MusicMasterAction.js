@@ -19,7 +19,7 @@ export const getArtist = artistQuery => dispatch => {
             dispatch(setErrorObject(noResultsFound))
         }
       }).catch(error => {
-          const message = (artistQuery.trim() === "") ? "Input cannot be blank" : "Input cannot have special characters!"; 
+          const message = error.message; //(artistQuery.trim() === "") ? "Input cannot be blank" : "Input cannot have special characters!"
           
           const noResultsFound = {  className: "artist_search_error",
                                     message : message };
@@ -52,5 +52,3 @@ const setTracks = tracks => ({
     type: MUSICMASTER_TYPE.SET_TRACKS,
     tracks
 });
-
-    

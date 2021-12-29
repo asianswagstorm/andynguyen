@@ -3,7 +3,6 @@ import Stats from "./pokemonHelper/Stats";
 import Profile from "./pokemonHelper/Profile";
 import Evolution from "./pokemonHelper/Evolution";
 import Headers from "../Headers";
-import { css } from "@emotion/core";
 import RingLoader from "react-spinners/RingLoader";
 import './styles/Pokemon.css';
 import { withRouter } from "react-router-dom";
@@ -11,7 +10,7 @@ import { connect } from 'react-redux';
 import {pokemonImage,getPokemonEvolution,getPokeData,getPokeSpecies} from "./apiServices/pokeAPI";
 import {TYPE_COLORS} from "./constants/pokemonConstants";
 
-const override = css`
+const override = `
   display: block;
   margin: 0 auto;
   border-color: red;

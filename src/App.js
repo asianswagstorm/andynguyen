@@ -31,12 +31,12 @@ export class App extends Component {
     const routes_components = [ {path: `/`, component: Home},
                                 {path:  `/TicTacToe`, component: TicTacToe},
                                 {path:  `/Connect4`, component: ConnectFour},
-                                {path:  `/Experience1`, component: Metso},
+                                //{path:  `/Experience1`, component: Metso},
                                 {path:  `/Pokemon`, component: Pokemons},
                                 {path:  `/Pokemon/:pokemonIndex`, component: Pokemon},
-                                {path:  `/Recipes`, component: RecipeComponent},
-                                {path:  `/Recipes/:id`, component: Recipe},
-                                {path:  `/Spotify`, component: SpotifyComponent},
+                                //{path:  `/Recipes`, component: RecipeComponent},
+                                //{path:  `/Recipes/:id`, component: Recipe},
+                                //{path:  `/Spotify`, component: SpotifyComponent},
                                 {path:  `/Covid`, component: CovidComponent},
                                 {path: "*", component: NotFound}];
       

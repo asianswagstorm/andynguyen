@@ -8,14 +8,15 @@ export const tiles = [
       title: "Covid19",
       type: ["Covid19", "JavaScript"]
     },
-    {
+    /*{
       linkType: "internal",
       href: "#/Spotify",
       src: "images/thumbs/thumb14.jpg",
       alt: "",
       title: "A spotify api app made with react. ",
       type: ["JavaScript"]
-    },
+    },*/
+    /*
     {
       linkType: "internal",
       href: "#/Recipes",
@@ -24,6 +25,7 @@ export const tiles = [
       title: "A recipe api app made with react. ",
       type: ["JavaScript"]
     },
+    */
     {
       linkType: "internal",
       href: `#/Pokemon`,
@@ -48,6 +50,7 @@ export const tiles = [
       title: "Connect 4 Game.",
       type: ["JavaScript"]
     },
+    /*
     {
       linkType: "external",
       href: "https://jamdo-487.herokuapp.com/",
@@ -57,6 +60,8 @@ export const tiles = [
         "Jamdo, a web application created for Web Services and Applications class.",
       type: ["Python"]
     },
+    */
+   /*
     {
       linkType: "external",
       href: "https://airbnbmock.herokuapp.com/",
@@ -66,6 +71,8 @@ export const tiles = [
         "An airbnb replica front page created with react JS (first time using React) ",
       type: ["JavaScript"]
     },
+    */
+   /*
     {
       linkType: "internal",
       href: `#/Experience1`,
@@ -74,4 +81,5 @@ export const tiles = [
       title: "Work Experience",
       type: ["Work Experience", "JavaScript", "Python"]
     }
+    */
   ];
