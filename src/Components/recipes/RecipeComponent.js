@@ -3,7 +3,7 @@ import './Recipe.css';
 import Headers from "../Headers";
 import Form from "./Form";
 import Recipes from "./Recipes";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 
 class RecipeComponent extends Component {

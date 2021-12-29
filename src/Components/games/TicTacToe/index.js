@@ -1,5 +1,5 @@
+import { withRouter } from "../../../helpers";
 import TicTacToe from "./TicTacToe.jsx"
-import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
 import {    

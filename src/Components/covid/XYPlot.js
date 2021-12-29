@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 import Chart from 'react-google-charts';
 import {filterExclude} from "./covidFunction";

@@ -5,7 +5,7 @@ import Evolution from "./pokemonHelper/Evolution";
 import Headers from "../Headers";
 import RingLoader from "react-spinners/RingLoader";
 import './styles/Pokemon.css';
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 import {pokemonImage,getPokemonEvolution,getPokeData,getPokeSpecies} from "./apiServices/pokeAPI";
 import {TYPE_COLORS} from "./constants/pokemonConstants";

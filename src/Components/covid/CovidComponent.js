@@ -1,9 +1,9 @@
 import React, { useState,useEffect }  from 'react';
-import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import WorldMapChart from "./WorldMapChart";
 import CanadaMap from "./CanadaCovid";
 import ReactTooltip from "react-tooltip";
+import { withRouter } from "../../helpers";
 import Headers from "../Headers";
 import WorldWideCases from "./WorldWideCases"
 import canada from "./topojsons/canada.topojson";

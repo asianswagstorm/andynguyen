@@ -7,10 +7,10 @@ import Typist from 'react-typist';
 import { popUpNotification,sanitize } from "./constants/HelperFunction/Functions";
 
 const languages = [
-  { languages: "All" },
-  { languages: "Work Experience" },
-  { languages: "JavaScript" },
-  { languages: "Python" }
+  // { languages: "All" },
+  // { languages: "Work Experience" },
+  // { languages: "JavaScript" },
+  // { languages: "Python" }
 ];
 
 const socials = [

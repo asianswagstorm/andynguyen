@@ -3,7 +3,7 @@ import Headers from "../Headers";
 import Search from "./pokemonHelper/Search";
 import PokemonCard from "./PokemonCard";
 import NoResults from "./pokemonHelper/NoResults";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 import "./styles/Pokemons.css";
 

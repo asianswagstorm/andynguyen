@@ -8,8 +8,7 @@ class NotFound extends Component {
         return (
             <section id="main">
               <Headers linkTo = "#/" headerTitle="Nothing to see here" origin = "false"/>
-
-						  <h1 className="center">404 ERROR,YOU HAVE REACHED A DEFAULT ROUTE </h1>
+                {/* <h1 className="center">Nothing to see here</h1> */}
             </section>
          );
     };};

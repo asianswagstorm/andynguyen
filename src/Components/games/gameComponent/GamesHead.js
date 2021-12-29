@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Headers from "../../Headers";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../../helpers";
 import { connect } from "react-redux";
 import {score_label, playerPicker } from "../../constants/Games"; //tictactoe_boxes
 import * as gameAction from "../../../redux/actions/GamesAction";

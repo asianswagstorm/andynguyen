@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { popUpNotification } from "../constants/HelperFunction/Functions";
 import {searchYoutube} from "./spotifyServices";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 
 class Tracks extends Component {

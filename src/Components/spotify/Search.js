@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {filterArtistByName} from "./filterArtist";
 import ArtistSuggestions from "./ArtistSuggestions";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 const listLimit = 6;
 

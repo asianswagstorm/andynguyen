@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "../../helpers";
 import { connect } from 'react-redux';
 import {addComma,stringToInt,filterExclude} from "./covidFunction"
 const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, setSelectedRegion,worldCases}) => { 
