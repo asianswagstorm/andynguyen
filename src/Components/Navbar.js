@@ -4,7 +4,7 @@ import '../css/Home.css';
 const Navbar = () =>  (
   <nav id="nav">
     <ul>
-      <li data-testid="nav__li__tag"><a href="/" className="active"><span className="icon fa-home"></span></a></li>
+      <li data-testid="nav__li__tag"><a href="#/" className="active"><span className="icon fa-home"></span></a></li>
     </ul>
   </nav>
 );

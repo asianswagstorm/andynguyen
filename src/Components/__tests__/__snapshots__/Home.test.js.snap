@@ -161,7 +161,7 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="/Recipes"
+                                    href="#/Recipes"
                                 >
                                     <img
                                         src="images/thumbs/thumb12.jpg"
@@ -176,7 +176,7 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="/Pokemon"
+                                    href="#/Pokemon"
                                 >
                                     <img
                                         src="images/thumbs/thumb13.jpg"
@@ -191,7 +191,7 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="/Spotify"
+                                    href="#/Spotify"
                                 >
                                     <img
                                         src="images/thumbs/thumb14.jpg"
@@ -206,7 +206,7 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="/TicTacToe"
+                                    href="#/TicTacToe"
                                 >
                                     <img
                                         src="images/thumbs/thumb6.jpg"
@@ -221,7 +221,7 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="/Connect4"
+                                    href="#/Connect4"
                                 >
                                     <img
                                         src="images/thumbs/thumb8.jpg"
@@ -236,7 +236,7 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="/Experience1"
+                                    href="#/Experience1"
                                 >
                                     <img
                                         src="images/thumbs/thumb7.jpg"
@@ -555,7 +555,7 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="/Recipes"
+                                href="#/Recipes"
                             >
                                 <img
                                     src="images/thumbs/thumb12.jpg"
@@ -570,7 +570,7 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="/Pokemon"
+                                href="#/Pokemon"
                             >
                                 <img
                                     src="images/thumbs/thumb13.jpg"
@@ -585,7 +585,7 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="/Spotify"
+                                href="#/Spotify"
                             >
                                 <img
                                     src="images/thumbs/thumb14.jpg"
@@ -600,7 +600,7 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="/TicTacToe"
+                                href="#/TicTacToe"
                             >
                                 <img
                                     src="images/thumbs/thumb6.jpg"
@@ -615,7 +615,7 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="/Connect4"
+                                href="#/Connect4"
                             >
                                 <img
                                     src="images/thumbs/thumb8.jpg"
@@ -630,7 +630,7 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="/Experience1"
+                                href="#/Experience1"
                             >
                                 <img
                                     src="images/thumbs/thumb7.jpg"

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import Home from "./Components/Home";
 import TicTacToe from "./Components/games/TicTacToe";
@@ -53,7 +53,7 @@ export class App extends Component {
         <Navbar />
         <section id="main">
           <section id="main__page">
-            <BrowserRouter>
+            <HashRouter>
               <Routes>
                 {routes_components.map((route, key) => (
                   <Route
@@ -69,7 +69,7 @@ export class App extends Component {
                   />
                 ))}
               </Routes>
-            </BrowserRouter>
+            </HashRouter>
           </section>
           <Footer />
         </section>

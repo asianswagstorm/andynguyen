@@ -13,7 +13,7 @@ Object {
                     data-testid="nav__li__tag"
                 >
                     <a
-                        href="/"
+                        href="#/"
                         class="active"
                     >
                         <span
@@ -34,7 +34,7 @@ Object {
                 data-testid="nav__li__tag"
             >
                 <a
-                    href="/"
+                    href="#/"
                     class="active"
                 >
                     <span

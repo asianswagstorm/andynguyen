@@ -2,7 +2,7 @@
 export const tiles = [
     {
       linkType: "internal",
-      href: `/Covid`,
+      href: `#/Covid`,
       src: "images/thumbs/thumb15.jpg",
       alt: "",
       title: "Covid19",
@@ -10,7 +10,7 @@ export const tiles = [
     },
     /*{
       linkType: "internal",
-      href: "/Spotify",
+      href: "#/Spotify",
       src: "images/thumbs/thumb14.jpg",
       alt: "",
       title: "A spotify api app made with react. ",
@@ -19,7 +19,7 @@ export const tiles = [
     /*
     {
       linkType: "internal",
-      href: "/Recipes",
+      href: "#/Recipes",
       src: "images/thumbs/thumb12.jpg",
       alt: "",
       title: "A recipe api app made with react. ",
@@ -28,7 +28,7 @@ export const tiles = [
     */
     {
       linkType: "internal",
-      href: `/Pokemon`,
+      href: `#/Pokemon`,
       src: "images/thumbs/thumb13.jpg",
       alt: "",
       title: "A pokedex api app made with react. ",
@@ -36,7 +36,7 @@ export const tiles = [
     },
     {
       linkType: "internal",
-      href: `/TicTacToe`,
+      href: `#/TicTacToe`,
       src: "images/thumbs/thumb6.jpg",
       alt: "",
       title: "Tic Tac Toe Game .",
@@ -44,7 +44,7 @@ export const tiles = [
     },
     {
       linkType: "internal",
-      href: `/Connect4`,
+      href: `#/Connect4`,
       src: "images/thumbs/thumb8.jpg",
       alt: "",
       title: "Connect 4 Game.",
