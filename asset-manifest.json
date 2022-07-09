@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a0942deb.css",
-    "main.js": "/static/js/main.ff43338b.js",
+    "main.js": "/static/js/main.20417f57.js",
     "static/media/washYourHands.gif": "/static/media/washYourHands.25817802b8f241abeb3b.gif",
     "static/media/world.topojson": "/static/media/world.a454808470c95162a5e6.topojson",
     "static/media/fontawesome-webfont.svg?v=4.6.3": "/static/media/fontawesome-webfont.3b270ae3f01b143951b0.svg",
@@ -15,6 +15,6 @@
   },
   "entrypoints": [
     "static/css/main.a0942deb.css",
-    "static/js/main.ff43338b.js"
+    "static/js/main.20417f57.js"
   ]
 }
