@@ -161,12 +161,12 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="#/Recipes"
+                                    href="/Recipes"
                                 >
                                     <img
                                         src="images/thumbs/thumb12.jpg"
                                         alt=""
-                                        title="#/Recipes"
+                                        title="/Recipes"
                                     />
                                 </a>
                             </div>
@@ -176,12 +176,12 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="#/Pokemon"
+                                    href="/Pokemon"
                                 >
                                     <img
                                         src="images/thumbs/thumb13.jpg"
                                         alt=""
-                                        title="#/Pokemon"
+                                        title="/Pokemon"
                                     />
                                 </a>
                             </div>
@@ -191,12 +191,12 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="#/Spotify"
+                                    href="/Spotify"
                                 >
                                     <img
                                         src="images/thumbs/thumb14.jpg"
                                         alt=""
-                                        title="#/Spotify"
+                                        title="/Spotify"
                                     />
                                 </a>
                             </div>
@@ -206,12 +206,12 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="#/TicTacToe"
+                                    href="/TicTacToe"
                                 >
                                     <img
                                         src="images/thumbs/thumb6.jpg"
                                         alt=""
-                                        title="#/TicTacToe"
+                                        title="/TicTacToe"
                                     />
                                 </a>
                             </div>
@@ -221,12 +221,12 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="#/Connect4"
+                                    href="/Connect4"
                                 >
                                     <img
                                         src="images/thumbs/thumb8.jpg"
                                         alt=""
-                                        title="#/Connect4"
+                                        title="/Connect4"
                                     />
                                 </a>
                             </div>
@@ -236,12 +236,12 @@ Object {
                                 <a
                                     target="_self"
                                     rel="noopener noreferrer"
-                                    href="#/Experience1"
+                                    href="/Experience1"
                                 >
                                     <img
                                         src="images/thumbs/thumb7.jpg"
                                         alt=""
-                                        title="#/Experience1"
+                                        title="/Experience1"
                                     />
                                 </a>
                             </div>
@@ -555,12 +555,12 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="#/Recipes"
+                                href="/Recipes"
                             >
                                 <img
                                     src="images/thumbs/thumb12.jpg"
                                     alt=""
-                                    title="#/Recipes"
+                                    title="/Recipes"
                                 />
                             </a>
                         </div>
@@ -570,12 +570,12 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="#/Pokemon"
+                                href="/Pokemon"
                             >
                                 <img
                                     src="images/thumbs/thumb13.jpg"
                                     alt=""
-                                    title="#/Pokemon"
+                                    title="/Pokemon"
                                 />
                             </a>
                         </div>
@@ -585,12 +585,12 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="#/Spotify"
+                                href="/Spotify"
                             >
                                 <img
                                     src="images/thumbs/thumb14.jpg"
                                     alt=""
-                                    title="#/Spotify"
+                                    title="/Spotify"
                                 />
                             </a>
                         </div>
@@ -600,12 +600,12 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="#/TicTacToe"
+                                href="/TicTacToe"
                             >
                                 <img
                                     src="images/thumbs/thumb6.jpg"
                                     alt=""
-                                    title="#/TicTacToe"
+                                    title="/TicTacToe"
                                 />
                             </a>
                         </div>
@@ -615,12 +615,12 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="#/Connect4"
+                                href="/Connect4"
                             >
                                 <img
                                     src="images/thumbs/thumb8.jpg"
                                     alt=""
-                                    title="#/Connect4"
+                                    title="/Connect4"
                                 />
                             </a>
                         </div>
@@ -630,12 +630,12 @@ Object {
                             <a
                                 target="_self"
                                 rel="noopener noreferrer"
-                                href="#/Experience1"
+                                href="/Experience1"
                             >
                                 <img
                                     src="images/thumbs/thumb7.jpg"
                                     alt=""
-                                    title="#/Experience1"
+                                    title="/Experience1"
                                 />
                             </a>
                         </div>

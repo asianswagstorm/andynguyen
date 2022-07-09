@@ -24,7 +24,7 @@ ShallowWrapper {
     "props": Object {
       "children": <a
         className="link-hover"
-        href="#/Pokemon/1"
+        href="/Pokemon/1"
 >
         <div
                 className="card"
@@ -110,7 +110,7 @@ ShallowWrapper {
           </div>
 </div>,
         "className": "link-hover",
-        "href": "#/Pokemon/1",
+        "href": "/Pokemon/1",
       },
       "ref": null,
       "rendered": Object {
@@ -300,7 +300,7 @@ ShallowWrapper {
       "props": Object {
         "children": <a
           className="link-hover"
-          href="#/Pokemon/1"
+          href="/Pokemon/1"
 >
           <div
                     className="card"
@@ -386,7 +386,7 @@ ShallowWrapper {
             </div>
 </div>,
           "className": "link-hover",
-          "href": "#/Pokemon/1",
+          "href": "/Pokemon/1",
         },
         "ref": null,
         "rendered": Object {

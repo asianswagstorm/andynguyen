@@ -4,7 +4,7 @@ import {resetTicTacToeCell} from "./TicTacToeAction";
 
 export const resetGame = (game_type) => dispatch => {
     dispatch(resetGameSuccess());
-    game_type === "tictactoe" ? dispatch(resetTicTacToeCell())  :dispatch(resetConnectFour());
+    game_type === "tictactoe" ? dispatch(resetTicTacToeCell()) :dispatch(resetConnectFour());
 };
 
 const resetGameSuccess = () => ({type: GAMES_TYPE.RESET_GAME});

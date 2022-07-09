@@ -26,7 +26,7 @@ class RecipeComponent extends Component {
     const {recipeName ,dispatch,action_props} = this.props;
     return (
       <div>
-        <Headers linkTo = "#/" headerTitle="Recipe App"/>
+        <Headers linkTo = "/" headerTitle="Recipe App"/>
         <div className="recipe__section" >
         <Form getRecipe={this.getRecipe} recipeName={recipeName} dispatch= {dispatch} recipe_action={action_props.recipe_action} />
         <Recipes/> 

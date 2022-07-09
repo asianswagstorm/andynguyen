@@ -18,7 +18,7 @@ export class PokemonCard extends Component {
     return (
     
       <div className="individual__card">
-        <a className="link-hover" href={`#/Pokemon/${pokemonIndex}`}>
+        <a className="link-hover" href={`/Pokemon/${pokemonIndex}`}>
             <div className="card">
               <h5 className="card-header">{pokemonIndex}</h5>
               <div className="card-body">

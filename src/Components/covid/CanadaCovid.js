@@ -55,4 +55,3 @@ const CanadaMap =  ({data,regionType,setTooltipContent,colorFill}) => {
 };
 
 export default CanadaMap;
-

@@ -186,7 +186,7 @@ const CovidComponent = (props) => {
     
     return (
         <div>
-            <Headers linkTo = "#/" headerTitle= {getProperData[regionType.name].header}/>   
+            <Headers linkTo = "/" headerTitle= {getProperData[regionType.name].header}/>   
             <div className= "covid19"> 
              { props.apiLoaded[regionType.name] === true ?  
                 (<div>   

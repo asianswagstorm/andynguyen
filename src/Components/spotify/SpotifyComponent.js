@@ -16,7 +16,7 @@ class SpotifyComponent extends Component {
     const headerTitle = this.props.artist !== null ? "Music Master" : "Welcome to Music Master";
     return (
       <div className="Spotify">
-        <Headers linkTo = "#/" headerTitle = {headerTitle} origin = "spotify" artist = {this.props.artist} />   
+        <Headers linkTo = "/" headerTitle = {headerTitle} origin = "spotify" artist = {this.props.artist} />   
         <Search  action_props={this.props.action_props} />
         <div className="spotify__content">    
           {this.props.artist !== null ? (

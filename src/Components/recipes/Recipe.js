@@ -41,7 +41,7 @@ class Recipe extends React.Component {
 
     return (
       <div className="App">
-        <Headers linkTo = "#/Recipes" headerTitle="Recipe App"/>
+        <Headers linkTo = "/Recipes" headerTitle="Recipe App"/>
           <div>
             { recipe && recipe.length !== 0 ?
               <div className="active-recipe">

@@ -26,7 +26,7 @@ class GamesHead extends Component {
   render = () => {
     return (
       <div>
-        <Headers linkTo = "#/" headerTitle=  {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } origin="games"/>
+        <Headers linkTo = "/" headerTitle=  {this.props.gameType === "tictactoe" ? "Tic Tac Toe" : "Connect Four" } origin="games"/>
         <div className="score-board">
           {score_label(this.props.gameType).map((label, key) => ( //this.props.gameType
             <div key={key} id={label.id} className="badge">

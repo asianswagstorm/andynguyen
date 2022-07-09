@@ -74,7 +74,7 @@ export class Pokemons extends Component {
   render = () => {
     return (
       <div className="pokemon__app">
-        <Headers linkTo = "#/" headerTitle="Pokedex"/>   
+        <Headers linkTo = "/" headerTitle="Pokedex"/>   
         <div className="pokemon_row">
           <div className="pokemon_search">
             <div className="pokemon__search__button" onClick={() => this.searchPokemon(this.props.searchedPokemon)}>

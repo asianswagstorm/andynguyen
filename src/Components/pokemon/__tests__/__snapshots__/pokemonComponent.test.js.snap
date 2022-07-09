@@ -39,7 +39,7 @@ ShallowWrapper {
       "children": Array [
         <Headers
           headerTitle="Pokedex"
-          linkTo="#/"
+          linkTo="/"
 />,
         <div
           className="row"
@@ -81,7 +81,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "headerTitle": "Pokedex",
-          "linkTo": "#/",
+          "linkTo": "/",
         },
         "ref": null,
         "rendered": null,
@@ -219,7 +219,7 @@ ShallowWrapper {
         "children": Array [
           <Headers
             headerTitle="Pokedex"
-            linkTo="#/"
+            linkTo="/"
 />,
           <div
             className="row"
@@ -261,7 +261,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "headerTitle": "Pokedex",
-            "linkTo": "#/",
+            "linkTo": "/",
           },
           "ref": null,
           "rendered": null,

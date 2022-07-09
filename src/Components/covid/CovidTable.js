@@ -8,9 +8,9 @@ const CovidTable = ({props,canadaCases,canadianGraphLoaded, regionType, data, se
                                                 deaths: "decrease"},
                                 alphabetical: "decrease"}
     const [cases, setCases] = useState(() => filterExclude(regionType,Object.values(data)));
-    const [increaseDecrease, setIncreaseDecrease] = useState({ "World" :    sortingCondition,
-                                                               "Canada" :   sortingCondition,
-                                                               "Quebec" :   sortingCondition,
+    const [increaseDecrease, setIncreaseDecrease] = useState({ "World" : sortingCondition,
+                                                               "Canada" : sortingCondition,
+                                                               "Quebec" : sortingCondition,
                                                                "Montreal" : sortingCondition});
     useEffect( () => {
         let myData = {};

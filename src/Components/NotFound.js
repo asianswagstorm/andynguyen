@@ -7,7 +7,7 @@ class NotFound extends Component {
     render = () => {
         return (
             <section id="main">
-              <Headers linkTo = "#/" headerTitle="Nothing to see here" origin = "false"/>
+              <Headers linkTo = "/" headerTitle="Nothing to see here" origin = "false"/>
                 {/* <h1 className="center">Nothing to see here</h1> */}
             </section>
          );
