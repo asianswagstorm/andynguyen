@@ -1,20 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.a0942deb.css",
-    "main.js": "/static/js/main.20417f57.js",
-    "static/media/washYourHands.gif": "/static/media/washYourHands.25817802b8f241abeb3b.gif",
-    "static/media/world.topojson": "/static/media/world.a454808470c95162a5e6.topojson",
+    "main.css": "/static/css/main.7bbb239f.css",
+    "main.js": "/static/js/main.a55eab71.js",
     "static/media/fontawesome-webfont.svg?v=4.6.3": "/static/media/fontawesome-webfont.3b270ae3f01b143951b0.svg",
-    "static/media/canada.topojson": "/static/media/canada.81056ce6e192811cdb9d.topojson",
     "static/media/fontawesome-webfont.ttf?v=4.6.3": "/static/media/fontawesome-webfont.f0af1680f082547a7aae.ttf",
-    "static/media/AndyNguyen.pdf": "/static/media/AndyNguyen.b231fa7fe79b99b49f88.pdf",
     "static/media/fontawesome-webfont.woff?v=4.6.3": "/static/media/fontawesome-webfont.f7f1738ca345185e0185.woff",
     "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.09b9015b1ecaf95655b1.eot",
     "static/media/fontawesome-webfont.woff2?v=4.6.3": "/static/media/fontawesome-webfont.0317d582b93c20f68e05.woff2",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.a0942deb.css",
-    "static/js/main.20417f57.js"
+    "static/css/main.7bbb239f.css",
+    "static/js/main.a55eab71.js"
   ]
 }
