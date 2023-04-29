@@ -356,7 +356,7 @@ class Pokemon extends Component {
 
     return (
       <div>
-        <Headers linkTo="/Pokemon" headerTitle="Pokedex" />
+        <Headers linkTo="/#/Pokemon" headerTitle="Pokedex" />
         <div className="pokemon-data">
           {this.state.imageLoading && (
             <div className="pokemon__loading">
