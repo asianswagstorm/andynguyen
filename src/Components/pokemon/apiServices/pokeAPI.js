@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const pokemonImage = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 export const pokemonGif = name => `https://projectpokemon.org/images/normal-sprite/${name.charAt(0).toLowerCase() + name.slice(1)}.gif`;
-const corsAnywhere = "https://cors-anywhere-asianswagstorm.herokuapp.com/";
+const corsAnywhere = "";
 
 export const getPokemonEvolution = async evolution_url => {
         try{

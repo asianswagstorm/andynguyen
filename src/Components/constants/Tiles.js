@@ -1,13 +1,13 @@
 
 export const tiles = [
-    {
-      linkType: "internal",
-      href: `#/Covid`,
-      src: "images/thumbs/thumb15.jpg",
-      alt: "",
-      title: "Covid19",
-      type: ["Covid19", "JavaScript"]
-    },
+    // {
+    //   linkType: "internal",
+    //   href: `#/Covid`,
+    //   src: "images/thumbs/thumb15.jpg",
+    //   alt: "",
+    //   title: "Covid19",
+    //   type: ["Covid19", "JavaScript"]
+    // },
     /*{
       linkType: "internal",
       href: "#/Spotify",

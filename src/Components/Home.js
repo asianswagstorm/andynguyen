@@ -8,6 +8,9 @@ import {
   popUpNotification,
   sanitize,
 } from "./constants/HelperFunction/Functions";
+import {
+  LINKEDIN_LINK, GITHUB_LINK, IG_LINK
+} from '../configs/const';
 
 const languages = [
   // { languages: "All" },
@@ -18,15 +21,15 @@ const languages = [
 
 const socials = [
   {
-    link: "https://www.linkedin.com/in/😄-andy-nguyen-84818b15b/",
+    link: LINKEDIN_LINK,
     type: "LinkedIn",
   },
   {
-    link: "https://github.com/asianswagstorm",
+    link: GITHUB_LINK,
     type: "Github",
   },
   {
-    link: "https://www.instagram.com/asianswagstorm/?hl=en",
+    link: IG_LINK,
     type: "Instagram",
   },
 ];
@@ -168,12 +171,14 @@ class Home extends Component {
               <p id="about-me">
                 Software development is one of my life passions, because I find
                 value in turning creative ideas into reality. Finding solutions
-                to client facing / challenging problems sparks joy within me. I
+                to client facing / challenging problems sparks joy within me.
+                {/* I
                 am seeking to join a dynamic, passionate, fun and energetic team
                 whom can provide mentorship opportunities, to help extend my
                 knowledge in software development to greater lengths. While
                 having a blast creating awesome software. Looking forward to
-                working with you.
+                working with you. */}
+
               </p>
               <p id="about-me">
                 Outside of coding, I hold a personal training certification and
@@ -188,14 +193,16 @@ class Home extends Component {
                 </a>
                 My passion for fitness has taught me dedication and confidence
                 that directly translates to everything I do in life. Other
-                hobbies include being an amature chef, a dog enthusiast and a
-                tech admirer.
+                hobbies include being an amature chef. My specialities include but not limited to
+                maki rolls, all sorts of meats such as rib roasts and racks of lamb.
+                
+                An avid dog enthusiast, my favorite breed is a golden retriever. They are so bubbly and make me smile.
               </p>
 
               <h3>My Socials</h3>
               <ul className="icons">
                 {socials.map((social) => (
-                  <li>
+                  <li key={social.type}>
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
